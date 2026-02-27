@@ -37,26 +37,30 @@ Instead of building a basic “cart app”, this project focuses on realistic co
 
 Feature-based folder structure:
 
+```
 src/
-├─ app/
-├─ components/
-├─ features/
-│ ├─ products/
-│ ├─ cart/
-│ ├─ checkout/
-│ ├─ auth/
-│ └─ account/
-├─ hooks/
-├─ layouts/
-├─ pages/
-├─ react-query/
-├─ services/
-├─ types/
-└─ utils/
+├── app/
+├── components/
+├── features/
+│   ├── products/
+│   ├── cart/
+│   ├── checkout/
+│   ├── auth/
+│   └── account/
+├── hooks/
+├── layouts/
+├── pages/
+├── react-query/
+├── services/
+├── types/
+└── utils/
+```
 
 ## Installation
 
+```bash
 git clone https://github.com/yourusername/voltix.git
 cd voltix
 npm install
 npm run dev
+```
