@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+:root {
+  --color-background: #ffffff;
+  --color-primary: #111827;
+}
+
+.dark {
+  --color-background: #0f172a;
+  --color-primary: #3b82f6;
+}
+
+.red {
+  --color-background: #e90000;
+  --color-primary: #e90000;
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+}
+
 #html {
   min-height: 100dvh;
 }
