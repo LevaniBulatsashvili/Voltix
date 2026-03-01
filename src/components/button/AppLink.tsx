@@ -10,7 +10,7 @@ const AppLink = ({ to, children, className = "", ...props }: AppLinkProps) => {
   return (
     <Link
       to={to}
-      className={`hover:text-neutral-600 transition ${className}`}
+      className={`hover:text-neutral-600 transition capitalize ${className}`}
       {...props}
     >
       {children}
