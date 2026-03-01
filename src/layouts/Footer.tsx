@@ -10,13 +10,11 @@ const FooterSection = ({
   links: string[];
 }) => (
   <div>
-    <p className="text-2xl font-semibold capitalize">{title}</p>
-    <ul className="text-neutral-600 mt-6 space-y-3">
+    <p className="text-2xl text-primary font-semibold capitalize">{title}</p>
+    <ul className="mt-6 space-y-3">
       {links.map((item, index) => (
         <li key={index}>
-          <AppLink to="#" className="hover:text-black! capitalize">
-            {item}
-          </AppLink>
+          <AppLink to="#">{item}</AppLink>
         </li>
       ))}
     </ul>
@@ -61,12 +59,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#F0F0F0] py-25 px-35">
+    <footer className="bg-background py-25 px-35">
       <div className="grid grid-cols-4 gap-35">
         <div className="space-y-8">
           <div>
-            <p className="text-4xl font-extrabold">{t("voltix")}</p>
-            <p className="mt-6 text-neutral-600">
+            <p className="text-4xl font-extrabold text-primary capitalize">
+              {t("voltix")}
+            </p>
+            <p className="mt-6 text-primary">
               {t(
                 "Voltix is your trusted source for the latest electronics, gadgets, and smart devices.",
               )}
@@ -84,7 +84,7 @@ const Footer = () => {
         ))}
       </div>
 
-      <div className="mt-13 border-t border-neutral-500 pt-6 text-center text-sm text-neutral-500 capitalize">
+      <div className="mt-13 border-t border-primary pt-6 text-center text-sm text-primary capitalize">
         © {new Date().getFullYear()} {t("voltix. all rights reserved.")}
       </div>
     </footer>

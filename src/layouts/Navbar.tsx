@@ -5,6 +5,8 @@ import { type ChangeEvent, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { PAGE } from "../pages/pageConfig";
 import LangSelector from "../components/inputs/LangSelector";
+import { useAppDispatch } from "../hooks/redux";
+import { toggleTheme } from "../store/theme/theme.slice";
 
 interface NavLinksProps {
   links: { label: string; to: string }[];
@@ -12,7 +14,7 @@ interface NavLinksProps {
 
 const NavLinks = ({ links }: NavLinksProps) => (
   <nav className="flex">
-    <ul className="flex items-center gap-6 whitespace-nowrap">
+    <ul className="flex items-center text-primary gap-6 whitespace-nowrap">
       {links.map((link) => (
         <li key={link.to}>
           <AppLink to={link.to}>{link.label}</AppLink>
@@ -57,9 +59,12 @@ const Navbar = () => {
   const onLangChange = (e: ChangeEvent<HTMLSelectElement>) =>
     i18n.changeLanguage(e.target.value);
 
+  const dispatch = useAppDispatch();
+  const toggleMode = () => dispatch(toggleTheme());
+
   return (
     <header className="my-6 mx-25 flex gap-10 items-center">
-      <AppLink to={PAGE.BASE} className="text-4xl font-extrabold">
+      <AppLink to={PAGE.BASE} className="text-4xl font-extrabold text-primary">
         {t("voltix")}
       </AppLink>
       <NavLinks links={navLinks} />
@@ -76,6 +81,9 @@ const Navbar = () => {
           onChange={onLangChange}
           languages={languages}
         />
+        <button onClick={toggleMode}>
+          {<ShoppingCart className="size-7 text-primary hover:opacity-50" />}
+        </button>
       </div>
     </header>
   );

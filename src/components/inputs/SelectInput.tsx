@@ -20,7 +20,7 @@ export default function SelectInput({
         name={name}
         value={value}
         onChange={onChange}
-        className="w-full mb-2 mx-2 border border-gray-300 bg-gray-50 rounded px-3 py-2 text-lg focus:outline-none cursor-pointer"
+        className="w-full mb-2 mx-2 border border-gray-300 bg-background rounded px-3 py-2 text-lg focus:outline-none cursor-pointer"
       >
         <option value="" disabled hidden>
           {`-- Select an optioin --`}

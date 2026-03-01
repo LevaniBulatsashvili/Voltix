@@ -8,8 +8,8 @@ interface ILangSelector {
 
 const LangSelector = ({ value, onChange, languages }: ILangSelector) => {
   return (
-    <div className="relative size-7 hover:text-neutral-600 transition">
-      <Globe className="size-7" />
+    <div className="relative size-7 hover:opacity-50 transition">
+      <Globe className="size-7 text-primary" />
 
       <select
         value={value}
