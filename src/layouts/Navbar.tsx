@@ -1,7 +1,7 @@
 import SearchBar from "../components/ui/SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import AppLink from "../components/button/AppLink";
-import { type ChangeEvent, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { PAGE } from "../pages/pageConfig";
 import LangSelector from "../components/inputs/LangSelector";
@@ -53,12 +53,9 @@ const Navbar = () => {
   ];
 
   const languages = [
-    { value: "en", language: "Eng" },
-    { value: "ka", language: "ქარ" },
+    { value: "en", language: "Eng", code: "us" },
+    { value: "ka", language: "ქარ", code: "ge" },
   ];
-
-  const onLangChange = (e: ChangeEvent<HTMLSelectElement>) =>
-    i18n.changeLanguage(e.target.value);
 
   const dispatch = useAppDispatch();
   const toggleMode = () => dispatch(toggleTheme());
@@ -79,7 +76,7 @@ const Navbar = () => {
         <IconButton to={PAGE.PROFILE} icon={<User className="size-7" />} />
         <LangSelector
           value={i18n.language}
-          onChange={onLangChange}
+          onChange={(e) => i18n.changeLanguage(e.target.value)}
           languages={languages}
         />
         <ToggleBtn

@@ -6,6 +6,7 @@
   --color-accent: #f59e0b;
   --color-background: #f9fafb;
   --color-text: #1f2937;
+  --color-hover: #93c5fd;
 }
 
 .dark {
@@ -14,6 +15,7 @@
   --color-accent: #f59e0b;
   --color-background: #0f172a;
   --color-text: #1f2937;
+  --color-hover: #3730a3;
 }
 
 #html {
