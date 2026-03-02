@@ -7,6 +7,7 @@ import { PAGE } from "../pages/pageConfig";
 import LangSelector from "../components/inputs/LangSelector";
 import { useAppDispatch } from "../hooks/redux";
 import { toggleTheme } from "../store/theme/theme.slice";
+import ToggleBtn from "../components/button/ToggleBtn";
 
 interface NavLinksProps {
   links: { label: string; to: string }[];
@@ -81,9 +82,14 @@ const Navbar = () => {
           onChange={onLangChange}
           languages={languages}
         />
-        <button onClick={toggleMode}>
-          {<ShoppingCart className="size-7 text-primary hover:opacity-50" />}
-        </button>
+        <ToggleBtn
+          onToggle={toggleMode}
+          className="border border-indigo-400 shadow-md"
+          inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400"
+          activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700"
+          inactiveThumbClassName="bg-yellow-400"
+          activeThumbClassName="bg-gray-200"
+        />
       </div>
     </header>
   );
