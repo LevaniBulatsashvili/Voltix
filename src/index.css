@@ -7,6 +7,17 @@
   --color-background: #f9fafb;
   --color-text: #1f2937;
   --color-hover: #93c5fd;
+
+  --animate-scroll-left: scroll-left 15s infinite linear;
+
+  @keyframes scroll-left {
+    from {
+      translate: 0;
+    }
+    to {
+      translate: -100%;
+    }
+  }
 }
 
 .dark {

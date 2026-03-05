@@ -8,7 +8,7 @@ const MainLayout = () => {
   const { theme } = useAppSelector(themeSelector);
 
   return (
-    <div className={`${theme} h-dvh flex flex-col bg-background`}>
+    <div className={`${theme} grid bg-background`}>
       <Header />
       <PageContainer />
       <Footer />

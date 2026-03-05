@@ -1,7 +1,6 @@
 import SearchBar from "../components/ui/SearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import AppLink from "../components/button/AppLink";
-import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { PAGE } from "../pages/pageConfig";
 import LangSelector from "../components/inputs/LangSelector";
@@ -23,23 +22,6 @@ const NavLinks = ({ links }: NavLinksProps) => (
       ))}
     </ul>
   </nav>
-);
-
-interface IconButtonProps {
-  to: string;
-  icon: ReactNode;
-  badge?: number;
-}
-
-const IconButton = ({ to, icon, badge }: IconButtonProps) => (
-  <AppLink to={to} className="relative">
-    {icon}
-    {badge !== undefined && (
-      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-        {badge}
-      </span>
-    )}
-  </AppLink>
 );
 
 const Navbar = () => {
@@ -68,20 +50,28 @@ const Navbar = () => {
       <NavLinks links={navLinks} />
       <SearchBar />
       <div className="flex items-center gap-4">
-        <IconButton
-          to={PAGE.CART}
-          icon={<ShoppingCart className="size-7" />}
-          badge={cartProducts}
-        />
-        <IconButton to={PAGE.PROFILE} icon={<User className="size-7" />} />
+        <AppLink to={PAGE.CART}>
+          <div className="relative">
+            <ShoppingCart className="size-7" />
+
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              {cartProducts}
+            </span>
+          </div>
+        </AppLink>
+        <AppLink to={PAGE.PROFILE} className="border-2 p-0.5 rounded-full">
+          <User className="size-7" />
+        </AppLink>
+
         <LangSelector
           value={i18n.language}
           onChange={(e) => i18n.changeLanguage(e.target.value)}
           languages={languages}
         />
+
         <ToggleBtn
           onToggle={toggleMode}
-          className="border border-indigo-400 shadow-md"
+          className="border border-indigo-400 shadow-md hover:border-indigo-600"
           inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400"
           activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700"
           inactiveThumbClassName="bg-yellow-400"
