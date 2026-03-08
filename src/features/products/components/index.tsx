@@ -7,9 +7,13 @@ import dellLogo from "../../../assets/logos/dell.svg";
 import hpLogo from "../../../assets/logos/hp.svg";
 import lenovoLogo from "../../../assets/logos/lenovo.svg";
 import { useTranslation } from "react-i18next";
-import ProductsHeader from "./ProductsHeader";
-import NewProducts from "./NewProducts";
+import ProductsHeader from "./layouts/ProductsHeader";
 import { dummyProducts } from "../utils/dummyProducts";
+import ProductShowcase from "./ProductShowcase";
+import { PAGE } from "../../../pages/pageConfig";
+import ProductCategories from "./ProductCategories";
+import Customers from "./customers";
+import { dummyCustomers } from "../utils/dummyCustomers";
 
 const logos = [
   { src: appleLogo, alt: "Apple" },
@@ -52,9 +56,24 @@ const Products = () => {
           <img key={idx} src={logo.src} alt={logo.alt} />
         ))}
         itemClassName="size-[4em]"
-        carouselClassName="my-10 border-4 border-background bg-white"
+        carouselClassName="my-10 border-y-4 border-background bg-white"
       />
-      <NewProducts products={dummyProducts.slice(0, 4)} />
+      <ProductShowcase
+        title={t("products-new arrivals")}
+        products={dummyProducts.slice(0, 4)}
+        viewAllLink={PAGE.PRODUCTS}
+      />
+      <hr className="w-[90%] mx-auto opacity-20" />
+      <ProductShowcase
+        title={t("products-top selling")}
+        products={dummyProducts.slice(4, 8)}
+        viewAllLink={PAGE.PRODUCTS}
+      />
+      <ProductCategories />
+      <Customers
+        title={t("products-our happy customers")}
+        customers={dummyCustomers}
+      />
     </div>
   );
 };

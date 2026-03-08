@@ -1,9 +1,9 @@
-import type { IProduct } from "../../../types/Product";
-import PriceTag from "./PriceTag";
-import PlaceholderImg from "../../../assets/images/Electronics.png";
-import StarRating from "./StarRatings";
-import AppLink from "../../../components/button/AppLink";
-import { PAGE } from "../../../pages/pageConfig";
+import type { IProduct } from "../../../../types/Product";
+import PriceTag from "../ui/PriceTag";
+import PlaceholderImg from "../../../../assets/images/Electronics.png";
+import StarRating from "../ui/StarRatings";
+import AppLink from "../../../../components/button/AppLink";
+import { PAGE } from "../../../../pages/pageConfig";
 
 interface IProductCard {
   product: IProduct;
@@ -27,9 +27,9 @@ const ProductCard = ({ product }: IProductCard) => (
       <p className="font-semibold capitalize text-lg text-gray-800">
         {product.name}
       </p>
-      <p className="text-yellow-500 font-medium flex items-center gap-1">
-        <StarRating rating={product.rating} />
-      </p>
+
+      <StarRating rating={product.rating} />
+
       <PriceTag
         price={product.price}
         discount={product.discountPercentage}

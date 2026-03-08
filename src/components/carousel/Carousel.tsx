@@ -12,9 +12,7 @@ const Carousel = ({ items, carouselClassName, itemClassName }: ICarousel) => {
   const itemClasses = `flex-none text-center content-center p-[1em] size-[5em] text-[3rem] ${itemClassName}!`;
 
   return (
-    <div
-      className={`mx-auto flex overflow-hidden w-[90%] ${carouselClassName}`}
-    >
+    <div className={`flex overflow-hidden w-full ${carouselClassName}`}>
       <div className={trackClasses}>
         {items.map((item, index) => (
           <div key={index} className={itemClasses}>

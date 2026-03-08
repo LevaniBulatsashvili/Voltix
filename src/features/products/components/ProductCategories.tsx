@@ -1,0 +1,58 @@
+import { useTranslation } from "react-i18next";
+import CategoryCard from "./cards/CategoryCard";
+import electronicsImg from "../../../assets/images/Electronics2.png";
+import gamingImg from "../../../assets/images/Gaming.png";
+import { PAGE } from "../../../pages/pageConfig";
+
+const ProductCategories = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
+      <h2 className="mb-16 text-5xl font-extrabold uppercase text-center">
+        {t("products-browse by category")}
+      </h2>
+      <div className="grid grid-cols-5 gap-5">
+        <div className="col-span-2">
+          <CategoryCard
+            to={PAGE.PRODUCTS}
+            title={t("products-electronics")}
+            image={electronicsImg}
+            imageWidth="w-[80%]"
+            imageHeight="h-full"
+          />
+        </div>
+
+        <div className="col-span-3">
+          <CategoryCard
+            to={PAGE.PRODUCTS}
+            title={t("products-headphones")}
+            imageWidth="w-[80%]"
+            imageHeight="h-full"
+          />
+        </div>
+
+        <div className="col-span-3">
+          <CategoryCard
+            to={PAGE.PRODUCTS}
+            title={t("products-gaming")}
+            image={gamingImg}
+            imageWidth="w-[90%]"
+            imageHeight="h-full"
+          />
+        </div>
+
+        <div className="col-span-2">
+          <CategoryCard
+            to={PAGE.PRODUCTS}
+            title={t("products-cameras")}
+            imageWidth="w-[80%]"
+            imageHeight="h-full"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCategories;

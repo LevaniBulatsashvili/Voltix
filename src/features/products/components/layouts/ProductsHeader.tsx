@@ -1,5 +1,5 @@
-import AppLink from "../../../components/button/AppLink";
-import { PAGE } from "../../../pages/pageConfig";
+import AppLink from "../../../../components/button/AppLink";
+import { PAGE } from "../../../../pages/pageConfig";
 import StatCard from "./StatCard";
 
 interface IStat {
