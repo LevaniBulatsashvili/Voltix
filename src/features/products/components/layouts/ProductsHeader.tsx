@@ -25,16 +25,16 @@ const ProductsHeader = ({
   stats,
 }: IProductsHeader) => {
   return (
-    <div className="p-24.5 grid grid-cols-2 gap-16">
+    <div className="p-24.5 grid grid-cols-2 gap-16 text-primary">
       <div className="flex flex-col justify-between h-full">
         <div className="grid gap-8">
           <h1 className="text-6xl font-extrabold capitalize">{title}</h1>
-          <p className="text-xl text-gray-700 capitalize">{description}</p>
+          <p className="text-xl capitalize">{description}</p>
         </div>
 
         <div className="mt-10 mb-14">
           <AppLink
-            className="bg-black px-16 py-4 rounded-full text-white font-semibold"
+            className="text-background bg-primary px-16 py-4 rounded-full font-semibold"
             to={PAGE.PRODUCTS}
           >
             {buttonText}

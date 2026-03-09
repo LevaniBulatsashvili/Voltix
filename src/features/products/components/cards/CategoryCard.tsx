@@ -24,7 +24,7 @@ const CategoryCard = ({
         <img
           src={image}
           alt={title}
-          className={`absolute bottom-0 right-0 ${imageWidth} ${imageHeight} object-contain`}
+          className={`absolute -bottom-8 -right-8 ${imageWidth} ${imageHeight} object-contain`}
         />
       </div>
     </AppLink>

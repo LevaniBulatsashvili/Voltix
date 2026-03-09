@@ -14,7 +14,7 @@ interface NavLinksProps {
 
 const NavLinks = ({ links }: NavLinksProps) => (
   <nav className="flex">
-    <ul className="flex items-center text-primary gap-6 whitespace-nowrap">
+    <ul className="flex items-center gap-6 whitespace-nowrap">
       {links.map((link) => (
         <li key={link.to}>
           <AppLink to={link.to}>{link.label}</AppLink>
@@ -24,7 +24,7 @@ const NavLinks = ({ links }: NavLinksProps) => (
   </nav>
 );
 
-const Navbar = () => {
+const Header = () => {
   const { t, i18n } = useTranslation();
   const cartProducts = 2;
   const navLinks = [
@@ -43,8 +43,8 @@ const Navbar = () => {
   const toggleMode = () => dispatch(toggleTheme());
 
   return (
-    <header className="my-6 mx-25 flex gap-10 items-center">
-      <AppLink to={PAGE.BASE} className="text-4xl font-extrabold text-primary">
+    <header className="py-6 px-25 flex gap-10 items-center bg-primary text-background">
+      <AppLink to={PAGE.BASE} className="text-4xl font-extrabold">
         {t("voltix")}
       </AppLink>
       <NavLinks links={navLinks} />
@@ -54,7 +54,7 @@ const Navbar = () => {
           <div className="relative">
             <ShoppingCart className="size-7" />
 
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
               {cartProducts}
             </span>
           </div>
@@ -71,15 +71,15 @@ const Navbar = () => {
 
         <ToggleBtn
           onToggle={toggleMode}
-          className="border border-indigo-400 shadow-md hover:border-indigo-600"
-          inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400"
-          activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700"
-          inactiveThumbClassName="bg-yellow-400"
-          activeThumbClassName="bg-gray-200"
+          className="border border-indigo-400 shadow-md transition-all duration-300 hover:border-indigo-600 hover:shadow-lg hover:scale-105"
+          inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400 hover:from-pink-300 hover:via-purple-300 hover:to-blue-400"
+          activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700 hover:from-indigo-700 hover:via-blue-800 hover:to-gray-800"
+          inactiveThumbClassName="bg-yellow-400 hover:bg-yellow-300"
+          activeThumbClassName="bg-gray-200 hover:bg-gray-100"
         />
       </div>
     </header>
   );
 };
 
-export default Navbar;
+export default Header;

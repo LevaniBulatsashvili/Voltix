@@ -7,7 +7,6 @@
   --color-background: #f9fafb;
   --color-text: #1f2937;
   --color-hover: #93c5fd;
-
   --animate-scroll-left: scroll-left 15s infinite linear;
 
   @keyframes scroll-left {
@@ -18,6 +17,15 @@
       translate: -100%;
     }
   }
+}
+
+.light {
+  --color-primary: #020202;
+  --color-secondary: #ef4444;
+  --color-accent: #f59e0b;
+  --color-background: #f9fafb;
+  --color-text: #1f2937;
+  --color-hover: #93c5fd;
 }
 
 .dark {

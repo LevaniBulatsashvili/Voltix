@@ -35,21 +35,23 @@ const LangSelector = ({ value, onChange, languages }: ILangSelector) => {
     <div ref={dropdownRef} className="relative inline-block">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-1 border rounded shadow cursor-pointer text-primary hover:bg-hover transition"
+        className="flex items-center gap-2 px-3 py-1 border rounded shadow cursor-pointer text-background hover:bg-hover/50 transition bg-primary"
       >
         {selectedLang && (
           <span className={`fi fi-${selectedLang.code} size-4`}></span>
         )}
-        <span>{selectedLang?.language}</span>
+        <span className="uppercase font-semibold">
+          {selectedLang?.language}
+        </span>
       </button>
 
       {open && (
-        <ul className="absolute mt-1 w-full  border rounded shadow-lg z-50 max-h-60 overflow-auto">
+        <ul className="absolute mt-1 w-full border rounded shadow-lg z-50 max-h-60 overflow-auto uppercase">
           {languages.map((lang) => (
             <li
               key={lang.value}
               onClick={() => handleSelect(lang.value)}
-              className="flex items-center gap-2 px-3 py-2 cursor-pointer text-primary bg-background hover:bg-background/80"
+              className="flex items-center gap-2 px-3 py-2 cursor-pointer text-background bg-primary border-b last:border-b-0 transition duration-200 hover:brightness-110 hover:drop-shadow-sm"
             >
               <span className={`fi fi-${lang.code} size-4`}></span>
               <span>{lang.language}</span>

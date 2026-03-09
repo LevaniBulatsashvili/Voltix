@@ -56,7 +56,7 @@ const Products = () => {
           <img key={idx} src={logo.src} alt={logo.alt} />
         ))}
         itemClassName="size-[4em]"
-        carouselClassName="my-10 border-y-4 border-background bg-white"
+        carouselClassName="my-10 border-y-4 border-primary bg-white"
       />
       <ProductShowcase
         title={t("products-new arrivals")}

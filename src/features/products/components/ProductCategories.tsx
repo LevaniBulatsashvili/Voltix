@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { PAGE } from "../../../pages/pageConfig";
 import CategoryCard from "./cards/CategoryCard";
 import electronicsImg from "../../../assets/images/Electronics2.png";
 import gamingImg from "../../../assets/images/Gaming.png";
-import { PAGE } from "../../../pages/pageConfig";
+import camerasImg from "../../../assets/images/Cameras.png";
+import headphonesImg from "../../../assets/images/Headphones.png";
 
 const ProductCategories = () => {
   const { t } = useTranslation();
@@ -18,16 +20,17 @@ const ProductCategories = () => {
             to={PAGE.PRODUCTS}
             title={t("products-electronics")}
             image={electronicsImg}
-            imageWidth="w-[80%]"
-            imageHeight="h-full"
+            imageWidth="w-[100%]"
+            imageHeight="h-[90%]"
           />
         </div>
 
         <div className="col-span-3">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title={t("products-headphones")}
-            imageWidth="w-[80%]"
+            title={t("products-cameras")}
+            image={camerasImg}
+            imageWidth="w-[120%]"
             imageHeight="h-full"
           />
         </div>
@@ -45,8 +48,9 @@ const ProductCategories = () => {
         <div className="col-span-2">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title={t("products-cameras")}
-            imageWidth="w-[80%]"
+            title={t("products-headphones")}
+            image={headphonesImg}
+            imageWidth="w-[90%]"
             imageHeight="h-full"
           />
         </div>
