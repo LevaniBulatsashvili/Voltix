@@ -22,7 +22,7 @@ const Customers = ({ title, customers }: ICustomersProps) => {
   return (
     <div className="w-[90%] mx-auto mb-30">
       <div className="flex items-center justify-between mb-10">
-        <h2 className="text-5xl font-extrabold uppercase">{title}</h2>
+        <h2 className="text-5xl font-extrabold uppercase text-primary">{title}</h2>
         <CustomerNavigation
           onPrev={handlePrev}
           onNext={handleNext}
