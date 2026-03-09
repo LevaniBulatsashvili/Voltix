@@ -8,12 +8,12 @@ import hpLogo from "../../../assets/logos/hp.svg";
 import lenovoLogo from "../../../assets/logos/lenovo.svg";
 import { useTranslation } from "react-i18next";
 import ProductsHeader from "./layouts/ProductsHeader";
-import { dummyProducts } from "../utils/dummyProducts";
 import ProductShowcase from "./ProductShowcase";
 import { PAGE } from "../../../pages/pageConfig";
 import ProductCategories from "./ProductCategories";
 import Customers from "./customers";
-import { dummyCustomers } from "../utils/dummyCustomers";
+import { dummyCustomers } from "../../../utils/dummyCustomers";
+import { dummyProducts } from "../../../utils/dummyProducts";
 
 const logos = [
   { src: appleLogo, alt: "Apple" },

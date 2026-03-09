@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
-import type { ICustomer } from "../../../../types/Customer";
-import formatCustomerName from "../../utils/formatCustomerName";
+import type { ICustomer } from "../../types/Customer";
+import formatCustomerName from "../../features/products/utils/formatCustomerName";
 import type { FC, SVGProps } from "react";
 
 interface CustomerCardProps {
@@ -32,7 +32,7 @@ const CustomerCard = ({ customer, AvatarIcon }: CustomerCardProps) => {
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <p className="text-xl font-bold">
+            <p className="text-xl font-bold text-black">
               {formatCustomerName(customer.name)}
             </p>
             <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">

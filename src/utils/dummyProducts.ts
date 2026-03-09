@@ -1,4 +1,4 @@
-import type { IProduct } from "../../../types/Product";
+import type { IProduct } from "../types/Product";
 
 export const dummyProducts: IProduct[] = [
   {
@@ -9,6 +9,7 @@ export const dummyProducts: IProduct[] = [
     category: "Laptops",
     price: 2199,
     currency: "USD",
+    discountPercentage: 15,
     rating: 4.8,
     stock: 12,
     images: ["/products/macbook-1.png", "/products/macbook-2.png"],

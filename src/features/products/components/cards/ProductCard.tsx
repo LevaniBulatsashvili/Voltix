@@ -1,7 +1,7 @@
 import type { IProduct } from "../../../../types/Product";
-import PriceTag from "../ui/PriceTag";
+import PriceTag from "../../../../components/ui/PriceTag";
 import PlaceholderImg from "../../../../assets/images/Electronics.png";
-import StarRating from "../ui/StarRatings";
+import StarRating from "../../../../components/ui/StarRatings";
 import AppLink from "../../../../components/button/AppLink";
 import { PAGE } from "../../../../pages/pageConfig";
 
@@ -28,12 +28,13 @@ const ProductCard = ({ product }: IProductCard) => (
         {product.name}
       </p>
 
-      <StarRating rating={product.rating} />
+      <StarRating rating={product.rating} textColor="black" />
 
       <PriceTag
         price={product.price}
         discount={product.discountPercentage}
         currency={product.currency}
+        textColor="black"
       />
     </div>
   </AppLink>

@@ -1,30 +1,36 @@
-import calculateDiscount from "../../utils/calculateDiscount";
-import getCurrencySymbol from "../../utils/getCurrencySymbol";
+import calculateDiscount from "../../features/products/utils/calculateDiscount";
+import getCurrencySymbol from "../../features/products/utils/getCurrencySymbol";
 
 interface IPriceTag {
   price: number;
   discount?: number;
   currency: string;
+  textColor?: string;
 }
 
-const PriceTag = ({ price, discount, currency }: IPriceTag) => {
+const PriceTag = ({
+  price,
+  discount,
+  currency,
+  textColor = "primary",
+}: IPriceTag) => {
   const symbol = getCurrencySymbol(currency);
   if (!discount)
     return (
-      <span className="text-2xl font-bold text-gray-900">
+      <span className="text-2xl font-bold">
         {symbol}
         {price}
       </span>
     );
 
   return (
-    <span className="flex items-baseline gap-2">
-      <span className="text-2xl font-bold text-gray-900">
+    <span className={`flex items-baseline gap-2 text-${textColor}`}>
+      <span className="text-2xl font-bold ">
         {symbol}
         {calculateDiscount(price, discount)}
       </span>
 
-      <span className="text-gray-400 line-through text-lg">
+      <span className="line-through text-lg opacity-80">
         {symbol}
         {price}
       </span>

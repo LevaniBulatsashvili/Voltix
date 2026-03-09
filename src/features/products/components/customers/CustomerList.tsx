@@ -1,5 +1,5 @@
 import type { ICustomer } from "../../../../types/Customer";
-import CustomerCard from "../cards/CustomerCard";
+import CustomerCard from "../../../../components/cards/CustomerCard";
 import { User, User2, UserCheck, UserPlus } from "lucide-react";
 
 interface ICustomerList {
