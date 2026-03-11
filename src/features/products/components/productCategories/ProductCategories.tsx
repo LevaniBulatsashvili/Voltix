@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { PAGE } from "../../../pages/pageConfig";
-import CategoryCard from "./cards/CategoryCard";
-import electronicsImg from "../../../assets/images/Electronics2.png";
-import gamingImg from "../../../assets/images/Gaming.png";
-import camerasImg from "../../../assets/images/Cameras.png";
-import headphonesImg from "../../../assets/images/Headphones.png";
+import { PAGE } from "../../../../pages/pageConfig";
+import CategoryCard from "./CategoryCard";
+import electronicsImg from "../../../../assets/images/Electronics2.png";
+import gamingImg from "../../../../assets/images/Gaming.png";
+import camerasImg from "../../../../assets/images/Cameras.png";
+import headphonesImg from "../../../../assets/images/Headphones.png";
 
 const ProductCategories = () => {
   const { t } = useTranslation();

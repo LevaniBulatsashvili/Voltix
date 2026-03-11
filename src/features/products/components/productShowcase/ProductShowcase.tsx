@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import type { IProduct } from "../../../types/Product";
-import ProductCard from "./cards/ProductCard";
-import ViewProducts from "./ui/ViewProducts";
+import type { IProduct } from "../../../../types/Product";
+import ProductCard from "./ProductCard";
+import ViewProducts from "./ViewProducts";
 
 interface IProductShowcase {
   title: string;

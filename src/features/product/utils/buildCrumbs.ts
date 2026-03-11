@@ -1,26 +1,22 @@
 import { PAGE } from "../../../pages/pageConfig";
-import type { Crumb } from "../../../types/Crumbs";
-import { capitalize } from "../../../utils/capitalize";
+import type { ICrumb } from "../../../types/Crumbs";
 
-export const buildCrumbs = (searchParams: URLSearchParams): Crumb[] => {
+export const buildCrumbs = (searchParams: URLSearchParams): ICrumb[] => {
   const category = searchParams.get("category");
   const subcategory = searchParams.get("subcategory");
 
-  const crumbs: Crumb[] = [
-    { name: "Home", path: PAGE.BASE },
-    { name: "Shop", path: PAGE.SHOP },
+  const crumbs: ICrumb[] = [
+    { name: "home", path: PAGE.BASE },
+    { name: "shop", path: PAGE.SHOP },
   ];
 
-  if (category) {
+  if (category)
     crumbs.push({
-      name: capitalize(category),
+      name: category,
       path: `${PAGE.SHOP}?category=${category}`,
     });
-  }
 
-  if (subcategory) {
-    crumbs.push({ name: capitalize(subcategory) });
-  }
+  if (subcategory) crumbs.push({ name: subcategory });
 
   return crumbs;
 };

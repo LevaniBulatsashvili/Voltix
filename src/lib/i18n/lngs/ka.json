@@ -36,5 +36,19 @@
   "products-headphones": "ყურსასმენები",
   "products-cameras": "კამერები",
   "products-gaming": "გეიმინგი",
-  "products-our happy customers": "ჩვენი მომხმარებლები"
+  "products-our happy customers": "ჩვენი მომხმარებლები",
+  "product-home": "მთავარი",
+  "product-shop": "მაღაზია",
+  "product-electronics": "ელექტრონიკა",
+  "product-tablets": "ტაბლეტები",
+  "product-add to cart": "კალათაში დამატება",
+  "product-out of stock": "ამოწურულია",
+  "product-product details": "დეტალები",
+  "product-rating & reviews": "შეფასებები",
+  "product-FAQs": "FAQ",
+  "product-customer reviews": "კომენტარები",
+  "product-latest": "უახლესი",
+  "product-oldest": "უძველესი",
+  "product-write a review": "დააკომენტარე",
+  "product-load more reviews": "მეტის ჩვენება"
 }

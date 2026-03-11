@@ -1,16 +1,18 @@
 import { useState } from "react";
-import CustomerCard from "../../../../components/cards/CustomerCard";
-import type { ICustomer } from "../../../../types/Customer";
+import CustomerCard from "../../../../../components/cards/CustomerCard";
+import type { ICustomer } from "../../../../../types/Customer";
 import { User, ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface IProductReviews {
   reviews: ICustomer[];
 }
 
-const INITIAL_VISIBLE = 4; // show 4 reviews initially
+const INITIAL_VISIBLE = 4;
 const LOAD_MORE_COUNT = 4;
 
 const ProductReviews = ({ reviews }: IProductReviews) => {
+  const { t } = useTranslation();
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [sortOrder, setSortOrder] = useState<"latest" | "oldest">("latest");
 
@@ -30,16 +32,20 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
   return (
     <div className="p-6 w-full flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <h2 className="text-2xl font-bold">
-          Customer Reviews ({reviews.length})
+        <h2 className="text-2xl font-bold capitalize">
+          {t("product-customer reviews")} ({reviews.length})
         </h2>
 
         <div className="flex items-center gap-2">
           <button
-            className="bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold flex items-center gap-1 hover:bg-gray-300 w-30 justify-center"
+            className="bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold flex items-center gap-1 hover:bg-gray-300 w-30 justify-center capitalize"
             onClick={toggleSortOrder}
           >
-            <span>{sortOrder === "latest" ? "Latest" : "Oldest"}</span>
+            <span>
+              {sortOrder === "latest"
+                ? t("product-latest")
+                : t("product-oldest")}
+            </span>
             <ChevronDown
               className={`ml-1 w-4 h-4 ${
                 sortOrder === "latest" ? "rotate-0" : "rotate-180"
@@ -47,8 +53,8 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
             />
           </button>
 
-          <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition">
-            Write a Review
+          <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
+            {t("product-write a review")}
           </button>
         </div>
       </div>
@@ -57,7 +63,7 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
         className="grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto 
              scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent"
         style={{
-          maxHeight: visibleCount > INITIAL_VISIBLE ? "44rem" : "auto", // 4 cards height approx
+          maxHeight: visibleCount > INITIAL_VISIBLE ? "44rem" : "auto",
         }}
       >
         {sortedReviews.slice(0, visibleCount).map((review) => (
@@ -68,9 +74,9 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
       {visibleCount < reviews.length && (
         <button
           onClick={handleLoadMore}
-          className="self-center bg-gray-100 text-black px-9 py-3 rounded-full font-semibold hover:bg-gray-200 transition mt-6"
+          className="self-center bg-gray-100 text-black px-9 py-3 rounded-full font-semibold hover:bg-gray-200 transition mt-6 capitalize"
         >
-          Load More Reviews
+          {t("product-load more reviews")}
         </button>
       )}
     </div>

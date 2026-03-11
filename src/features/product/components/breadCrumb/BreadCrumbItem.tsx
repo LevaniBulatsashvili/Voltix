@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import AppLink from "../../../../components/button/AppLink";
 import type { ICrumb } from "../../../../types/Crumbs";
 
@@ -7,6 +8,8 @@ interface IBreadcrumbItem {
 }
 
 const BreadcrumbItem = ({ crumb, isLast }: IBreadcrumbItem) => {
+  const { t } = useTranslation();
+
   return (
     <li className="flex items-center">
       {crumb.path && !isLast ? (
@@ -14,10 +17,12 @@ const BreadcrumbItem = ({ crumb, isLast }: IBreadcrumbItem) => {
           to={crumb.path}
           className="transition-colors duration-200 capitalize"
         >
-          {crumb.name}
+          {t(`product-${crumb.name}`)}
         </AppLink>
       ) : (
-        <span className="font-semiboldcapitalize">{crumb.name}</span>
+        <span className="font-semibold capitalize">
+          {t(`product-${crumb.name}`)}
+        </span>
       )}
 
       {!isLast && <span className="mx-2 text-primary">{`>`}</span>}

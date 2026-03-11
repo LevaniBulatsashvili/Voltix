@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
+import ProductBtn from "../../../../components/button/ProductBtn";
 import QuantitySelector from "../../../../components/ui/QuantitySelector";
-import AddToCartButton from "../buttons/AddToCartButton";
-import OutOfStockButton from "../buttons/OutOfStockButton";
 
 interface IProductActions {
   stock: number;
@@ -15,6 +15,10 @@ const ProductActions = ({
   increase,
   decrease,
 }: IProductActions) => {
+  const { t } = useTranslation();
+
+  const handleAddToCart = () => {};
+
   return (
     <div className="mt-auto pt-4 flex items-center gap-4">
       {stock > 0 ? (
@@ -25,10 +29,18 @@ const ProductActions = ({
             onIncrease={increase}
             onDecrease={decrease}
           />
-          <AddToCartButton />
+          <ProductBtn
+            text={t("product-add to cart")}
+            onClick={handleAddToCart}
+            className="bg-primary text-background flex-1 hover:opacity-80"
+          />
         </>
       ) : (
-        <OutOfStockButton />
+        <ProductBtn
+          text={t("product-out of stock")}
+          disabled
+          className="w-full bg-gray-400 text-white cursor-not-allowed py-3"
+        />
       )}
     </div>
   );

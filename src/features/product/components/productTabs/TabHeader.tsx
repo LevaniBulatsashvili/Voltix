@@ -11,7 +11,7 @@ const TabHeader = ({ tabs, activeTab, onTabChange }: ITabHeader) => {
         <button
           key={tab.key}
           onClick={() => onTabChange(tab.key)}
-          className={`px-4 py-2 font-medium transition ${
+          className={`px-4 py-2 font-medium transition capitalize ${
             activeTab === tab.key
               ? "border-b-2 border-primary text-primary"
               : "text-gray-600 hover:text-primary"

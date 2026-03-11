@@ -36,5 +36,19 @@
   "products-headphones": "headphones",
   "products-cameras": "cameras",
   "products-gaming": "gaming",
-  "products-our happy customers": "our happy customers"
+  "products-our happy customers": "our happy customers",
+  "product-home": "home",
+  "product-shop": "shop",
+  "product-electronics": "electronics",
+  "product-tablets": "tablets",
+  "product-add to cart": "add to cart",
+  "product-out of stock": "out of stock",
+  "product-product details": "product details",
+  "product-rating & reviews": "rating & reviews",
+  "product-FAQs": "FAQs",
+  "product-customer reviews": "customer reviews",
+  "product-latest": "latest",
+  "product-oldest": "oldest",
+  "product-write a review": "write a review",
+  "product-load more reviews": "load more reviews"
 }

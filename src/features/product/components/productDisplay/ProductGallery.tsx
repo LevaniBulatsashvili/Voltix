@@ -9,7 +9,6 @@ interface ProductGalleryProps {
 }
 
 const ProductGallery = ({ images = [], name }: ProductGalleryProps) => {
-  // fallback images
   const galleryImages = images.length
     ? images
     : [cameraImg, electronicsImg, headphonesImg];

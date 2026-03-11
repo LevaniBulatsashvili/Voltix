@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
+import { useTranslation } from "react-i18next";
 
 interface IProductTabs {
   children: {
@@ -13,12 +14,13 @@ interface IProductTabs {
 type TabKeys = keyof IProductTabs["children"];
 
 const ProductTabs = ({ children }: IProductTabs) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabKeys>("details");
 
   const tabs = [
-    { key: "details", label: "Product Details" },
-    { key: "reviews", label: "Rating & Reviews" },
-    { key: "faqs", label: "FAQs" },
+    { key: "details", label: t("product-product details") },
+    { key: "reviews", label: t("product-rating & reviews") },
+    { key: "faqs", label: t("product-FAQs") },
   ];
 
   return (
