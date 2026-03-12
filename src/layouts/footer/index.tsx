@@ -45,15 +45,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background text-primary py-16 px-6 sm:px-10 lg:px-24">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
-          <Brand />
+    <footer className="bg-background text-primary py-5 px-6 sm:px-10 lg:px-24">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 ">
+        <Brand />
 
-          {sections.map((section, idx) => (
-            <Section key={idx} title={section.title} links={section.links} />
-          ))}
-        </div>
+        {sections.map((section, idx) => (
+          <Section key={idx} title={section.title} links={section.links} />
+        ))}
       </div>
 
       <div className="mt-12 border-t border-primary pt-6 text-center text-sm capitalize">

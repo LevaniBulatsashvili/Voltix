@@ -45,7 +45,7 @@ const Header = ({ cartProducts, navLinks, languages }: IHeader) => {
         <NavDropdown navLinks={navLinks} />
 
         <div className="flex items-center gap-4 flex-1 min-w-0 justify-end">
-          <div className="flex-1 min-w-22 max-w-lg">
+          <div className="flex-1 min-w-21.5 max-w-lg">
             <SearchBar />
           </div>
           <Actions

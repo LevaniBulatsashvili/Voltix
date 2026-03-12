@@ -15,7 +15,6 @@ const NavDropdown = ({
   navLinks,
   bgClass = "bg-white dark:bg-gray-800",
   textClass = "text-gray-900 dark:text-gray-100",
-  breakpoint = "xl",
 }: INavDropdown) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -26,11 +25,11 @@ const NavDropdown = ({
 
   return (
     <div className="flex items-center relative" ref={dropdownRef}>
-      <div className={`hidden ${breakpoint}:flex`}>
+      <div className={`hidden xl:flex`}>
         <NavLinks links={navLinks} />
       </div>
 
-      <div className={`${breakpoint}:hidden relative flex items-center`}>
+      <div className={`xl:hidden relative flex items-center`}>
         <button
           className="p-2 rounded hover:bg-primary/70 transition-colors duration-200 z-10"
           onClick={() => setOpen((prev) => !prev)}
