@@ -29,7 +29,7 @@ const ProductDisplay = ({ product }: IProductDisplay) => {
   };
 
   return (
-    <div className="grid grid-cols-[4fr_2fr] mb-20">
+    <div className="grid grid-rows-1 grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 sm:gap-10 mb-14 sm:mb-20">
       <ProductGallery name={name} />
 
       <ProductInfo

@@ -12,7 +12,7 @@ const Product = () => {
   const product = dummyProducts[0];
 
   return (
-    <div className="p-6 w-[90%] text-primary bg-background">
+    <div className="p-6 w-full md:w-[95%] lg:w-[90%] text-primary bg-background">
       <Breadcrumbs />
       <ProductDisplay product={product} />
       <ProductTabs

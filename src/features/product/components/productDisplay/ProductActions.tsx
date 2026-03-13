@@ -32,14 +32,14 @@ const ProductActions = ({
           <ProductBtn
             text={t("product-add to cart")}
             onClick={handleAddToCart}
-            className="bg-primary text-background flex-1 hover:opacity-80"
+            className="bg-primary max-w-60 text-background flex-1 hover:opacity-80"
           />
         </>
       ) : (
         <ProductBtn
           text={t("product-out of stock")}
           disabled
-          className="w-full bg-gray-400 text-white cursor-not-allowed py-3"
+          className="w-full max-w-60 bg-gray-400 text-white cursor-not-allowed py-3"
         />
       )}
     </div>

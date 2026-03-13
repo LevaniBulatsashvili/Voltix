@@ -32,13 +32,13 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
   return (
     <div className="p-6 w-full flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <h2 className="text-2xl font-bold capitalize">
+        <h2 className="text-xl sm:text-2xl font-bold capitalize">
           {t("product-customer reviews")} ({reviews.length})
         </h2>
 
         <div className="flex items-center gap-2">
           <button
-            className="bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-semibold flex items-center gap-1 hover:bg-gray-300 w-30 justify-center capitalize"
+            className="bg-gray-200 text-gray-700 w-30 px-6 py-3 rounded-full font-semibold flex items-center gap-1 hover:bg-gray-300 justify-center capitalize"
             onClick={toggleSortOrder}
           >
             <span>
@@ -47,14 +47,14 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
                 : t("product-oldest")}
             </span>
             <ChevronDown
-              className={`ml-1 w-4 h-4 ${
+              className={`ml-1 size-4 ${
                 sortOrder === "latest" ? "rotate-0" : "rotate-180"
               }`}
             />
           </button>
 
           <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
-            {t("product-write a review")}
+            {t("product-review")}
           </button>
         </div>
       </div>
@@ -74,7 +74,7 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
       {visibleCount < reviews.length && (
         <button
           onClick={handleLoadMore}
-          className="self-center bg-gray-100 text-black px-9 py-3 rounded-full font-semibold hover:bg-gray-200 transition mt-6 capitalize"
+          className="self-center bg-gray-100 text-black px-9 py-3 rounded-full font-semibold hover:bg-gray-200 transition mt-4 sm:mt-6 capitalize"
         >
           {t("product-load more reviews")}
         </button>
