@@ -20,9 +20,9 @@ const Customers = ({ title, customers }: ICustomers) => {
     );
 
   return (
-    <div className="w-[90%] mx-auto mb-30">
-      <div className="flex items-center justify-between mb-10">
-        <h2 className="text-5xl font-extrabold uppercase text-primary">
+    <div className="w-[90%] mx-auto mb-20 sm:mb-30">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-10">
+        <h2 className="text-4xl sm:text-5xl font-extrabold uppercase text-primary text-center sm:text-start">
           {title}
         </h2>
         <CustomerNavigation

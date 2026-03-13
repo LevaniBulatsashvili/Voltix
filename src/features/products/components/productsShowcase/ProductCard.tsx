@@ -12,7 +12,7 @@ interface IProductCard {
 const ProductCard = ({ product }: IProductCard) => (
   <AppLink
     to={PAGE.PRODUCTS}
-    className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer w-70"
+    className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer w-70 mx-auto"
   >
     <div className="overflow-hidden rounded-lg">
       <img

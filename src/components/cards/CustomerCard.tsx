@@ -10,7 +10,7 @@ interface CustomerCardProps {
 
 const CustomerCard = ({ customer, AvatarIcon }: CustomerCardProps) => {
   return (
-    <div className="bg-gray-50 p-7 rounded-2xl border border-gray-300 shadow hover:shadow-lg transition h-80 overflow-auto">
+    <div className="bg-gray-50 p-7 rounded-2xl border border-gray-300 shadow hover:shadow-lg transition h-60 sm:h-80 overflow-auto">
       {customer.rating && (
         <div className="text-3xl flex items-center gap-1 mb-4">
           {Array.from({ length: 5 }).map((_, i) => (

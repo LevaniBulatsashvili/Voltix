@@ -10,12 +10,12 @@ const ProductCategories = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
-      <h2 className="mb-16 text-5xl font-extrabold uppercase text-center">
+    <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
+      <h2 className="mb-10 sm:mb-16 text-4xl sm:text-5xl font-extrabold uppercase text-center">
         {t("products-browse by category")}
       </h2>
       <div className="grid grid-cols-5 gap-5">
-        <div className="col-span-2">
+        <div className="col-span-5 lg:col-span-2">
           <CategoryCard
             to={PAGE.PRODUCTS}
             title={t("products-electronics")}
@@ -25,7 +25,7 @@ const ProductCategories = () => {
           />
         </div>
 
-        <div className="col-span-3">
+        <div className="col-span-5 lg:col-span-3">
           <CategoryCard
             to={PAGE.PRODUCTS}
             title={t("products-cameras")}
@@ -35,7 +35,7 @@ const ProductCategories = () => {
           />
         </div>
 
-        <div className="col-span-3">
+        <div className="col-span-5 lg:col-span-3">
           <CategoryCard
             to={PAGE.PRODUCTS}
             title={t("products-gaming")}
@@ -45,7 +45,7 @@ const ProductCategories = () => {
           />
         </div>
 
-        <div className="col-span-2">
+        <div className="col-span-5 lg:col-span-2">
           <CategoryCard
             to={PAGE.PRODUCTS}
             title={t("products-headphones")}

@@ -19,12 +19,12 @@ const CategoryCard = ({
   return (
     <AppLink to={to}>
       <div className="relative bg-gray-100 p-6 rounded-2xl overflow-hidden h-72.5 hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-4xl font-medium text-black">{title}</h2>
+        <h2 className="text-3xl sm:text-4xl font-medium text-black">{title}</h2>
 
         <img
           src={image}
           alt={title}
-          className={`absolute -bottom-8 -right-8 ${imageWidth} ${imageHeight} object-contain`}
+          className={`absolute -bottom-8 right-0 sm:-right-8 ${imageWidth} ${imageHeight} object-contain`}
         />
       </div>
     </AppLink>

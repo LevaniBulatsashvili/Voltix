@@ -9,7 +9,7 @@ interface ICarousel {
 const Carousel = ({ items, carouselClassName, itemClassName }: ICarousel) => {
   const trackClasses =
     "flex items-center justify-center gap-4 pr-4 animate-scroll-left";
-  const itemClasses = `flex-none text-center content-center p-[1em] size-[5em] text-[3rem] ${itemClassName}!`;
+  const itemClasses = `flex-none text-center content-center p-[1em] ${itemClassName}!`;
 
   return (
     <div className={`flex overflow-hidden w-full ${carouselClassName}`}>

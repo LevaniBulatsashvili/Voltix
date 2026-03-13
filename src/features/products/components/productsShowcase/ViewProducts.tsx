@@ -10,7 +10,7 @@ const ViewProducts = ({ to, text, className = "" }: IViewProducts) => {
   return (
     <AppLink
       to={to}
-      className={`px-16 py-3 rounded-full bg-accent text-white font-semibold ${className}`}
+      className={`px-16 py-3 rounded-full bg-accent hover:opacity-80 text-white font-semibold ${className}`}
     >
       {text}
     </AppLink>

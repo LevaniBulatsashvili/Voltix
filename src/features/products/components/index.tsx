@@ -55,8 +55,8 @@ const Products = () => {
         items={logos.map((logo, idx) => (
           <img key={idx} src={logo.src} alt={logo.alt} />
         ))}
-        itemClassName="size-[4em]"
-        carouselClassName="my-10 border-y-4 border-primary bg-white"
+        carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
+        itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
       />
       <ProductShowcase
         title={t("products-new arrivals")}
