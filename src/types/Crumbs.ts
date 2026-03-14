@@ -1,4 +1,4 @@
 export interface ICrumb {
-  name: string;
-  path?: string;
+  label: string;
+  to?: string;
 }

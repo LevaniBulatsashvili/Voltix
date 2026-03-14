@@ -13,7 +13,9 @@ import { PAGE } from "../../../pages/pageConfig";
 import ProductCategories from "./productsCategories";
 import Customers from "./customers";
 import { dummyCustomers } from "../../../utils/dummyCustomers";
-import { dummyProducts } from "../../../utils/dummyProducts";
+import AsyncBoundary from "../../../components/feedback/AsyncBoundary";
+import useFetchNewestProducts from "../../../hooks/useFetchNewestProducts";
+import useFetchTopSellingProducts from "../../../hooks/useFetchTopSellingProducts";
 
 const logos = [
   { src: appleLogo, alt: "Apple" },
@@ -41,40 +43,51 @@ const Products = () => {
     },
   ];
 
+  const newestProductsQuery = useFetchNewestProducts(4);
+  const topSellingProductsQuery = useFetchTopSellingProducts(4);
+
   return (
-    <div className="grid">
-      <ProductsHeader
-        title={t("products-header")}
-        description={t("products-description")}
-        buttonText={t("products-shopBtn")}
-        image={electronicsImg}
-        imageAlt={t("products-electronics")}
-        stats={stats}
-      />
-      <Carousel
-        items={logos.map((logo, idx) => (
-          <img key={idx} src={logo.src} alt={logo.alt} />
-        ))}
-        carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
-        itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
-      />
-      <ProductShowcase
-        title={t("products-new arrivals")}
-        products={dummyProducts.slice(0, 4)}
-        viewAllLink={PAGE.PRODUCTS}
-      />
-      <hr className="w-[90%] mx-auto opacity-20" />
-      <ProductShowcase
-        title={t("products-top selling")}
-        products={dummyProducts.slice(4, 8)}
-        viewAllLink={PAGE.PRODUCTS}
-      />
-      <ProductCategories />
-      <Customers
-        title={t("products-our happy customers")}
-        customers={dummyCustomers}
-      />
-    </div>
+    <AsyncBoundary query={newestProductsQuery}>
+      {(newestProducts) => (
+        <AsyncBoundary query={topSellingProductsQuery}>
+          {(topSellingProducts) => (
+            <div className="grid">
+              <ProductsHeader
+                title={t("products-header")}
+                description={t("products-description")}
+                buttonText={t("products-shopBtn")}
+                image={electronicsImg}
+                imageAlt={t("products-electronics")}
+                stats={stats}
+              />
+              <Carousel
+                items={logos.map((logo, idx) => (
+                  <img key={idx} src={logo.src} alt={logo.alt} />
+                ))}
+                carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
+                itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
+              />
+              <ProductShowcase
+                title={t("products-new arrivals")}
+                products={newestProducts}
+                viewAllLink={PAGE.PRODUCTS}
+              />
+              <hr className="w-[90%] mx-auto opacity-20" />
+              <ProductShowcase
+                title={t("products-top selling")}
+                products={topSellingProducts}
+                viewAllLink={PAGE.PRODUCTS}
+              />
+              <ProductCategories />
+              <Customers
+                title={t("products-our happy customers")}
+                customers={dummyCustomers}
+              />
+            </div>
+          )}
+        </AsyncBoundary>
+      )}
+    </AsyncBoundary>
   );
 };
 

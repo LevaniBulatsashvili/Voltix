@@ -10,8 +10,14 @@ const AppRouter = () => {
       <Routes>
         <Route element={<MainLayout />} path={PAGE.BASE}>
           <Route index element={<Navigate to={PAGE.PRODUCTS} />} />
+
           <Route path={PAGE.PRODUCTS} element={<ProductsPage />} />
-          <Route path={PAGE.PRODUCT} element={<ProductPage />} />
+
+          <Route
+            path={`${PAGE.SHOP}/:categories/:subcategories/:id`}
+            element={<ProductPage />}
+          />
+
           <Route path={PAGE.NOT_FOUND} element={<></>} />
         </Route>
       </Routes>

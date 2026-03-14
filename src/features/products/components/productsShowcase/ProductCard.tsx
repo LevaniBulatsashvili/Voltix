@@ -11,8 +11,8 @@ interface IProductCard {
 
 const ProductCard = ({ product }: IProductCard) => (
   <AppLink
-    to={PAGE.PRODUCTS}
-    className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer w-70 mx-auto"
+    to={`${PAGE.SHOP}/${product.main_category_id.name}/${product.category_id.name}/${product.id}`}
+    className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer"
   >
     <div className="overflow-hidden rounded-lg">
       <img
@@ -32,7 +32,7 @@ const ProductCard = ({ product }: IProductCard) => (
 
       <PriceTag
         price={product.price}
-        discount={product.discountPercentage}
+        discount={product.discount_percentage}
         currency={product.currency}
         textColor="black"
       />

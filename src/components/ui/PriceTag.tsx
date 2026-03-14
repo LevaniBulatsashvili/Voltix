@@ -17,7 +17,7 @@ const PriceTag = ({
   const symbol = getCurrencySymbol(currency);
   if (!discount)
     return (
-      <span className="text-2xl font-bold">
+      <span className={`text-2xl font-bold text-${textColor}`}>
         {symbol}
         {price}
       </span>

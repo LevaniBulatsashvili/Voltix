@@ -1,13 +1,12 @@
 const PAGE = {
   BASE: "/",
   PRODUCTS: "/products",
-  PRODUCT: "/product",
-  SHOP: "/shop?filter=shop",
-  SALE: "/shop?filter=sale",
-  ARRIVALS: "/shop?filter=arrivals",
-  CATEGORIES: "/shop?filter=categories",
+  SHOP: "/shop",
+  SALE: "/shop/sale",
+  ARRIVALS: "/shop/arrivals",
+  CATEGORIES: "/shop/categories",
   CART: "/cart",
-  PROFILE: "/proifle",
+  PROFILE: "/profile",
   NOT_FOUND: "*",
 };
 

@@ -1,17 +1,26 @@
 export interface IProduct {
-  id: string;
+  id: number;
   name: string;
   description: string;
   brand: string;
-  category: string;
+  main_category_id: {
+    id: number;
+    name: string;
+  };
+  category_id: {
+    id: number;
+    name: string;
+  };
   price: number;
   currency: "USD" | "GEL" | "EUR";
-  discountPercentage?: number;
+  discount_percentage?: number;
   rating: number;
   stock: number;
-  images: string[];
   thumbnail: string;
-  specs?: Record<string, string>;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
+
+  product_images?: { image: string }[];
+  product_specs?: { key: string; value: string }[];
+  total_sold: number;
 }
