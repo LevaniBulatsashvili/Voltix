@@ -14,12 +14,12 @@ const Breadcrumbs = ({ product }: IBreadcrumbs) => {
   const crumbs: ICrumb[] = [
     { label: t("product-home"), to: PAGE.BASE },
     {
-      label: t(`product-${product.main_category_id.name.toLowerCase()}`),
-      to: `${PAGE.CATEGORIES}/${product.main_category_id.id}`,
+      label: t(`product-${product.main_category.name.toLowerCase()}`),
+      to: `${PAGE.CATEGORIES}/${product.main_category.id}`,
     },
     {
-      label: t(`product-${product.category_id.name.toLowerCase()}`),
-      to: `${PAGE.CATEGORIES}/${product.main_category_id.id}/${product.category_id.id}`,
+      label: t(`product-${product.category.name.toLowerCase()}`),
+      to: `${PAGE.CATEGORIES}/${product.main_category.id}/${product.category.id}`,
     },
     { label: product.name },
   ];

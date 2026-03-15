@@ -1,5 +1,3 @@
-import { dummyCustomers } from "../../../utils/dummyCustomers";
-import { dummyFAQs } from "../../../utils/dummyFAQs";
 import { useParams } from "react-router-dom";
 import Breadcrumbs from "./breadCrumb";
 import ProductDetails from "./productTabs/Tabs/ProductDetails";
@@ -22,9 +20,11 @@ const Product = () => {
           <ProductDisplay product={product} />
           <ProductTabs
             children={{
-              details: <ProductDetails product={product} />,
-              reviews: <ProductReviews reviews={dummyCustomers} />,
-              faqs: <ProductFAQs faqs={dummyFAQs} />,
+              details: <ProductDetails specs={product.product_specs || []} />,
+              reviews: (
+                <ProductReviews reviews={product.product_comments || []} />
+              ),
+              faqs: <ProductFAQs faqs={product.product_faqs || []} />,
             }}
           />
         </div>

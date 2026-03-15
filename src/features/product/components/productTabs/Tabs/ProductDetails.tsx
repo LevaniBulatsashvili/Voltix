@@ -1,23 +1,25 @@
-import type { IProduct } from "../../../../../types/Product";
+import { useTranslation } from "react-i18next";
+import type { ISpecs } from "../../../../../types/Product";
 
 interface IProductDetails {
-  product: IProduct;
+  specs: ISpecs[];
 }
 
-const ProductDetails = ({ product }: IProductDetails) => {
-  const hasSpecs = product.specs && Object.keys(product.specs).length > 0;
+const ProductDetails = ({ specs }: IProductDetails) => {
+  const { t } = useTranslation();
+  const hasSpecs = specs && specs.length > 0;
 
   return (
     <div className="w-full">
       {hasSpecs ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {Object.entries(product.specs!).map(([key, value]) => (
+          {specs.map(({ spec, value }) => (
             <div
-              key={key}
+              key={spec}
               className="flex justify-between border border-gray-400 items-center p-3 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition"
             >
               <span className="font-semibold text-gray-600 capitalize">
-                {key}
+                {spec}
               </span>
               <span className="text-gray-900">{value}</span>
             </div>
@@ -25,7 +27,7 @@ const ProductDetails = ({ product }: IProductDetails) => {
         </div>
       ) : (
         <p className="text-gray-500 italic">
-          No specifications available for this product.
+          {t("product-no specifications available for this product.")}
         </p>
       )}
     </div>

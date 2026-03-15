@@ -56,5 +56,6 @@
   "product-latest": "newest",
   "product-oldest": "oldest",
   "product-review": "review",
-  "product-load more reviews": "load more reviews"
+  "product-load more reviews": "load more reviews",
+  "product-no specifications available for this product.": "no specifications available for this product."
 }
