@@ -1,5 +1,11 @@
 const PAGE = {
   BASE: "/",
+  LOGIN: "/login",
+  REGISTER: "/register",
+  ORDERS: "/",
+  WISHLIST: "/",
+  SETTINGS: "/",
+  Admin: "/admin",
   PRODUCTS: "/products",
   SHOP: "/shop",
   SALE: "/shop/sale",

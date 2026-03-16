@@ -1,10 +1,11 @@
 import "flag-icons/css/flag-icons.min.css";
 import { useState, useRef, useEffect } from "react";
+import type { ILanguage } from "../../types/header";
 
 interface ILangSelector {
   value: string;
   onChange: (e: { target: { value: string } }) => void;
-  languages: { value: string; language: string; code: string }[];
+  languages: ILanguage[];
 }
 
 const LangSelector = ({ value, onChange, languages }: ILangSelector) => {

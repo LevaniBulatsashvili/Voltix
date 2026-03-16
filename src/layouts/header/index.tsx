@@ -1,64 +1,33 @@
-import { useState } from "react";
+import { useAppSelector } from "../../hooks/redux";
+import UserHeader from "./UserHeader";
+import GuestHeader from "./GuestHeader";
 import { useTranslation } from "react-i18next";
-import Logo from "./Logo";
-import NavDropdown from "./NavDropdown";
-import Actions from "./Actions";
-import MobileMenu from "./MobileMenu";
-import SearchBar from "../../components/ui/SearchBar";
-import { useAppDispatch } from "../../hooks/redux";
-import { toggleTheme } from "../../store/theme/theme.slice";
-import type { IHeader } from "../../types/header";
-import { Menu, X } from "lucide-react";
+import { PAGE } from "../../pages/pageConfig";
 
-const Header = ({ cartProducts, navLinks, languages }: IHeader) => {
-  const { t, i18n } = useTranslation();
-  const dispatch = useAppDispatch();
-  const toggleMode = () => dispatch(toggleTheme());
+const Header = () => {
+  const user = useAppSelector((state) => state.auth.user);
+  const { t } = useTranslation();
+  const navLinks = [
+    { label: t("header-shop"), to: PAGE.SHOP },
+    { label: t("header-on sale"), to: PAGE.SALE },
+    { label: t("header-new arrivals"), to: PAGE.ARRIVALS },
+    { label: t("header-categories"), to: PAGE.CATEGORIES },
+  ];
+  const languages = [
+    { value: "en", language: "Eng", code: "us" },
+    { value: "ka", language: "ქარ", code: "ge" },
+  ];
+  const cartProducts = 2;
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  return (
-    <header className="items-center bg-primary text-background py-4 sm:py-5 md:py-6 px-8 sm:px-10 md:px-16 lg:px-25 flex flex-col gap-10 sm:flex-row sm:items-center sm:gap-6 relative">
-      <div className="flex justify-between items-center w-full sm:w-auto">
-        <Logo label={t("voltix")} />
-        <button
-          className="sm:hidden p-2 rounded hover:bg-primary/70 transition"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {menuOpen && (
-        <MobileMenu
-          navLinks={navLinks}
-          languages={languages}
-          currentLanguage={i18n.language}
-          onLanguageChange={(lang) => i18n.changeLanguage(lang)}
-          cartProducts={cartProducts}
-          onToggleTheme={toggleMode}
-          closeMenu={() => setMenuOpen(false)}
-        />
-      )}
-
-      <div className="hidden sm:flex items-center justify-between w-full gap-6">
-        <NavDropdown navLinks={navLinks} />
-
-        <div className="flex items-center gap-4 flex-1 min-w-0 justify-end">
-          <div className="flex-1 min-w-21.5 max-w-lg">
-            <SearchBar />
-          </div>
-          <Actions
-            cartProducts={cartProducts}
-            languages={languages}
-            currentLanguage={i18n.language}
-            onLanguageChange={(lang) => i18n.changeLanguage(lang)}
-            onToggleTheme={toggleMode}
-          />
-        </div>
-      </div>
-    </header>
-  );
+  if (user)
+    return (
+      <UserHeader
+        cartProducts={cartProducts}
+        navLinks={navLinks}
+        languages={languages}
+      />
+    );
+  return <GuestHeader languages={languages} />;
 };
 
 export default Header;
