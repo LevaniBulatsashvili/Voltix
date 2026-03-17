@@ -74,7 +74,13 @@
   "register-register": "რეგისტრაცია",
   "register-already have an account?": "უკვე გაქვთ ანგარიში?",
   "register-login": "შესვლა",
-  "register-email is required": "ელ. ფოსტა აუცილებელია",
-  "register-invalid email address": "ელ. ფოსტა არ არსებობს",
-  "register-password must be at least 6 characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს"
+  "register-email is required": "ელფოსტა აუცილებელია",
+  "register-invalid email address": "ელფოსტა არ არსებობს",
+  "register-password must be at least 6 characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს",
+  "verify-email-verify your email": "შეამოწმეთ თქვენი ელფოსტა",
+  "verify-email-thank you for registering! a verification link has been sent to your email. please check your inbox and click the link to activate your account.": "მადლობა რეგისტრაციისთვის! თქვენი ელფოსტის მისამართზე გაიგზავნა დადასტურების ბმული. გთხოვთ, შეამოწმოთ თქვენი ინბოქსი და დააწკაპუნეთ ბმულს ანგარიშის გასააქტიურებლად.",
+  "verify-email-back to login": "უკან დაბრუნება",
+  "verification-success-email verified successfully!": "ელფოსტა დადასტურდა!",
+  "verification-success-Your email has been successfully verified. You can now log in to your account and start shopping.": "თქვენი ელფოსტა წარმატებით დადასტურდა. ახლა შეგიძლიათ შეხვიდეთ თქვენს ანგარიშში და დაიწყოთ შოპინგი.",
+  "verification-success-home": "მთავარი"
 }

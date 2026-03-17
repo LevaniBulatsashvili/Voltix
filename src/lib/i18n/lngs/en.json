@@ -77,5 +77,11 @@
   "register-login": "login",
   "register-email is required": "email is required",
   "register-invalid email address": "email invalid",
-  "register-password must be at least 6 characters": "password must be at least 6 characters"
+  "register-password must be at least 6 characters": "password must be at least 6 characters",
+  "verify-email-verify your email": "verify your email",
+  "verify-email-thank you for registering! a verification link has been sent to your email. please check your inbox and click the link to activate your account.": "Thank you for registering! A verification link has been sent to your email. Please check your inbox and click the link to activate your account.",
+  "verify-email-back to login": "Back to Login",
+  "verification-success-email verified successfully!": "email verified successfully!",
+  "verification-success-your email has been successfully verified. You can now log in to your account and start shopping.": "Your email has been successfully verified. You can now log in to your account and start shopping.",
+  "verification-success-home": "home"
 }

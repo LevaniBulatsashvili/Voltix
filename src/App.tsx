@@ -3,12 +3,15 @@ import AppRouter from "./routes/AppRouter";
 import { client } from "./react-query/client";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import AuthProvider from "./providers/AuthProvider";
 
 function App() {
   return (
     <Provider store={store()}>
       <QueryClientProvider client={client}>
-        <AppRouter />
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
       </QueryClientProvider>
     </Provider>
   );

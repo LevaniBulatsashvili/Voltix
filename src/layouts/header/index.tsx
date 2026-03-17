@@ -19,7 +19,7 @@ const Header = () => {
   ];
   const cartProducts = 2;
 
-  if (user)
+  if (user?.email_verified)
     return (
       <UserHeader
         cartProducts={cartProducts}

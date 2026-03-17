@@ -42,7 +42,7 @@ const Actions = ({
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
-      {!!user && (
+      {user?.email_verified && (
         <AppLink to={PAGE.CART} className="relative">
           <ShoppingCart className="w-6 h-6" />
           {cartProducts && cartProducts > 0 && (
@@ -53,7 +53,7 @@ const Actions = ({
         </AppLink>
       )}
 
-      {!!user && (
+      {user?.email_verified && (
         <div className="relative">
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}

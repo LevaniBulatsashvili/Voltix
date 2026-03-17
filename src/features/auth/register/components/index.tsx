@@ -29,7 +29,7 @@ const RegisterPage = () => {
 
   const onSubmit = (data: RegisterFormData) => {
     registerUser(data, {
-      onSuccess: () => navigate(PAGE.BASE),
+      onSuccess: () => navigate(PAGE.VERIFY_EMAIL),
     });
   };
 
