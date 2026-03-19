@@ -3,6 +3,8 @@ import type { IAuthResponse, IRegisterInput } from "../../../../types/Auth";
 import { authService } from "../../services/authService";
 import { useAppDispatch } from "../../../../hooks/redux";
 import { setSession, setUser } from "../../store/auth.slice";
+import { notifySuccess } from "../../../../lib/toast/notifySuccess";
+import { notifyError } from "../../../../lib/toast/notifyError";
 
 export const useRegister = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +15,10 @@ export const useRegister = () => {
     onSuccess: (data) => {
       if (data.user) dispatch(setUser(data.user));
       if (data.session) dispatch(setSession(data.session));
+
+      notifySuccess("success.register");
     },
+    onError: (error) => notifyError(error),
   });
 
   return {

@@ -82,5 +82,17 @@
   "verify-email-back to login": "უკან დაბრუნება",
   "verification-success-email verified successfully!": "ელფოსტა დადასტურდა!",
   "verification-success-Your email has been successfully verified. You can now log in to your account and start shopping.": "თქვენი ელფოსტა წარმატებით დადასტურდა. ახლა შეგიძლიათ შეხვიდეთ თქვენს ანგარიშში და დაიწყოთ შოპინგი.",
-  "verification-success-home": "მთავარი"
+  "verification-success-home": "მთავარი",
+
+  "errors": {
+    "unknown": "დაფიქსირდა შეცდომა",
+    "network": "ქსელის შეცდომა. სცადეთ თავიდან",
+    "invalid_credentials": "არასწორი ელფოსტა ან პაროლი",
+    "email_not_confirmed": "გთხოვთ დაადასტუროთ ელფოსტა",
+    "user_exists": "მომხმარებელი უკვე არსებობს"
+  },
+  "success": {
+    "login": "მოგესალმებით 👋",
+    "register": "ანგარიში შექმნილია! შეამოწმეთ ელფოსტა"
+  }
 }

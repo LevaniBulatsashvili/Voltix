@@ -83,5 +83,17 @@
   "verify-email-back to login": "Back to Login",
   "verification-success-email verified successfully!": "email verified successfully!",
   "verification-success-your email has been successfully verified. You can now log in to your account and start shopping.": "Your email has been successfully verified. You can now log in to your account and start shopping.",
-  "verification-success-home": "home"
+  "verification-success-home": "home",
+
+  "errors": {
+    "unknown": "Something went wrong",
+    "network": "Network error. Please try again.",
+    "invalid_credentials": "Invalid email or password",
+    "email_not_confirmed": "Please confirm your email",
+    "user_exists": "User already exists"
+  },
+  "success": {
+    "login": "Welcome back 👋",
+    "register": "Account created! Check your email"
+  }
 }

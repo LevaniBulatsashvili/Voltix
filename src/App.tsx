@@ -4,12 +4,16 @@ import { client } from "./react-query/client";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import AuthProvider from "./providers/AuthProvider";
+import ToastProvider from "./providers/toast/ToastProvider";
+import ToastListener from "./providers/toast/ToastListener";
 
 function App() {
   return (
-    <Provider store={store()}>
+    <Provider store={store}>
       <QueryClientProvider client={client}>
         <AuthProvider>
+          <ToastListener />
+          <ToastProvider />
           <AppRouter />
         </AuthProvider>
       </QueryClientProvider>
