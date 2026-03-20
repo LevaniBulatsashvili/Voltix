@@ -11,5 +11,6 @@ export const mapUser = (
     id: user.id,
     email: user.email ?? "",
     role,
+    email_verified: user.email_confirmed_at ? true : false,
   };
 };

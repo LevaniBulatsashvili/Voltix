@@ -8,7 +8,8 @@ interface IAuthRoute {
   allowedRoles?: Array<"user" | "admin">;
   redirectPath?: string;
   requireEmailVerified?: boolean;
-  guestOnly?: boolean;
+  guestOnly?: boolean; // For Login/Register
+  verifyPagesOnly?: boolean; // For verify-email / verify-success
 }
 
 const AuthRoute = ({
@@ -17,26 +18,37 @@ const AuthRoute = ({
   redirectPath,
   requireEmailVerified = false,
   guestOnly = false,
+  verifyPagesOnly = false,
 }: IAuthRoute) => {
   const { user, isLoading } = useAppSelector((state) => state.auth);
 
   if (isLoading) return <Spinner />;
 
-  // Guest-only routes (Login/Register)
-  if (guestOnly && user && user.email_verified)
-    // Fully authenticated users get redirected
-    return <Navigate to={redirectPath ?? PAGE.PRODUCTS} replace />;
+  // Guest-only pages: Login/Register
+  if (guestOnly) {
+    if (user && user.email_verified)
+      return <Navigate to={redirectPath ?? PAGE.PRODUCTS} replace />;
 
-  // Protected routes: redirect guests
-  if (requireAuth && !user) {
-    return <Navigate to={redirectPath ?? PAGE.LOGIN} replace />;
+    return <Outlet />;
   }
 
-  // Protected routes: role check
+  // Verify pages: only for logged-in users without verified email
+  if (verifyPagesOnly) {
+    if (!user) return <Navigate to={PAGE.LOGIN} replace />;
+    if (user.email_verified) return <Navigate to={PAGE.PRODUCTS} replace />; // redirect verified users
+
+    return <Outlet />;
+  }
+
+  // Protected pages
+  if (requireAuth && !user)
+    return <Navigate to={redirectPath ?? PAGE.LOGIN} replace />;
+
+  // Role check
   if (requireAuth && allowedRoles && user && !allowedRoles.includes(user.role))
     return <Navigate to={redirectPath ?? PAGE.PRODUCTS} replace />;
 
-  // Protected routes: email verification check
+  // Email verification required
   if (requireAuth && requireEmailVerified && user && !user.email_verified)
     return <Navigate to={PAGE.VERIFY_EMAIL} replace />;
 

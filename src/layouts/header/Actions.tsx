@@ -15,6 +15,7 @@ import { PAGE } from "../../pages/pageConfig";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { logout } from "../../features/auth/store/auth.slice";
 import type { ILanguage } from "../../types/header";
+import { useLogout } from "../../hooks/useLogout";
 
 interface IActions {
   cartProducts?: number;
@@ -31,11 +32,13 @@ const Actions = ({
   onLanguageChange,
   onToggleTheme,
 }: IActions) => {
+  const { signOut } = useLogout();
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = () => {
+    signOut();
     dispatch(logout());
     setDropdownOpen(false);
   };

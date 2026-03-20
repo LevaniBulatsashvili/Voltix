@@ -1,25 +1,18 @@
-import type { ElementType, ReactNode } from "react";
-import type { LinkProps } from "react-router-dom";
+import type { ReactNode } from "react";
 
 interface IPrimaryButton {
   children: ReactNode;
-  as?: ElementType;
-  to?: string;
   onClick?: () => void;
 }
 
-const PrimaryButton = ({
-  children,
-  as: Component = "button",
-  ...props
-}: IPrimaryButton & LinkProps) => {
+const PrimaryButton = ({ children, ...props }: IPrimaryButton) => {
   return (
-    <Component
+    <button
       {...props}
-      className="bg-primary text-background font-semibold px-6 py-3 rounded-lg shadow hover:opacity-80 transition-colors duration-200"
+      className="bg-primary text-background font-semibold px-8 py-3 rounded-lg hover:opacity-80 transition-colors duration-200"
     >
       {children}
-    </Component>
+    </button>
   );
 };
 

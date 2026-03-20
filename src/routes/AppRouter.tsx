@@ -1,71 +1,52 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import MainLayout from "../layouts/PageLayout";
-import ProductsPage from "../pages/products/ProductsPage";
-import ProductPage from "../pages/product/ProductPage";
-import LoginPage from "../pages/auth/login/LoginPage";
-import RegisterPage from "../pages/auth/register/RegisterPage";
-// import AdminPage from "../pages/admin/AdminPage";
-import AuthRoute from "./AuthRoute";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import AuthRoute from "../routes/AuthRoute";
 import { PAGE } from "../pages/pageConfig";
+import LoginPage from "../features/auth/login/components";
+import RegisterPage from "../features/auth/register/components";
 import VerifyEmailPage from "../pages/auth/verification/VerifyEmailPage";
 import VerificationSuccessPage from "../pages/auth/verification/VerificationSuccessPage";
+import ProductsPage from "../pages/products/ProductsPage";
+import MainLayout from "../layouts/PageLayout";
+import ProductPage from "../pages/product/ProductPage";
+import ProfilePage from "../pages/user/profile/ProfilePage";
 
-const AppRouter = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />} path={PAGE.BASE}>
-          {/* Guest */}
-          <Route element={<AuthRoute guestOnly />}>
-            <Route path={PAGE.LOGIN} element={<LoginPage />} />
-            <Route path={PAGE.REGISTER} element={<RegisterPage />} />
-          </Route>
+const AppRoutes = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route element={<MainLayout />} path={PAGE.BASE}>
+        <Route index element={<Navigate to={PAGE.PRODUCTS} replace />} />
 
-          {/* Unverified */}
-          <Route
-            element={
-              <AuthRoute requireAuth={true} requireEmailVerified={false} />
-            }
-          >
-            <Route path={PAGE.VERIFY_EMAIL} element={<VerifyEmailPage />} />
-            <Route
-              path={PAGE.VERIFY_SUCCESS}
-              element={<VerificationSuccessPage />}
-            />
-          </Route>
-
-          {/* Protected */}
-          <Route
-            element={
-              <AuthRoute requireAuth={true} requireEmailVerified={true} />
-            }
-          >
-            <Route index element={<Navigate to={PAGE.PRODUCTS} />} />
-            <Route path={PAGE.PRODUCTS} element={<ProductsPage />} />
-            <Route
-              path={`${PAGE.SHOP}/:categories/:subcategories/:id`}
-              element={<ProductPage />}
-            />
-          </Route>
-
-          {/* Admin */}
-          <Route
-            element={
-              <AuthRoute
-                requireAuth={true}
-                allowedRoles={["admin"]}
-                requireEmailVerified={true}
-              />
-            }
-          >
-            {/* <Route path={PAGE.ADMIN} element={<AdminPage />} /> */}
-          </Route>
+        {/* Guest-only pages */}
+        <Route element={<AuthRoute guestOnly />}>
+          <Route path={PAGE.LOGIN} element={<LoginPage />} />
+          <Route path={PAGE.REGISTER} element={<RegisterPage />} />
         </Route>
 
-        <Route path={PAGE.NOT_FOUND} element={<></>} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+        <Route element={<AuthRoute verifyPagesOnly />}>
+          <Route path={PAGE.VERIFY_EMAIL} element={<VerifyEmailPage />} />
+          <Route
+            path={PAGE.VERIFY_SUCCESS}
+            element={<VerificationSuccessPage />}
+          />
+        </Route>
 
-export default AppRouter;
+        {/* Protected pages for any logged-in user */}
+        <Route element={<AuthRoute requireAuth />}>
+          <Route path={PAGE.PRODUCTS} element={<ProductsPage />} />
+          <Route path={PAGE.PRODUCT} element={<ProductPage />} />
+          <Route path={PAGE.PROFILE} element={<ProfilePage />} />
+        </Route>
+
+        {/* Admin-only pages */}
+        <Route element={<AuthRoute requireAuth allowedRoles={["admin"]} />}>
+          {/* <Route path={PAGE.ADMIN} element={<AdminPage />} /> */}
+        </Route>
+
+        {/* Catch-all: redirect unknown routes */}
+        <Route path="*" element={<Navigate to={PAGE.PRODUCTS} replace />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
+
+export default AppRoutes;
