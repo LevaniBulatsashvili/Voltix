@@ -34,7 +34,7 @@ export const FormInput = <T extends FieldValues>({
 
       <Input
         type={type}
-        placeholder={placeholder ?? String(name)}
+        placeholder={placeholder ? placeholder : String(name)}
         disabled={disabled}
         {...register(name)}
       />

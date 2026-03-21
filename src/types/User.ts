@@ -11,6 +11,7 @@ export interface IUser {
 
 export interface IAddress {
   id: string;
+  user_id: string;
   label?: string;
   recipient_name?: string;
   address_lines: string[];
@@ -24,6 +25,7 @@ export interface IAddress {
 
 export interface IOrder {
   id: string;
+  user_id: string;
   date: string;
   status: "pending" | "shipped" | "delivered" | "cancelled";
   total_amount: number;
@@ -32,6 +34,7 @@ export interface IOrder {
 
 export interface IOrderItem {
   id: string;
+  order_id: string;
   product_id: string;
   name: string;
   quantity: number;

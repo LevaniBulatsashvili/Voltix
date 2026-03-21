@@ -5,6 +5,8 @@ import { setSession, setUser } from "../../store/auth.slice";
 import { authService } from "../../services/authService";
 import { notifySuccess } from "../../../../lib/toast/notifySuccess";
 import { notifyError } from "../../../../lib/toast/notifyError";
+import { client } from "../../../../react-query/client";
+import Query_Keys from "../../../../react-query/query-keys";
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +15,12 @@ export const useLogin = () => {
     mutationFn: ({ email, password }) =>
       authService.loginWithEmail(email, password),
     onSuccess: (data) => {
-      if (data.user) dispatch(setUser(data.user));
+      if (data.authUser) dispatch(setUser(data.authUser));
+
+      if (data.user) {
+        client.setQueryData([Query_Keys.getUser], data.user);
+      }
+
       if (data.session) dispatch(setSession(data.session));
 
       notifySuccess("success.login");

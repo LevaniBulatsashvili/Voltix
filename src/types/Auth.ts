@@ -1,4 +1,5 @@
 import type { Session } from "@supabase/supabase-js";
+import type { IUser } from "./User";
 
 export interface IAuthService {
   loginWithEmail(email: string, password: string): Promise<IAuthResponse>;
@@ -6,6 +7,12 @@ export interface IAuthService {
   loginWithGoogle(): Promise<IOAuthResponse>;
   loginWithOtp(email: string): Promise<IOtpResponse>;
   logout(): Promise<void>;
+  updateEmail(
+    newEmail: string,
+    currentPassword: string,
+  ): Promise<IAuthUser | null>;
+  updatePassword(currentPassword: string, newPassword: string): Promise<void>;
+  sendPasswordResetEmail(email: string): Promise<void>;
 }
 
 export interface IAuthUser {
@@ -16,7 +23,8 @@ export interface IAuthUser {
 }
 
 export interface IAuthResponse {
-  user: IAuthUser | null;
+  authUser: IAuthUser | null; 
+  user: IUser | null;       
   session: Session | null;
 }
 
