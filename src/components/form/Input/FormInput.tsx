@@ -3,9 +3,11 @@ import {
   type FieldErrors,
   type Path,
   type FieldValues,
+  get,
 } from "react-hook-form";
 import Input from "./Input";
 import { Label } from "./Label";
+import { useTranslation } from "react-i18next";
 
 interface IFormInput<T extends FieldValues> {
   name: Path<T>;
@@ -26,7 +28,8 @@ export const FormInput = <T extends FieldValues>({
   placeholder,
   disabled,
 }: IFormInput<T>) => {
-  const error = errors?.[name]?.message as string | undefined;
+  const { t } = useTranslation();
+  const error = get(errors, name)?.message as string | undefined;
 
   return (
     <div>
@@ -39,7 +42,9 @@ export const FormInput = <T extends FieldValues>({
         {...register(name)}
       />
 
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+      {error && (
+        <p className="mt-1 text-sm text-red-500">{t(`errors.${error}`)}</p>
+      )}
     </div>
   );
 };

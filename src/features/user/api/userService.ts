@@ -12,15 +12,18 @@ export const userService = {
 
     const { data, error } = await supabase
       .from("profiles")
-      .select("*, addresses(*)")
+      .select("*, address(*)")
       .eq("id", user.id)
       .single();
+
+    const address = data.address?.[0] ?? null;
 
     if (error) throw error;
 
     return {
       ...data,
       email: user.email,
+      address,
     } as IUser;
   },
 
@@ -56,7 +59,7 @@ export const userService = {
     if (!user) throw new Error("Not authenticated");
 
     const { data, error } = await supabase
-      .from("addresses")
+      .from("address")
       .select("*")
       .eq("user_id", user.id);
 
@@ -75,7 +78,7 @@ export const userService = {
     if (!user) throw new Error("Not authenticated");
 
     const { data, error } = await supabase
-      .from("addresses")
+      .from("address")
       .insert({ ...address, user_id: user.id })
       .single();
 
@@ -84,8 +87,7 @@ export const userService = {
   },
 
   updateAddress: async (
-    addressId: string,
-    updates: Partial<IAddress>,
+    updatedAddress: Partial<IAddress>,
   ): Promise<IAddress> => {
     const {
       data: { user },
@@ -95,9 +97,9 @@ export const userService = {
     if (!user) throw new Error("Not authenticated");
 
     const { data, error } = await supabase
-      .from("addresses")
-      .update(updates)
-      .eq("id", addressId)
+      .from("address")
+      .update(updatedAddress)
+      .eq("id", updatedAddress.id)
       .eq("user_id", user.id)
       .single();
 
@@ -114,7 +116,7 @@ export const userService = {
     if (!user) throw new Error("Not authenticated");
 
     const { error } = await supabase
-      .from("addresses")
+      .from("address")
       .delete()
       .eq("id", addressId)
       .eq("user_id", user.id);

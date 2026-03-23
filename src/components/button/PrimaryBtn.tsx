@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 interface IPrimaryButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   className?: string;
-  onClick?: () => void;
 }
 
 const PrimaryButton = ({ text, className, ...props }: IPrimaryButton) => {

@@ -8,6 +8,8 @@ import {
 } from "../../../schemas/changePasswordSchema";
 import { authService } from "../../../../auth/services/authService";
 import PasswordInput from "../../../../../components/form/Input/PasswordInput";
+import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
+import { notifySupabaseError } from "../../../../../lib/toast/notifySupabaseError";
 
 interface IChangePasswordModal {
   isOpen: boolean;
@@ -32,19 +34,9 @@ const ChangePasswordModal = ({ isOpen, onClose }: IChangePasswordModal) => {
     try {
       await authService.updatePassword(data.currentPassword, data.newPassword);
       onClose();
-      // alert("Password updated successfully!");
+      notifySuccess("profile.password_update_successful");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        alert(error.message);
-      } else if (
-        typeof error === "object" &&
-        error !== null &&
-        "message" in error
-      ) {
-        alert((error as { message: string }).message);
-      } else {
-        alert("Failed to update password");
-      }
+      notifySupabaseError(error);
     }
   };
 

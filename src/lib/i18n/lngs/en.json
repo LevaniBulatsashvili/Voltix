@@ -90,7 +90,35 @@
     "network": "Network error. Please try again.",
     "invalid_credentials": "Invalid email or password",
     "email_not_confirmed": "Please confirm your email",
-    "user_exists": "User already exists"
+    "user_exists": "User already exists",
+    "address_line_is_required": "address line is required",
+    "city_is_required": "city is required",
+    "postal_code_is_required": "postal code is required",
+    "country_must_be_ISO_2-letter_code": "country must be ISO 2-letter code",
+    "invalid_email_address": "invalid email address",
+    "enter_your_password": "enter your password",
+    "current_password_is_required": "current password is required",
+    "new_password_must_be_at_least_6_characters": "new password must be at least 6 characters",
+    "please_confirm_your_new_password": "please confirm your new password",
+    "passwords_do_not_match": "passwords do not match",
+
+    "supabase": {
+      "AuthInvalidLoginCredentials": "Invalid login credentials",
+      "AuthUserNotFound": "User not found",
+      "AuthEmailNotConfirmed": "Please confirm your email",
+      "AuthPasswordUpdateFailed": "Failed to update password",
+      "AuthProviderSignUpNotAllowed": "Sign-up not allowed for this provider",
+
+      "DBUniqueViolation": "Duplicate value already exists",
+      "DBForeignKeyViolation": "Related record not found",
+      "DBNotNullViolation": "Required field missing",
+      "DBStringTooLong": "Value too long",
+      "DBColumnDoesNotExist": "Invalid column specified",
+
+      "NetworkError": "Network error. Please try again.",
+      "TimeoutError": "Request timed out",
+      "UnknownError": "Something went wrong"
+    }
   },
   "success": {
     "login": "Welcome back 👋",
@@ -108,7 +136,7 @@
     "your_phone": "your phone",
     "your_city": "your city",
     "your_postal_code": "your postal code",
-    "your_country": "your country",
+    "your_country": "ISO 2-letter code",
     "your_address_line": "your address line",
     "address": "address",
     "details": "details",
@@ -122,6 +150,7 @@
     "enter_your_current_password": "enter your current password",
     "cancel": "cancel",
     "updating": "updating...",
+    "saving": "saving...",
     "update_email": "update",
     "password": "password",
     "change_password": "change password",
@@ -129,6 +158,10 @@
     "enter_current_password": "enter current password",
     "new_password": "new password",
     "enter_new_password": "enter new password",
-    "confirm_new_password": "confirm new password"
+    "confirm_new_password": "confirm new password",
+    "image_successfully_updated": "image successfully updated!",
+    "profile_successfully_updated": "profile successfully updated",
+    "password_update_successful": "password update successful",
+    "please_check_both_emails_to_verify": "please check both emails to verify"
   }
 }

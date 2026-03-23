@@ -9,6 +9,8 @@ import {
   type TChangeEmail,
 } from "../../../schemas/changeEmailSchema";
 import { authService } from "../../../../auth/services/authService";
+import { notifySupabaseError } from "../../../../../lib/toast/notifySupabaseError";
+import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
 
 interface IChangeEmailModal {
   user: IUser;
@@ -16,11 +18,7 @@ interface IChangeEmailModal {
   onClose: () => void;
 }
 
-const ChangeEmailModal = ({
-  // user,
-  isOpen,
-  onClose,
-}: IChangeEmailModal) => {
+const ChangeEmailModal = ({ isOpen, onClose }: IChangeEmailModal) => {
   const {
     register,
     handleSubmit,
@@ -34,8 +32,9 @@ const ChangeEmailModal = ({
     try {
       await authService.updateEmail(data.newEmail, data.password);
       onClose();
+      notifySuccess("profile.please_check_both_emails_to_verify");
     } catch (error) {
-      console.error("Failed to update email", error);
+      notifySupabaseError(error);
     }
   };
 

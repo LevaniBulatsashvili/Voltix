@@ -5,22 +5,17 @@ export interface IUser {
   phone?: string;
   avatar_url?: string;
   created_at: string;
-  addresses?: IAddress[];
+  address: IAddress;
   orders?: IOrder[];
 }
 
 export interface IAddress {
-  id: string;
-  user_id: string;
-  label?: string;
-  recipient_name?: string;
-  address_lines: string[];
-  city?: string;
-  state_or_province?: string;
-  postal_code?: string;
+  id?: string;
+  user_id?: string;
+  address_line: string;
+  city: string;
+  postal_code: string;
   country: string;
-  phone?: string;
-  is_default?: boolean;
 }
 
 export interface IOrder {

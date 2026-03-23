@@ -1,55 +1,44 @@
-// src/features/auth/services/authService.ts
 import { supabase } from "../../../lib/supabase";
 import { PAGE } from "../../../pages/pageConfig";
 import type {
   IAuthResponse,
   IAuthService,
-  IAuthUser,
   IOAuthResponse,
   IOtpResponse,
 } from "../../../types/Auth";
-import { mapUser } from "../../../utils/mapUser";
 import { userService } from "../../user/api/userService";
 import { profileService } from "./profileService";
+import {
+  getCurrentAuthUser,
+  reauthenticate,
+  mapAuthUser,
+} from "./auth.helpers";
 
 export const authService: IAuthService = {
-  /**
-   * Login with email + password
-   * Returns both Supabase auth user (IAuthUser) and full profile (IUser)
-   */
-  loginWithEmail: async (
-    email: string,
-    password: string,
-  ): Promise<IAuthResponse> => {
+  // =========================
+  // 🔐 LOGIN
+  // =========================
+  async loginWithEmail(email, password): Promise<IAuthResponse> {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) throw error;
 
-    // Supabase auth user
-    const authUser: IAuthUser | null = data.user ? mapUser(data.user) : null;
-
-    // Full profile (IUser) including addresses
-    let fullUser = null;
-    if (authUser?.id) {
-      fullUser = await userService.getUser();
-    }
+    const authUser = mapAuthUser(data.user);
+    const user = authUser?.id ? await userService.getUser() : null;
 
     return {
-      authUser, // IAuthUser (role, email_verified)
-      user: fullUser, // IUser (profile + addresses)
+      authUser,
+      user,
       session: data.session,
     };
   },
 
-  /**
-   * Register with email + password
-   */
-  registerWithEmail: async (
-    email: string,
-    password: string,
-  ): Promise<IAuthResponse> => {
+  // =========================
+  // 📝 REGISTER
+  // =========================
+  async registerWithEmail(email, password): Promise<IAuthResponse> {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -59,100 +48,88 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
 
-    // Map auth user
-    const authUser: IAuthUser | null = data.user ? mapUser(data.user) : null;
+    const authUser = mapAuthUser(data.user!);
 
-    // Create empty profile if user exists
-    if (authUser?.id) {
-      await profileService.createEmptyProfile(authUser.id);
-
-      // Fetch full profile immediately
-      const fullUser = await userService.getUser();
-      return {
-        authUser,
-        user: fullUser,
-        session: data.session,
-      };
+    if (!authUser?.id) {
+      return { authUser, user: null, session: data.session };
     }
+
+    await profileService.createEmptyProfile(authUser.id);
+    const user = await userService.getUser();
 
     return {
       authUser,
-      user: null,
+      user,
       session: data.session,
     };
   },
 
-  loginWithGoogle: async (): Promise<IOAuthResponse> => {
+  // =========================
+  // 🌐 OAUTH
+  // =========================
+  async loginWithGoogle(): Promise<IOAuthResponse> {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
     if (error) throw error;
+
     return data as IOAuthResponse;
   },
 
-  loginWithOtp: async (email: string): Promise<IOtpResponse> => {
+  // =========================
+  // 🔑 OTP LOGIN
+  // =========================
+  async loginWithOtp(email): Promise<IOtpResponse> {
     const { data, error } = await supabase.auth.signInWithOtp({ email });
     if (error) throw error;
+
     return data as IOtpResponse;
   },
 
-  logout: async (): Promise<void> => {
+  // =========================
+  // 🚪 LOGOUT
+  // =========================
+  async logout(): Promise<void> {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   },
 
-  updateEmail: async (
-    newEmail: string,
-    currentPassword: string,
-  ): Promise<IAuthUser | null> => {
-    const {
-      data: { user },
-      error: getUserError,
-    } = await supabase.auth.getUser();
-    if (getUserError) throw getUserError;
-    if (!user?.email) throw new Error("No authenticated user found.");
+  // =========================
+  // 📧 UPDATE EMAIL
+  // =========================
+  async updateEmail(newEmail, currentPassword) {
+    const authUser = await getCurrentAuthUser();
+    if (!authUser?.email) throw new Error("No authenticated user found.");
 
-    // Re-authenticate
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: user.email,
-      password: currentPassword,
+    await reauthenticate(authUser.email, currentPassword);
+
+    const { data, error } = await supabase.auth.updateUser({
+      email: newEmail,
     });
-    if (signInError) throw signInError;
+    if (error) throw error;
 
-    const { data: updatedData, error: updateError } =
-      await supabase.auth.updateUser({ email: newEmail });
-    if (updateError) throw updateError;
-
-    return updatedData.user ? mapUser(updatedData.user) : null;
+    return mapAuthUser(data.user);
   },
 
-  updatePassword: async (
-    currentPassword: string,
-    newPassword: string,
-  ): Promise<void> => {
-    const {
-      data: { user },
-      error: getUserError,
-    } = await supabase.auth.getUser();
-    if (getUserError) throw getUserError;
-    if (!user?.email) throw new Error("No authenticated user found.");
+  // =========================
+  // 🔒 UPDATE PASSWORD
+  // =========================
+  async updatePassword(currentPassword, newPassword): Promise<void> {
+    const authUser = await getCurrentAuthUser();
+    if (!authUser?.email) throw new Error("No authenticated user found.");
 
-    // Re-authenticate
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: user.email,
-      password: currentPassword,
-    });
-    if (signInError) throw signInError;
+    await reauthenticate(authUser.email, currentPassword);
 
-    const { error: updateError } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
-    if (updateError) throw updateError;
-
-    console.log("Password updated successfully");
+    if (error) throw error;
   },
 
-  sendPasswordResetEmail: async (email: string): Promise<void> => {
+  // =========================
+  // 📩 RESET PASSWORD
+  // =========================
+  async sendPasswordResetEmail(email): Promise<void> {
     const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) throw error;
   },
