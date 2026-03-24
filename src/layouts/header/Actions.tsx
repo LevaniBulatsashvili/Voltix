@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ShoppingCart,
   User,
-  ChevronDown,
   LogOut,
   Settings,
   Heart,
@@ -16,6 +15,8 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import { logout } from "../../features/auth/store/auth.slice";
 import type { ILanguage } from "../../types/header";
 import { useLogout } from "../../hooks/useLogout";
+import { useTranslation } from "react-i18next";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 interface IActions {
   cartProducts?: number;
@@ -32,10 +33,13 @@ const Actions = ({
   onLanguageChange,
   onToggleTheme,
 }: IActions) => {
+  const { t } = useTranslation();
   const { signOut } = useLogout();
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useClickOutside(dropdownRef, () => setDropdownOpen(false));
 
   const handleLogout = () => {
     signOut();
@@ -57,48 +61,51 @@ const Actions = ({
       )}
 
       {user?.email_verified && (
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-1 border-2 p-1 rounded-full hover:shadow-lg transition"
+            className="size-8 rounded-full flex items-center justify-center border border-background opacity-80 hover:opacity-100
+                        focus:outline-none focus:ring-1 focus:ring-indigo-500
+                      "
           >
-            <User className="w-6 h-6" />
-            <ChevronDown
-              className={`w-4 h-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
-            />
+            <User className="w-6 h-6 " />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg border overflow-hidden z-50">
+            <div className="absolute -right-19  sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50">
               <AppLink
                 to={PAGE.PROFILE}
-                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                onClick={() => setDropdownOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
               >
-                <User className="w-4 h-4" /> Profile
+                <User className="w-4 h-4" /> {t("header.profile")}
               </AppLink>
               <AppLink
                 to={PAGE.ORDERS}
-                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                onClick={() => setDropdownOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
               >
-                <Package className="w-4 h-4" /> Orders
+                <Package className="w-4 h-4" /> {t("header.orders")}
               </AppLink>
               <AppLink
                 to={PAGE.WISHLIST}
-                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                onClick={() => setDropdownOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
               >
-                <Heart className="w-4 h-4" /> Wishlist
+                <Heart className="w-4 h-4" /> {t("header.wishlist")}
               </AppLink>
               <AppLink
                 to={PAGE.SETTINGS}
-                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                onClick={() => setDropdownOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
               >
-                <Settings className="w-4 h-4" /> Settings
+                <Settings className="w-4 h-4" /> {t("header.settings")}
               </AppLink>
               <button
                 onClick={handleLogout}
-                className="w-full text-left flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                className="w-full text-left flex items-center gap-2 px-4 py-2 hover:opacity-90"
               >
-                <LogOut className="w-4 h-4" /> Logout
+                <LogOut className="w-4 h-4" /> {t("header.logout")}
               </button>
             </div>
           )}

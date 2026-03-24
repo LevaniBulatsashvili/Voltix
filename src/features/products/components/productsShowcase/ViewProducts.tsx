@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import AppLink from "../../../../components/button/AppLink";
 
 interface IViewProducts {
@@ -7,12 +8,14 @@ interface IViewProducts {
 }
 
 const ViewProducts = ({ to, text, className = "" }: IViewProducts) => {
+  const { t } = useTranslation();
+
   return (
     <AppLink
       to={to}
       className={`px-16 py-3 rounded-full bg-accent hover:opacity-80 text-white font-semibold ${className}`}
     >
-      {text}
+      {t(text)}
     </AppLink>
   );
 };

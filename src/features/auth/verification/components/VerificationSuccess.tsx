@@ -12,17 +12,15 @@ const VerificationSuccess = () => {
 
   return (
     <Container>
-      <Heading>
-        {t("verification-success-email verified successfully!")}
-      </Heading>
+      <Heading>{t("verificationSuccess.email_verified_successfully")}</Heading>
       <Text>
         {t(
-          "verification-success-Your email has been successfully verified. You can now log in to your account and start shopping.",
+          "verificationSuccess.your_email_has_been_successfully_verified_You_can_now_log_in_to_your_account_and_start_shopping",
         )}
       </Text>
       <div className="flex justify-center gap-4">
         <LinkBtn className="capitalize" to={PAGE.BASE}>
-          {t("verification-success-home")}
+          {t("verificationSuccess.home")}
         </LinkBtn>
       </div>
     </Container>

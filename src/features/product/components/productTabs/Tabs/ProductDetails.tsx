@@ -27,7 +27,7 @@ const ProductDetails = ({ specs }: IProductDetails) => {
         </div>
       ) : (
         <p className="text-gray-500 italic">
-          {t("product-no specifications available for this product.")}
+          {t("product.no_specifications_available_for_this_product")}
         </p>
       )}
     </div>

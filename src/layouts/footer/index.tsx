@@ -7,39 +7,39 @@ const Footer = () => {
 
   const sections: ISection[] = [
     {
-      title: t("footer-company"),
+      title: t("footer.company"),
       links: [
-        t("footer-about"),
-        t("footer-careers"),
-        t("footer-blog"),
-        t("footer-press"),
+        t("footer.about"),
+        t("footer.careers"),
+        t("footer.blog"),
+        t("footer.press"),
       ],
     },
     {
-      title: t("footer-help"),
+      title: t("footer.help"),
       links: [
-        t("footer-contact us"),
-        t("footer-shipping & delivery"),
-        t("footer-returns"),
-        t("footer-order tracking"),
+        t("footer.contact_us"),
+        t("footer.shipping_delivery"),
+        t("footer.returns"),
+        t("footer.order_tracking"),
       ],
     },
     {
-      title: t("footer-FAQ"),
+      title: t("footer.FAQ"),
       links: [
-        t("footer-account"),
-        t("footer-manage deliveries"),
-        t("footer-orders"),
-        t("footer-payments"),
+        t("footer.account"),
+        t("footer.manage_deliveries"),
+        t("footer.orders"),
+        t("footer.payments"),
       ],
     },
     {
-      title: t("footer-resources"),
+      title: t("footer.resources"),
       links: [
-        t("footer-guides"),
-        t("footer-tutorials"),
-        t("footer-product reviews"),
-        t("footer-comparison charts"),
+        t("footer.guides"),
+        t("footer.tutorials"),
+        t("footer.product_reviews"),
+        t("footer.comparison_charts"),
       ],
     },
   ];
@@ -55,7 +55,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-12 border-t border-primary pt-6 text-center text-sm capitalize">
-        © {new Date().getFullYear()} {t("footer-voltix. all rights reserved.")}
+        © {new Date().getFullYear()} {t("footer.voltix_all_rights_reserved")}
       </div>
     </footer>
   );

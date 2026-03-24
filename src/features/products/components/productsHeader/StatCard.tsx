@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface IStatCard {
   value: string;
   label: string;
@@ -5,11 +7,13 @@ interface IStatCard {
 }
 
 const StatCard = ({ value, label, statClass = "" }: IStatCard) => {
+  const { t } = useTranslation();
+
   return (
     <div className={`capitalize text-center sm:text-start ${statClass}`}>
       <span className="text-4xl sm:text-5xl font-semibold">{value}</span>
       <br />
-      {label}
+      {t(label)}
     </div>
   );
 };

@@ -1,0 +1,19 @@
+{
+  "home": "home",
+  "shop": "shop",
+  "electronics": "electronics",
+  "tablets": "tablets",
+  "phones": "phones",
+  "laptops:": "laptops",
+  "add_to_cart": "add to cart",
+  "out_of_stock": "out of stock",
+  "product_details": "product details",
+  "rating_reviews": "rating & reviews",
+  "faqs": "FAQs",
+  "customer_reviews": "customer reviews",
+  "latest": "latest",
+  "oldest": "oldest",
+  "review": "review",
+  "load_more_reviews": "load more reviews",
+  "no_specifications": "no specifications"
+}

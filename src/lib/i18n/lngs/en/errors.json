@@ -1,0 +1,35 @@
+{
+  "unknown": "Something went wrong",
+  "network": "Network error. Please try again.",
+  "invalid_credentials": "Invalid email or password",
+  "email_not_confirmed": "Please confirm your email",
+  "user_exists": "User already exists",
+  "address_line_is_required": "address line is required",
+  "city_is_required": "city is required",
+  "postal_code_is_required": "postal code is required",
+  "country_must_be_ISO_2-letter_code": "country must be ISO 2-letter code",
+  "invalid_email_address": "invalid email address",
+  "enter_your_password": "enter your password",
+  "current_password_is_required": "current password is required",
+  "new_password_must_be_at_least_6_characters": "new password must be at least 6 characters",
+  "please_confirm_your_new_password": "please confirm your new password",
+  "passwords_do_not_match": "passwords do not match",
+
+  "supabase": {
+    "Invalid login credentials": "Invalid login credentials",
+    "User not found": "User not found",
+    "Please confirm your email": "Please confirm your email",
+    "Failed to update password": "Failed to update password",
+    "Sign-up not allowed forr this provider": "Sign-up not allowed for this provider",
+
+    "Duplicate value already exists": "Duplicate value already exists",
+    "Related record not found": "Related record not found",
+    "Required field missing": "Required field missing",
+    "Value too long": "Value too long",
+    "Invalid column specified": "Invalid column specified",
+
+    "Network error. Please try again.": "Network error. Please try again.",
+    "Request timed out": "Request timed out",
+    "Something went wrong": "Something went wrong"
+  }
+}

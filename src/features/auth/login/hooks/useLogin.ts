@@ -23,7 +23,7 @@ export const useLogin = () => {
 
       if (data.session) dispatch(setSession(data.session));
 
-      notifySuccess("success.login");
+      notifySuccess("login.welcome_back");
     },
     onError: (error) => notifyError(error),
   });

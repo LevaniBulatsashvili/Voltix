@@ -8,10 +8,10 @@ const Header = () => {
   const user = useAppSelector((state) => state.auth.user);
   const { t } = useTranslation();
   const navLinks = [
-    { label: t("header-shop"), to: PAGE.SHOP },
-    { label: t("header-on sale"), to: PAGE.SALE },
-    { label: t("header-new arrivals"), to: PAGE.ARRIVALS },
-    { label: t("header-categories"), to: PAGE.CATEGORIES },
+    { label: t("header.shop"), to: PAGE.SHOP },
+    { label: t("header.on_sale"), to: PAGE.SALE },
+    { label: t("header.new_arrivals"), to: PAGE.ARRIVALS },
+    { label: t("header.categories"), to: PAGE.CATEGORIES },
   ];
   const languages = [
     { value: "en", language: "Eng", code: "us" },

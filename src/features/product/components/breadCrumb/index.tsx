@@ -12,13 +12,13 @@ const Breadcrumbs = ({ product }: IBreadcrumbs) => {
   const { t } = useTranslation();
 
   const crumbs: ICrumb[] = [
-    { label: t("product-home"), to: PAGE.BASE },
+    { label: t("product.home"), to: PAGE.BASE },
     {
-      label: t(`product-${product.main_category.name.toLowerCase()}`),
+      label: t(`product.${product.main_category.name.toLowerCase()}`),
       to: `${PAGE.CATEGORIES}/${product.main_category.id}`,
     },
     {
-      label: t(`product-${product.category.name.toLowerCase()}`),
+      label: t(`product.${product.category.name.toLowerCase()}`),
       to: `${PAGE.CATEGORIES}/${product.main_category.id}/${product.category.id}`,
     },
     { label: product.name },

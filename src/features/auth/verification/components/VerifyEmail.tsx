@@ -10,14 +10,14 @@ const VerifyEmail = () => {
 
   return (
     <Container>
-      <Heading>{t("verify-email-verify your email")}</Heading>
+      <Heading>{t("verifyEmail.verify_your_email")}</Heading>
       <Text>
         {t(
-          "verify-email-thank you for registering! a verification link has been sent to your email. please check your inbox and click the link to activate your account.",
+          "verifyEmail.thank_you_for_registering_a_verification_link_has_been_sent_to_your_email_please_check_your_inbox_and_click_the_link_to_activate_your_account",
         )}
       </Text>
 
-      <LinkBtn to={PAGE.LOGIN}>{t("verify-email-back to login")}</LinkBtn>
+      <LinkBtn to={PAGE.LOGIN}>{t("verifyEmail.back_to_login")}</LinkBtn>
     </Container>
   );
 };

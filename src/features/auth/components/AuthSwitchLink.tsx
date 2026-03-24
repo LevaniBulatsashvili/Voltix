@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import AppLink from "../../../components/button/AppLink";
 
 interface IAuthFooter {
@@ -7,14 +8,16 @@ interface IAuthFooter {
 }
 
 const AuthSwitchLink = ({ to, text, linkText }: IAuthFooter) => {
+  const { t } = useTranslation();
+
   return (
     <p className="mt-10 text-center text-sm">
-      {text}
+      {t(text)}
       <AppLink
         className="ml-1.5 font-semibold underline hover:opacity-80"
         to={to}
       >
-        {linkText}
+        {t(linkText)}
       </AppLink>
     </p>
   );

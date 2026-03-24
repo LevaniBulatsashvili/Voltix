@@ -1,0 +1,19 @@
+{
+  "home": "მთავარი",
+  "shop": "მაღაზია",
+  "electronics": "ელექტრონიკა",
+  "tablets": "ტაბლეტები",
+  "phones": "მობილურები",
+  "laptops:": "ლეპტოპები",
+  "add_to_cart": "დამატება",
+  "out_of_stock": "ამოწურულია",
+  "product_details": "აღწერა",
+  "rating_reviews": "იუზერები",
+  "faqs": "FAQ",
+  "customer_reviews": "კომენტარები",
+  "latest": "ახალი",
+  "oldest": "ძველი",
+  "review": "შეაფასე",
+  "load_more_reviews": "მეტის ჩვენება",
+  "no_specifications": "პროდუქტს სპეციფიკაციები არ აქვს."
+}

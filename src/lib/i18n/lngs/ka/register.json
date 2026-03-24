@@ -1,0 +1,13 @@
+{
+  "create_account": "ანგარიშის შექმნა",
+  "email": "ელ. ფოსტა",
+  "password": "პაროლი",
+  "register_loading": "რეგისტრაცია მიმდინარეობს",
+  "register": "რეგისტრაცია",
+  "already_have_an_account?": "უკვე გაქვთ ანგარიში?",
+  "login": "შესვლა",
+  "email_is_required": "ელფოსტა აუცილებელია",
+  "invalid_email_address": "ელფოსტა არასწორია",
+  "password_must_be_at_least_6_characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს",
+  "account_created_check_your_email": "ანგარიში შექმნილია! შეამოწმეთ ელფოსტა"
+}

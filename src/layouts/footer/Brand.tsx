@@ -25,7 +25,7 @@ const Brand = () => {
       <p className="text-4xl font-extrabold capitalize">{t("voltix")}</p>
       <p>
         {t(
-          "footer-Voltix is your trusted source for the latest electronics, gadgets, and smart devices.",
+          "footer.Voltix_is_your_trusted_source_for_the_latest_electronics,_gadgets,_and_smart_devices",
         )}
       </p>
       <SocialLinks />

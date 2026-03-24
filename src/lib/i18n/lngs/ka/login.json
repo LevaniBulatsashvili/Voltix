@@ -1,0 +1,12 @@
+{
+  "welcome_back": "კეთილი დაბრუნება",
+  "email": "ელ. ფოსტა",
+  "password": "პაროლი",
+  "login": "შესვლა",
+  "logging_in": "მიმდინარეობს შესვლა...",
+  "don't_have_an_account?": "არ გაქვთ ანგარიში?",
+  "register": "რეგისტრაცია",
+  "email_is_required": "ელ. ფოსტა აუცილებელია",
+  "invalid_email_address": "ელ. ფოსტა არასწორია",
+  "password_must_be_at_least_6_characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს"
+}

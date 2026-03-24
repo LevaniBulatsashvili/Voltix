@@ -11,7 +11,7 @@ import { Menu, X } from "lucide-react";
 import type { IHeader } from "../../types/header";
 
 const UserHeader = ({ cartProducts, navLinks, languages }: IHeader) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const toggleMode = () => dispatch(toggleTheme());
 
@@ -20,7 +20,7 @@ const UserHeader = ({ cartProducts, navLinks, languages }: IHeader) => {
   return (
     <header className="items-center bg-primary text-background py-4 sm:py-5 md:py-6 px-8 sm:px-10 md:px-16 lg:px-25 flex flex-col gap-10 sm:flex-row sm:items-center sm:gap-6 relative">
       <div className="flex justify-between items-center w-full sm:w-auto">
-        <Logo label={t("voltix")} />
+        <Logo label="voltix" />
         <button
           className="sm:hidden p-2 rounded hover:bg-primary/70 transition"
           onClick={() => setMenuOpen((prev) => !prev)}

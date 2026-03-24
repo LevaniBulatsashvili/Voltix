@@ -31,15 +31,15 @@ const Products = () => {
   const stats = [
     {
       value: "200+",
-      label: t("products-international brands"),
+      label: t("products.international_brands"),
     },
     {
       value: "2,000+",
-      label: t("products-high quality products"),
+      label: t("products.high_quality_products"),
     },
     {
       value: "30,000+",
-      label: t("products-happy customers"),
+      label: t("products.happy_customers"),
     },
   ];
 
@@ -53,11 +53,11 @@ const Products = () => {
           {(topSellingProducts) => (
             <div className="grid">
               <ProductsHeader
-                title={t("products-header")}
-                description={t("products-description")}
-                buttonText={t("products-shopBtn")}
+                title="products.header"
+                description="products.description"
+                buttonText="products.shop_btn"
                 image={electronicsImg}
-                imageAlt={t("products-electronics")}
+                imageAlt="products.electronics"
                 stats={stats}
               />
               <Carousel
@@ -68,19 +68,19 @@ const Products = () => {
                 itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
               />
               <ProductShowcase
-                title={t("products-new arrivals")}
+                title="products.new_arrivals"
                 products={newestProducts}
                 viewAllLink={PAGE.PRODUCTS}
               />
               <hr className="w-[90%] mx-auto opacity-20" />
               <ProductShowcase
-                title={t("products-top selling")}
+                title="products.top_selling"
                 products={topSellingProducts}
                 viewAllLink={PAGE.PRODUCTS}
               />
               <ProductCategories />
               <Customers
-                title={t("products-our happy customers")}
+                title="products.our_happy_customers"
                 customers={dummyCustomers}
               />
             </div>

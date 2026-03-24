@@ -33,7 +33,7 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
     <div className="p-6 w-full flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <h2 className="text-xl sm:text-2xl font-bold capitalize">
-          {t("product-customer reviews")} ({reviews.length})
+          {t("product.customer_reviews")} ({reviews.length})
         </h2>
 
         <div className="flex items-center gap-2">
@@ -43,8 +43,8 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
           >
             <span>
               {sortOrder === "latest"
-                ? t("product-latest")
-                : t("product-oldest")}
+                ? t("product.latest")
+                : t("product.oldest")}
             </span>
             <ChevronDown
               className={`ml-1 size-4 ${
@@ -54,7 +54,7 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
           </button>
 
           <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
-            {t("product-review")}
+            {t("product.review")}
           </button>
         </div>
       </div>

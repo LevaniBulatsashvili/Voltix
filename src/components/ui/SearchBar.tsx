@@ -26,7 +26,7 @@ export default function SearchBar({ delay = 700 }) {
         className={`rounded-full font-normal text-lg text-text bg-white border border-primary/50 w-full py-2 pl-10 pr-4 focus:bg-white focus:outline-none placeholder:capitalize ${
           disabled ? "opacity-50 cursor-not-allowed bg-gray-100" : ""
         }`}
-        placeholder={t("header-search")}
+        placeholder={t("header.search")}
         value={inputValue}
         disabled={disabled}
         onChange={(e) => setInputValue(e.target.value)}

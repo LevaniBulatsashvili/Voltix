@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import AppLink from "../../../../components/button/AppLink";
 import { PAGE } from "../../../../pages/pageConfig";
 import StatCard from "./StatCard";
@@ -24,15 +25,17 @@ const ProductsHeader = ({
   imageAlt,
   stats,
 }: IProductsHeader) => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-8 sm:p-10 md:p-15 lg:p-24.5 grid grid-cols-1 xl:grid-cols-2 gap-0 xl:gap-16 text-primary">
       <div className="flex flex-col justify-between h-full">
         <div className="grid gap-8">
           <h1 className="text-4xl sm:text-6xl text-center xl:text-start font-extrabold capitalize">
-            {title}
+            {t(title)}
           </h1>
           <p className="text-md sm:text-xl text-center xl:text-start capitalize mx-auto sm:w-full sm:mx-0">
-            {description}
+            {t(description)}
           </p>
         </div>
 
@@ -42,7 +45,7 @@ const ProductsHeader = ({
                        px-8 sm:px-12 md:px-16 py-3 sm:py-4 text-sm sm:text-base md:text-lg"
             to={PAGE.PRODUCTS}
           >
-            {buttonText}
+            {t(buttonText)}
           </AppLink>
         </div>
 
@@ -61,7 +64,7 @@ const ProductsHeader = ({
       <div className="flex items-center justify-center">
         <img
           src={image}
-          alt={imageAlt}
+          alt={t(imageAlt)}
           className="h-full w-full object-cover rounded-lg"
         />
       </div>

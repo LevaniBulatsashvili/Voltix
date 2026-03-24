@@ -1,7 +1,6 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
 import type { RegisterFormData } from "../../schemas/registerSchema";
 import { FormInput } from "../../../../../components/form/FormInput";
-import { useTranslation } from "react-i18next";
 import FormBtn from "../../../../../components/form/FormBtn";
 import Form from "../../../../../components/form/Form";
 
@@ -18,15 +17,13 @@ const RegisterForm = ({
   onSubmit,
   isPending,
 }: RegisterFormProps) => {
-  const { t } = useTranslation();
-
   return (
     <Form onSubmit={onSubmit}>
       <FormInput
         name="email"
         register={register}
         errors={errors}
-        placeholder="register-email"
+        placeholder="register.email"
         type="email"
       />
 
@@ -34,15 +31,13 @@ const RegisterForm = ({
         name="password"
         register={register}
         errors={errors}
-        placeholder="register-password"
+        placeholder="register.password"
         type="password"
       />
 
       <FormBtn
         isPending={isPending}
-        text={
-          isPending ? t("register-register loading") : t("register-register")
-        }
+        text={isPending ? "register.register_loading" : "register.register"}
       />
     </Form>
   );

@@ -9,12 +9,11 @@ import {
 } from "../schemas/registerSchema";
 import { PAGE } from "../../../../pages/pageConfig";
 import AuthSwitchLink from "../../components/AuthSwitchLink";
-import { useTranslation } from "react-i18next";
 import FormHeader from "../../../../components/form/FormHeader";
 import FormContainer from "../../../../components/form/FormContainer";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const RegisterPage = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const { register: registerUser, isPending, error } = useRegister();
 
@@ -35,7 +34,7 @@ const RegisterPage = () => {
 
   return (
     <FormContainer>
-      <FormHeader text={t("register-create account")} />
+      <FormHeader text="register.create_account" />
 
       <RegisterForm
         register={register}
@@ -43,13 +42,11 @@ const RegisterPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         isPending={isPending}
       />
-      {error && (
-        <p className="mt-2 text-red-500 text-center">{error.message}</p>
-      )}
+      {error && <ErrorMessage message={error.message} />}
 
       <AuthSwitchLink
-        text={t("register-already have an account?")}
-        linkText={t("register-login")}
+        text="register.already_have_an_account?"
+        linkText="register.login"
         to={PAGE.LOGIN}
       />
     </FormContainer>

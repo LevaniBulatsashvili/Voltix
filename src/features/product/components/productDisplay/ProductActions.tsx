@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import ProductBtn from "../../../../components/button/ProductBtn";
 import QuantitySelector from "../../../../components/ui/QuantitySelector";
 
@@ -15,8 +14,6 @@ const ProductActions = ({
   increase,
   decrease,
 }: IProductActions) => {
-  const { t } = useTranslation();
-
   const handleAddToCart = () => {};
 
   return (
@@ -30,14 +27,14 @@ const ProductActions = ({
             onDecrease={decrease}
           />
           <ProductBtn
-            text={t("product-add to cart")}
+            text="product.add_to_cart"
             onClick={handleAddToCart}
             className="bg-primary max-w-60 text-background flex-1 hover:opacity-80"
           />
         </>
       ) : (
         <ProductBtn
-          text={t("product-out of stock")}
+          text="product.out_of_stock"
           disabled
           className="w-full max-w-60 bg-gray-400 text-white cursor-not-allowed py-3"
         />

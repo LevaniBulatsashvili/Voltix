@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface ITabHeader {
   tabs: { key: string; label: string }[];
   activeTab: string;
@@ -5,6 +7,8 @@ interface ITabHeader {
 }
 
 const TabHeader = ({ tabs, activeTab, onTabChange }: ITabHeader) => {
+  const { t } = useTranslation();
+
   return (
     <div className="grid grid-cols-3 border-b border-gray-300 mb-4">
       {tabs.map((tab) => (
@@ -17,7 +21,7 @@ const TabHeader = ({ tabs, activeTab, onTabChange }: ITabHeader) => {
               : "text-gray-600 hover:text-primary"
           }`}
         >
-          {tab.label}
+          {t(tab.label)}
         </button>
       ))}
     </div>

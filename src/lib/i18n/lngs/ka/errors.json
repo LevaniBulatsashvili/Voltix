@@ -1,0 +1,35 @@
+{
+  "unknown": "დაფიქსირდა შეცდომა",
+  "network": "ქსელის შეცდომა. სცადეთ თავიდან",
+  "invalid_credentials": "არასწორი ელფოსტა ან პაროლი",
+  "email_not_confirmed": "გთხოვთ დაადასტუროთ ელფოსტა",
+  "user_exists": "მომხმარებელი უკვე არსებობს",
+  "address_line_is_required": "მისამართის ხაზი აუცილებელია",
+  "city_is_required": "ქალაქი აუცილებელია",
+  "postal_code_is_required": "საფოსტო კოდი აუცილებელია",
+  "country_must_be_ISO_2-letter_code": "ქვეყანა უნდა იყოს ISO 2-ბგერის კოდი",
+  "invalid_email_address": "არასწორი ელ. ფოსტა",
+  "enter_your_password": "შეიყვანეთ პაროლი",
+  "current_password_is_required": "მიმდინარე პაროლი აუცილებელია",
+  "new_password_must_be_at_least_6_characters": "ახალი პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს",
+  "please_confirm_your_new_password": "დაადასტურეთ ახალი პაროლი",
+  "passwords_do_not_match": "პაროლები არ ემთხვევა",
+
+  "supabase": {
+    "Invalid login credentials": "არასწორი შესვლა",
+    "User not found": "მომხმარებელი ვერ მოიძებნა",
+    "Please confirm your email": "გთხოვთ დაადასტუროთ ელფოსტა",
+    "Failed to update password": "პაროლის განახლება ვერ მოხერხდა",
+    "Sign-up not allowed forr this provider": "რეგისტრაცია ამ პროვაიდერისთვის შეუძლებელია",
+
+    "Duplicate value already exists": "დუბლირებული მნიშვნელობა უკვე არსებობს",
+    "Related record not found": "შეკრული ჩანაწერი ვერ მოიძებნა",
+    "Required field missing": "სავალდებულო ველი ცარიელია",
+    "Value too long": "ტექსტი ძალიან გრძელია",
+    "Invalid column specified": "ვერსია არ არსებობს",
+
+    "Network error. Please try again.": "ქსელის შეცდომა. სცადეთ თავიდან",
+    "Request timed out": "თხოვნა ამოიწურა",
+    "Something went wrong": "დაფიქსირდა შეცდომა"
+  }
+}

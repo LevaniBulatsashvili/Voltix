@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface IProductBtn {
   text: string;
   onClick?: () => void;
@@ -11,13 +13,15 @@ const ProductBtn = ({
   disabled = false,
   className = "",
 }: IProductBtn) => {
+  const { t } = useTranslation();
+
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       className={`rounded-full px-6 py-2 capitalize ${className}`}
     >
-      {text}
+      {t(text)}
     </button>
   );
 };

@@ -12,7 +12,7 @@ const ProductDisplay = ({ product }: IProductDisplay) => {
     name,
     price,
     currency,
-    discountPercentage,
+    discount_percentage,
     rating,
     stock,
     description,
@@ -36,7 +36,7 @@ const ProductDisplay = ({ product }: IProductDisplay) => {
         name={name}
         rating={rating}
         price={price}
-        discount={discountPercentage}
+        discount={discount_percentage}
         currency={currency}
         description={description}
         stock={stock}
