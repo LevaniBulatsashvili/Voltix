@@ -1,0 +1,15 @@
+{
+  "home": "მთავარი",
+  "cart": "კალათა",
+  "your_cart": "შენი კალათა",
+  "order_summary": "შეკვეთების შეჯამება",
+  "subtotal": "ჯამი",
+  "discount": "ფასდაკლება",
+  "delivery_fee": "მიტანა",
+  "add_promo_code": "პრომო კოდის დამატება",
+  "apply": "დამატება",
+  "total": "მთლიანად",
+  "go_to_checkout": "ყიდვა",
+  "your_cart_is_empty": "თქვენი კალათა ცარიელია",
+  "looks_like_you_haven't_added_any_products_to_your_cart_yet": "თქვენ კალათაში არ დაგიმატებიათ პროდუქტები."
+}

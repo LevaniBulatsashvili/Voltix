@@ -8,6 +8,7 @@ import verifyEmail from "./verify_email.json";
 import verificationSuccess from "./verification_success.json";
 import errors from "./errors.json";
 import profile from "./profile.json";
+import cart from "./cart.json";
 
 export const ka = {
   header,
@@ -20,4 +21,5 @@ export const ka = {
   verificationSuccess,
   errors,
   profile,
+  cart,
 };

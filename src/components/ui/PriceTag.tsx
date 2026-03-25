@@ -1,5 +1,5 @@
-import calculateDiscount from "../../features/products/utils/calculateDiscount";
-import getCurrencySymbol from "../../features/products/utils/getCurrencySymbol";
+import calculateDiscount from "../../utils/calculateDiscount";
+import getCurrencySymbol from "../../utils/getCurrencySymbol";
 
 interface IPriceTag {
   price: number;

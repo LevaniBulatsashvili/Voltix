@@ -9,6 +9,7 @@ import ProductsPage from "../pages/products/ProductsPage";
 import MainLayout from "../layouts/PageLayout";
 import ProductPage from "../pages/product/ProductPage";
 import ProfilePage from "../pages/user/profile/ProfilePage";
+import CartPage from "../pages/user/cart/CartPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -35,6 +36,7 @@ const AppRoutes = () => (
           <Route path={PAGE.PRODUCTS} element={<ProductsPage />} />
           <Route path={PAGE.PRODUCT} element={<ProductPage />} />
           <Route path={PAGE.PROFILE} element={<ProfilePage />} />
+          <Route path={PAGE.CART} element={<CartPage />} />
         </Route>
 
         {/* Admin-only pages */}
