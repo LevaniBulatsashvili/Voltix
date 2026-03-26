@@ -1,5 +1,6 @@
 const Query_Keys = {
   getUser: "user",
+  getProfile: "profile",
   getProduct: "product",
   getProducts: "products",
   getNewestProducts: "newest-products",

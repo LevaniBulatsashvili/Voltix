@@ -1,7 +1,6 @@
 import type { INavLink } from "./Nav";
 
 export interface IHeader {
-  cartProducts: number;
   navLinks: INavLink[];
   languages: ILanguage[];
 }

@@ -11,5 +11,6 @@
   "total": "total",
   "go_to_checkout": "go to checkout",
   "your_cart_is_empty": "your cart is empty",
-  "looks_like_you_haven't_added_any_products_to_your_cart_yet": "Looks like you haven't added any products to your cart yet."
+  "looks_like_you_haven't_added_any_products_to_your_cart_yet": "Looks like you haven't added any products to your cart yet.",
+  "purchase": "purchase"
 }

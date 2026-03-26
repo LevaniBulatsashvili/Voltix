@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 import { formatDateLong } from "../../../../../utils/formatDateLong";
-import type { IUser } from "../../../../../types/User";
+import type { IProfile } from "../../../../../types/Profile";
 import { useState } from "react";
 import ChangeEmailModal from "./ChangeEmailModal";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import FormSection from "../ui/FormSection";
 import InfoRow from "../ui/InfoRow";
 
 interface IEmailSection {
-  user: IUser;
+  user: IProfile;
 }
 
 const EmailSection = ({ user }: IEmailSection) => {

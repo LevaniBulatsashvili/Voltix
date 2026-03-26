@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { wishlistService } from "../services/wishlistService";
-import Query_Keys from "../../../react-query/query-keys";
+import Query_Keys from "../../../../react-query/query-keys";
 
 export const useWishlist = (userId: string) => {
   const queryClient = useQueryClient();

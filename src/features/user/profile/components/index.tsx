@@ -8,24 +8,25 @@ import Orders from "./orders/Orders";
 import EmailSection from "./emailSection/EmailSection";
 import PasswordSection from "./passwordSection/PasswordSection";
 import { userFormSchema, type TUserForm } from "../../schemas/userSchema";
-import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { useUpdateUser } from "../hooks/useUpdateUser";
 import { useUpsertAddress } from "../hooks/useUpsertAddress";
 import { mapUserToForm } from "../utils/mapUserToForm";
-import type { IAddress } from "../../../../types/User";
+import type { IAddress } from "../../../../types/Profile";
 import AvatarSelector from "./avatarSelector/AvatarSelector";
 import userImg from "../../../../assets/images/User.png";
 import { notifySuccess } from "../../../../lib/toast/notifySuccess";
 import { useTranslation } from "react-i18next";
 import { notifySupabaseError } from "../../../../lib/toast/notifySupabaseError";
 import ProfileSkeleton from "./skeleton/ProfileSkeleton";
+import { useAppSelector } from "../../../../hooks/redux";
 
 const ProfilePage = () => {
   const { t } = useTranslation();
   const [editting, setEditting] = useState(false);
   const [isAddressOpen, setIsAddressOpen] = useState(false);
-
-  const { data: user, isLoading } = useCurrentUser();
+  const { profile, loading: isLoading } = useAppSelector(
+    (state) => state.profile,
+  );
 
   const { mutateAsync: updateUser, isPending: isUpdatingUser } =
     useUpdateUser();
@@ -45,11 +46,11 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (user) reset(mapUserToForm(user));
-  }, [user, reset]);
+    if (profile) reset(mapUserToForm(profile));
+  }, [profile, reset]);
 
   const onEdit = () => {
-    if (editting && user) reset(mapUserToForm(user));
+    if (editting && profile) reset(mapUserToForm(profile));
 
     setEditting((prev) => !prev);
   };
@@ -61,7 +62,7 @@ const ProfilePage = () => {
       if (profileData) await updateUser(profileData);
       if (address)
         await upsertAddress({
-          id: user?.address?.id,
+          id: profile?.address?.id,
           data: address as Omit<IAddress, "id" | "user_id">,
         });
 
@@ -74,7 +75,7 @@ const ProfilePage = () => {
     }
   };
 
-  if (isLoading || !user) return <ProfileSkeleton />;
+  if (isLoading || !profile) return <ProfileSkeleton />;
 
   return (
     <div className="w-full">
@@ -85,8 +86,8 @@ const ProfilePage = () => {
           <div className="h-41 flex flex-col md:flex-row items-center gap-5 sm:gap-0 sm:justify-between">
             <div className="flex self-start md:self-auto items-center gap-4 md:gap-6">
               <AvatarSelector
-                currentAvatar={user.avatar_url || userImg}
-                userId={user.id}
+                currentAvatar={profile.avatar_url || userImg}
+                userId={profile.id}
                 onUploadSuccess={() =>
                   notifySuccess(t("profile.image_successfully_updated"))
                 }
@@ -94,10 +95,12 @@ const ProfilePage = () => {
 
               <div className="max-w-[55dvw] px-4">
                 <div className="overflow-x-auto whitespace-nowrap scrollbar-none">
-                  <h1 className="text-2xl font-semibold">{user.full_name}</h1>
+                  <h1 className="text-2xl font-semibold">
+                    {profile.full_name}
+                  </h1>
                 </div>
                 <div className="overflow-x-auto mt-1 whitespace-nowrap scrollbar-none">
-                  <p className="opacity-70">{user.email}</p>
+                  <p className="opacity-70">{profile.email}</p>
                 </div>
               </div>
             </div>
@@ -185,11 +188,11 @@ const ProfilePage = () => {
             />
           </form>
 
-          <EmailSection user={user} />
+          <EmailSection user={profile} />
           <PasswordSection />
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-            <Orders userId={user.id} />
+            <Orders userId={profile.id} />
           </div>
         </div>
       </div>

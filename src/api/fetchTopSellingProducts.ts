@@ -2,7 +2,7 @@ import { supabase } from "../lib/supabase";
 import type { IProduct } from "../types/Product";
 
 const fetchTopSellingProducts = async (limit?: number): Promise<IProduct[]> => {
-  const query = supabase
+  let query = supabase
     .from("products")
     .select(
       `
@@ -12,7 +12,7 @@ const fetchTopSellingProducts = async (limit?: number): Promise<IProduct[]> => {
     `,
     )
     .order("total_sold", { ascending: false });
-  if (limit !== undefined) query.limit(limit);
+  if (limit !== undefined) query = query.limit(limit);
 
   const { data, error } = await query;
 

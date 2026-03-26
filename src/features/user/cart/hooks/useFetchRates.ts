@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import Query_Keys from "../../../react-query/query-keys";
-import fetchRates, { type RatesResponse } from "../cart/api/fetchRates";
+import type { RatesResponse } from "../api/fetchRates";
+import Query_Keys from "../../../../react-query/query-keys";
+import fetchRates from "../api/fetchRates";
 
 const useFetchRates = (from: string = "USD", to: string = "GEL") => {
   return useQuery<RatesResponse>({

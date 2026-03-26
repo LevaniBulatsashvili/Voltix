@@ -17,16 +17,9 @@ const Header = () => {
     { value: "en", language: "Eng", code: "us" },
     { value: "ka", language: "ქარ", code: "ge" },
   ];
-  const cartProducts = 2;
 
   if (user?.email_verified)
-    return (
-      <UserHeader
-        cartProducts={cartProducts}
-        navLinks={navLinks}
-        languages={languages}
-      />
-    );
+    return <UserHeader navLinks={navLinks} languages={languages} />;
   return <GuestHeader languages={languages} />;
 };
 

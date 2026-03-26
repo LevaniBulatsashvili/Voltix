@@ -1,5 +1,5 @@
 import type { Session } from "@supabase/supabase-js";
-import type { IUser } from "./User";
+import type { IUser } from "./Profile";
 
 export interface IAuthService {
   loginWithEmail(email: string, password: string): Promise<IAuthResponse>;
@@ -23,8 +23,8 @@ export interface IAuthUser {
 }
 
 export interface IAuthResponse {
-  authUser: IAuthUser | null; 
-  user: IUser | null;       
+  authUser: IAuthUser | null;
+  user: IUser | null;
   session: Session | null;
 }
 

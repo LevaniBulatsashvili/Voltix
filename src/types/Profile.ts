@@ -1,4 +1,6 @@
-export interface IUser {
+import type { IProduct } from "./Product";
+
+export interface IProfile {
   id: string;
   full_name: string;
   email: string;
@@ -22,17 +24,20 @@ export interface IOrder {
   id: string;
   user_id: string;
   date: string;
+  currency: "GEL" | "USD";
   status: "pending" | "shipped" | "delivered" | "cancelled";
   total_amount: number;
+  delivery_fee: number;
+  discount: number;
   items: IOrderItem[];
 }
 
 export interface IOrderItem {
-  id: string;
-  order_id: string;
-  product_id: string;
-  name: string;
+  id?: string;
+  order_id?: string;
+  product_id: number;
   quantity: number;
   price: number;
-  image_url?: string;
+  total?: number;
+  product?: IProduct;
 }

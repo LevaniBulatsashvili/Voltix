@@ -9,7 +9,6 @@ const MobileMenu = ({
   languages,
   currentLanguage,
   onLanguageChange,
-  cartProducts,
   onToggleTheme,
   closeMenu,
 }: IMobileMenu) => {
@@ -36,7 +35,6 @@ const MobileMenu = ({
       >
         <div className="flex flex-col gap-6 px-4 pb-6 overflow-y-auto h-[calc(100%-56px)]">
           <Actions
-            cartProducts={cartProducts}
             languages={languages}
             currentLanguage={currentLanguage}
             onLanguageChange={onLanguageChange}

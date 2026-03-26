@@ -1,31 +1,35 @@
-import ProductBtn from "../../../../components/button/ProductBtn";
+import type { IProduct } from "../../../../types/Product";
 import QuantitySelector from "../../../../components/ui/QuantitySelector";
+import ProductBtn from "../../../../components/button/ProductBtn";
 
 interface IProductActions {
-  stock: number;
+  product: IProduct;
   quantity: number;
+  maxQuantity: number;
   increase: () => void;
   decrease: () => void;
+  handleAddToCart: () => void;
 }
 
 const ProductActions = ({
-  stock,
+  product,
   quantity,
+  maxQuantity,
   increase,
   decrease,
+  handleAddToCart,
 }: IProductActions) => {
-  const handleAddToCart = () => {};
-
   return (
     <div className="mt-auto pt-4 flex items-center gap-4">
-      {stock > 0 ? (
+      {product.stock > 0 ? (
         <>
           <QuantitySelector
             quantity={quantity}
-            stock={stock}
+            maxQuantity={maxQuantity}
             onIncrease={increase}
             onDecrease={decrease}
           />
+
           <ProductBtn
             text="product.add_to_cart"
             onClick={handleAddToCart}

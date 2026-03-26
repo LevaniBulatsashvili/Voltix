@@ -5,7 +5,7 @@ import fetchTopSellingProducts from "../api/fetchTopSellingProducts";
 
 const useFetchTopSellingProducts = (limit?: number) => {
   return useQuery<IProduct[]>({
-    queryKey: [Query_Keys.getNewestProducts, limit],
+    queryKey: [Query_Keys.getTopSellingProducts, limit],
     queryFn: () => fetchTopSellingProducts(limit),
     enabled: limit !== 0,
   });

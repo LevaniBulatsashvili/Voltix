@@ -11,15 +11,13 @@ import AppLink from "../../components/button/AppLink";
 import LangSelector from "../../components/inputs/LangSelector";
 import ToggleBtn from "../../components/button/ToggleBtn";
 import { PAGE } from "../../pages/pageConfig";
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { logout } from "../../features/auth/store/auth.slice";
+import { useAppSelector } from "../../hooks/redux";
 import type { ILanguage } from "../../types/header";
 import { useLogout } from "../../hooks/useLogout";
 import { useTranslation } from "react-i18next";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
 interface IActions {
-  cartProducts?: number;
   languages: ILanguage[];
   currentLanguage: string;
   onLanguageChange: (lang: string) => void;
@@ -27,7 +25,6 @@ interface IActions {
 }
 
 const Actions = ({
-  cartProducts,
   languages,
   currentLanguage,
   onLanguageChange,
@@ -36,14 +33,14 @@ const Actions = ({
   const { t } = useTranslation();
   const { signOut } = useLogout();
   const user = useAppSelector((state) => state.auth.user);
-  const dispatch = useAppDispatch();
+  const { items: cartItems } = useAppSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useClickOutside(dropdownRef, () => setDropdownOpen(false));
+  const totalItems = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
 
   const handleLogout = () => {
     signOut();
-    dispatch(logout());
     setDropdownOpen(false);
   };
 
@@ -52,9 +49,9 @@ const Actions = ({
       {user?.email_verified && (
         <AppLink to={PAGE.CART} className="relative">
           <ShoppingCart className="w-6 h-6" />
-          {cartProducts && cartProducts > 0 && (
+          {totalItems > 0 && (
             <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-              {cartProducts}
+              {totalItems}
             </span>
           )}
         </AppLink>

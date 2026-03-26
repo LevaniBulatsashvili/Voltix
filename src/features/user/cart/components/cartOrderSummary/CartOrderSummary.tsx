@@ -4,31 +4,53 @@ import PrimaryButton from "../../../../../components/button/PrimaryBtn";
 import SummaryRow from "./SummaryRow";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useTranslation } from "react-i18next";
+import { notify } from "../../../../../lib/toast/toast";
+import { useAppDispatch, useAppSelector } from "../../../../../hooks/redux";
+import { createOrder } from "../../api/createOrder";
+import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
+import { clearCart } from "../../store/cart.slice";
+import { notifyError } from "../../../../../lib/toast/notifyError";
 
 interface ICartOrderSummary {
   subtotal: number;
-  discount?: number;
-  deliveryFee?: number;
-  currency: string;
+  discount: number;
+  deliveryFee: number;
+  total: number;
+  currency: "USD" | "GEL";
 }
 
 const CartOrderSummary = ({
+  total,
   subtotal,
   discount = 0,
   deliveryFee = 0,
   currency,
 }: ICartOrderSummary) => {
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.items);
+  const { profile } = useAppSelector((state) => state.profile);
   const { t } = useTranslation();
   const [promocode, setPromocode] = useState<string>("");
 
   const handlePromocodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPromocode(e.target.value);
   };
+  const onPromocode = () => notify.info("Promo code feature coming soon!");
 
-  const onPromocode = () => {};
+  const handlePurchase = async () => {
+    try {
+      if (profile?.id) {
+        await createOrder(profile.id, cartItems, currency);
+        notifySuccess("Order placed successfully!");
+        dispatch(clearCart());
+      }
+    } catch (error) {
+      notifyError(error || "Failed to create order.");
+    }
+  };
 
-  const discountAmount = (subtotal * discount) / 100;
-  const total = subtotal - discountAmount + deliveryFee;
+  const discountPercentage =
+    subtotal > 0 ? Math.round((discount / subtotal) * 100) : 0;
 
   return (
     <div className="flex flex-col border border-gray-300 rounded-xl p-5 space-y-6 h-fit">
@@ -40,7 +62,7 @@ const CartOrderSummary = ({
             value={formatCurrency(subtotal, currency)}
           />
           <SummaryRow
-            label={`${t("cart.discount")} (${discount}%)`}
+            label={`${t("cart.discount")} (${discountPercentage}%)`}
             value={`-${formatCurrency(discount, currency)}`}
             valueClass="text-red-600"
           />
@@ -56,12 +78,9 @@ const CartOrderSummary = ({
         </p>
       </div>
 
-      <div className="space-y-3 sm:flex gap-3">
+      <div className="space-y-3 sm:flex gap-3 sm:h-12">
         <div className="relative w-full ">
-          <Tag
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-            size={20}
-          />
+          <Tag className="absolute left-3 top-4  text-gray-400" size={20} />
           <input
             type="text"
             value={promocode}
@@ -77,7 +96,8 @@ const CartOrderSummary = ({
         />
       </div>
       <PrimaryButton
-        text="cart.go_to_checkout"
+        onClick={handlePurchase}
+        text="cart.purchase"
         className="rounded-full! justify-self-center"
       />
     </div>

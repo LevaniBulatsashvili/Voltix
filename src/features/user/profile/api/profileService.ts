@@ -1,8 +1,8 @@
-import { supabase } from "../../../lib/supabase";
-import type { IUser, IAddress } from "../../../types/User";
+import { supabase } from "../../../../lib/supabase";
+import type { IProfile, IAddress } from "../../../../types/Profile";
 
-export const userService = {
-  getUser: async (): Promise<IUser | null> => {
+export const profileService = {
+  getProfile: async (): Promise<IProfile | null> => {
     const {
       data: { user },
       error: userError,
@@ -24,10 +24,10 @@ export const userService = {
       ...data,
       email: user.email,
       address,
-    } as IUser;
+    } as IProfile;
   },
 
-  updateUser: async (updates: Partial<IUser>): Promise<IUser> => {
+  updateProfile: async (updates: Partial<IProfile>): Promise<IProfile> => {
     const {
       data: { user },
       error: userError,
@@ -47,7 +47,7 @@ export const userService = {
     return {
       ...data,
       email: user.email,
-    } as IUser;
+    } as IProfile;
   },
 
   getAddresses: async (): Promise<IAddress[]> => {
@@ -122,5 +122,21 @@ export const userService = {
       .eq("user_id", user.id);
 
     if (error) throw error;
+  },
+
+  createEmptyProfile: async (userId: string): Promise<IProfile> => {
+    const { data, error } = await supabase
+      .from("profiles")
+      .insert({
+        id: userId,
+        full_name: "",
+        phone: null,
+        avatar_url: null,
+        created_at: new Date().toISOString(),
+      })
+      .single();
+
+    if (error) throw error;
+    return data as IProfile;
   },
 };

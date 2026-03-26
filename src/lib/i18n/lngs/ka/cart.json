@@ -11,5 +11,6 @@
   "total": "მთლიანად",
   "go_to_checkout": "ყიდვა",
   "your_cart_is_empty": "თქვენი კალათა ცარიელია",
-  "looks_like_you_haven't_added_any_products_to_your_cart_yet": "თქვენ კალათაში არ დაგიმატებიათ პროდუქტები."
+  "looks_like_you_haven't_added_any_products_to_your_cart_yet": "თქვენ კალათაში არ დაგიმატებიათ პროდუქტები.",
+  "purchase": "ყიდვა"
 }

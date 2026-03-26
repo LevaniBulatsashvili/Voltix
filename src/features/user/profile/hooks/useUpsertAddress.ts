@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { IAddress } from "../../../../types/User";
-import { userService } from "../../api/userService";
+import type { IAddress } from "../../../../types/Profile";
+import { profileService } from "../api/profileService";
 import Query_Keys from "../../../../react-query/query-keys";
 
 interface IUpsertAddress {
@@ -13,8 +13,8 @@ export const useUpsertAddress = () => {
 
   return useMutation({
     mutationFn: async ({ id, data }: IUpsertAddress) => {
-      if (id) return await userService.updateAddress({ id, ...data });
-      return await userService.addAddress(data);
+      if (id) return await profileService.updateAddress({ id, ...data });
+      return await profileService.addAddress(data);
     },
 
     onSuccess: () => {

@@ -10,7 +10,7 @@ import { toggleTheme } from "../../store/theme/theme.slice";
 import { Menu, X } from "lucide-react";
 import type { IHeader } from "../../types/header";
 
-const UserHeader = ({ cartProducts, navLinks, languages }: IHeader) => {
+const UserHeader = ({ navLinks, languages }: IHeader) => {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const toggleMode = () => dispatch(toggleTheme());
@@ -35,7 +35,6 @@ const UserHeader = ({ cartProducts, navLinks, languages }: IHeader) => {
           languages={languages}
           currentLanguage={i18n.language}
           onLanguageChange={(lang) => i18n.changeLanguage(lang)}
-          cartProducts={cartProducts}
           onToggleTheme={toggleMode}
           closeMenu={() => setMenuOpen(false)}
         />
@@ -49,7 +48,6 @@ const UserHeader = ({ cartProducts, navLinks, languages }: IHeader) => {
             <SearchBar />
           </div>
           <Actions
-            cartProducts={cartProducts}
             languages={languages}
             currentLanguage={i18n.language}
             onLanguageChange={(lang) => i18n.changeLanguage(lang)}

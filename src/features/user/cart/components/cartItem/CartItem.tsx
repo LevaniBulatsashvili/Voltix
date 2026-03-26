@@ -17,11 +17,11 @@ interface ICartItemProps {
 const CartItem = ({ item }: ICartItemProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { product, quantity } = item;
+
   const onRemove = () => dispatch(removeFromCart(product.id));
   const onIncrease = () => dispatch(increaseQuantity(product.id));
   const onDecrease = () => dispatch(decreaseQuantity(product.id));
-
-  const { product, quantity } = item;
 
   return (
     <div className="space-y-4 sm:flex gap-4 py-5 bg-backgound text-primary">
@@ -43,7 +43,7 @@ const CartItem = ({ item }: ICartItemProps) => {
           onIncrease={onIncrease}
           onDecrease={onDecrease}
           quantity={quantity}
-          stock={product.stock}
+          maxQuantity={product.stock}
         />
       </div>
     </div>

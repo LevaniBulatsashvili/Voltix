@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PrimaryButton from "../../../../../components/button/PrimaryBtn";
 import { FormInput } from "../../../../../components/form/Input/FormInput";
-import type { IUser } from "../../../../../types/User";
+import type { IProfile } from "../../../../../types/Profile";
 import Modal from "../../../../../components/ui/Modal";
 import {
   changeEmailSchema,
@@ -13,7 +13,7 @@ import { notifySupabaseError } from "../../../../../lib/toast/notifySupabaseErro
 import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
 
 interface IChangeEmailModal {
-  user: IUser;
+  user: IProfile;
   isOpen: boolean;
   onClose: () => void;
 }

@@ -6,7 +6,7 @@ interface ICartItemActions {
   onIncrease: () => void;
   onDecrease: () => void;
   quantity: number;
-  stock: number;
+  maxQuantity: number;
 }
 
 const CartItemActions = ({
@@ -14,7 +14,7 @@ const CartItemActions = ({
   onDecrease,
   onIncrease,
   quantity,
-  stock,
+  maxQuantity,
 }: ICartItemActions) => {
   return (
     <div className="flex flex-row-reverse sm:flex-col justify-between items-end h-full">
@@ -26,10 +26,10 @@ const CartItemActions = ({
       </button>
 
       <QuantitySelector
+        quantity={quantity}
+        maxQuantity={maxQuantity}
         onIncrease={onIncrease}
         onDecrease={onDecrease}
-        quantity={quantity}
-        stock={stock}
       />
     </div>
   );
