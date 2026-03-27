@@ -1,4 +1,4 @@
-import type { IUser } from "../../../../types/Profile";
+import type { IUser } from "../../../../types/profile";
 import type { TUserForm } from "../../schemas/userSchema";
 
 export const mapUserToForm = (user: IUser): TUserForm => ({

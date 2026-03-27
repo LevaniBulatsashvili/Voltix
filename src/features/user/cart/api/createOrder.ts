@@ -1,38 +1,31 @@
 import { supabase } from "../../../../lib/supabase";
-import type { ICartItem } from "../../../../types/Cart";
-import type { IOrderItem } from "../../../../types/Profile";
+import type { ICartItem } from "../../../../types/cart";
+import type { ICurrency } from "../../../../types/currency";
+import type { IOrderItem } from "../../../../types/profile";
 
 export const createOrder = async (
   profileId: string,
   cartItems: ICartItem[],
-  currency: "GEL" | "USD",
+  currency: ICurrency,
+  totalAmount: number,
+  deliveryFee: number,
+  discount: number,
 ) => {
   try {
     if (!cartItems || cartItems.length === 0) {
       throw new Error("Cart is empty");
     }
 
-    const hasMixedCurrencies = cartItems.some(
-      (item) => item.product.currency && item.product.currency !== currency,
-    );
-
-    if (hasMixedCurrencies) {
-      throw new Error("Cart contains items with different currencies");
-    }
-
-    const totalAmount = cartItems.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
-      0,
-    );
-
     const { data: orderData, error: orderError } = await supabase
       .from("orders")
       .insert([
         {
           user_id: profileId,
+          currency,
           status: "pending",
           total_amount: totalAmount,
-          currency,
+          delivery_fee: deliveryFee,
+          discount,
         },
       ])
       .select("id")

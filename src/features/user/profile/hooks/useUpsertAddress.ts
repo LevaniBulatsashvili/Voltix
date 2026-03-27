@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { IAddress } from "../../../../types/Profile";
+import type { IAddress } from "../../../../types/profile";
 import { profileService } from "../api/profileService";
 import Query_Keys from "../../../../react-query/query-keys";
 

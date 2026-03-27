@@ -5,7 +5,7 @@ import type {
   IAuthService,
   IOAuthResponse,
   IOtpResponse,
-} from "../../../types/Auth";
+} from "../../../types/auth";
 import { profileService } from "../../user/profile/api/profileService";
 
 import {

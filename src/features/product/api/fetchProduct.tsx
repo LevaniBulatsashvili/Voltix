@@ -1,5 +1,5 @@
 import { supabase } from "../../../lib/supabase";
-import type { IProduct, IImage } from "../../../types/Product";
+import type { IProduct, IImage } from "../../../types/product";
 
 const fetchProduct = async (id: string): Promise<IProduct> => {
   const { data, error } = await supabase

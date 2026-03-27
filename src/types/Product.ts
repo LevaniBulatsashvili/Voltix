@@ -6,7 +6,6 @@ export interface IProduct {
   main_category: IMainCategory;
   category: ICategory;
   price: number;
-  currency: "USD" | "GEL" | "EUR";
   discount_percentage?: number;
   rating: number;
   stock: number;

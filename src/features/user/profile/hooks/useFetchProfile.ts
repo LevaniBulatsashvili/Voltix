@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch } from "../../../../hooks/redux";
-import type { IProfile } from "../../../../types/Profile";
+import type { IProfile } from "../../../../types/profile";
 import Query_Keys from "../../../../react-query/query-keys";
 import { profileService } from "../api/profileService";
 import { setProfile } from "../store/profile.slice";

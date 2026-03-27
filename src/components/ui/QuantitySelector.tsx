@@ -14,23 +14,23 @@ const QuantitySelector = ({
   onDecrease,
 }: IQuantitySelector) => {
   return (
-    <div className="flex items-center border border-gray-300 overflow-hidden bg-white rounded-full">
+    <div className="flex items-center border border-gray-300 overflow-hidden rounded-full">
       <button
         onClick={onDecrease}
         disabled={quantity === 0}
-        className="p-2 flex items-center justify-center text-black hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition"
+        className="p-2 flex items-center justify-center  hover:bg-gray-400 disabled:opacity-40 disabled:cursor-not-allowed transition"
       >
         <Minus size={18} />
       </button>
 
-      <span className="px-4 min-w-12  overflow text-black text-center font-medium">
+      <span className="px-4 min-w-12  overflow  text-center font-medium">
         {quantity}
       </span>
 
       <button
         onClick={onIncrease}
         disabled={quantity === maxQuantity}
-        className="p-2 flex items-center justify-center text-black hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed transition"
+        className="p-2 flex items-center justify-center  hover:bg-gray-400 disabled:opacity-40 disabled:cursor-not-allowed transition"
       >
         <Plus size={18} />
       </button>

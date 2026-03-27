@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-import type { IProduct } from "../types/Product";
+import type { IProduct } from "../types/product";
 
 const fetchNewestProducts = async (limit?: number): Promise<IProduct[]> => {
   let query = supabase

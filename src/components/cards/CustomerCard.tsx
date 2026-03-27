@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import type { ICustomer } from "../../types/Customer";
+import type { ICustomer } from "../../types/customer";
 import formatCustomerName from "../../features/products/utils/formatCustomerName";
 import type { FC, SVGProps } from "react";
 

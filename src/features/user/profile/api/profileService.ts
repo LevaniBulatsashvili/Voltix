@@ -1,5 +1,5 @@
 import { supabase } from "../../../../lib/supabase";
-import type { IProfile, IAddress } from "../../../../types/Profile";
+import type { IProfile, IAddress } from "../../../../types/profile";
 
 export const profileService = {
   getProfile: async (): Promise<IProfile | null> => {

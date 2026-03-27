@@ -1,4 +1,4 @@
-import type { IProduct } from "./Product";
+import type { IProduct } from "./product";
 
 export interface IProfile {
   id: string;

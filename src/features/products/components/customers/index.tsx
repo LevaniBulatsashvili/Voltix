@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ICustomer } from "../../../../types/Customer";
+import type { ICustomer } from "../../../../types/customer";
 import CustomerList from "./CustomerList";
 import CustomerNavigation from "./CustomerNavigation";
 import { useVisibleCount } from "../../hooks/useVisibleCount";

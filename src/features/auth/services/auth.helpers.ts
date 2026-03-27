@@ -1,6 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "../../../lib/supabase";
-import type { IAuthUser } from "../../../types/Auth";
+import type { IAuthUser } from "../../../types/auth";
 import { mapUser } from "../../../utils/mapUser";
 
 export const getCurrentAuthUser = async (): Promise<IAuthUser | null> => {

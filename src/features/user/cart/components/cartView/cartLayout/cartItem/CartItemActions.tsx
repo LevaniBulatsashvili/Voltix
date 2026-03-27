@@ -1,4 +1,4 @@
-import QuantitySelector from "../../../../../components/ui/QuantitySelector";
+import QuantitySelector from "../../../../../../../components/ui/QuantitySelector";
 import { Trash2 } from "lucide-react";
 
 interface ICartItemActions {
@@ -20,9 +20,9 @@ const CartItemActions = ({
     <div className="flex flex-row-reverse sm:flex-col justify-between items-end h-full">
       <button
         onClick={onRemove}
-        className="flex text-red-500 hover:text-red-600 transition"
+        className="flex text-primary hover:text-gray-400 transition"
       >
-        <Trash2 size={20} />
+        <Trash2 size={24} />
       </button>
 
       <QuantitySelector

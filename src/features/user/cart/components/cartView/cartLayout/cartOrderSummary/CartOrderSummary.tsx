@@ -1,22 +1,21 @@
 import { Tag } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
-import PrimaryButton from "../../../../../components/button/PrimaryBtn";
+import PrimaryButton from "../../../../../../../components/button/PrimaryBtn";
 import SummaryRow from "./SummaryRow";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { useTranslation } from "react-i18next";
-import { notify } from "../../../../../lib/toast/toast";
-import { useAppDispatch, useAppSelector } from "../../../../../hooks/redux";
-import { createOrder } from "../../api/createOrder";
-import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
-import { clearCart } from "../../store/cart.slice";
-import { notifyError } from "../../../../../lib/toast/notifyError";
+import { notify } from "../../../../../../../lib/toast/toast";
+import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux";
+import { createOrder } from "../../../../api/createOrder";
+import { notifySuccess } from "../../../../../../../lib/toast/notifySuccess";
+import { clearCart } from "../../../../store/cart.slice";
+import { notifyError } from "../../../../../../../lib/toast/notifyError";
+import { usePrice } from "../../../../hooks/usePrice";
 
 interface ICartOrderSummary {
   subtotal: number;
   discount: number;
   deliveryFee: number;
   total: number;
-  currency: "USD" | "GEL";
 }
 
 const CartOrderSummary = ({
@@ -24,9 +23,10 @@ const CartOrderSummary = ({
   subtotal,
   discount = 0,
   deliveryFee = 0,
-  currency,
 }: ICartOrderSummary) => {
   const dispatch = useAppDispatch();
+  const { currency } = usePrice();
+  const { format } = usePrice();
   const cartItems = useAppSelector((state) => state.cart.items);
   const { profile } = useAppSelector((state) => state.profile);
   const { t } = useTranslation();
@@ -40,7 +40,14 @@ const CartOrderSummary = ({
   const handlePurchase = async () => {
     try {
       if (profile?.id) {
-        await createOrder(profile.id, cartItems, currency);
+        await createOrder(
+          profile.id,
+          cartItems,
+          currency,
+          total,
+          deliveryFee,
+          discount,
+        );
         notifySuccess("Order placed successfully!");
         dispatch(clearCart());
       }
@@ -59,22 +66,22 @@ const CartOrderSummary = ({
         <div className="border-b pb-4 border-gray-400 space-y-4">
           <SummaryRow
             label="cart.subtotal"
-            value={formatCurrency(subtotal, currency)}
+            value={format(subtotal, false, true)}
           />
           <SummaryRow
             label={`${t("cart.discount")} (${discountPercentage}%)`}
-            value={`-${formatCurrency(discount, currency)}`}
+            value={`-${format(discount, false, true)}`}
             valueClass="text-red-600"
           />
           <SummaryRow
             label="cart.delivery_fee"
-            value={formatCurrency(deliveryFee, currency)}
+            value={format(deliveryFee, false, true)}
           />
         </div>
 
         <p className="my-5 flex justify-between text-2xl">
           {t("cart.total")}
-          <span className="font-bold">{formatCurrency(total, currency)}</span>
+          <span className="font-bold">{format(total, false, true)}</span>
         </p>
       </div>
 

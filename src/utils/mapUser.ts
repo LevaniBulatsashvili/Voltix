@@ -1,5 +1,5 @@
 import type { User } from "@supabase/supabase-js";
-import type { IAuthUser } from "../types/Auth";
+import type { IAuthUser } from "../types/auth";
 
 export const mapUser = (
   user: User | null,

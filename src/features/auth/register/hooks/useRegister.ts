@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import type { IAuthResponse, IRegisterInput } from "../../../../types/Auth";
+import type { IAuthResponse, IRegisterInput } from "../../../../types/auth";
 import { authService } from "../../services/authService";
 import { useAppDispatch } from "../../../../hooks/redux";
 import { setSession, setUser } from "../../store/auth.slice";

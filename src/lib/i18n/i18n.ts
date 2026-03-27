@@ -4,11 +4,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { en } from "./lngs/en";
 import { ka } from "./lngs/ka";
 
+const savedLang = localStorage.getItem("i18nextLng");
+if (!savedLang) localStorage.setItem("i18nextLng", "en");
+
 i18next
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
-    lng: "en",
     fallbackLng: "en",
     resources: {
       en: { translation: en },

@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
 import { formatDateLong } from "../../../../../utils/formatDateLong";
-import type { IProfile } from "../../../../../types/Profile";
+import type { IProfile } from "../../../../../types/profile";
 import { useState } from "react";
 import ChangeEmailModal from "./ChangeEmailModal";
 import { useTranslation } from "react-i18next";

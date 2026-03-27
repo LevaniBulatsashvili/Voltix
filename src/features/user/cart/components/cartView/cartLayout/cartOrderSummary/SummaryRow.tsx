@@ -19,6 +19,7 @@ const SummaryRow = ({
   return (
     <p className={`flex justify-between text-xl opacity-80 ${summaryClass}`}>
       {t(label)}
+
       <span className={`font-bold opacity-100 ${valueClass}`}>{value}</span>
     </p>
   );

@@ -11,7 +11,7 @@ import { userFormSchema, type TUserForm } from "../../schemas/userSchema";
 import { useUpdateUser } from "../hooks/useUpdateUser";
 import { useUpsertAddress } from "../hooks/useUpsertAddress";
 import { mapUserToForm } from "../utils/mapUserToForm";
-import type { IAddress } from "../../../../types/Profile";
+import type { IAddress } from "../../../../types/profile";
 import AvatarSelector from "./avatarSelector/AvatarSelector";
 import userImg from "../../../../assets/images/User.png";
 import { notifySuccess } from "../../../../lib/toast/notifySuccess";

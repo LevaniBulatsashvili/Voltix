@@ -1,20 +1,38 @@
-export interface RatesResponse {
-  date: string;
-  base: "USD" | "GEL" | "EUR";
-  quote: "USD" | "GEL" | "EUR";
+import type { ICurrency } from "../../../../types/currency";
+
+export interface IRate {
+  base: "USD";
+  quote: "GEL" | "EUR" | "USD";
   rate: number;
 }
+export type IRates = Record<string, number>;
 
-const fetchRates = async (from: string, to: string): Promise<RatesResponse> => {
+const fetchRates = async (
+  base: string = "USD",
+  quotesArr: ICurrency[] = ["GEL", "EUR"],
+): Promise<IRates> => {
+  const quotes = quotesArr.join(",");
+
   const res = await fetch(
-    `https://api.frankfurter.dev/v2/rates?base=${from}&quotes=${to}`,
+    `https://api.frankfurter.dev/v2/rates?base=${base}&quotes=${quotes}`,
   );
 
   if (!res.ok) throw new Error("Failed to fetch currency rates");
 
-  const data = await res.json();
+  const data: IRate[] = await res.json();
 
-  return data[0];
+  const mapped = data.reduce<Partial<IRates>>((acc, curr) => {
+    if (curr.quote === "GEL" || curr.quote === "EUR") {
+      acc[curr.quote] = curr.rate;
+    }
+    return acc;
+  }, {});
+
+  if (!mapped.GEL || !mapped.EUR) {
+    throw new Error("Missing required currency rates");
+  }
+
+  return mapped as IRates;
 };
 
 export default fetchRates;

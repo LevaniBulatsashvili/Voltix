@@ -1,4 +1,4 @@
-import type { ICustomer } from "../types/Customer";
+import type { ICustomer } from "../types/customer";
 
 export const dummyCustomers: ICustomer[] = [
   {
