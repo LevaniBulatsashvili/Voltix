@@ -9,6 +9,7 @@ import verificationSuccess from "./verification_success.json";
 import errors from "./errors.json";
 import profile from "./profile.json";
 import cart from "./cart.json";
+import category from "./category.json";
 
 export const en = {
   header,
@@ -22,4 +23,5 @@ export const en = {
   errors,
   profile,
   cart,
+  category,
 };

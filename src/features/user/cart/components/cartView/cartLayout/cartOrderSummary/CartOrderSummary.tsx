@@ -4,12 +4,9 @@ import PrimaryButton from "../../../../../../../components/button/PrimaryBtn";
 import SummaryRow from "./SummaryRow";
 import { useTranslation } from "react-i18next";
 import { notify } from "../../../../../../../lib/toast/toast";
-import { useAppDispatch, useAppSelector } from "../../../../../../../hooks/redux";
-import { createOrder } from "../../../../api/createOrder";
-import { notifySuccess } from "../../../../../../../lib/toast/notifySuccess";
-import { clearCart } from "../../../../store/cart.slice";
-import { notifyError } from "../../../../../../../lib/toast/notifyError";
+import { useAppSelector } from "../../../../../../../hooks/redux";
 import { usePrice } from "../../../../hooks/usePrice";
+import { useCreateOrder } from "../../../../hooks/useCreateOrder";
 
 interface ICartOrderSummary {
   subtotal: number;
@@ -24,13 +21,13 @@ const CartOrderSummary = ({
   discount = 0,
   deliveryFee = 0,
 }: ICartOrderSummary) => {
-  const dispatch = useAppDispatch();
   const { currency } = usePrice();
   const { format } = usePrice();
   const cartItems = useAppSelector((state) => state.cart.items);
   const { profile } = useAppSelector((state) => state.profile);
   const { t } = useTranslation();
   const [promocode, setPromocode] = useState<string>("");
+  const { mutate: order, isPending } = useCreateOrder();
 
   const handlePromocodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPromocode(e.target.value);
@@ -38,22 +35,16 @@ const CartOrderSummary = ({
   const onPromocode = () => notify.info("Promo code feature coming soon!");
 
   const handlePurchase = async () => {
-    try {
-      if (profile?.id) {
-        await createOrder(
-          profile.id,
-          cartItems,
-          currency,
-          total,
-          deliveryFee,
-          discount,
-        );
-        notifySuccess("Order placed successfully!");
-        dispatch(clearCart());
-      }
-    } catch (error) {
-      notifyError(error || "Failed to create order.");
-    }
+    if (!profile?.id) return;
+
+    order({
+      user_id: profile.id,
+      currency,
+      total_amount: total,
+      delivery_fee: deliveryFee,
+      discount,
+      items: cartItems,
+    });
   };
 
   const discountPercentage =
@@ -105,7 +96,8 @@ const CartOrderSummary = ({
       <PrimaryButton
         onClick={handlePurchase}
         text="cart.purchase"
-        className="rounded-full! justify-self-center"
+        className={`rounded-full! justify-self-center ${isPending ? "opacity-60" : ""}`}
+        disabled={isPending}
       />
     </div>
   );

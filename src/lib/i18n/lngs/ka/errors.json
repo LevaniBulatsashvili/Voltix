@@ -15,6 +15,17 @@
   "please_confirm_your_new_password": "დაადასტურეთ ახალი პაროლი",
   "passwords_do_not_match": "პაროლები არ ემთხვევა",
 
+  "Failed to fetch currency rates": "ვალუტის კურსის მიღება ვერ მოხერხდა",
+  "Missing required currency rates": "საჭირო ვალუტის კურსები არ მოიძებნა",
+  "Cart is empty": "კალათა ცარიელია",
+  "Something went wrong": "რაღაც შეცდომა მოხდა",
+  "Failed to post order": "შეკვეთა ვერ მოხერხდა",
+  "Failed to post ordered products": "შეკვეთილი პროდუქტების დამატება ვერ მოხერხდა",
+  "Failed to update product": "პროდუქტის განახლება ვერ მოხერხდა",
+  "Failed to read cart from storage": "კალათის მონაცემების წაიკითხვა ვერ მოხერხდა",
+  "Failed to save cart": "კალათის მონაცემების შენახვა ვერ მოხერხდა",
+  "Failed to clear cart": "კალათის წაშლა ვერ მოხერხდა",
+
   "supabase": {
     "Invalid login credentials": "არასწორი შესვლა",
     "User not found": "მომხმარებელი ვერ მოიძებნა",

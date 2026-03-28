@@ -26,7 +26,7 @@ export const cartMiddleware: Middleware = (store) => (next) => (action) => {
       const state = store.getState();
       cartStorage.set(state.cart.items);
     } catch (error) {
-      notifyError(error);
+      notifyError(error, true);
     }
   }
 

@@ -45,7 +45,8 @@ export interface ISpecs {
 
 export interface IMainCategory {
   id: number;
-  name: string;
+  name: "Electronics" | "Headphones" | "Gaming" | "Cameras";
+  categories: ICategory[];
 }
 
 export interface ICategory {

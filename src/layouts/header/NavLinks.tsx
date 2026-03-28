@@ -13,7 +13,7 @@ const NavLinks = ({ links, onClick, className = "" }: INavLinks) => (
       className={`flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 whitespace-nowrap ${className}`}
     >
       {links.map((link) => (
-        <li key={link.to}>
+        <li key={link.label}>
           <AppLink
             to={link.to}
             onClick={onClick}

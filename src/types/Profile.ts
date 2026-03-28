@@ -1,3 +1,5 @@
+import type { ICartItem } from "./cart";
+import type { ICurrency } from "./currency";
 import type { IProduct } from "./product";
 
 export interface IProfile {
@@ -20,17 +22,19 @@ export interface IAddress {
   country: string;
 }
 
-export interface IOrder {
+export interface IOrder<TItems = IOrderItem> {
   id: string;
   user_id: string;
   date: string;
-  currency: "GEL" | "USD";
+  currency: ICurrency;
   status: "pending" | "shipped" | "delivered" | "cancelled";
   total_amount: number;
   delivery_fee: number;
   discount: number;
-  items: IOrderItem[];
+  items: TItems[];
 }
+
+export type IOrderRaw = Omit<IOrder<ICartItem>, "id" | "status" | "date">;
 
 export interface IOrderItem {
   id?: string;

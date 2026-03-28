@@ -10,6 +10,7 @@ import MainLayout from "../layouts/PageLayout";
 import ProductPage from "../pages/product/ProductPage";
 import ProfilePage from "../pages/user/profile/ProfilePage";
 import CartPage from "../pages/user/cart/CartPage";
+import CategoryPage from "../pages/category/CategoryPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -37,6 +38,7 @@ const AppRoutes = () => (
           <Route path={PAGE.PRODUCT} element={<ProductPage />} />
           <Route path={PAGE.PROFILE} element={<ProfilePage />} />
           <Route path={PAGE.CART} element={<CartPage />} />
+          <Route path={PAGE.CATEGORY} element={<CategoryPage />} />
         </Route>
 
         {/* Admin-only pages */}

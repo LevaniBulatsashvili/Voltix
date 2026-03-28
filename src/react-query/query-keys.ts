@@ -3,9 +3,11 @@ const Query_Keys = {
   getProfile: "profile",
   getProduct: "product",
   getProducts: "products",
+  getSelectedProducts: "selected-products",
   getNewestProducts: "newest-products",
   getTopSellingProducts: "top-selling-products",
   getCurrencyRates: "currency-rates",
+  getMainCategories: "main-categories",
   searchProducts: "searched-Products",
   wishlist: "wishlist",
 };

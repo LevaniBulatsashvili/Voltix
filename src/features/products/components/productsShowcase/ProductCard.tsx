@@ -33,7 +33,6 @@ const ProductCard = ({ product }: IProductCard) => (
       <PriceTag
         price={product.price}
         discount={product.discount_percentage}
-        currency={product.currency}
         textColor="black"
       />
     </div>

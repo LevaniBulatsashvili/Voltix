@@ -3,7 +3,7 @@ import useFetchRates from "./useFetchRates";
 
 export const usePrice = () => {
   const currency = useCurrency();
-  const { data: rates, isLoading, error } = useFetchRates();
+  const { data: rates, isLoading } = useFetchRates();
 
   const convert = (usd: number) => {
     if (currency === "USD") return usd;
@@ -43,6 +43,5 @@ export const usePrice = () => {
     convert,
     format,
     isLoading,
-    error,
   };
 };

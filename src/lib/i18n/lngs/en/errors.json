@@ -15,6 +15,17 @@
   "please_confirm_your_new_password": "please confirm your new password",
   "passwords_do_not_match": "passwords do not match",
 
+  "Failed to fetch currency rates": "Failed to fetch currency rates",
+  "Missing required currency rates": "Missing required currency rates",
+  "Cart is empty": "Cart is empty",
+  "Something went wrong": "Something went wrong",
+  "Failed to post order": "Failed to post order",
+  "Failed to post ordered products": "Failed to post ordered items",
+  "Failed to update product": "Failed to update product",
+  "Failed to read cart from storage": "Failed to read cart from storage",
+  "Failed to save cart": "Failed to save cart",
+  "Failed to clear cart": "Failed to clear cart",
+
   "supabase": {
     "Invalid login credentials": "Invalid login credentials",
     "User not found": "User not found",
