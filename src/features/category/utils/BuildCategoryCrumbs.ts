@@ -1,15 +1,19 @@
 import type { TFunction } from "i18next";
 import type { ICrumb } from "../../../types/crumbs";
 import { PAGE } from "../../../pages/pageConfig";
+import type { ICategory } from "../../../types/product";
 
-export const buildCategoryBreadcrumbs = (t: TFunction): ICrumb[] => {
+export const buildCategoryBreadcrumbs = (
+  t: TFunction,
+  category?: ICategory["name"],
+): ICrumb[] => {
   return [
     {
-      label: t("category.home"),
+      label: t("common.home"),
       to: PAGE.BASE,
     },
     {
-      label: t("category.category"),
+      label: t(`common.${category ? category : "categories"}`),
     },
   ];
 };

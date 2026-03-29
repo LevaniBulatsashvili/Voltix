@@ -6,21 +6,14 @@ interface IProductHeader {
   rating: number;
   price: number;
   discount?: number;
-  currency: string;
 }
 
-const ProductHeader = ({
-  name,
-  rating,
-  price,
-  discount,
-  currency,
-}: IProductHeader) => {
+const ProductHeader = ({ name, rating, price, discount }: IProductHeader) => {
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-4xl font-extrabold uppercase">{name}</h1>
       <StarRating rating={rating} />
-      <PriceTag price={price} discount={discount} currency={currency} />
+      <PriceTag price={price} discount={discount} />
     </div>
   );
 };

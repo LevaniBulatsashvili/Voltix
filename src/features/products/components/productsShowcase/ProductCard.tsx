@@ -18,9 +18,7 @@ const ProductCard = ({ product }: IProductCard) => (
       <img
         src={PlaceholderImg}
         alt={product.name}
-        width={200}
-        height={300}
-        className="object-cover w-full h-75 transform hover:scale-105 transition-transform duration-300"
+        className="object-cover w-full h-60 transform hover:scale-105 transition-transform duration-300"
       />
     </div>
     <div className="mt-3 space-y-2 text-start">

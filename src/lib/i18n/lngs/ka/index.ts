@@ -10,6 +10,7 @@ import errors from "./errors.json";
 import profile from "./profile.json";
 import cart from "./cart.json";
 import category from "./category.json";
+import common from "./common.json";
 
 export const ka = {
   header,
@@ -24,4 +25,5 @@ export const ka = {
   profile,
   cart,
   category,
+  common,
 };

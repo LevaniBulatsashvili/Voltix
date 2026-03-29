@@ -1,15 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ICategory, IProduct } from "../../../types/product";
+import type { ICategory } from "../../../types/product";
 import Query_Keys from "../../../react-query/query-keys";
-import fetchSelectedProducts from "../api/fetchSelectedProducts";
+import fetchSelectedProducts, {
+  type IProductsResponse,
+  type ISortBy,
+} from "../api/fetchSelectedProducts";
 import { notifyError } from "../../../lib/toast/notifyError";
 
-const useFetchSelectedProducts = (category: ICategory | null) => {
-  return useQuery<IProduct[]>({
-    queryKey: [Query_Keys.getSelectedProducts, category],
+const useFetchSelectedProducts = (
+  category: ICategory | null,
+  page: number = 1,
+  limit: number = 9,
+  sortBy?: ISortBy,
+  min?: number,
+  max?: number,
+) => {
+  return useQuery<IProductsResponse>({
+    queryKey: [
+      Query_Keys.getSelectedProducts,
+      category?.id,
+      page,
+      limit,
+      sortBy,
+      min,
+      max,
+    ],
     queryFn: async () => {
       try {
-        return await fetchSelectedProducts(category);
+        return await fetchSelectedProducts(
+          category,
+          page,
+          limit,
+          sortBy,
+          min,
+          max,
+        );
       } catch (error) {
         const message =
           error instanceof Error ? error.message : "Something went wrong";

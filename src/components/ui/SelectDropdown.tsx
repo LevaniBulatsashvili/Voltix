@@ -35,7 +35,7 @@ export const SelectDropdown = <T,>({
   };
 
   return (
-    <div className={`w-74 ${className}`}>
+    <div className={`hover:border-b ${className}`}>
       <button
         type="button"
         onClick={() => setOpen(!open)}

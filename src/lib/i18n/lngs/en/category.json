@@ -4,5 +4,9 @@
   "electronics": "electronics",
   "heaphones": "heaphones",
   "gaming": "gaming",
-  "cameras": "cameras"
+  "cameras": "cameras",
+  "showing_products": "Showing {{start}}–{{end}} of {{total}} products",
+  "most_popular": "most popular",
+  "newest": "newest",
+  "price": "price"
 }

@@ -1,1 +1,3 @@
-{}
+{
+  "showing_products": "{{start}}–{{end}} პროდუქტიდან {{total}}"
+}
