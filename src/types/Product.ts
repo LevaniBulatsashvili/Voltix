@@ -2,12 +2,15 @@ export interface IProduct {
   id: number;
   name: string;
   description: string;
-  brand: string;
+  brand: IBrand;
+  brand_id: number;
   main_category: IMainCategory;
   category: ICategory;
   price: number;
+  price_final: number;
   discount_percentage?: number;
-  rating: number;
+  rating_avg: number;
+  rating_count: number;
   stock: number;
   thumbnail: string;
   created_at: string;
@@ -19,13 +22,23 @@ export interface IProduct {
   total_sold: number;
 }
 
+export interface IBrand {
+  id: number;
+  name: string;
+  logo_url?: string;
+  website_url?: string;
+}
+
 export interface IComment {
   id: string;
-  parent_id: IProduct["id"];
+  product_id: IProduct["id"];
+  user_id: string;
+
   name: string;
   avatar?: string;
   comment: string;
   rating: number;
+
   verified?: boolean;
   createdAt: string;
 }
@@ -38,7 +51,6 @@ export interface IImage {
 
 export interface ISpecs {
   id: number;
-  parent_id: ICategory["id"];
   spec: string;
   value: string;
 }

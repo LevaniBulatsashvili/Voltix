@@ -3,6 +3,8 @@ const Query_Keys = {
   getProfile: "profile",
   getProduct: "product",
   getProducts: "products",
+  getBrands: "brands",
+  getSpecs: "specs",
   getSelectedProducts: "selected-products",
   getNewestProducts: "newest-products",
   getTopSellingProducts: "top-selling-products",

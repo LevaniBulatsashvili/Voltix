@@ -8,42 +8,58 @@ import useFetchSelectedProducts from "../hooks/useFetchSelectedProducts";
 import CategoryItemContainer from "./categoryItemContainer/CategoryItemContainer";
 import type { ICategory } from "../../../types/product";
 import type { ISortBy } from "../api/fetchSelectedProducts";
+import { useCategoryFilters } from "../hooks/useCategoryFilters";
+import useFetchBrands from "../hooks/useFetchBrands";
+import useFetchSpecs from "../hooks/useFetchSpecs";
 
 const CategoryPage = () => {
   const { t } = useTranslation();
-
-  const [minPrice, setMinPrice] = useState<number>();
-  const [maxPrice, setMaxPrice] = useState<number>();
-  const [sortBy, setSortBy] = useState<ISortBy>("newest");
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(
     null,
   );
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState<ISortBy>("newest");
+
+  const {
+    minPrice,
+    maxPrice,
+    rating,
+    hasDiscount,
+    brands,
+    specs,
+    handlePriceChange,
+    handleRatingChange,
+    handleHasDiscountChange,
+    handleBrandsChange,
+    handleSpecsChange,
+  } = useCategoryFilters();
 
   const { data: mainCategories, isLoading: isMainCategoriesLoading } =
     useFetchMainCategories();
+  const { data: allBrands, isLoading: isBrandsLoading } = useFetchBrands();
+  const { data: allSpecs, isLoading: isSpecsLoading } = useFetchSpecs();
 
   const { data: productsData, isLoading: isProductsLoading } =
-    useFetchSelectedProducts(
-      selectedCategory,
-      currentPage,
-      4,
+    useFetchSelectedProducts({
+      category: selectedCategory,
+      page: currentPage,
+      limit: 4,
       sortBy,
-      minPrice,
-      maxPrice,
-    );
+      min: minPrice,
+      max: maxPrice,
+      rating,
+      hasDiscount,
+      selectedBrands: brands,
+      productSpecs: specs,
+    });
 
-  const handleSelectionChange = (category: ICategory | null) => {
+  const handleCategoryChange = (category: ICategory | null) => {
     setSelectedCategory(category);
     setCurrentPage(1);
   };
 
-  const onPriceFilterChange = (min: number, max: number) => {
-    setMinPrice(min);
-    setMaxPrice(() => (max === 5000 ? undefined : max));
-  };
-
-  if (isMainCategoriesLoading) return <div>Loading...</div>;
+  if (isMainCategoriesLoading || isBrandsLoading || isSpecsLoading)
+    return <div>Loading...</div>;
 
   return (
     <div className="p-6 w-full md:w-[95%] lg:w-[90%] min-h-[88dvh] text-primary bg-background">
@@ -59,8 +75,18 @@ const CategoryPage = () => {
           t={t}
           mainCategories={mainCategories ?? []}
           selectedCategory={selectedCategory}
-          onFilterCategory={handleSelectionChange}
-          onPriceFilterChange={onPriceFilterChange}
+          onFilterCategory={handleCategoryChange}
+          onPriceFilterChange={handlePriceChange}
+          selectedRating={rating}
+          onRatingChange={handleRatingChange}
+          hasDiscount={hasDiscount}
+          onHasDiscountChange={handleHasDiscountChange}
+          availableBrands={allBrands}
+          selectedBrands={brands}
+          onSelectedBrandsChange={handleBrandsChange}
+          availableSpecs={allSpecs}
+          selectedSpecs={specs}
+          onSelectedSpecsChange={handleSpecsChange}
         />
 
         {!isProductsLoading && productsData && (

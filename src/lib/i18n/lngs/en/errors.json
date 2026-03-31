@@ -25,6 +25,10 @@
   "Failed to read cart from storage": "Failed to read cart from storage",
   "Failed to save cart": "Failed to save cart",
   "Failed to clear cart": "Failed to clear cart",
+  "products couldn't be fetched": "products couldn't be fetched",
+  "specs couldn't be filtered": "specs couldn't be filtered",
+  "brands not found": "brands not found",
+  "specs not found": "specs not found",
 
   "supabase": {
     "Invalid login credentials": "Invalid login credentials",

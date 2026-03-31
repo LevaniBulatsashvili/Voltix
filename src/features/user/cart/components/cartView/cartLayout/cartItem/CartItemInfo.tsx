@@ -11,7 +11,7 @@ const CartItemInfo = ({ product }: ICartItemInfo) => {
         <h2 className="font-semibold text-xl self-start justify-self-start">
           {product.name}
         </h2>
-        <p className="text-mdd text-gray-500">{product.brand}</p>
+        <p className="text-mdd text-gray-500">{product.brand.name}</p>
       </div>
 
       <PriceTag price={product.price} discount={product.discount_percentage} />

@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { Sliders, X } from "lucide-react";
 import { SelectDropdown } from "../../../../components/ui/SelectDropdown";
-import type { ICategory, IMainCategory } from "../../../../types/product";
+import type {
+  IBrand,
+  ICategory,
+  IMainCategory,
+  ISpecs,
+} from "../../../../types/product";
 import type { TFunction } from "i18next";
 import PriceFilter from "./PriceFilter";
+import RatingFilter from "./RatingFilter";
+import SpecFilter from "./SpecFilter";
 
 interface IFilters {
   t: TFunction;
@@ -11,6 +18,16 @@ interface IFilters {
   selectedCategory: ICategory | null;
   onFilterCategory: (selectedCategory: ICategory | null) => void;
   onPriceFilterChange?: (min: number, max: number) => void;
+  selectedRating?: number;
+  onRatingChange?: (rating?: number) => void;
+  hasDiscount?: boolean;
+  onHasDiscountChange?: (value: boolean) => void;
+  availableBrands?: IBrand[];
+  selectedBrands?: number[];
+  onSelectedBrandsChange?: (brands: number[]) => void;
+  availableSpecs?: ISpecs[];
+  selectedSpecs?: ISpecs[];
+  onSelectedSpecsChange?: (specs: ISpecs[]) => void;
 }
 
 const Filters = ({
@@ -19,6 +36,16 @@ const Filters = ({
   selectedCategory,
   onFilterCategory,
   onPriceFilterChange,
+  selectedRating,
+  onRatingChange,
+  hasDiscount,
+  onHasDiscountChange,
+  availableBrands,
+  selectedBrands,
+  onSelectedBrandsChange,
+  availableSpecs,
+  onSelectedSpecsChange,
+  selectedSpecs,
 }: IFilters) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -81,6 +108,58 @@ const Filters = ({
         </div>
 
         <PriceFilter t={t} onPriceFilterChange={onPriceFilterChange} />
+
+        <RatingFilter t={t} value={selectedRating} onChange={onRatingChange} />
+
+        <div className="py-4 border-t border-gray-300">
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={!!hasDiscount}
+              onChange={(e) => onHasDiscountChange?.(e.target.checked)}
+              className="w-5 h-5 accent-primary"
+            />
+            <span className="text-sm font-medium">
+              {t("category.has_discount")}
+            </span>
+          </label>
+        </div>
+
+        {availableBrands && availableBrands.length > 0 && (
+          <div className="py-4 border-t border-gray-300">
+            <h3 className="text-sm font-semibold mb-2">
+              {t("category.brands")}
+            </h3>
+            <div className="flex flex-col gap-1 max-h-40 overflow-y-auto">
+              {availableBrands.map((brand) => (
+                <label
+                  key={brand.id}
+                  className="flex items-center gap-2 cursor-pointer select-none"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedBrands?.includes(brand.id)}
+                    onChange={(e) => {
+                      const updatedBrands = e.target.checked
+                        ? [...(selectedBrands || []), brand.id]
+                        : (selectedBrands || []).filter((b) => b !== brand.id);
+                      onSelectedBrandsChange?.(updatedBrands);
+                    }}
+                    className="w-5 h-5 accent-primary"
+                  />
+                  <span className="text-sm">{brand.name}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <SpecFilter
+          t={t}
+          availableSpecs={availableSpecs || []}
+          selectedSpecs={selectedSpecs}
+          onChange={onSelectedSpecsChange}
+        />
       </div>
     </>
   );

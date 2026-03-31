@@ -1,5 +1,7 @@
-import { supabase } from "../../../lib/supabase";
-import type { ICategory, IProduct } from "../../../types/product";
+import type { ICategory, IProduct, ISpecs } from "../../../types/product";
+import { getRange } from "../../../utils/pagination";
+import { buildProductsQuery } from "../utils/BuildProductQuery";
+import { filterProductsBySpecs } from "./specFilter";
 
 export interface IProductsResponse {
   products: IProduct[];
@@ -16,27 +18,30 @@ const fetchSelectedProducts = async (
   sortBy?: ISortBy,
   minPrice?: number,
   maxPrice?: number,
+  rating?: number,
+  hasDiscount?: boolean,
+  selectedBrands?: number[],
+  productSpecs?: ISpecs[],
 ): Promise<IProductsResponse> => {
   if (!category) return { products: [], totalPages: 0, totalCount: 0 };
 
-  const from = (page - 1) * limit;
-  const to = from + limit - 1;
+  const { from, to } = getRange(page, limit);
 
-  let query = supabase
-    .from("products")
-    .select("*", { count: "exact" })
-    .eq("category", category.id)
-    .gt("stock", 0);
+  const filteredProductIds = await filterProductsBySpecs(productSpecs || []);
 
-  if (minPrice) query = query.gte("price", minPrice);
-  if (maxPrice) query = query.lte("price", maxPrice); // add discounted price later
-
-  if (sortBy === "popular")
-    query = query.order("total_sold", { ascending: false });
-  else query = query.order("created_at", { ascending: false });
+  const query = buildProductsQuery({
+    category,
+    minPrice,
+    maxPrice,
+    rating,
+    hasDiscount,
+    selectedBrands,
+    filteredProductIds,
+    sortBy,
+  });
+  if (!query) return { products: [], totalPages: 0, totalCount: 0 };
 
   const { data, error, count } = await query.range(from, to);
-
   if (error) throw new Error("products couldn't be fetched");
 
   return {

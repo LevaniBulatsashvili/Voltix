@@ -9,6 +9,7 @@ const fetchProduct = async (id: string): Promise<IProduct> => {
       *,
       main_category(id, name),
       category(id, name),
+      brand:brands(id, name),
       product_images(image_url),
       product_specs(spec, value),
       product_comments(id, name, avatar, comment, rating, verified, created_at),

@@ -8,5 +8,8 @@
   "showing_products": "Showing {{start}}–{{end}} of {{total}} products",
   "most_popular": "most popular",
   "newest": "newest",
-  "price": "price"
+  "price": "price",
+  "rating": "rating",
+  "has_discount": "has discount",
+  "brands": "brands"
 }

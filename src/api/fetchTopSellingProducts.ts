@@ -8,7 +8,8 @@ const fetchTopSellingProducts = async (limit?: number): Promise<IProduct[]> => {
       `
       *,
       main_category(id, name),
-      category(id, name)
+      category(id, name),
+      brand:brands(id, name)
     `,
     )
     .order("total_sold", { ascending: false });

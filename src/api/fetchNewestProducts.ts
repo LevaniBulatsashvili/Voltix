@@ -8,7 +8,8 @@ const fetchNewestProducts = async (limit?: number): Promise<IProduct[]> => {
       `
       *,
       main_category(id, name),
-      category(id, name)
+      category(id, name),
+      brand:brands(id, name)
     `,
     )
     .order("created_at", { ascending: false });

@@ -26,7 +26,7 @@ const ProductCard = ({ product }: IProductCard) => (
         {product.name}
       </p>
 
-      <StarRating rating={product.rating} textColor="black" />
+      <StarRating rating={product.rating_avg} textColor="black" />
 
       <PriceTag
         price={product.price}
