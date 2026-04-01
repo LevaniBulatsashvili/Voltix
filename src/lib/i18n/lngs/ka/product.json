@@ -1,10 +1,4 @@
 {
-  "home": "მთავარი",
-  "shop": "მაღაზია",
-  "electronics": "ელექტრონიკა",
-  "tablets": "ტაბლეტები",
-  "phones": "მობილურები",
-  "laptops:": "ლეპტოპები",
   "add_to_cart": "დამატება",
   "out_of_stock": "ამოწურულია",
   "product_details": "აღწერა",
@@ -16,5 +10,5 @@
   "oldest": "ძველი",
   "review": "შეაფასე",
   "load_more_reviews": "მეტის ჩვენება",
-  "no_specifications": "პროდუქტს სპეციფიკაციები არ აქვს."
+  "no_specifications_available_for_this_product": "პროდუქტს სპეციფიკაციები არ აქვს."
 }

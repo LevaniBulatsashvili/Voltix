@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-
 import ProductDetails from "./productTabs/Tabs/ProductDetails";
 import ProductDisplay from "./productDisplay/ProductDisplay";
 import ProductFAQs from "./productTabs/Tabs/ProductFAQs";

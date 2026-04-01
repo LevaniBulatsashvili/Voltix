@@ -1,10 +1,4 @@
 {
-  "home": "home",
-  "shop": "shop",
-  "electronics": "electronics",
-  "tablets": "tablets",
-  "phones": "phones",
-  "laptops:": "laptops",
   "add_to_cart": "add to cart",
   "product_added": "product added!",
   "out_of_stock": "out of stock",
@@ -16,5 +10,5 @@
   "oldest": "oldest",
   "review": "review",
   "load_more_reviews": "load more reviews",
-  "no_specifications": "no specifications"
+  "no_specifications_available_for_this_product": "no specifications available for this product"
 }

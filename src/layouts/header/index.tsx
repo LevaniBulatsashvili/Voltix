@@ -11,7 +11,7 @@ const Header = () => {
     { label: t("header.shop"), to: PAGE.SHOP },
     { label: t("header.on_sale"), to: PAGE.SALE },
     { label: t("header.new_arrivals"), to: PAGE.ARRIVALS },
-    { label: t("header.categories"), to: PAGE.CATEGORIES },
+    { label: t("header.categories"), to: PAGE.CATEGORY },
   ];
   const languages = [
     { value: "en", language: "Eng", code: "us" },

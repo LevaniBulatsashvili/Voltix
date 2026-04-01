@@ -18,7 +18,7 @@ const ProductCategories = () => {
         <div className="col-span-5 lg:col-span-2">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title="products.electronics"
+            title="common.electronics"
             image={electronicsImg}
             imageWidth="w-[100%]"
             imageHeight="h-[90%]"
@@ -28,7 +28,7 @@ const ProductCategories = () => {
         <div className="col-span-5 lg:col-span-3">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title="products.cameras"
+            title="common.cameras"
             image={camerasImg}
             imageWidth="w-[120%]"
             imageHeight="h-full"
@@ -38,7 +38,7 @@ const ProductCategories = () => {
         <div className="col-span-5 lg:col-span-3">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title="products.gaming"
+            title="common.gaming"
             image={gamingImg}
             imageWidth="w-[90%]"
             imageHeight="h-full"
@@ -48,7 +48,7 @@ const ProductCategories = () => {
         <div className="col-span-5 lg:col-span-2">
           <CategoryCard
             to={PAGE.PRODUCTS}
-            title="products.headphones"
+            title="common.headphones"
             image={headphonesImg}
             imageWidth="w-[90%]"
             imageHeight="h-full"

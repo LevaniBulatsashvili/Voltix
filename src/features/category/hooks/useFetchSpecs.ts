@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ISpecs } from "../../../types/product";
 import Query_Keys from "../../../react-query/query-keys";
 import { notifyError } from "../../../lib/toast/notifyError";
-import fetchSpecs from "../api/fetchSpecs";
+import fetchSpecs, { type ISpecWithValues } from "../api/fetchSpecs";
 
 const useFetchSpecs = () => {
-  return useQuery<ISpecs[]>({
+  return useQuery<ISpecWithValues[]>({
     queryKey: [Query_Keys.getSpecs],
     queryFn: async () => {
       try {

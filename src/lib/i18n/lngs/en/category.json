@@ -1,15 +1,11 @@
 {
   "filters": "filters",
-  "home": "home",
-  "electronics": "electronics",
-  "heaphones": "heaphones",
-  "gaming": "gaming",
-  "cameras": "cameras",
   "showing_products": "Showing {{start}}–{{end}} of {{total}} products",
   "most_popular": "most popular",
   "newest": "newest",
   "price": "price",
   "rating": "rating",
-  "has_discount": "has discount",
-  "brands": "brands"
+  "discounted": "discounted",
+  "brands": "brands",
+  "apply_filters": "apply filters"
 }

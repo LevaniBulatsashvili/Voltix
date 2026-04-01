@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { ISpecs } from "../../../types/product";
 
 export const useCategoryFilters = (
   initial?: Partial<{
@@ -7,8 +6,6 @@ export const useCategoryFilters = (
     maxPrice: number;
     rating: number;
     hasDiscount: boolean;
-    brands: number[];
-    specs: ISpecs[];
   }>,
   resetPage?: () => void,
 ) => {
@@ -22,8 +19,6 @@ export const useCategoryFilters = (
   const [hasDiscount, setHasDiscount] = useState<boolean | undefined>(
     initial?.hasDiscount,
   );
-  const [brands, setBrands] = useState<number[]>(initial?.brands || []);
-  const [specs, setSpecs] = useState<ISpecs[]>(initial?.specs || []);
 
   const handlePriceChange = (min: number, max: number) => {
     setMinPrice(min);
@@ -41,28 +36,14 @@ export const useCategoryFilters = (
     resetPage?.();
   };
 
-  const handleBrandsChange = (selected: number[]) => {
-    setBrands(selected);
-    resetPage?.();
-  };
-
-  const handleSpecsChange = (selected: ISpecs[]) => {
-    setSpecs(selected);
-    resetPage?.();
-  };
-
   return {
     minPrice,
     maxPrice,
     rating,
     hasDiscount,
-    brands,
-    specs,
 
     handlePriceChange,
     handleRatingChange,
     handleHasDiscountChange,
-    handleBrandsChange,
-    handleSpecsChange,
   };
 };

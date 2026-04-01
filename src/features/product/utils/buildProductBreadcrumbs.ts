@@ -9,16 +9,16 @@ export const buildProductBreadcrumbs = (
 ): ICrumb[] => {
   return [
     {
-      label: t("product.home"),
+      label: t("common.home"),
       to: PAGE.BASE,
     },
     {
-      label: t(`product.${product.main_category.name.toLowerCase()}`),
-      to: `${PAGE.CATEGORIES}/${product.main_category.name}`,
+      label: t(`common.${product.main_category.name.toLowerCase()}`),
+      to: `${PAGE.CATEGORY}/${product.main_category.name}`,
     },
     {
-      label: t(`product.${product.category.name.toLowerCase()}`),
-      to: `${PAGE.CATEGORIES}/${product.main_category.name}/${product.category.name}`,
+      label: t(`common.${product.category.name.toLowerCase()}`),
+      to: `${PAGE.CATEGORY}/${product.main_category.name}/${product.category.name}`,
     },
     {
       label: product.name,

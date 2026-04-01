@@ -7,8 +7,8 @@ const fetchNewestProducts = async (limit?: number): Promise<IProduct[]> => {
     .select(
       `
       *,
-      main_category(id, name),
-      category(id, name),
+      main_category:main_category_id(id, name),
+      category:categories(name),
       brand:brands(id, name)
     `,
     )

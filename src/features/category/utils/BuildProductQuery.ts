@@ -1,58 +1,52 @@
 import { supabase } from "../../../lib/supabase";
-import type { ICategory } from "../../../types/product";
+import type { IBrand, ICategory } from "../../../types/product";
 
 interface IQueryOptions {
-  category: ICategory;
+  category: ICategory | null;
+  brand: IBrand | null;
   minPrice?: number;
   maxPrice?: number;
   rating?: number;
   hasDiscount?: boolean;
-  selectedBrands?: number[];
-  filteredProductIds?: number[] | null;
   sortBy?: "popular" | "newest";
 }
 
 export const buildProductsQuery = (options: IQueryOptions) => {
-  const {
-    category,
-    minPrice,
-    maxPrice,
-    rating,
-    hasDiscount,
-    selectedBrands,
-    filteredProductIds,
-    sortBy,
-  } = options;
-
-  let query = supabase
-    .from("products")
-    .select(
-      `
+  const { category, brand, minPrice, maxPrice, rating, hasDiscount, sortBy } =
+    options;
+  let query = supabase.from("products").select(
+    `
         *,
-        brands(id, name),
-        product_images(*),
-        product_specs(*),
-        product_comments:comments(*)
+        main_category:main_category_id(id, name),
+        category:category_id(id, name)
       `,
-      { count: "planned" },
-    )
-    .eq("category", category.id)
-    .gt("stock", 0);
+    { count: "exact" },
+  );
 
-  if (filteredProductIds) {
-    if (filteredProductIds.length === 0) return null;
-    query = query.in("id", filteredProductIds);
-  }
-
+  if (category) query = query.eq("category_id", category.id);
+  if (brand) query = query.eq("brand_id", brand.id);
   if (minPrice !== undefined) query = query.gte("price_final", minPrice);
   if (maxPrice !== undefined) query = query.lte("price_final", maxPrice);
-  if (rating !== undefined) query = query.gte("rating", rating);
+  if (rating !== undefined) query = query.gte("rating_avg", rating);
   if (hasDiscount) query = query.gt("discount_percentage", 0);
-  if (selectedBrands?.length) query = query.in("brand_id", selectedBrands);
 
-  if (sortBy === "popular")
-    query = query.order("total_sold", { ascending: false });
-  else query = query.order("created_at", { ascending: false });
+  if (sortBy === "popular") {
+    query = query
+      .order("total_sold", {
+        ascending: false,
+      })
+      .order("id", {
+        ascending: false,
+      });
+  } else {
+    query = query
+      .order("created_at", {
+        ascending: false,
+      })
+      .order("id", {
+        ascending: false,
+      });
+  }
 
   return query;
 };

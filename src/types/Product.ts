@@ -2,9 +2,11 @@ export interface IProduct {
   id: number;
   name: string;
   description: string;
-  brand: IBrand;
   brand_id: number;
+  brand: IBrand;
+  main_category_id: number;
   main_category: IMainCategory;
+  category_id: number;
   category: ICategory;
   price: number;
   price_final: number;
@@ -15,11 +17,40 @@ export interface IProduct {
   thumbnail: string;
   created_at: string;
   updated_at: string;
+  total_sold: number;
+
+  product_specs?: IProductSpec[];
   product_comments?: IComment[];
   product_images?: IImage[];
-  product_specs?: ISpecs[];
   product_faqs?: IFAQ[];
-  total_sold: number;
+}
+
+export interface IMainCategory {
+  id: number;
+  name: "Electronics" | "Headphones" | "Gaming" | "Cameras";
+  categories: ICategory[];
+
+  specs?: ISpecs[];
+}
+
+export interface ICategory {
+  id: number;
+  parent_id: number;
+  name: string;
+  specs?: ISpecs[];
+}
+
+export interface ISpecs {
+  id: number;
+  category_id: ICategory["id"];
+  spec_name: string;
+  spec_values?: ISpecValues[];
+}
+
+export interface ISpecValues {
+  id: number;
+  spec_id: ISpecs["id"];
+  value: string;
 }
 
 export interface IBrand {
@@ -27,6 +58,13 @@ export interface IBrand {
   name: string;
   logo_url?: string;
   website_url?: string;
+}
+
+export interface IProductSpec {
+  id: number;
+  product_id: IProduct["id"];
+  spec: string;
+  value: string;
 }
 
 export interface IComment {
@@ -45,31 +83,13 @@ export interface IComment {
 
 export interface IImage {
   id: number;
-  parent_id: ICategory["id"];
+  product_id: IProduct["id"];
   image_url: string;
-}
-
-export interface ISpecs {
-  id: number;
-  spec: string;
-  value: string;
-}
-
-export interface IMainCategory {
-  id: number;
-  name: "Electronics" | "Headphones" | "Gaming" | "Cameras";
-  categories: ICategory[];
-}
-
-export interface ICategory {
-  id: number;
-  parent_id: IMainCategory["id"];
-  name: string;
 }
 
 export interface IFAQ {
   id: string;
-  parent_id: IProduct["id"];
+  product_id: IProduct["id"];
   question: string;
   answer: string;
 }

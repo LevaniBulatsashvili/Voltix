@@ -7,11 +7,11 @@ const fetchProduct = async (id: string): Promise<IProduct> => {
     .select(
       `
       *,
-      main_category(id, name),
-      category(id, name),
+      main_category:main_category_id(id, name),
+      category:categories(id, name),
       brand:brands(id, name),
+      product_specs(id, spec, value),
       product_images(image_url),
-      product_specs(spec, value),
       product_comments(id, name, avatar, comment, rating, verified, created_at),
       product_faqs(id, question, answer)
     `,

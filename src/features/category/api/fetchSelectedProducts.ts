@@ -1,7 +1,6 @@
-import type { ICategory, IProduct, ISpecs } from "../../../types/product";
+import type { IBrand, ICategory, IProduct } from "../../../types/product";
 import { getRange } from "../../../utils/pagination";
 import { buildProductsQuery } from "../utils/BuildProductQuery";
-import { filterProductsBySpecs } from "./specFilter";
 
 export interface IProductsResponse {
   products: IProduct[];
@@ -13,6 +12,7 @@ export type ISortBy = "popular" | "newest";
 
 const fetchSelectedProducts = async (
   category: ICategory | null,
+  brand: IBrand | null,
   page: number = 1,
   limit: number = 9,
   sortBy?: ISortBy,
@@ -20,25 +20,21 @@ const fetchSelectedProducts = async (
   maxPrice?: number,
   rating?: number,
   hasDiscount?: boolean,
-  selectedBrands?: number[],
-  productSpecs?: ISpecs[],
 ): Promise<IProductsResponse> => {
   if (!category) return { products: [], totalPages: 0, totalCount: 0 };
 
   const { from, to } = getRange(page, limit);
 
-  const filteredProductIds = await filterProductsBySpecs(productSpecs || []);
-
   const query = buildProductsQuery({
     category,
+    brand,
     minPrice,
     maxPrice,
     rating,
     hasDiscount,
-    selectedBrands,
-    filteredProductIds,
     sortBy,
   });
+
   if (!query) return { products: [], totalPages: 0, totalCount: 0 };
 
   const { data, error, count } = await query.range(from, to);

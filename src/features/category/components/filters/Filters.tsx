@@ -5,29 +5,26 @@ import type {
   IBrand,
   ICategory,
   IMainCategory,
-  ISpecs,
 } from "../../../../types/product";
 import type { TFunction } from "i18next";
 import PriceFilter from "./PriceFilter";
 import RatingFilter from "./RatingFilter";
-import SpecFilter from "./SpecFilter";
+import DiscountFilter from "./DiscountFilter";
+import PrimaryButton from "../../../../components/button/PrimaryBtn";
 
 interface IFilters {
   t: TFunction;
   mainCategories: IMainCategory[];
   selectedCategory: ICategory | null;
   onFilterCategory: (selectedCategory: ICategory | null) => void;
+  availableBrands: IBrand[];
+  selectedBrand: IBrand | null;
+  onSelectedBrandChange: (selectedBrandId: IBrand | null) => void;
   onPriceFilterChange?: (min: number, max: number) => void;
   selectedRating?: number;
   onRatingChange?: (rating?: number) => void;
   hasDiscount?: boolean;
   onHasDiscountChange?: (value: boolean) => void;
-  availableBrands?: IBrand[];
-  selectedBrands?: number[];
-  onSelectedBrandsChange?: (brands: number[]) => void;
-  availableSpecs?: ISpecs[];
-  selectedSpecs?: ISpecs[];
-  onSelectedSpecsChange?: (specs: ISpecs[]) => void;
 }
 
 const Filters = ({
@@ -41,11 +38,8 @@ const Filters = ({
   hasDiscount,
   onHasDiscountChange,
   availableBrands,
-  selectedBrands,
-  onSelectedBrandsChange,
-  availableSpecs,
-  onSelectedSpecsChange,
-  selectedSpecs,
+  selectedBrand,
+  onSelectedBrandChange,
 }: IFilters) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,10 +61,10 @@ const Filters = ({
 
       <div
         className={`
-          fixed top-23.5 right-0 h-full w-74 p-6 rounded-l-xl bg-background z-50 xl:max-h-fit xl:border xl:border-gray-400 xl:rounded-2xl
+          fixed top-23.5 right-0 h-full w-82 p-6 rounded-l-xl bg-background z-50 xl:max-h-fit xl:border xl:border-gray-400 xl:rounded-2xl
           transform transition-transform duration-300
           ${isOpen ? "translate-x-0" : "translate-x-full"}
-          xl:static xl:translate-x-0 xl:w-74 xl:block
+          xl:static xl:translate-x-0 xl:w-82 xl:block
         `}
       >
         <div className="flex justify-between items-center mb-6 xl:hidden">
@@ -94,15 +88,16 @@ const Filters = ({
         <div className="py-3 border-y border-gray-300">
           {mainCategories.map(({ id, name, categories }) => (
             <SelectDropdown<ICategory>
+              t={t}
               key={id}
-              name={t(name)}
+              name={`common.${name.toLowerCase()}`}
               items={categories}
               onSelect={onFilterCategory}
               selectedKey={
                 selectedCategory ? String(selectedCategory.id) : null
               }
               getKey={(category) => String(category.id)}
-              renderText={(category) => category.name}
+              renderText={(category) => `common.${category.name.toLowerCase()}`}
             />
           ))}
         </div>
@@ -111,54 +106,27 @@ const Filters = ({
 
         <RatingFilter t={t} value={selectedRating} onChange={onRatingChange} />
 
-        <div className="py-4 border-t border-gray-300">
-          <label className="flex items-center gap-2 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={!!hasDiscount}
-              onChange={(e) => onHasDiscountChange?.(e.target.checked)}
-              className="w-5 h-5 accent-primary"
-            />
-            <span className="text-sm font-medium">
-              {t("category.has_discount")}
-            </span>
-          </label>
+        <DiscountFilter
+          t={t}
+          hasDiscount={hasDiscount}
+          onHasDiscountChange={onHasDiscountChange}
+        />
+
+        <div className="py-3 border-y border-gray-300">
+          <SelectDropdown<IBrand>
+            t={t}
+            name="category.brands"
+            items={availableBrands}
+            onSelect={onSelectedBrandChange}
+            selectedKey={selectedBrand ? String(selectedBrand.id) : null}
+            getKey={(brand) => String(brand.id)}
+            renderText={(brand) => `common.${brand.name.toLowerCase()}`}
+          />
         </div>
 
-        {availableBrands && availableBrands.length > 0 && (
-          <div className="py-4 border-t border-gray-300">
-            <h3 className="text-sm font-semibold mb-2">
-              {t("category.brands")}
-            </h3>
-            <div className="flex flex-col gap-1 max-h-40 overflow-y-auto">
-              {availableBrands.map((brand) => (
-                <label
-                  key={brand.id}
-                  className="flex items-center gap-2 cursor-pointer select-none"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands?.includes(brand.id)}
-                    onChange={(e) => {
-                      const updatedBrands = e.target.checked
-                        ? [...(selectedBrands || []), brand.id]
-                        : (selectedBrands || []).filter((b) => b !== brand.id);
-                      onSelectedBrandsChange?.(updatedBrands);
-                    }}
-                    className="w-5 h-5 accent-primary"
-                  />
-                  <span className="text-sm">{brand.name}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <SpecFilter
-          t={t}
-          availableSpecs={availableSpecs || []}
-          selectedSpecs={selectedSpecs}
-          onChange={onSelectedSpecsChange}
+        <PrimaryButton
+          text={t("category.apply_filters")}
+          className="mt-6 py-4 w-full! rounded-full!"
         />
       </div>
     </>

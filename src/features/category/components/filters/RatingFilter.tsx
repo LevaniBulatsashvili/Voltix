@@ -20,11 +20,10 @@ const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
   }, [debouncedRating, onChange]);
 
   return (
-    <div className="w-full">
-      {/* HEADER */}
+    <div className="w-full border-y border-gray-300">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-3 flex justify-between items-center hover:border-b transition-all"
+        className="w-full py-3 flex justify-between items-center transition-all"
       >
         <h2 className="text-xl font-semibold capitalize">
           {t("category.rating")}
@@ -38,10 +37,9 @@ const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
         />
       </button>
 
-      {/* BODY */}
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-40 mt-2" : "max-h-0"
+          isOpen ? "max-h-40 mt-2 pb-3" : "max-h-0"
         }`}
       >
         <Slider
@@ -52,9 +50,8 @@ const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
           onChange={setRating}
         />
 
-        {/* VALUE */}
         <div className="flex justify-between mt-2 items-center">
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-primary/80">
             {rating === 0 ? " 0+" : `${rating.toFixed(1)}+`}
           </span>
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { ICategory, ISpecs } from "../../../types/product";
+import type { IBrand, ICategory } from "../../../types/product";
 import Query_Keys from "../../../react-query/query-keys";
 import fetchSelectedProducts, {
   type IProductsResponse,
@@ -9,6 +9,7 @@ import { notifyError } from "../../../lib/toast/notifyError";
 
 interface IUseFetchSelectedProducts {
   category: ICategory | null;
+  brand: IBrand | null;
   page?: number;
   limit?: number;
   sortBy?: ISortBy;
@@ -16,12 +17,11 @@ interface IUseFetchSelectedProducts {
   max?: number;
   rating?: number;
   hasDiscount?: boolean;
-  selectedBrands?: number[];
-  productSpecs?: ISpecs[];
 }
 
 const useFetchSelectedProducts = ({
   category,
+  brand,
   page = 1,
   limit = 9,
   sortBy,
@@ -29,13 +29,12 @@ const useFetchSelectedProducts = ({
   max,
   rating,
   hasDiscount,
-  selectedBrands,
-  productSpecs,
 }: IUseFetchSelectedProducts) => {
   return useQuery<IProductsResponse>({
     queryKey: [
       Query_Keys.getSelectedProducts,
       category?.id,
+      brand?.id,
       page,
       limit,
       sortBy,
@@ -43,13 +42,12 @@ const useFetchSelectedProducts = ({
       max,
       rating,
       hasDiscount,
-      selectedBrands ? JSON.stringify(selectedBrands) : null,
-      productSpecs ? JSON.stringify(productSpecs) : null,
     ],
     queryFn: async () => {
       try {
         return await fetchSelectedProducts(
           category,
+          brand,
           page,
           limit,
           sortBy,
@@ -57,8 +55,6 @@ const useFetchSelectedProducts = ({
           max,
           rating,
           hasDiscount,
-          selectedBrands,
-          productSpecs,
         );
       } catch (error) {
         const message =

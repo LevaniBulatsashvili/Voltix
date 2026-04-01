@@ -1,8 +1,10 @@
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useAppSelector } from "../../hooks/redux";
+import type { TFunction } from "i18next";
 
 interface ISelectDropdown<T> {
+  t: TFunction;
   name: string;
   items: T[];
   getKey: (item: T) => string;
@@ -13,6 +15,7 @@ interface ISelectDropdown<T> {
 }
 
 export const SelectDropdown = <T,>({
+  t,
   name,
   items,
   getKey,
@@ -35,13 +38,13 @@ export const SelectDropdown = <T,>({
   };
 
   return (
-    <div className={`hover:border-b ${className}`}>
+    <div className={`${className}`}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
         className="w-full py-3 text-left flex justify-between items-center"
       >
-        <span>{name}</span>
+        <span className="capitalize">{t(name)}</span>
         <ChevronRight
           size={16}
           className={`transition-transform duration-100 ${open ? "rotate-90" : "rotate-0"}`}
@@ -49,7 +52,7 @@ export const SelectDropdown = <T,>({
       </button>
 
       {open && (
-        <div className="rounded-lg shadow shadow-primary/10 p-1">
+        <div className="rounded-lg shadow shadow-primary/10 p-1 max-h-54 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
           <div className="flex flex-wrap gap-2 p-2">
             {items.map((item) => {
               const isSelected = selectedKey === getKey(item);
@@ -65,7 +68,7 @@ export const SelectDropdown = <T,>({
                       : ""
                   }`}
                 >
-                  {renderText(item)}
+                  {t(renderText(item))}
                 </div>
               );
             })}
