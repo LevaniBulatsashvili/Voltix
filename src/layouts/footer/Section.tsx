@@ -8,9 +8,7 @@ export interface ISection {
 const Section = ({ title, links }: ISection) => {
   return (
     <div className="text-left">
-      <p className="text-xl sm:text-2xl text-primary font-semibold uppercase">
-        {title}
-      </p>
+      <p className="text-xl sm:text-2xl font-semibold uppercase">{title}</p>
       <ul className="mt-7 space-y-2 sm:space-y-3">
         {links.map((item, index) => (
           <li key={index}>

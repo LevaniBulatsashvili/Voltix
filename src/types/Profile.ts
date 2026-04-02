@@ -9,13 +9,13 @@ export interface IProfile {
   phone?: string;
   avatar_url?: string;
   created_at: string;
-  address: IAddress;
+  address?: IAddress;
   orders?: IOrder[];
 }
 
 export interface IAddress {
-  id?: string;
-  user_id?: string;
+  id: string;
+  user_id: string;
   address_line: string;
   city: string;
   postal_code: string;

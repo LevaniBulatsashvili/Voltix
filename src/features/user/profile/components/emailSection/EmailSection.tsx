@@ -8,10 +8,10 @@ import FormSection from "../ui/FormSection";
 import InfoRow from "../ui/InfoRow";
 
 interface IEmailSection {
-  user: IProfile;
+  profile: IProfile;
 }
 
-const EmailSection = ({ user }: IEmailSection) => {
+const EmailSection = ({ profile }: IEmailSection) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
 
@@ -30,14 +30,13 @@ const EmailSection = ({ user }: IEmailSection) => {
               size={40}
             />
           }
-          title={user.email}
-          subtitle={formatDateLong(user.created_at)}
+          title={profile.email}
+          subtitle={formatDateLong(profile.created_at)}
         />
       </FormSection>
 
       {showModal && (
         <ChangeEmailModal
-          user={user}
           isOpen={showModal}
           onClose={() => setShowModal(false)}
         />

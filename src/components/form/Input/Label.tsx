@@ -11,7 +11,7 @@ export const Label = ({ htmlFor, text }: ILabel) => {
   return (
     <label
       htmlFor={htmlFor}
-      className="block mb-3 text-lg text-black opacity-90 capitalize"
+      className="block mb-3 text-lg opacity-90 capitalize"
     >
       {t(text)}
     </label>

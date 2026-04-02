@@ -19,7 +19,7 @@ const fetchProduct = async (id: string): Promise<IProduct> => {
     .eq("id", id)
     .single();
 
-  if (error || !data) throw error ?? new Error("Product not found");
+  if (error || !data) new Error("product not found");
 
   const sortImages = (img1: IImage, img2: IImage) => {
     if (img1.image_url === data.thumbnail) return -1;

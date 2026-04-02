@@ -11,6 +11,7 @@ import ProductPage from "../pages/product/ProductPage";
 import ProfilePage from "../pages/user/profile/ProfilePage";
 import CartPage from "../pages/user/cart/CartPage";
 import CategoryPage from "../pages/category/CategoryPage";
+import NotFoundPage from "../pages/error/notFound/NotFoundPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -47,7 +48,7 @@ const AppRoutes = () => (
         </Route>
 
         {/* Catch-all: redirect unknown routes */}
-        <Route path="*" element={<Navigate to={PAGE.PRODUCTS} replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </BrowserRouter>

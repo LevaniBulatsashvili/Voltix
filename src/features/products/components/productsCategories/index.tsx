@@ -11,7 +11,7 @@ const ProductCategories = () => {
 
   return (
     <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
-      <h2 className="mb-10 sm:mb-16 text-4xl sm:text-5xl font-extrabold uppercase text-center">
+      <h2 className="mb-10 sm:mb-16 text-4xl sm:text-5xl font-extrabold uppercase text-center text-black">
         {t("products.browse_by_category")}
       </h2>
       <div className="grid grid-cols-5 gap-5">

@@ -1,13 +1,13 @@
-import type { IUser } from "../../../../types/profile";
+import type { IProfile } from "../../../../types/profile";
 import type { TUserForm } from "../../schemas/userSchema";
 
-export const mapUserToForm = (user: IUser): TUserForm => ({
-  full_name: user.full_name ?? "",
-  phone: user.phone ?? "",
+export const mapUserToForm = (profile: IProfile): TUserForm => ({
+  full_name: profile.full_name ?? "",
+  phone: profile.phone ?? "",
   address: {
-    city: user.address?.city ?? "",
-    postal_code: user.address?.postal_code ?? "",
-    country: user.address?.country ?? "",
-    address_line: user.address?.address_line ?? "",
+    city: profile.address?.city ?? "",
+    postal_code: profile.address?.postal_code ?? "",
+    country: profile.address?.country ?? "",
+    address_line: profile.address?.address_line ?? "",
   },
 });

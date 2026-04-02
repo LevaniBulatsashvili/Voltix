@@ -28,7 +28,7 @@ const ProductsHeader = ({
   const { t } = useTranslation();
 
   return (
-    <div className="p-8 sm:p-10 md:p-15 lg:p-24.5 grid grid-cols-1 xl:grid-cols-2 gap-0 xl:gap-16 text-primary">
+    <div className="p-8 sm:p-10 md:p-15 lg:px-24.5 grid grid-cols-1 xl:grid-cols-2 gap-0 xl:gap-16">
       <div className="flex flex-col justify-between h-full">
         <div className="grid gap-8">
           <h1 className="text-4xl sm:text-6xl text-center xl:text-start font-extrabold capitalize">

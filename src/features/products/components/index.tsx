@@ -16,6 +16,7 @@ import { dummyCustomers } from "../../../utils/dummyCustomers";
 import AsyncBoundary from "../../../components/feedback/AsyncBoundary";
 import useFetchNewestProducts from "../../../hooks/useFetchNewestProducts";
 import useFetchTopSellingProducts from "../../../hooks/useFetchTopSellingProducts";
+import ProductShowcaseSkeleton from "./productsSkeleton/ProductShowcaseSkeleton";
 
 const logos = [
   { src: appleLogo, alt: "Apple" },
@@ -43,51 +44,68 @@ const Products = () => {
     },
   ];
 
-  const newestProductsQuery = useFetchNewestProducts(4);
-  const topSellingProductsQuery = useFetchTopSellingProducts(4);
+  const { data: newestProductsData, isLoading: newestProductLoading } =
+    useFetchNewestProducts(4);
+  const { data: topSellingProductsData, isLoading: topSellingProductsLoading } =
+    useFetchTopSellingProducts(4);
 
   return (
-    <AsyncBoundary query={newestProductsQuery}>
-      {(newestProducts) => (
-        <AsyncBoundary query={topSellingProductsQuery}>
-          {(topSellingProducts) => (
-            <div className="grid">
-              <ProductsHeader
-                title="products.header"
-                description="products.description"
-                buttonText="products.shop_btn"
-                image={electronicsImg}
-                imageAlt="products.electronics"
-                stats={stats}
-              />
-              <Carousel
-                items={logos.map((logo, idx) => (
-                  <img key={idx} src={logo.src} alt={logo.alt} />
-                ))}
-                carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
-                itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
-              />
-              <ProductShowcase
-                title="products.new_arrivals"
-                products={newestProducts}
-                viewAllLink={PAGE.PRODUCTS}
-              />
-              <hr className="w-[90%] mx-auto opacity-20" />
-              <ProductShowcase
-                title="products.top_selling"
-                products={topSellingProducts}
-                viewAllLink={PAGE.PRODUCTS}
-              />
-              <ProductCategories />
-              <Customers
-                title="products.our_happy_customers"
-                customers={dummyCustomers}
-              />
-            </div>
-          )}
-        </AsyncBoundary>
-      )}
-    </AsyncBoundary>
+    <div className="grid">
+      <ProductsHeader
+        title="products.header"
+        description="products.description"
+        buttonText="products.shop_btn"
+        image={electronicsImg}
+        imageAlt="products.electronics"
+        stats={stats}
+      />
+
+      <Carousel
+        items={logos.map((logo, idx) => (
+          <img key={idx} src={logo.src} alt={logo.alt} />
+        ))}
+        carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
+        itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
+      />
+
+      <AsyncBoundary
+        data={newestProductsData}
+        isLoading={newestProductLoading}
+        loadingFallback={<ProductShowcaseSkeleton />}
+        defaultNoDataOptions={{ className: "my-15 h-120" }}
+      >
+        {(newestProducts) => (
+          <ProductShowcase
+            title="products.new_arrivals"
+            products={newestProducts}
+            viewAllLink={PAGE.PRODUCTS}
+          />
+        )}
+      </AsyncBoundary>
+
+      <hr className="w-[90%] mx-auto opacity-20" />
+      <AsyncBoundary
+        data={topSellingProductsData}
+        isLoading={topSellingProductsLoading}
+        loadingFallback={<ProductShowcaseSkeleton />}
+        defaultNoDataOptions={{ className: "my-15 h-120" }}
+      >
+        {(topSellingProducts) => (
+          <ProductShowcase
+            title="products.top_selling"
+            products={topSellingProducts}
+            viewAllLink={PAGE.PRODUCTS}
+          />
+        )}
+      </AsyncBoundary>
+
+      <ProductCategories />
+
+      <Customers
+        title="products.our_happy_customers"
+        customers={dummyCustomers}
+      />
+    </div>
   );
 };
 

@@ -1,4 +1,11 @@
 {
+  "page_not_found": "გვერდი არ მოიძებნა",
+  "the_page_you’re_looking_for_doesn’t_exist_or_has_been_moved._Let’s_get_you_back_to_shopping": "გვერდი, რომლის ძებნაც გაინტერესებდა, არ არსებობს ან გადატანილია. დავუბრუნდეთ შოპინგს.",
+  "continue_shopping": "გააგრძელე შოპინგი",
+  "go_home": "მთავარ გვერდზე",
+  "oops_something_went_wrong": "სერვერზე შეცდომა მოხდა",
+  "try_refreshing_the_page_or_come_back_later": "სცადეთ გვერდის განახლება ან მოგვიანებით დაბრუნდით.",
+
   "unknown": "დაფიქსირდა შეცდომა",
   "network": "ქსელის შეცდომა. სცადეთ თავიდან",
   "invalid_credentials": "არასწორი ელფოსტა ან პაროლი",

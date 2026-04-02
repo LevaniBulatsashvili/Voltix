@@ -1,4 +1,11 @@
 {
+  "page_not_found": "page not found",
+  "the_page_you’re_looking_for_doesn’t_exist_or_has_been_moved._Let’s_get_you_back_to_shopping": "The page you’re looking for doesn’t exist or has been moved. Let’s get you back to shopping.",
+  "continue_shopping": "continue shopping",
+  "go_home": "Go Home",
+  "oops_something_went_wrong": "Oops! Something went wrong",
+  "try_refreshing_the_page_or_come_back_later": "Try refreshing the page or come back later.",
+
   "unknown": "Something went wrong",
   "network": "Network error. Please try again.",
   "invalid_credentials": "Invalid email or password",
@@ -14,6 +21,13 @@
   "new_password_must_be_at_least_6_characters": "new password must be at least 6 characters",
   "please_confirm_your_new_password": "please confirm your new password",
   "passwords_do_not_match": "passwords do not match",
+
+  "newest products couldn't be fetched": "newest products couldn't be fetched",
+  "top selling products couldn't be fetched": "top selling products couldn't be fetched",
+  "product not found": "product not found",
+  "main categories not found": "main categories not found",
+  "user not found": "user not found",
+  "profile not found": "profile not found",
 
   "Failed to fetch currency rates": "Failed to fetch currency rates",
   "Missing required currency rates": "Missing required currency rates",

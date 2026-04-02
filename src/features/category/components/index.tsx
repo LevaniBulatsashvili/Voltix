@@ -38,7 +38,7 @@ const CategoryPage = () => {
     useFetchSelectedProducts({
       category: selectedCategory,
       page: currentPage,
-      limit: 4,
+      limit: 6,
       sortBy,
       min: minPrice,
       max: maxPrice,

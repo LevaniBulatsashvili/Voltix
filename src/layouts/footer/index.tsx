@@ -45,7 +45,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-background text-primary py-5 px-6 sm:px-10 lg:px-24">
+    <footer className="py-5 px-6 sm:px-10 lg:px-24">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 ">
         <Brand />
 

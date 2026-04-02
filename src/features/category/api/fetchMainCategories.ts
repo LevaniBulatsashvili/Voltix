@@ -9,7 +9,7 @@ const fetchMainCategories = async (): Promise<IMainCategory[]> => {
       `,
   );
 
-  if (error || !data) new Error("Categories not found");
+  if (error || !data) new Error("main categories not found");
 
   return data as IMainCategory[];
 };

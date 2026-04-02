@@ -19,13 +19,13 @@ const ProductInfo = ({
   decrease,
   handleAddToCart,
 }: IProductInfo) => {
-  const { name, rating, price, discount_percentage, description } = product;
+  const { name, rating_avg, price, discount_percentage, description } = product;
 
   return (
     <div className="flex flex-col grow gap-4">
       <ProductHeader
         name={name}
-        rating={rating}
+        rating={rating_avg}
         price={price}
         discount={discount_percentage}
       />

@@ -17,7 +17,7 @@ const fetchNewestProducts = async (limit?: number): Promise<IProduct[]> => {
 
   const { data, error } = await query;
 
-  if (error) throw error;
+  if (error) throw new Error("newest products couldn't be fetched");
   return data as IProduct[];
 };
 

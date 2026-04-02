@@ -9,30 +9,40 @@ import useFetchProduct from "../hooks/useFetchProduct";
 import Breadcrumbs from "../../../components/ui/BreadCrumbs";
 import { buildProductBreadcrumbs } from "../utils/buildProductBreadcrumbs";
 import { useTranslation } from "react-i18next";
+import ProductSkeleton from "./productSkeleton/ProductSkeleton";
 
 const Product = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
-  const productQuery = useFetchProduct(id ?? "");
+  const { data: productData, isLoading: productLoading } = useFetchProduct(
+    id ?? "",
+  );
 
   return (
-    <AsyncBoundary query={productQuery}>
-      {(product) => (
-        <div className="p-6 w-full md:w-[95%] lg:w-[90%] text-primary bg-background">
-          <Breadcrumbs items={buildProductBreadcrumbs(product, t)} />
-          <ProductDisplay product={product} />
-          <ProductTabs
-            children={{
-              details: <ProductDetails specs={product.product_specs || []} />,
-              reviews: (
-                <ProductReviews reviews={product.product_comments || []} />
-              ),
-              faqs: <ProductFAQs faqs={product.product_faqs || []} />,
-            }}
-          />
-        </div>
-      )}
-    </AsyncBoundary>
+    <div className="p-6 w-full md:w-[95%] lg:w-[90%] text-primary bg-background">
+      <AsyncBoundary
+        data={productData}
+        isLoading={productLoading}
+        loadingFallback={<ProductSkeleton />}
+        defaultNoDataOptions={{ className: "h-[75dvh]" }}
+      >
+        {(product) => (
+          <>
+            <Breadcrumbs items={buildProductBreadcrumbs(product, t)} />
+            <ProductDisplay product={product} />
+            <ProductTabs
+              children={{
+                details: <ProductDetails specs={product.product_specs || []} />,
+                reviews: (
+                  <ProductReviews reviews={product.product_comments || []} />
+                ),
+                faqs: <ProductFAQs faqs={product.product_faqs || []} />,
+              }}
+            />
+          </>
+        )}
+      </AsyncBoundary>
+    </div>
   );
 };
 

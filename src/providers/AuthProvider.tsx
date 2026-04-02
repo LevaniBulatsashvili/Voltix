@@ -4,7 +4,7 @@ import { useAppDispatch } from "../hooks/redux";
 import { setUser, setLoading } from "../features/auth/store/auth.slice";
 import { mapUser } from "../utils/mapUser";
 import type { Session } from "@supabase/supabase-js";
-import { useFetchProfile } from "../features/user/profile/hooks/useFetchProfile";
+import useFetchProfile from "../features/user/profile/hooks/useFetchProfile";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();

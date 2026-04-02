@@ -24,7 +24,7 @@ const Customers = ({ title, customers }: ICustomers) => {
   return (
     <div className="w-[90%] mx-auto mb-20 sm:mb-30">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 sm:mb-10">
-        <h2 className="text-4xl sm:text-5xl font-extrabold uppercase text-primary text-center sm:text-start">
+        <h2 className="text-4xl sm:text-5xl font-extrabold uppercase text-center sm:text-start">
           {t(title)}
         </h2>
         <CustomerNavigation
