@@ -1,13 +1,13 @@
 import { store } from "../../store";
 import { addNotification } from "../../store/notification/notification.slice";
-import { getErrorKey } from "../errors/getErrorKey";
+import { extractErrorMessage } from "../../utils/error";
 
-export const notifyError = (error: unknown, customErr?: boolean) => {
+export const notifyError = (error: unknown) => {
   store.dispatch(
     addNotification({
       id: crypto.randomUUID(),
       type: "error",
-      message: `errors.${customErr ? error : getErrorKey(error)}`,
+      message: `errors.${extractErrorMessage(error)}`,
     }),
   );
 };

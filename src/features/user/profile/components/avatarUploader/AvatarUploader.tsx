@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Avatar from "./Avatar";
+import Avatar from "../../../../../components/ui/Avatar";
 import AvatarOverlay from "./AvatarOverlay";
 import Spinner from "../../../../../components/feedback/Spinner";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";

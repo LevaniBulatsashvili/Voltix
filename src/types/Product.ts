@@ -20,7 +20,7 @@ export interface IProduct {
   total_sold: number;
 
   product_specs?: IProductSpec[];
-  product_comments?: IComment[];
+  product_comments?: IProductComment[];
   product_images?: IImage[];
   product_faqs?: IFAQ[];
 }
@@ -67,7 +67,7 @@ export interface IProductSpec {
   value: string;
 }
 
-export interface IComment {
+export interface IProductComment {
   id: string;
   product_id: IProduct["id"];
   user_id: string;
@@ -78,7 +78,7 @@ export interface IComment {
   rating: number;
 
   verified?: boolean;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface IImage {

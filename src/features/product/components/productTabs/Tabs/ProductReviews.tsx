@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CustomerCard from "../../../../../components/cards/CustomerCard";
+import CustomerCard from "../../../../../components/cards/ProductCommentCard";
 import type { ICustomer } from "../../../../../types/customer";
 import { User, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";

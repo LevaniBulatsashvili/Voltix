@@ -11,12 +11,11 @@ import ProductsHeader from "./productsHeader";
 import ProductShowcase from "./productsShowcase";
 import { PAGE } from "../../../pages/pageConfig";
 import ProductCategories from "./productsCategories";
-import Customers from "./customers";
-import { dummyCustomers } from "../../../utils/dummyCustomers";
 import AsyncBoundary from "../../../components/feedback/AsyncBoundary";
 import useFetchNewestProducts from "../../../hooks/useFetchNewestProducts";
 import useFetchTopSellingProducts from "../../../hooks/useFetchTopSellingProducts";
 import ProductShowcaseSkeleton from "./productsSkeleton/ProductShowcaseSkeleton";
+import ProductComments from "./ProductComments";
 
 const logos = [
   { src: appleLogo, alt: "Apple" },
@@ -44,10 +43,16 @@ const Products = () => {
     },
   ];
 
-  const { data: newestProductsData, isLoading: newestProductLoading } =
-    useFetchNewestProducts(4);
-  const { data: topSellingProductsData, isLoading: topSellingProductsLoading } =
-    useFetchTopSellingProducts(4);
+  const {
+    data: newestProductsData,
+    isLoading: newestProductsLoading,
+    error: newestProductsError,
+  } = useFetchNewestProducts(4);
+  const {
+    data: topSellingProductsData,
+    isLoading: topSellingProductsLoading,
+    error: topSellingProductsError,
+  } = useFetchTopSellingProducts(4);
 
   return (
     <div className="grid">
@@ -70,9 +75,12 @@ const Products = () => {
 
       <AsyncBoundary
         data={newestProductsData}
-        isLoading={newestProductLoading}
+        isLoading={newestProductsLoading}
+        error={newestProductsError}
         loadingFallback={<ProductShowcaseSkeleton />}
-        defaultNoDataOptions={{ className: "my-15 h-120" }}
+        defaultFallbackOptions={{
+          className: "my-15 h-120",
+        }}
       >
         {(newestProducts) => (
           <ProductShowcase
@@ -87,8 +95,11 @@ const Products = () => {
       <AsyncBoundary
         data={topSellingProductsData}
         isLoading={topSellingProductsLoading}
+        error={topSellingProductsError}
         loadingFallback={<ProductShowcaseSkeleton />}
-        defaultNoDataOptions={{ className: "my-15 h-120" }}
+        defaultFallbackOptions={{
+          className: "my-15 h-120",
+        }}
       >
         {(topSellingProducts) => (
           <ProductShowcase
@@ -101,10 +112,7 @@ const Products = () => {
 
       <ProductCategories />
 
-      <Customers
-        title="products.our_happy_customers"
-        customers={dummyCustomers}
-      />
+      <ProductComments />
     </div>
   );
 };

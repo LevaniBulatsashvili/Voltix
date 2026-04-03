@@ -17,7 +17,7 @@ const fetchTopSellingProducts = async (limit?: number): Promise<IProduct[]> => {
 
   const { data, error } = await query;
 
-  if (error) throw new Error("top selling products couldn't be fetched");
+  if (error) throw new Error("top_selling_products_couldn't_be_fetched");
   return data as IProduct[];
 };
 

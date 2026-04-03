@@ -3,7 +3,7 @@ import { Skeleton } from "../../../../components/ui/Skeleton";
 const ProductShowcaseSkeleton = () => {
   return (
     <div className="w-[90%] mx-auto my-15 text-center">
-      <Skeleton className="h-15 w-1/4 mx-auto mb-14" />
+      <Skeleton className="h-35 sm:h-15 w-50 sm:w-100 mx-auto mb-14" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="space-y-2 p-4 rounded-lg bg-white">
@@ -14,7 +14,7 @@ const ProductShowcaseSkeleton = () => {
           </div>
         ))}
       </div>
-      <Skeleton className="h-12 w-1/8 mx-auto rounded-full! mt-16" />
+      <Skeleton className="h-12 w-45 mx-auto rounded-full! mt-16" />
     </div>
   );
 };

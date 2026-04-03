@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import EmptyState from "./EmptyState";
 import Spinner from "./Spinner";
+import ErrorState from "./ErrorState";
 
-interface INoDataOptions {
-  title?: string;
-  description?: string;
+interface IFallbackOptions {
+  noDataOpt?: { title?: string; description?: string; classname: string };
+  errorOpt?: { className: string };
   className?: string;
 }
 
@@ -16,20 +17,24 @@ interface ILoadingOptions {
 type IAsyncBoundary<T> = {
   data?: T;
   isLoading: boolean;
-  loadingFallback?: ReactNode;
+  error: Error | null;
   noDataFallback?: ReactNode;
+  loadingFallback?: ReactNode;
+  errorFallback?: ReactNode;
+  defaultFallbackOptions?: IFallbackOptions;
   defaultLoadingOptions?: ILoadingOptions;
-  defaultNoDataOptions?: INoDataOptions;
   children: (data: T) => ReactNode;
 };
 
 function AsyncBoundary<T>({
   data,
   isLoading,
-  loadingFallback,
-  defaultLoadingOptions,
+  error,
   noDataFallback,
-  defaultNoDataOptions,
+  loadingFallback,
+  errorFallback,
+  defaultFallbackOptions,
+  defaultLoadingOptions,
   children,
 }: IAsyncBoundary<T>) {
   if (isLoading)
@@ -44,6 +49,21 @@ function AsyncBoundary<T>({
       </>
     );
 
+  if (error)
+    return (
+      <>
+        {errorFallback ?? (
+          <ErrorState
+            title={error.message || "common.an_error_has_occured"}
+            className={
+              defaultFallbackOptions?.errorOpt?.className ??
+              defaultFallbackOptions?.className
+            }
+          />
+        )}
+      </>
+    );
+
   const isEmpty = !data || (Array.isArray(data) && data.length === 0);
 
   if (isEmpty)
@@ -51,9 +71,15 @@ function AsyncBoundary<T>({
       <>
         {noDataFallback ?? (
           <EmptyState
-            title={defaultNoDataOptions?.title || "common.no_data_available"}
-            description={defaultNoDataOptions?.description}
-            className={defaultNoDataOptions?.className}
+            title={
+              defaultFallbackOptions?.noDataOpt?.title ||
+              "common.no_data_available"
+            }
+            description={defaultFallbackOptions?.noDataOpt?.description}
+            className={
+              defaultFallbackOptions?.noDataOpt?.classname ??
+              defaultFallbackOptions?.className
+            }
           />
         )}
       </>

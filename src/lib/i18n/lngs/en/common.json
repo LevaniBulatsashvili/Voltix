@@ -1,7 +1,8 @@
 {
   "voltix": "voltix",
   "home": "home",
-  "no_data_available": "no data available",
+  "no_data_available": "No data available",
+  "an_error_has_occured": "An error has occurred",
   "shop": "shop",
   "categories": "categories",
   "electronics": "electronics",

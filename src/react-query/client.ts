@@ -1,31 +1,36 @@
-import { QueryClient, QueryCache } from "@tanstack/react-query";
-import { store } from "../store";
-import { addNotification } from "../store/notification/notification.slice";
-import { getErrorKey } from "../lib/errors/getErrorKey";
+import { QueryClient, QueryCache, MutationCache } from "@tanstack/react-query";
+import { handleQueryError } from "./handleQueryError";
+import { isHttpError } from "../utils/error";
 
 export const client = new QueryClient({
   queryCache: new QueryCache({
-    onError: (error) => {
-      store.dispatch(
-        addNotification({
-          id: crypto.randomUUID(),
-          type: "error",
-          messageKey: `errors.${getErrorKey(error)}`,
-        }),
-      );
+    onError: (error, query) => {
+      handleQueryError(error, query);
     },
   }),
+
+  mutationCache: new MutationCache({
+    onError: (error, _variables, _context, mutation) => {
+      handleQueryError(error, undefined, mutation);
+    },
+  }),
+
   defaultOptions: {
-    mutations: {
-      onError: (error: unknown) => {
-        store.dispatch(
-          addNotification({
-            id: crypto.randomUUID(),
-            type: "error",
-            messageKey: `errors.${getErrorKey(error)}`,
-          }),
-        );
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 30,
+      retry: (failureCount, error) => {
+        if (isHttpError(error) && error.status >= 400 && error.status < 500) {
+          return false;
+        }
+        return failureCount < 2;
       },
+      retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 5000),
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+    },
+    mutations: {
+      retry: 0,
     },
   },
 });
