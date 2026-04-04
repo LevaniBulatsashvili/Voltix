@@ -3,13 +3,13 @@ import Breadcrumbs from "../../../components/ui/BreadCrumbs";
 import { buildCategoryBreadcrumbs } from "../utils/BuildCategoryCrumbs";
 import { useTranslation } from "react-i18next";
 import Filters from "./filters/Filters";
-import useFetchMainCategories from "../hooks/useFetchMainCategories";
 import useFetchSelectedProducts from "../hooks/useFetchSelectedProducts";
 import CategoryItemContainer from "./categoryItemContainer/CategoryItemContainer";
 import type { IBrand, ICategory } from "../../../types/product";
 import type { ISortBy } from "../api/fetchSelectedProducts";
 import { useCategoryFilters } from "../hooks/useCategoryFilters";
 import useFetchBrands from "../hooks/useFetchBrands";
+import { useFetchMainCategories } from "../../../hooks/useFetchMainCategories";
 
 const CategoryPage = () => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const CategoryPage = () => {
   } = useCategoryFilters();
 
   const { data: mainCategories, isLoading: isMainCategoriesLoading } =
-    useFetchMainCategories();
+    useFetchMainCategories({ includeCategories: true });
   const { data: allBrands, isLoading: isBrandsLoading } = useFetchBrands();
 
   const { data: productsData, isLoading: isProductsLoading } =

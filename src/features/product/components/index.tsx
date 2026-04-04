@@ -14,17 +14,20 @@ import ProductSkeleton from "./productSkeleton/ProductSkeleton";
 const Product = () => {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
-  const { data: productData, isLoading: productLoading } = useFetchProduct(
-    id ?? "",
-  );
+  const {
+    data: productData,
+    isLoading: productLoading,
+    error: productError,
+  } = useFetchProduct(id ?? "");
 
   return (
     <div className="p-6 w-full md:w-[95%] lg:w-[90%] text-primary bg-background">
       <AsyncBoundary
         data={productData}
         isLoading={productLoading}
+        error={productError}
         loadingFallback={<ProductSkeleton />}
-        defaultNoDataOptions={{ className: "h-[75dvh]" }}
+        defaultFallbackOptions={{ className: "h-[75dvh]" }}
       >
         {(product) => (
           <>
@@ -33,9 +36,7 @@ const Product = () => {
             <ProductTabs
               children={{
                 details: <ProductDetails specs={product.product_specs || []} />,
-                reviews: (
-                  <ProductReviews reviews={product.product_comments || []} />
-                ),
+                reviews: <ProductReviews productId={product.id} />,
                 faqs: <ProductFAQs faqs={product.product_faqs || []} />,
               }}
             />

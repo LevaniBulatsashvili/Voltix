@@ -5,7 +5,7 @@ interface IProductCommentsListSkeleton {
   count?: number;
 }
 
-const ProductCommentsListSkeleton = ({
+const ProductsCommentsListSkeleton = ({
   className = "",
   count = 3,
 }: IProductCommentsListSkeleton) => {
@@ -37,4 +37,4 @@ const ProductCommentsListSkeleton = ({
   );
 };
 
-export default ProductCommentsListSkeleton;
+export default ProductsCommentsListSkeleton;

@@ -28,8 +28,8 @@ export interface IProduct {
 export interface IMainCategory {
   id: number;
   name: "Electronics" | "Headphones" | "Gaming" | "Cameras";
-  categories: ICategory[];
-
+  thumbnail: string;
+  categories?: ICategory[];
   specs?: ISpecs[];
 }
 

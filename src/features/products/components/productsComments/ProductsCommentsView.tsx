@@ -1,37 +1,34 @@
+import type { IProductCommentsResponse } from "../../../product/api/fetchProductComments";
 import AsyncBoundary from "../../../../components/feedback/AsyncBoundary";
 import { useStepPagination } from "../../../../hooks/useStepPagination";
-import type { IProductComment } from "../../../../types/product";
-import ProductCommentsListSkeleton from "../productsSkeleton/ProductCommentsListSkeleton";
-import ProductCommentsNavigation from "./ProductCommentNavigation";
-import ProductCommentsList from "./ProductCommentsList";
+import ProductsCommentsListSkeleton from "../productsSkeleton/ProductsCommentsListSkeleton";
+import ProductsCommentsNavigation from "./ProductsCommentNavigation";
+import ProductsCommentsList from "./ProductsCommentsList";
 
-interface IProductCommentsView {
+interface IProductsCommentsView {
   title: string;
-  startIndex: number;
+  page: number;
+  setPage: (index: number) => void;
   visibleProducts: number;
-  setStartIndex: (index: number) => void;
-  productCommentsData?: {
-    comments: IProductComment[];
-    total: number;
-  };
+  productCommentsData?: IProductCommentsResponse;
   commentsLoading: boolean;
   commentsError: Error | null;
 }
 
-const ProductCommentsView = ({
+const ProductsCommentsView = ({
   title,
   productCommentsData,
   commentsLoading,
   commentsError,
-  startIndex,
+  page,
   visibleProducts,
-  setStartIndex,
-}: IProductCommentsView) => {
+  setPage,
+}: IProductsCommentsView) => {
   const { prev, next, prevDisabled, nextDisabled } = useStepPagination({
-    currentIndex: startIndex,
+    currentPage: page,
     totalItems: productCommentsData?.total || 0,
     visibleItems: visibleProducts,
-    onChange: setStartIndex,
+    onChange: setPage,
   });
 
   return (
@@ -40,7 +37,7 @@ const ProductCommentsView = ({
         <h2 className="text-4xl sm:text-5xl font-extrabold uppercase text-center sm:text-start">
           {title}
         </h2>
-        <ProductCommentsNavigation
+        <ProductsCommentsNavigation
           onPrev={prev}
           onNext={next}
           prevDisabled={prevDisabled}
@@ -53,19 +50,16 @@ const ProductCommentsView = ({
         isLoading={commentsLoading}
         error={commentsError}
         loadingFallback={
-          <ProductCommentsListSkeleton count={visibleProducts} />
+          <ProductsCommentsListSkeleton count={visibleProducts} />
         }
         defaultFallbackOptions={{ className: "my-15 h-74 w-full" }}
       >
-        {({ comments }) => (
-          <ProductCommentsList
-            productComments={comments}
-            startIndex={startIndex}
-          />
+        {({ data: productComments }) => (
+          <ProductsCommentsList productComments={productComments} />
         )}
       </AsyncBoundary>
     </div>
   );
 };
 
-export default ProductCommentsView;
+export default ProductsCommentsView;

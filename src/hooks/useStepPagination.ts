@@ -1,29 +1,29 @@
 import { useCallback } from "react";
 
 interface IPaginationStep {
-  currentIndex: number;
+  currentPage: number;
   totalItems: number;
   visibleItems: number;
   onChange: (index: number) => void;
 }
 
 export const useStepPagination = ({
-  currentIndex,
+  currentPage,
   totalItems,
   visibleItems,
   onChange,
 }: IPaginationStep) => {
   const prev = useCallback(
-    () => onChange(Math.max(currentIndex - 1, 0)),
-    [currentIndex, onChange],
+    () => onChange(Math.max(currentPage - 1, 0)),
+    [currentPage, onChange],
   );
   const next = useCallback(
-    () => onChange(Math.min(currentIndex + 1, totalItems - visibleItems)),
-    [currentIndex, onChange, totalItems, visibleItems],
+    () => onChange(Math.min(currentPage + 1, totalItems - visibleItems)),
+    [currentPage, onChange, totalItems, visibleItems],
   );
 
-  const prevDisabled = currentIndex === 0;
-  const nextDisabled = currentIndex >= totalItems - visibleItems;
+  const prevDisabled = currentPage === 1;
+  const nextDisabled = currentPage * 3 >= totalItems;
 
   return { prev, next, prevDisabled, nextDisabled };
 };

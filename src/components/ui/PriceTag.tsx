@@ -18,7 +18,11 @@ const PriceTag = ({ price, discount, textColor = "primary" }: IPriceTag) => {
     );
 
   return (
-    <span className={`flex items-center gap-2 text-${textColor}`}>
+    <span
+      className={`flex items-center gap-2 text-${textColor} overflow-x-auto
+      scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent
+      `}
+    >
       <span className="text-2xl font-bold ">
         {format(calculateDiscount(price, discount), true)}
       </span>

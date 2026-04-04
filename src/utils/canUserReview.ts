@@ -1,11 +1,12 @@
-import type { IComment } from "../types/product";
+
+import type { IProductComment } from "../types/product";
 import type { IOrder } from "../types/profile";
 
 export const canUserReview = (
   userId: string | undefined,
   orders: IOrder[] | undefined,
   productId: number,
-  comments: IComment[] | undefined,
+  comments: IProductComment[] | undefined,
 ) => {
   if (!userId || !orders) return false;
 

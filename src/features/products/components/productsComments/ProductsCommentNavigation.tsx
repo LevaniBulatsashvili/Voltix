@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface IProductCommentsNavigation {
+interface IProductsCommentsNavigation {
   onPrev: () => void;
   onNext: () => void;
   prevDisabled: boolean;
@@ -8,13 +8,13 @@ interface IProductCommentsNavigation {
   className?: string;
 }
 
-const ProductCommentsNavigation = ({
+const ProductsCommentsNavigation = ({
   onPrev,
   onNext,
   prevDisabled,
   nextDisabled,
   className = "flex gap-4",
-}: IProductCommentsNavigation) => (
+}: IProductsCommentsNavigation) => (
   <div className={className}>
     <button
       onClick={onPrev}
@@ -32,4 +32,4 @@ const ProductCommentsNavigation = ({
     </button>
   </div>
 );
-export default ProductCommentsNavigation;
+export default ProductsCommentsNavigation;

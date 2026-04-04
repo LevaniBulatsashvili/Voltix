@@ -1,17 +1,20 @@
 import { supabase } from "../../../lib/supabase";
 import type { IMainCategory } from "../../../types/product";
 
-const fetchMainCategories = async (): Promise<IMainCategory[]> => {
-  const { data, error } = await supabase.from("main_categories").select(
-    `
-      *,
-      categories(id, name)
-      `,
-  );
+export interface IFetchMainCategoriesOptions {
+  includeCategories?: boolean;
+}
 
-  if (error || !data) new Error("main categories not found");
+export const fetchMainCategories = async ({
+  includeCategories = false,
+}: IFetchMainCategoriesOptions = {}): Promise<IMainCategory[]> => {
+  const { data, error } = await supabase.from("main_categories").select(`
+      ${includeCategories ? "*, categories(id,name)" : "id, *"}
+      `);
 
-  return data as IMainCategory[];
+  if (error || !data) throw new Error("main_categories_could_not_be_fetched");
+
+  return data;
 };
 
 export default fetchMainCategories;

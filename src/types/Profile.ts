@@ -1,5 +1,5 @@
-import type { ICartItem } from "./cart";
-import type { ICurrency } from "./currency";
+import type { ICartItem } from "./common/cart";
+import type { ICurrency } from "./common/currency";
 import type { IProduct } from "./product";
 
 export interface IProfile {

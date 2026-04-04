@@ -12,14 +12,13 @@ const fetchProduct = async (id: string): Promise<IProduct> => {
       brand:brands(id, name),
       product_specs(id, spec, value),
       product_images(image_url),
-      product_comments(id, name, avatar, comment, rating, verified, created_at),
       product_faqs(id, question, answer)
     `,
     )
     .eq("id", id)
     .single();
 
-  if (error || !data) new Error("product not found");
+  if (error || !data) new Error("product_not_found");
 
   const sortImages = (img1: IImage, img2: IImage) => {
     if (img1.image_url === data.thumbnail) return -1;

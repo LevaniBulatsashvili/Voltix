@@ -1,4 +1,4 @@
-import type { ICurrency } from "../../../../types/currency";
+import type { ICurrency } from "../../../../types/common/currency";
 
 export interface IRate {
   base: "USD";

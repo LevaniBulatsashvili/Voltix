@@ -1,4 +1,4 @@
-import type { ICrumb } from "../../types/crumbs";
+import type { ICrumb } from "../../types/common/crumbs";
 import AppLink from "../button/AppLink";
 
 interface IBreadcrumbs {

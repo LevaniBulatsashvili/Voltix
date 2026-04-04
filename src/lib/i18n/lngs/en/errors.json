@@ -1,12 +1,15 @@
 {
   "something_went_wrong": "Something went wrong",
-  "newest_products_couldn't_be_fetched": "newest products couldn't be fetched",
-  "top_selling_products_couldn't_be_fetched": "top selling products couldn't be fetched",
+  "products_could_not_be_fetched": "products could not be fetched",
   "product_comments_could_not_be_fetched": "product comments could not be fetched",
   "product_not_found": "product not found",
   "main_categories_not_found": "main categories not found",
   "user_not_found": "user not found",
   "profile_not_found": "profile not found",
+  "failed_to_upload_image": "failed to upload image",
+  "comments_could_not_be_fetched": "comments could not be fetched",
+  "main_categories_could_not_be_fetched": "main categories could not be fetched",
+  "brands_could_not_be_fetched": "brands could not be fetched",
 
   "page_not_found": "page not found",
   "the_page_you’re_looking_for_doesn’t_exist_or_has_been_moved._Let’s_get_you_back_to_shopping": "The page you’re looking for doesn’t exist or has been moved. Let’s get you back to shopping.",

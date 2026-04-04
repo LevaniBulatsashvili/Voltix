@@ -1,20 +1,16 @@
 import type { IProductComment } from "../../../../types/product";
 import ProductCommentCard from "../../../../components/cards/ProductCommentCard";
 
-interface IProductCommentsList {
+interface IProductsCommentsList {
   productComments: IProductComment[];
-  startIndex: number;
 }
 
-const ProductCommentsList = ({
-  productComments,
-  startIndex,
-}: IProductCommentsList) => {
+const ProductsCommentsList = ({ productComments }: IProductsCommentsList) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {productComments.map((productComment, index) => (
+      {productComments.map((productComment) => (
         <ProductCommentCard
-          key={startIndex + index}
+          key={productComment.id}
           productComment={productComment}
         />
       ))}
@@ -22,4 +18,4 @@ const ProductCommentsList = ({
   );
 };
 
-export default ProductCommentsList;
+export default ProductsCommentsList;

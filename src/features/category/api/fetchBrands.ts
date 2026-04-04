@@ -4,10 +4,10 @@ import type { IBrand } from "../../../types/product";
 const fetchBrands = async (): Promise<IBrand[]> => {
   const { data, error } = await supabase
     .from("brands")
-    .select("id, name")
+    .select("*")
     .order("name", { ascending: true });
 
-  if (error || !data) throw new Error("brands not found");
+  if (error) throw new Error("brands_could_not_be_fetched");
 
   return data;
 };

@@ -1,6 +1,6 @@
 import type { TFunction } from "i18next";
 import type { IProduct } from "../../../types/product";
-import type { ICrumb } from "../../../types/crumbs";
+import type { ICrumb } from "../../../types/common/crumbs";
 import { PAGE } from "../../../pages/pageConfig";
 
 export const buildProductBreadcrumbs = (

@@ -21,7 +21,7 @@ export const useCreateOrder = () => {
       const message =
         error instanceof Error ? error.message : "Something went wrong";
 
-      notifyError(message, true);
+      notifyError(message);
     },
   });
 };
