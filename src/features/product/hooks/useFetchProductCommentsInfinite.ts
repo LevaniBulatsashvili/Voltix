@@ -1,33 +1,20 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   fetchProductComments,
+  type IFetchProductCommentsOptions,
   type IProductCommentsResponse,
-  type TCommentSortOrder,
 } from "../api/fetchProductComments";
-import Query_Keys from "../../../react-query/query-keys";
+import {Query_Keys} from "../../../lib/react-query/configs";
 
-interface IUseFetchProductCommentsOptions {
-  productId?: number;
-  sortOrder?: TCommentSortOrder;
-  limit?: number;
-}
-
-export const useFetchProductCommentsInfinite = ({
-  productId,
-  sortOrder = "newest",
-  limit = 4,
-}: IUseFetchProductCommentsOptions) => {
+export const useFetchProductCommentsInfinite = (
+  options: IFetchProductCommentsOptions,
+) => {
   return useInfiniteQuery<IProductCommentsResponse, Error>({
-    queryKey: [Query_Keys.getProductComments, productId, sortOrder],
+    queryKey: [Query_Keys.getProductComments, options],
     queryFn: ({ pageParam = 1 }) =>
-      fetchProductComments({
-        page: pageParam as number,
-        limit,
-        productId,
-        sortOrder,
-      }),
+      fetchProductComments({ ...options, page: pageParam as number }),
     getNextPageParam: (lastPage, allPages) => {
-      const loadedComments = allPages.flatMap((p) => p.productComments).length;
+      const loadedComments = allPages.flatMap((p) => p.data).length;
       return loadedComments < lastPage.total ? allPages.length + 1 : undefined;
     },
     initialPageParam: 1,

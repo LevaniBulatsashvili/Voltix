@@ -1,12 +1,12 @@
 import { type ReactNode } from "react";
 
-interface ITabContent {
+interface IProductTabContent {
   activeTab: string;
   children: { [key: string]: ReactNode };
 }
 
-const TabContent = ({ activeTab, children }: ITabContent) => {
+const ProductTabContent = ({ activeTab, children }: IProductTabContent) => {
   return <div className="mt-8">{children[activeTab]}</div>;
 };
 
-export default TabContent;
+export default ProductTabContent;

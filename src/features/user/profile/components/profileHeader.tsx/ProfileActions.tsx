@@ -13,14 +13,25 @@ const ProfileActions = ({
   onEdit,
   onSave,
 }: IProfileActions) => {
-  return isEditing ? (
-    <PrimaryButton
-      text={isSaving ? "profile.saving" : "profile.save"}
-      onClick={onSave}
-      disabled={isSaving}
-    />
-  ) : (
-    <PrimaryButton text="profile.edit" onClick={onEdit} />
+  return (
+    <div className="ml-auto space-x-3">
+      {isEditing ? (
+        <>
+          <PrimaryButton
+            text="profile.cancel"
+            onClick={onEdit}
+            disabled={isSaving}
+          />
+          <PrimaryButton
+            text={isSaving ? "profile.saving" : "profile.save"}
+            onClick={onSave}
+            disabled={isSaving}
+          />
+        </>
+      ) : (
+        <PrimaryButton text="profile.edit" onClick={onEdit} />
+      )}
+    </div>
   );
 };
 

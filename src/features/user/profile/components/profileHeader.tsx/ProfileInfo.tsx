@@ -1,5 +1,5 @@
 interface IProfileInfo {
-  name: string;
+  name?: string;
   email: string;
 }
 

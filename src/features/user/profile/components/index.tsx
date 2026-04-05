@@ -1,75 +1,47 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import EmailSection from "./emailSection/EmailSection";
 import PasswordSection from "./passwordSection/PasswordSection";
-import { userFormSchema, type TUserForm } from "../../schemas/userSchema";
-import { useUpdateUser } from "../hooks/useUpdateUser";
-import { useUpsertAddress } from "../hooks/useUpsertAddress";
-import { mapUserToForm } from "../utils/mapUserToForm";
-import type { IAddress } from "../../../../types/profile";
+import { profileSchema, type TProfileForm } from "../../schemas/profileSchema";
 import userImg from "../../../../assets/images/User.png";
 import { notifySuccess } from "../../../../lib/toast/notifySuccess";
 import { useTranslation } from "react-i18next";
-import { notifySupabaseError } from "../../../../lib/toast/notifySupabaseError";
 import Orders from "./ProfileOrders/Orders";
-import useFetchProfile from "../hooks/useFetchProfile";
 import ProfileActions from "./profileHeader.tsx/ProfileActions";
 import ProfileHeader from "./profileHeader.tsx/ProfileHeader";
 import ProfileForm from "./profileForm/ProfileForm";
 import AsyncBoundary from "../../../../components/feedback/AsyncBoundary";
 import ProfileHeaderSkeleton from "./skeleton/ProfileHeaderSkeleton";
 import EmailSectionSkeleton from "./skeleton/EmailSectionSkeleton";
+import { useProfilePageLogic } from "../hooks/useProfilePageLogic";
+import { mapProfileToForm } from "../utils/mapProfileToForm";
 
 const ProfilePage = () => {
   const { t } = useTranslation();
-  const [isEditing, setIsEditing] = useState(false);
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
-  const { data: profileData, isLoading } = useFetchProfile();
+  const {
+    isEditing,
+    isAddressOpen,
+    isSaving,
+    profileData,
+    profileLoading,
+    profileError,
+    ordersData,
+    ordersLoading,
+    ordersError,
+    onEdit,
+    toggleIsAddressOpen,
+    onSubmit,
+  } = useProfilePageLogic();
 
-  const { mutateAsync: updateUser, isPending: isUpdatingUser } =
-    useUpdateUser();
-
-  const { mutateAsync: upsertAddress, isPending: isUpdatingAddress } =
-    useUpsertAddress();
-
-  const isSaving = isUpdatingUser || isUpdatingAddress;
-
-  const formMethods = useForm<TUserForm>({
-    resolver: zodResolver(userFormSchema),
+  const formMethods = useForm<TProfileForm>({
+    resolver: zodResolver(profileSchema),
   });
-
   const { reset, handleSubmit } = formMethods;
 
   useEffect(() => {
-    if (profileData) reset(mapUserToForm(profileData));
+    if (profileData) reset(mapProfileToForm(profileData));
   }, [profileData, reset]);
-
-  const onEdit = () => {
-    if (isEditing && profileData) reset(mapUserToForm(profileData));
-
-    setIsEditing((prev) => !prev);
-  };
-
-  const onSubmit = async (data: TUserForm) => {
-    try {
-      const { address, ...rest } = data;
-
-      if (rest) await updateUser(rest);
-      if (address)
-        await upsertAddress({
-          id: profileData?.address?.id,
-          data: address as Omit<IAddress, "id" | "user_id">,
-        });
-
-      setIsEditing(false);
-      setIsAddressOpen(false);
-
-      notifySuccess(t("profile.profile_successfully_updated"));
-    } catch (err) {
-      notifySupabaseError(err);
-    }
-  };
 
   return (
     <div className="w-full">
@@ -80,8 +52,12 @@ const ProfilePage = () => {
           <div className="h-41 flex flex-col md:flex-row items-center gap-5 sm:gap-0 sm:justify-between">
             <AsyncBoundary
               data={profileData}
-              isLoading={isLoading}
+              isLoading={profileLoading}
+              error={profileError}
               loadingFallback={<ProfileHeaderSkeleton />}
+              defaultFallbackOptions={{
+                className: "w-70! h-25! p-0! space-y-1! mx-0! mb-2!",
+              }}
             >
               {(profile) => (
                 <ProfileHeader
@@ -99,7 +75,7 @@ const ProfilePage = () => {
             <ProfileActions
               isEditing={isEditing}
               isSaving={isSaving}
-              onEdit={onEdit}
+              onEdit={() => onEdit(() => {})}
               onSave={handleSubmit(onSubmit)}
             />
           </div>
@@ -108,21 +84,35 @@ const ProfilePage = () => {
             isEditing={isEditing}
             isSaving={isSaving}
             isAddressOpen={isAddressOpen}
-            toggleIsAddressOpen={() => setIsAddressOpen((prev) => !prev)}
+            toggleIsAddressOpen={toggleIsAddressOpen}
             onSubmit={onSubmit}
             formMethods={formMethods}
           />
 
           <AsyncBoundary
             data={profileData}
-            isLoading={isLoading}
+            isLoading={profileLoading}
+            error={profileError}
             loadingFallback={<EmailSectionSkeleton />}
+            defaultFallbackOptions={{
+              className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
+            }}
           >
             {(profile) => <EmailSection profile={profile} />}
           </AsyncBoundary>
           <PasswordSection />
 
-          <Orders />
+          <AsyncBoundary
+            data={ordersData}
+            isLoading={ordersLoading}
+            error={ordersError}
+            loadingFallback={<EmailSectionSkeleton />}
+            defaultFallbackOptions={{
+              className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
+            }}
+          >
+            {(orders) => <Orders orders={orders} />}
+          </AsyncBoundary>
         </div>
       </div>
     </div>

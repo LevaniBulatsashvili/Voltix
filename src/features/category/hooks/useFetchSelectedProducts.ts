@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import type { IBrand, ICategory } from "../../../types/product";
-import Query_Keys from "../../../react-query/query-keys";
+import { Query_Keys } from "../../../lib/react-query/configs";
 import fetchSelectedProducts, {
   type IProductsResponse,
   type ISortBy,
 } from "../api/fetchSelectedProducts";
-import { notifyError } from "../../../lib/toast/notifyError";
 
 interface IUseFetchSelectedProducts {
   category: ICategory | null;
@@ -43,28 +42,18 @@ const useFetchSelectedProducts = ({
       rating,
       hasDiscount,
     ],
-    queryFn: async () => {
-      try {
-        return await fetchSelectedProducts(
-          category,
-          brand,
-          page,
-          limit,
-          sortBy,
-          min,
-          max,
-          rating,
-          hasDiscount,
-        );
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Something went wrong";
-        notifyError(message, true);
-        throw error;
-      }
-    },
-    staleTime: 1000 * 60 * 10,
-    refetchInterval: 1000 * 60 * 30,
+    queryFn: () =>
+      fetchSelectedProducts(
+        category,
+        brand,
+        page,
+        limit,
+        sortBy,
+        min,
+        max,
+        rating,
+        hasDiscount,
+      ),
   });
 };
 

@@ -4,7 +4,7 @@ import {
   type IFetchProductCommentsOptions,
   type IProductCommentsResponse,
 } from "../../product/api/fetchProductComments";
-import Query_Keys from "../../../react-query/query-keys";
+import {Query_Keys} from "../../../lib/react-query/configs";
 
 export const useFetchProductComments = (
   options: IFetchProductCommentsOptions,

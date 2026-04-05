@@ -1,4 +1,3 @@
-// ProductInfoSkeleton.tsx
 import { Skeleton } from "../../../../components/ui/Skeleton";
 
 const ProductInfoSkeleton = () => {

@@ -1,12 +1,16 @@
 import { useTranslation } from "react-i18next";
 
-interface ITabHeader {
+interface IProductTabHeader {
   tabs: { key: string; label: string }[];
   activeTab: string;
   onTabChange: (key: string) => void;
 }
 
-const TabHeader = ({ tabs, activeTab, onTabChange }: ITabHeader) => {
+const ProductTabHeader = ({
+  tabs,
+  activeTab,
+  onTabChange,
+}: IProductTabHeader) => {
   const { t } = useTranslation();
 
   return (
@@ -28,4 +32,4 @@ const TabHeader = ({ tabs, activeTab, onTabChange }: ITabHeader) => {
   );
 };
 
-export default TabHeader;
+export default ProductTabHeader;

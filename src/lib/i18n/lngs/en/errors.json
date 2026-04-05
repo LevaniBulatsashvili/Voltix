@@ -5,11 +5,50 @@
   "product_not_found": "product not found",
   "main_categories_not_found": "main categories not found",
   "user_not_found": "user not found",
-  "profile_not_found": "profile not found",
   "failed_to_upload_image": "failed to upload image",
   "comments_could_not_be_fetched": "comments could not be fetched",
   "main_categories_could_not_be_fetched": "main categories could not be fetched",
   "brands_could_not_be_fetched": "brands could not be fetched",
+
+  "entities": {
+    "data": "Data",
+    "profile": "Profile",
+    "address": "Address"
+  },
+  "actions": {
+    "fetch": "fetch",
+    "create": "create",
+    "update": "update",
+    "delete": "delete"
+  },
+  "failed": "Failed to {{action}} {{entity}}",
+  "not_available": "{{entity}} not available",
+
+  "an_error_has_occured": "an error has occured",
+
+  "data_not_available": "data not available",
+  "failed_to_fetch_data": "failed to fetch data",
+  "failed_to_create_data": "failed to create data",
+  "failed_to_update_data": "failed to update data",
+  "failed_to_delete_data": "failed to delete data",
+
+  "profile_not_available": "profile not available",
+  "failed_to_fetch_profile": "failed to fetch profile",
+  "failed_to_post_profile": "failed to post profile",
+  "failed_to_update_profile": "failed to update profile",
+  "failed_to_delete_profile": "failed to delete profile",
+
+  "address_not_available": "address not available",
+  "failed_to_fetch_address": "failed to fetch address",
+  "failed_to_post_address": "failed to post address",
+  "failed_to_update_address": "failed to update address",
+  "failed_to_delete_address": "failed to delete address",
+
+  "order_not_available": "order not available",
+  "failed_to_fetch_order": "failed to fetch order",
+  "failed_to_post_order": "failed to post order",
+  "failed_to_update_order": "failed to update order",
+  "failed_to_delete_order": "failed to delete order",
 
   "page_not_found": "page not found",
   "the_page_you’re_looking_for_doesn’t_exist_or_has_been_moved._Let’s_get_you_back_to_shopping": "The page you’re looking for doesn’t exist or has been moved. Let’s get you back to shopping.",

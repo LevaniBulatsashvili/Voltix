@@ -12,7 +12,7 @@ const initialState: ICartState = (() => {
   try {
     return { items: cartStorage.get() };
   } catch (error) {
-    notifyError(error, true);
+    notifyError(error);
     return { items: [] };
   }
 })();

@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
-import TabHeader from "./TabHeader";
-import TabContent from "./TabContent";
+import ProductTabHeader from "./ProductTabHeader";
+import ProductTabContent from "./ProductTabContent";
 
 interface IProductTabs {
   children: {
@@ -23,12 +23,12 @@ const ProductTabs = ({ children }: IProductTabs) => {
 
   return (
     <div className="w.full">
-      <TabHeader
+      <ProductTabHeader
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={(key: string) => setActiveTab(key as TabKeys)}
       />
-      <TabContent activeTab={activeTab} children={children} />
+      <ProductTabContent activeTab={activeTab} children={children} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { IProduct } from "../../../types/product";
-import Query_Keys from "../../../react-query/query-keys";
+import {Query_Keys} from "../../../lib/react-query/configs";
 import fetchProduct from "../api/fetchProduct";
 
 const useFetchProduct = (productId: string) => {

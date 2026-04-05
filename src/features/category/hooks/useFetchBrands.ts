@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { IBrand } from "../../../types/product";
-import Query_Keys from "../../../react-query/query-keys";
+import {Query_Keys} from "../../../lib/react-query/configs";
 import fetchBrands from "../api/fetchBrands";
 
 const useFetchBrands = () => {

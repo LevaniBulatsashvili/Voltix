@@ -6,7 +6,7 @@ import type {
   IOAuthResponse,
   IOtpResponse,
 } from "../../../types/auth";
-import { profileService } from "../../user/profile/api/profileService";
+import { profileService } from "../../user/profile/service/profileService";
 
 import {
   getCurrentAuthUser,
@@ -26,7 +26,7 @@ export const authService: IAuthService = {
     if (error) throw error;
 
     const authUser = mapAuthUser(data.user);
-    const user = authUser?.id ? await profileService.getProfile() : null;
+    const user = authUser?.id ? await profileService.fetch(data.user.id) : null;
 
     return {
       authUser,
@@ -54,12 +54,11 @@ export const authService: IAuthService = {
       return { authUser, user: null, session: data.session };
     }
 
-    await profileService.createEmptyProfile(authUser.id);
-    const user = await profileService.getProfile();
+    const profile = await profileService.create({ email });
 
     return {
       authUser,
-      user,
+      user: profile,
       session: data.session,
     };
   },

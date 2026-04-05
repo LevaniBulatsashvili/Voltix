@@ -3,20 +3,20 @@ import Avatar from "../../../../../components/ui/Avatar";
 import AvatarOverlay from "./AvatarOverlay";
 import Spinner from "../../../../../components/feedback/Spinner";
 import { useUploadAvatar } from "../../hooks/useUploadAvatar";
-import { useUpdateUser } from "../../hooks/useUpdateUser";
-import { deleteAvatar } from "../../hooks/deleteAvatar";
+import { useUpdateProfile } from "../../hooks/profileCRUD";
+import { deleteAvatar } from "../../api/deleteAvatar";
 import { getPathFromUrl } from "../../utils/getPathFromUrl";
 
 interface IAvatarUploader {
   currentAvatar: string;
-  userId: string;
+  profileId: string;
   disabled?: boolean;
   onUploadSuccess?: (url: string) => void;
 }
 
 const AvatarUploader = ({
   currentAvatar,
-  userId,
+  profileId,
   disabled,
   onUploadSuccess,
 }: IAvatarUploader) => {
@@ -24,9 +24,9 @@ const AvatarUploader = ({
   const [previousAvatar, setPreviousAvatar] = useState(currentAvatar);
 
   const { uploadAvatar, uploading } = useUploadAvatar();
-  const { mutateAsync: updateUser } = useUpdateUser();
+  const { mutateAsync: updateProfile } = useUpdateProfile();
 
-  const inputId = `avatar-${userId}`;
+  const inputId = `avatar-${profileId}`;
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -35,8 +35,8 @@ const AvatarUploader = ({
     setPreview(URL.createObjectURL(file));
 
     try {
-      const url = await uploadAvatar(file, userId);
-      await updateUser({ avatar_url: url });
+      const url = await uploadAvatar(file, profileId);
+      await updateProfile({ id: profileId, avatar_url: url });
 
       if (previousAvatar?.includes("/avatars/")) {
         const oldPath = getPathFromUrl(previousAvatar);

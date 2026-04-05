@@ -1,5 +1,5 @@
 import { type UseFormReturn } from "react-hook-form";
-import { type TUserForm } from "../../../schemas/userSchema";
+import { type TProfileForm } from "../../../schemas/profileSchema";
 import { FormInput } from "../../../../../components/form/Input/FormInput";
 import { FormDropdown } from "../../../../../components/form/FormDropdown";
 
@@ -8,8 +8,8 @@ interface IProfileForm {
   isSaving: boolean;
   isAddressOpen: boolean;
   toggleIsAddressOpen: () => void;
-  onSubmit: (data: TUserForm) => void;
-  formMethods: UseFormReturn<TUserForm>;
+  onSubmit: (data: TProfileForm) => void;
+  formMethods: UseFormReturn<TProfileForm>;
 }
 
 const ProfileForm = ({

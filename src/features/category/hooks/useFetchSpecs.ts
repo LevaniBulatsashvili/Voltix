@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Query_Keys from "../../../react-query/query-keys";
+import {Query_Keys} from "../../../lib/react-query/configs";
 import { notifyError } from "../../../lib/toast/notifyError";
 import fetchSpecs, { type ISpecWithValues } from "../api/fetchSpecs";
 

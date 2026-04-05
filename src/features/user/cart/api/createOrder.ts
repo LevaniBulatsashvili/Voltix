@@ -2,7 +2,7 @@ import { supabase } from "../../../../lib/supabase";
 import type { IOrderItem, IOrderRaw } from "../../../../types/profile";
 
 export const createOrder = async ({
-  user_id: profileId,
+  profile_id: profileId,
   currency,
   total_amount: totalAmount,
   delivery_fee: deliveryFee,
@@ -15,7 +15,7 @@ export const createOrder = async ({
     .from("orders")
     .insert([
       {
-        user_id: profileId,
+        profile_id: profileId,
         currency,
         status: "pending",
         total_amount: totalAmount,
@@ -34,8 +34,8 @@ export const createOrder = async ({
     order_id: orderId,
     product_id: item.product.id,
     quantity: item.quantity,
-    price: item.product.price,
-    total: item.product.price * item.quantity,
+    price: item.product.price_final,
+    total: item.product.price_final * item.quantity,
   }));
 
   const { error: itemsError } = await supabase

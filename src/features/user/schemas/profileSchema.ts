@@ -28,7 +28,7 @@ const requireIfStarted =
     return check(a);
   };
 
-export const userFormSchema = z
+export const profileSchema = z
   .object({
     full_name: z.string().optional(),
     phone: z.string().optional(),
@@ -63,4 +63,4 @@ export const userFormSchema = z
     },
   );
 
-export type TUserForm = z.infer<typeof userFormSchema>;
+export type TProfileForm = z.infer<typeof profileSchema>;

@@ -1,5 +1,5 @@
 import { useCurrency } from "./useCurrency";
-import useFetchRates from "./useFetchRates";
+import useFetchRates from "../../../../hooks/useFetchRates";
 
 export const usePrice = () => {
   const currency = useCurrency();

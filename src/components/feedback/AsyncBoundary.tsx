@@ -54,7 +54,7 @@ function AsyncBoundary<T>({
       <>
         {errorFallback ?? (
           <ErrorState
-            title={error.message || "common.an_error_has_occured"}
+            title={error.message || "an_error_has_occured"}
             className={
               defaultFallbackOptions?.errorOpt?.className ??
               defaultFallbackOptions?.className
