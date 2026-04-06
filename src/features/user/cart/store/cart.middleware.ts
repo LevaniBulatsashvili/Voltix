@@ -1,34 +1,26 @@
-import type { Middleware } from "@reduxjs/toolkit";
-import { isAnyOf } from "@reduxjs/toolkit";
-import { cartStorage } from "./cartStorage";
+import { createPersistenceMiddleware } from "../../../../store/utils/createPersistenceMiddleware";
+import { cartStorage } from "./cart.storage";
 import {
   addToCart,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
   clearCart,
+  type ICartState,
 } from "./cart.slice";
-import { notifyError } from "../../../../lib/toast/notifyError";
+import type { RootState } from "../../../../store";
 
-const isCartAction = isAnyOf(
-  addToCart,
-  removeFromCart,
-  increaseQuantity,
-  decreaseQuantity,
-  clearCart,
-);
-
-export const cartMiddleware: Middleware = (store) => (next) => (action) => {
-  const result = next(action);
-
-  if (isCartAction(action)) {
-    try {
-      const state = store.getState();
-      cartStorage.set(state.cart.items);
-    } catch (error) {
-      notifyError(error, true);
-    }
-  }
-
-  return result;
-};
+export const cartMiddleware = createPersistenceMiddleware<
+  RootState,
+  ICartState
+>({
+  sliceSelector: (state) => state.cart,
+  storage: cartStorage,
+  actions: [
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart,
+  ],
+});

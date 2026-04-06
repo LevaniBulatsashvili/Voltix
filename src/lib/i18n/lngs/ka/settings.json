@@ -1,0 +1,10 @@
+{
+  "app_settings": "აპლიკაციის პარამეტრები",
+  "toggle_different_states_to_simulate_behaviors_in_the_app_for_testing_purposes": "გაანალიზეთ სხვადასხვა მდგომარეობა აპლიკაციაში, ტესტირების მიზნებისთვის.",
+  "permanent_no_data_state": "მუდმივი მონაცემების არქონის მდგომარეობა",
+  "flicker_no_data_state": "მონაცემების არქონის ფლიკერი",
+  "permanent_loading_state": "მუდმივი დამტვირთავი მდგომარეობა",
+  "flicker_loading_state": "დამტვირთავი ფლიკერი",
+  "permanent_srror_state": "მუდმივი შეცდომის მდგომარეობა",
+  "flicker_error_state": "შეცდომის ფლიკერი"
+}

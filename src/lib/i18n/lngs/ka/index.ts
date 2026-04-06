@@ -11,6 +11,7 @@ import profile from "./profile.json";
 import cart from "./cart.json";
 import category from "./category.json";
 import common from "./common.json";
+import settings from "./settings.json";
 
 export const ka = {
   header,
@@ -26,4 +27,5 @@ export const ka = {
   cart,
   category,
   common,
+  settings,
 };

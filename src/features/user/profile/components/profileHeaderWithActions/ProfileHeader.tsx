@@ -1,4 +1,4 @@
-import AvatarUploader from "../avatarUploader/AvatarUploader";
+import AvatarUploader from "./avatarUploader/AvatarUploader";
 import ProfileInfo from "./ProfileInfo";
 
 interface IProfileHeader {

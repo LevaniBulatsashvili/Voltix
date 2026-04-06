@@ -1,34 +1,25 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import EmailSection from "./emailSection/EmailSection";
-import PasswordSection from "./passwordSection/PasswordSection";
-import { profileSchema, type TProfileForm } from "../../schemas/profileSchema";
-import userImg from "../../../../assets/images/User.png";
-import { notifySuccess } from "../../../../lib/toast/notifySuccess";
-import { useTranslation } from "react-i18next";
-import Orders from "./ProfileOrders/Orders";
-import ProfileActions from "./profileHeader.tsx/ProfileActions";
-import ProfileHeader from "./profileHeader.tsx/ProfileHeader";
+import { profileSchema, type TProfileForm } from "../schemas/profileSchema";
+import ProfileOrders from "./profileOrders/ProfileOrders";
 import ProfileForm from "./profileForm/ProfileForm";
-import AsyncBoundary from "../../../../components/feedback/AsyncBoundary";
-import ProfileHeaderSkeleton from "./skeleton/ProfileHeaderSkeleton";
-import EmailSectionSkeleton from "./skeleton/EmailSectionSkeleton";
 import { useProfilePageLogic } from "../hooks/useProfilePageLogic";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
+import { QueryBoundary } from "../../../../components/feedback/QueryBoundary";
+import ProfileHeaderWithActions from "./profileHeaderWithActions/ProfileHeaderWithActions";
+import ProfileHeaderWithActionsSkeleton from "./profileSkeleton/ProfileWithActionsSkeleton";
+import ProfileSecuritySection from "./profileSecuritySection/profileSecuritySection";
+import ProfileSecuritySectionSkeleton from "./profileSkeleton/ProfileSecuritySectionSkeleton";
+import ProfileOrdersSkeleton from "./profileSkeleton/ProfileOrdersSkeleton";
 
-const ProfilePage = () => {
-  const { t } = useTranslation();
+const Profile = () => {
   const {
     isEditing,
     isAddressOpen,
     isSaving,
-    profileData,
-    profileLoading,
-    profileError,
-    ordersData,
-    ordersLoading,
-    ordersError,
+    profileQuery,
+    ordersQuery,
     onEdit,
     toggleIsAddressOpen,
     onSubmit,
@@ -40,8 +31,8 @@ const ProfilePage = () => {
   const { reset, handleSubmit } = formMethods;
 
   useEffect(() => {
-    if (profileData) reset(mapProfileToForm(profileData));
-  }, [profileData, reset]);
+    if (profileQuery.data) reset(mapProfileToForm(profileQuery.data));
+  }, [profileQuery.data, reset]);
 
   return (
     <div className="w-full">
@@ -49,36 +40,23 @@ const ProfilePage = () => {
         <div className="h-25 bg-linear-to-r from-primary to-background"></div>
 
         <div className="p-4 sm:p-10 text-black!">
-          <div className="h-41 flex flex-col md:flex-row items-center gap-5 sm:gap-0 sm:justify-between">
-            <AsyncBoundary
-              data={profileData}
-              isLoading={profileLoading}
-              error={profileError}
-              loadingFallback={<ProfileHeaderSkeleton />}
-              defaultFallbackOptions={{
-                className: "w-70! h-25! p-0! space-y-1! mx-0! mb-2!",
-              }}
-            >
-              {(profile) => (
-                <ProfileHeader
-                  avatar={profile.avatar_url || userImg}
-                  id={profile.id}
-                  name={profile.full_name}
-                  email={profile.email}
-                  onAvatarSuccess={() =>
-                    notifySuccess(t("profile.image_successfully_updated"))
-                  }
-                />
-              )}
-            </AsyncBoundary>
-
-            <ProfileActions
-              isEditing={isEditing}
-              isSaving={isSaving}
-              onEdit={() => onEdit(() => {})}
-              onSave={handleSubmit(onSubmit)}
-            />
-          </div>
+          <QueryBoundary
+            query={profileQuery}
+            loadingFallback={<ProfileHeaderWithActionsSkeleton />}
+            defaultFallbackOptions={{
+              className: "w-70! h-25! p-0! space-y-1! mb-2!",
+            }}
+          >
+            {(profile) => (
+              <ProfileHeaderWithActions
+                profile={profile}
+                isEditing={isEditing}
+                isSaving={isSaving}
+                onEdit={() => onEdit(() => {})}
+                onSubmit={handleSubmit(onSubmit)}
+              />
+            )}
+          </QueryBoundary>
 
           <ProfileForm
             isEditing={isEditing}
@@ -89,34 +67,29 @@ const ProfilePage = () => {
             formMethods={formMethods}
           />
 
-          <AsyncBoundary
-            data={profileData}
-            isLoading={profileLoading}
-            error={profileError}
-            loadingFallback={<EmailSectionSkeleton />}
+          <QueryBoundary
+            query={profileQuery}
+            loadingFallback={<ProfileSecuritySectionSkeleton />}
             defaultFallbackOptions={{
               className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
             }}
           >
-            {(profile) => <EmailSection profile={profile} />}
-          </AsyncBoundary>
-          <PasswordSection />
+            {(profile) => <ProfileSecuritySection profile={profile} />}
+          </QueryBoundary>
 
-          <AsyncBoundary
-            data={ordersData}
-            isLoading={ordersLoading}
-            error={ordersError}
-            loadingFallback={<EmailSectionSkeleton />}
+          <QueryBoundary
+            query={ordersQuery}
+            loadingFallback={<ProfileOrdersSkeleton />}
             defaultFallbackOptions={{
               className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
             }}
           >
-            {(orders) => <Orders orders={orders} />}
-          </AsyncBoundary>
+            {(orders) => <ProfileOrders orders={orders} />}
+          </QueryBoundary>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default Profile;

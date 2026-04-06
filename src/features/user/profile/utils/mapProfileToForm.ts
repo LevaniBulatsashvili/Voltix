@@ -1,5 +1,5 @@
 import type { IProfile } from "../../../../types/profile";
-import type { TUserForm } from "../../schemas/profileSchema";
+import type { TUserForm } from "../schemas/profileSchema";
 
 export const mapProfileToForm = (profile: IProfile): TUserForm => ({
   full_name: profile.full_name ?? "",

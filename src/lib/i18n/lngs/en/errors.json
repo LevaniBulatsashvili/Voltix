@@ -50,6 +50,15 @@
   "failed_to_update_order": "failed to update order",
   "failed_to_delete_order": "failed to delete order",
 
+  "persist": {
+    "failed_to_read_cart": "failed to read cart",
+    "failed_to_save_cart": "failed to save cart",
+    "failed to_clear_cart": "failed to clear cart",
+    "failed_to_read_settings": "failed to read settings",
+    "failed_to_save_settings": "failed to save settings",
+    "failed to_clear_settings": "failed to clear settings"
+  },
+
   "page_not_found": "page not found",
   "the_page_you’re_looking_for_doesn’t_exist_or_has_been_moved._Let’s_get_you_back_to_shopping": "The page you’re looking for doesn’t exist or has been moved. Let’s get you back to shopping.",
   "continue_shopping": "continue shopping",

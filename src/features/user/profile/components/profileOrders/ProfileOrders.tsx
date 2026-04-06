@@ -1,11 +1,11 @@
 import type { IOrder } from "../../../../../types/profile";
 import { usePrice } from "../../../cart/hooks/usePrice";
 
-interface IOrders {
+interface IProfileOrders {
   orders: IOrder[];
 }
 
-const Orders = ({ orders }: IOrders) => {
+const ProfileOrders = ({ orders }: IProfileOrders) => {
   const { format } = usePrice();
 
   return (
@@ -31,12 +31,10 @@ const Orders = ({ orders }: IOrders) => {
             </span>
           </div>
 
-          {/* Date */}
           <p className="text-sm text-gray-500 mb-2">
             {new Date(order.date).toLocaleDateString()}
           </p>
 
-          {/* Items */}
           <div className="space-y-2 mb-4">
             {order.items?.map((item, idx) => (
               <div
@@ -46,6 +44,7 @@ const Orders = ({ orders }: IOrders) => {
                 <span>
                   {item.product?.name ?? "Product"} x{item.quantity}
                 </span>
+                {/* update later */}
                 <span>{format(item.total ?? item.price * item.quantity)}</span>
               </div>
             ))}
@@ -55,7 +54,6 @@ const Orders = ({ orders }: IOrders) => {
             </div>
           </div>
 
-          {/* Total */}
           <div className="border-t pt-3 flex justify-between font-medium">
             <span>Total</span>
             <span>{format(order.total_amount)}</span>
@@ -66,4 +64,4 @@ const Orders = ({ orders }: IOrders) => {
   );
 };
 
-export default Orders;
+export default ProfileOrders;

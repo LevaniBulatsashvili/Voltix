@@ -1,12 +1,12 @@
 import { type ReactNode } from "react";
 
-interface IInfoRow {
+interface IProfileInfoRow {
   icon: ReactNode;
   title: string;
   subtitle?: string;
 }
 
-const InfoRow = ({ icon, title, subtitle }: IInfoRow) => (
+const ProfileInfoRow = ({ icon, title, subtitle }: IProfileInfoRow) => (
   <div className="flex items-center gap-3">
     {icon}
     <div>
@@ -16,4 +16,4 @@ const InfoRow = ({ icon, title, subtitle }: IInfoRow) => (
   </div>
 );
 
-export default InfoRow;
+export default ProfileInfoRow;

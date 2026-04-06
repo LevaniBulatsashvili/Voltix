@@ -6,7 +6,7 @@ const PAGE = {
   VERIFY_SUCCESS: "/verify-success",
   ORDERS: "/",
   WISHLIST: "/",
-  SETTINGS: "/",
+  SETTINGS: "/settings",
   Admin: "/admin",
   PRODUCTS: "/products",
   PRODUCT: "shop/:category/:subcategory/:id",

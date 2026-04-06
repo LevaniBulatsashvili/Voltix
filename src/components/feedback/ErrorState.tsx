@@ -1,22 +1,40 @@
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, RefreshCcw } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface IErrorState {
   title: string;
   className?: string;
+  isRetrying?: boolean;
+  onRetry?: () => void;
 }
 
-const ErrorState = ({ title, className }: IErrorState) => {
+const ErrorState = ({ title, className, isRetrying, onRetry }: IErrorState) => {
   const { t } = useTranslation();
 
   return (
     <div
-      className={`w-[90%] flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl bg-red-50 ${className}`}
+      className={`w-[90%] relative px-8 py-12 text-center border rounded-2xl bg-red-50 ${className}`}
     >
-      <AlertTriangle className="size-16 text-red-500 mb-6" />
+      <AlertTriangle className="size-16 text-red-500 mb-6 mx-auto" />
       <h3 className="text-xl font-semibold mb-2 text-red-700">
         {t(`errors.${title}`)}
       </h3>
+
+      {onRetry && (
+        <button
+          onClick={onRetry}
+          className="absolute text-red-950 hover:opacity-80 top-3 right-3 disabled:opacity-55"
+          disabled={isRetrying}
+        >
+          <RefreshCcw
+            size={30}
+            strokeWidth={2.8}
+            className={`transition-transform ${
+              isRetrying ? "animate-spin-reverse" : ""
+            }`}
+          />
+        </button>
+      )}
     </div>
   );
 };

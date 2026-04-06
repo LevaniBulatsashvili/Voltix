@@ -1,15 +1,17 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import EmptyState from "./EmptyState";
 import Spinner from "./Spinner";
 import ErrorState from "./ErrorState";
+import { useAppSelector } from "../../hooks/redux";
+import { useFlicker } from "../../hooks/useFlicker";
 
-interface IFallbackOptions {
+export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname: string };
   errorOpt?: { className: string };
   className?: string;
 }
 
-interface ILoadingOptions {
+export interface ILoadingOptions {
   containerClassName?: string;
   spinnerClassName?: string;
 }
@@ -17,27 +19,45 @@ interface ILoadingOptions {
 type IAsyncBoundary<T> = {
   data?: T;
   isLoading: boolean;
+  isRefetching?: boolean;
   error: Error | null;
   noDataFallback?: ReactNode;
   loadingFallback?: ReactNode;
   errorFallback?: ReactNode;
   defaultFallbackOptions?: IFallbackOptions;
   defaultLoadingOptions?: ILoadingOptions;
+  onRetry?: () => void;
   children: (data: T) => ReactNode;
 };
 
 function AsyncBoundary<T>({
   data,
   isLoading,
+  isRefetching,
   error,
   noDataFallback,
   loadingFallback,
   errorFallback,
   defaultFallbackOptions,
   defaultLoadingOptions,
+  onRetry,
   children,
 }: IAsyncBoundary<T>) {
-  if (isLoading)
+  const {
+    permaNoDataState,
+    permaLoadingState,
+    permaErrorState,
+    flickerNoDataState,
+    flickerLoadingState,
+    flickerErrorState,
+  } = useAppSelector((state) => state.settings);
+  const flicker = useFlicker({
+    flickerLoading: flickerLoadingState,
+    flickerError: flickerErrorState,
+    flickerEmpty: flickerNoDataState,
+  });
+
+  if (permaLoadingState || isLoading || flicker === "loading")
     return (
       <>
         {loadingFallback ?? (
@@ -49,16 +69,18 @@ function AsyncBoundary<T>({
       </>
     );
 
-  if (error)
+  if (permaErrorState || error || flicker === "error")
     return (
       <>
         {errorFallback ?? (
           <ErrorState
-            title={error.message || "an_error_has_occured"}
+            title={error?.message || "an_error_has_occured"}
             className={
               defaultFallbackOptions?.errorOpt?.className ??
               defaultFallbackOptions?.className
             }
+            isRetrying={isRefetching ?? false}
+            onRetry={onRetry}
           />
         )}
       </>
@@ -66,7 +88,7 @@ function AsyncBoundary<T>({
 
   const isEmpty = !data || (Array.isArray(data) && data.length === 0);
 
-  if (isEmpty)
+  if (permaNoDataState || isEmpty || flicker === "empty")
     return (
       <>
         {noDataFallback ?? (

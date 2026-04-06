@@ -1,8 +1,9 @@
 interface ISkeleton {
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export const Skeleton = ({ className = "" }: ISkeleton) => {
+export const Skeleton = ({ className = "", style }: ISkeleton) => {
   return (
     <div
       className={`
@@ -10,6 +11,7 @@ export const Skeleton = ({ className = "" }: ISkeleton) => {
         bg-gray-200
         ${className}
       `}
+      style={style}
     >
       <div
         className="

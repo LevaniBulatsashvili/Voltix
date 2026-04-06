@@ -12,6 +12,7 @@ import ProfilePage from "../pages/user/profile/ProfilePage";
 import CartPage from "../pages/user/cart/CartPage";
 import CategoryPage from "../pages/category/CategoryPage";
 import NotFoundPage from "../pages/error/notFound/NotFoundPage";
+import SettingsPage from "../pages/user/settings/SettingsPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -40,6 +41,7 @@ const AppRoutes = () => (
           <Route path={PAGE.PROFILE} element={<ProfilePage />} />
           <Route path={PAGE.CART} element={<CartPage />} />
           <Route path={PAGE.CATEGORY} element={<CategoryPage />} />
+          <Route path={PAGE.SETTINGS} element={<SettingsPage />} />
         </Route>
 
         {/* Admin-only pages */}

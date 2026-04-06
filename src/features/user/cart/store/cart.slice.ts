@@ -1,23 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { ICartItem } from "../../../../types/common/cart";
 import type { IProduct } from "../../../../types/product";
-import { cartStorage } from "./cartStorage";
-import { notifyError } from "../../../../lib/toast/notifyError";
+import { cartStorage } from "./cart.storage";
 
-interface ICartState {
+export interface ICartState {
   items: ICartItem[];
 }
 
-const initialState: ICartState = (() => {
-  try {
-    return { items: cartStorage.get() };
-  } catch (error) {
-    notifyError(error);
-    return { items: [] };
-  }
-})();
+const initialState: ICartState = cartStorage.get() || { items: [] };
 
-const cartSlice = createSlice({
+export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
@@ -26,20 +18,19 @@ const cartSlice = createSlice({
       action: PayloadAction<{ product: IProduct; quantity: number }>,
     ) {
       const { product, quantity } = action.payload;
-
       const existing = state.items.find(
         (item) => item.product.id === product.id,
       );
 
       if (existing) {
-        const newQuantity = existing.quantity + quantity;
-
-        existing.quantity =
-          newQuantity > product.stock ? product.stock : newQuantity;
+        existing.quantity = Math.min(
+          existing.quantity + quantity,
+          product.stock,
+        );
       } else {
         state.items.push({
           product,
-          quantity: quantity > product.stock ? product.stock : quantity,
+          quantity: Math.min(quantity, product.stock),
         });
       }
     },
@@ -51,16 +42,12 @@ const cartSlice = createSlice({
     },
 
     increaseQuantity(state, action: PayloadAction<number>) {
-      const item = state.items.find(
-        (item) => item.product.id === action.payload,
-      );
+      const item = state.items.find((i) => i.product.id === action.payload);
       if (item) item.quantity += 1;
     },
 
     decreaseQuantity(state, action: PayloadAction<number>) {
-      const item = state.items.find(
-        (item) => item.product.id === action.payload,
-      );
+      const item = state.items.find((i) => i.product.id === action.payload);
       if (item && item.quantity > 1) item.quantity -= 1;
     },
 

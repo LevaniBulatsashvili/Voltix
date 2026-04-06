@@ -1,0 +1,10 @@
+{
+  "app_settings": "App Settings",
+  "toggle_different_states_to_simulate_behaviors_in_the_app_for_testing_purposes": "Toggle different states to simulate behaviors in the app for testing purposes.",
+  "permanent_no_data_state": "Permanent No Data State",
+  "flicker_no_data_state": "Flicker No Data State",
+  "permanent_loading_state": "Permanent Loading State",
+  "flicker_loading_state": "Flicker Loading State",
+  "permanent_srror_state": "Permanent Error State",
+  "flicker_error_state": "Flicker Error State"
+}

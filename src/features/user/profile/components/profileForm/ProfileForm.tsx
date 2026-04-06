@@ -1,5 +1,5 @@
 import { type UseFormReturn } from "react-hook-form";
-import { type TProfileForm } from "../../../schemas/profileSchema";
+import { type TProfileForm } from "../../schemas/profileSchema";
 import { FormInput } from "../../../../../components/form/Input/FormInput";
 import { FormDropdown } from "../../../../../components/form/FormDropdown";
 

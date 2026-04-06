@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import PrimaryButton from "../../../../../components/button/PrimaryBtn";
+import PrimaryButton from "../../../../../../components/button/PrimaryBtn";
 
-interface IFormSection {
+interface IProfileFormSection {
   title: string;
   children: ReactNode;
   buttonText?: string;
@@ -9,13 +9,13 @@ interface IFormSection {
   buttonClassName?: string;
 }
 
-const FormSection = ({
+const ProfileFormSection = ({
   title,
   children,
   buttonText,
   onButtonClick,
   buttonClassName,
-}: IFormSection) => {
+}: IProfileFormSection) => {
   return (
     <div className="mt-8 space-y-5">
       <p className="text-xl font-semibold capitalize">{title}</p>
@@ -33,4 +33,4 @@ const FormSection = ({
   );
 };
 
-export default FormSection;
+export default ProfileFormSection;

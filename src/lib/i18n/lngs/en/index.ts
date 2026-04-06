@@ -10,7 +10,8 @@ import errors from "./errors.json";
 import profile from "./profile.json";
 import cart from "./cart.json";
 import category from "./category.json";
-import common from "./common.json"
+import common from "./common.json";
+import settings from "./settings.json";
 
 export const en = {
   header,
@@ -25,5 +26,6 @@ export const en = {
   profile,
   cart,
   category,
-  common
+  common,
+  settings,
 };

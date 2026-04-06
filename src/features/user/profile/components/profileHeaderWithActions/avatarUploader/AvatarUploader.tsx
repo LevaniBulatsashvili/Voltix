@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Avatar from "../../../../../components/ui/Avatar";
+import { useUploadAvatar } from "../../../hooks/useUploadAvatar";
+import { useUpdateProfile } from "../../../hooks/profileCRUD";
+import { getPathFromUrl } from "../../../utils/getPathFromUrl";
+import { deleteAvatar } from "../../../api/deleteAvatar";
+import Avatar from "../../../../../../components/ui/Avatar";
 import AvatarOverlay from "./AvatarOverlay";
-import Spinner from "../../../../../components/feedback/Spinner";
-import { useUploadAvatar } from "../../hooks/useUploadAvatar";
-import { useUpdateProfile } from "../../hooks/profileCRUD";
-import { deleteAvatar } from "../../api/deleteAvatar";
-import { getPathFromUrl } from "../../utils/getPathFromUrl";
+import Spinner from "../../../../../../components/feedback/Spinner";
 
 interface IAvatarUploader {
   currentAvatar: string;

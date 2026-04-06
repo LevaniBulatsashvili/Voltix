@@ -32,6 +32,7 @@ const Actions = ({
 }: IActions) => {
   const { t } = useTranslation();
   const { signOut } = useLogout();
+  const { theme } = useAppSelector((state) => state.theme);
   const user = useAppSelector((state) => state.auth.user);
   const { items: cartItems } = useAppSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -116,6 +117,7 @@ const Actions = ({
       />
 
       <ToggleBtn
+        isActive={theme === "dark"}
         onToggle={onToggleTheme}
         className="border border-indigo-400 shadow-md transition-all duration-300 hover:border-indigo-600 hover:shadow-lg hover:scale-105"
         inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400 hover:from-pink-300 hover:via-purple-300 hover:to-blue-400"

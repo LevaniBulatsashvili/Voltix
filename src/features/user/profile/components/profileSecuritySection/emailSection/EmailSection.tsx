@@ -1,11 +1,11 @@
 import { Mail } from "lucide-react";
-import { formatDateLong } from "../../../../../utils/formatDateLong";
-import type { IProfile } from "../../../../../types/profile";
+import { formatDateLong } from "../../../../../../utils/formatDateLong";
+import type { IProfile } from "../../../../../../types/profile";
 import { useState } from "react";
 import ChangeEmailModal from "./ChangeEmailModal";
 import { useTranslation } from "react-i18next";
-import FormSection from "../ui/FormSection";
-import InfoRow from "../ui/InfoRow";
+import ProfileFormSection from "../shared/ProfileFormSection";
+import ProfileInfoRow from "../shared/ProfileInfoRow";
 
 interface IEmailSection {
   profile: IProfile;
@@ -17,13 +17,13 @@ const EmailSection = ({ profile }: IEmailSection) => {
 
   return (
     <>
-      <FormSection
+      <ProfileFormSection
         title={t("profile.email_address")}
         buttonText={t("profile.change_email")}
         buttonClassName="md:w-60 md:justify-self-end"
         onButtonClick={() => setShowModal(true)}
       >
-        <InfoRow
+        <ProfileInfoRow
           icon={
             <Mail
               className="p-1.5 bg-blue-100 text-blue-800 rounded-full"
@@ -33,7 +33,7 @@ const EmailSection = ({ profile }: IEmailSection) => {
           title={profile.email}
           subtitle={formatDateLong(profile.created_at)}
         />
-      </FormSection>
+      </ProfileFormSection>
 
       {showModal && (
         <ChangeEmailModal

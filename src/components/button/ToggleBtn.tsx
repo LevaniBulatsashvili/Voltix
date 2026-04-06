@@ -2,6 +2,7 @@ import { useState } from "react";
 
 interface IToggleBtn {
   onToggle: () => void;
+  isActive?: boolean;
   className?: string;
   activeToggleClassName?: string;
   inactiveToggleClassName?: string;
@@ -11,16 +12,21 @@ interface IToggleBtn {
 
 const ToggleBtn = ({
   onToggle,
+  isActive,
   className = "",
   activeToggleClassName = "",
   inactiveToggleClassName = "",
   activeThumbClassName = "",
   inactiveThumbClassName = "",
 }: IToggleBtn) => {
-  const [toggled, setToggled] = useState(false);
+  const [internalState, setInternalState] = useState(false);
+
+  const toggled = isActive ?? internalState;
 
   const handleClick = () => {
-    setToggled((prev) => !prev);
+    if (isActive === undefined) {
+      setInternalState((prev) => !prev);
+    }
     onToggle();
   };
 
@@ -40,7 +46,11 @@ const ToggleBtn = ({
           absolute top-1/2 -translate-y-1/2
           size-6 rounded-full
           transition-all duration-400
-          ${toggled ? `left-5.75 ${activeThumbClassName}` : `left-0.5 ${inactiveThumbClassName}`}
+          ${
+            toggled
+              ? `left-5.75 ${activeThumbClassName}`
+              : `left-0.5 ${inactiveThumbClassName}`
+          }
         `}
       />
     </button>

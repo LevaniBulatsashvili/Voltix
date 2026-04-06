@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ChangePasswordModal from "./ChangePassword.modal";
 import { useTranslation } from "react-i18next";
-import FormSection from "../ui/FormSection";
+import ProfileFormSection from "../shared/ProfileFormSection";
 
 const PasswordSection = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const PasswordSection = () => {
 
   return (
     <>
-      <FormSection
+      <ProfileFormSection
         title={t("profile.password")}
         buttonText={t("profile.change_password")}
         buttonClassName="md:w-60 md:justify-self-end"
@@ -21,7 +21,7 @@ const PasswordSection = () => {
           disabled
           className="h-14 p-5 text-black text-lg rounded-lg focus:outline-gray-400 bg-gray-200 disabled:opacity-90 disabled:cursor-not-allowed"
         />
-      </FormSection>
+      </ProfileFormSection>
 
       {showModal && (
         <ChangePasswordModal
