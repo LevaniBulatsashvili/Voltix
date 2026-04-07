@@ -1,12 +1,14 @@
 {
   "shop": "მაღაზია",
-  "on_sale": "ფასდაკლება",
-  "new_arrivals": "ახალი შემოსულობები",
-  "categories": "კატეგორიები",
+  "on_sale": "ფასდაკლებული",
+  "new_arrivals": "უახლესი",
+  "popular": "პოპულარული",
   "search": "ძიება",
   "profile": "პროფილი",
   "orders": "შეკვეთები",
   "wishlist": "სურვილები",
   "settings": "პარამეტრები",
-  "logout": "გამოსვლა"
+  "logout": "გამოსვლა",
+  "all_results": "ყველაფერი",
+  "no_results_found": "შედეგი არ მოიძებნა"
 }

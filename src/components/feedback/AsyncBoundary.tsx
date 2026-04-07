@@ -8,17 +8,13 @@ import type { IDataResponse } from "../../types/common/api";
 import {
   normalizeResponse,
   resolveAsyncState,
-} from "../../utils/asyncBoundary";
+} from "../../utils/asyncBoundaryUtils";
 
 export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname?: string };
+  loadingOpt?: { containerClassName?: string; spinnerClassName?: string };
   errorOpt?: { className?: string };
   className?: string;
-}
-
-export interface ILoadingOptions {
-  containerClassName?: string;
-  spinnerClassName?: string;
 }
 
 export type IAsyncBoundaryMeta = {
@@ -37,7 +33,6 @@ type IAsyncBoundaryProps<T> = {
   loadingFallback?: ReactNode;
   errorFallback?: ReactNode;
   defaultFallbackOptions?: IFallbackOptions;
-  defaultLoadingOptions?: ILoadingOptions;
   onRetry?: () => void;
   children: (items: T[], meta: IAsyncBoundaryMeta) => ReactNode;
 };
@@ -51,7 +46,6 @@ function AsyncBoundary<T>({
   loadingFallback,
   errorFallback,
   defaultFallbackOptions,
-  defaultLoadingOptions,
   onRetry,
   children,
 }: IAsyncBoundaryProps<T>) {
@@ -78,8 +72,10 @@ function AsyncBoundary<T>({
     return (
       loadingFallback ?? (
         <Spinner
-          containerClass={defaultLoadingOptions?.containerClassName}
-          spinnerclass={defaultLoadingOptions?.spinnerClassName}
+          containerClass={
+            defaultFallbackOptions?.loadingOpt?.containerClassName
+          }
+          spinnerclass={defaultFallbackOptions?.loadingOpt?.spinnerClassName}
         />
       )
     );

@@ -40,7 +40,7 @@ const AppRoutes = () => (
           <Route path={PAGE.PRODUCT} element={<ProductPage />} />
           <Route path={PAGE.PROFILE} element={<ProfilePage />} />
           <Route path={PAGE.CART} element={<CartPage />} />
-          <Route path={PAGE.CATEGORY} element={<CategoryPage />} />
+          <Route path={PAGE.SHOP} element={<CategoryPage />} />
           <Route path={PAGE.SETTINGS} element={<SettingsPage />} />
         </Route>
 

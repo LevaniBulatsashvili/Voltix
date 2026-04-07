@@ -2,11 +2,13 @@
   "shop": "shop",
   "on_sale": "on sale",
   "new_arrivals": "new arrivals",
-  "categories": "categories",
+  "popular": "popular",
   "search": "search",
   "profile": "profile",
   "orders": "orders",
   "wishlist": "wishlist",
   "settings": "settings",
-  "logout": "logout"
+  "logout": "logout",
+  "all_results": "All Results",
+  "no_results_found": "No Results Found"
 }

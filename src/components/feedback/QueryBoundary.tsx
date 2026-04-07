@@ -1,8 +1,5 @@
 import type { ReactNode } from "react";
-import AsyncBoundary, {
-  type IFallbackOptions,
-  type ILoadingOptions,
-} from "./AsyncBoundary";
+import AsyncBoundary, { type IFallbackOptions } from "./AsyncBoundary";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { IDataResponse } from "../../types/common/api";
 
@@ -12,19 +9,19 @@ interface IQueryBoundary<T> {
     items: T[],
     meta: { total?: number; page?: number; limit?: number; hasMore?: boolean },
   ) => ReactNode;
+  noDataFallback?: ReactNode;
   loadingFallback?: ReactNode;
   errorFallback?: ReactNode;
   defaultFallbackOptions?: IFallbackOptions;
-  defaultLoadingOptions?: ILoadingOptions;
 }
 
 export const QueryBoundary = <T,>({
   query,
   children,
+  noDataFallback,
   loadingFallback,
   errorFallback,
   defaultFallbackOptions,
-  defaultLoadingOptions,
 }: IQueryBoundary<T>) => {
   return (
     <AsyncBoundary
@@ -33,10 +30,10 @@ export const QueryBoundary = <T,>({
       isRefetching={query.isRefetching}
       error={query.error}
       onRetry={query.refetch}
+      noDataFallback={noDataFallback}
       loadingFallback={loadingFallback}
       errorFallback={errorFallback}
       defaultFallbackOptions={defaultFallbackOptions}
-      defaultLoadingOptions={defaultLoadingOptions}
     >
       {children}
     </AsyncBoundary>

@@ -4,10 +4,11 @@ export const createQueryHook = <TData, TOptions>(
   queryKeyFn: (options: TOptions) => readonly unknown[],
   queryFn: (options: TOptions) => Promise<TData>,
 ) => {
-  return (options: TOptions) => {
+  return (options: TOptions, enabled: boolean = true) => {
     return useQuery<TData>({
       queryKey: queryKeyFn(options),
       queryFn: () => queryFn(options),
+      enabled,
     });
   };
 };

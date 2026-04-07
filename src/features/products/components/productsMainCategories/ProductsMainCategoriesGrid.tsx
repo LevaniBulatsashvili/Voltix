@@ -33,7 +33,7 @@ const ProductsMainCategoriesGrid = ({
         return (
           <div key={id} className={`col-span-5 ${colSpan}`}>
             <ProductsMainCategoryCard
-              to={`${PAGE.CATEGORY}/${name}`}
+              to={`${PAGE.CATEGORY}/${name.toLowerCase()}`}
               title={t(`common.${name.toLowerCase()}`)}
               image={thumbnail}
             />
