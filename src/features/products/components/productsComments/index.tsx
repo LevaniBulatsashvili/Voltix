@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useVisibleCount } from "../../hooks/useVisibleCount";
-import { useFetchProductComments } from "../../hooks/useFetchProductComments";
+import { useFetchProductComments } from "../../../product/hooks/productCommentCRUD";
 import ProductCommentsView from "./ProductsCommentsView";
 import { useTranslation } from "react-i18next";
 
@@ -8,11 +8,10 @@ const ProductsComments = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const visibleProducts = useVisibleCount();
-  const {
-    data: productCommentsData,
-    isLoading: productCommentsLoading,
-    error: productCommentsError,
-  } = useFetchProductComments({ page, limit: visibleProducts });
+  const productCommentsQuery = useFetchProductComments({
+    page,
+    limit: visibleProducts,
+  });
 
   return (
     <ProductCommentsView
@@ -20,9 +19,7 @@ const ProductsComments = () => {
       page={page}
       visibleProducts={visibleProducts}
       setPage={setPage}
-      productCommentsData={productCommentsData}
-      commentsLoading={productCommentsLoading}
-      commentsError={productCommentsError}
+      productCommentsQuery={productCommentsQuery}
     />
   );
 };

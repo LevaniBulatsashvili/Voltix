@@ -1,5 +1,5 @@
 import Carousel from "../../../../components/carousel/Carousel";
-import { Skeleton } from "../../../../components/ui/Skeleton";
+import { Skeleton } from "../../../../components/skeleton/Skeleton";
 
 interface IProductsCarouselSkeleton {
   count?: number;

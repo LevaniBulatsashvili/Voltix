@@ -1,32 +1,30 @@
-import type { IProductCommentsResponse } from "../../../product/api/fetchProductComments";
-import AsyncBoundary from "../../../../components/feedback/AsyncBoundary";
 import { useStepPagination } from "../../../../hooks/useStepPagination";
 import ProductsCommentsListSkeleton from "../productsSkeleton/ProductsCommentsListSkeleton";
 import ProductsCommentsNavigation from "./ProductsCommentNavigation";
 import ProductsCommentsList from "./ProductsCommentsList";
+import { QueryBoundary } from "../../../../components/feedback/QueryBoundary";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { IDataResponse } from "../../../../types/common/api";
+import type { IProductComment } from "../../../../types/product";
 
 interface IProductsCommentsView {
   title: string;
   page: number;
   setPage: (index: number) => void;
   visibleProducts: number;
-  productCommentsData?: IProductCommentsResponse;
-  commentsLoading: boolean;
-  commentsError: Error | null;
+  productCommentsQuery: UseQueryResult<IDataResponse<IProductComment>>;
 }
 
 const ProductsCommentsView = ({
   title,
-  productCommentsData,
-  commentsLoading,
-  commentsError,
   page,
+  productCommentsQuery,
   visibleProducts,
   setPage,
 }: IProductsCommentsView) => {
   const { prev, next, prevDisabled, nextDisabled } = useStepPagination({
     currentPage: page,
-    totalItems: productCommentsData?.total || 0,
+    totalItems: productCommentsQuery?.data?.total || 0,
     visibleItems: visibleProducts,
     onChange: setPage,
   });
@@ -45,19 +43,17 @@ const ProductsCommentsView = ({
         />
       </div>
 
-      <AsyncBoundary
-        data={productCommentsData}
-        isLoading={commentsLoading}
-        error={commentsError}
+      <QueryBoundary
+        query={productCommentsQuery}
         loadingFallback={
           <ProductsCommentsListSkeleton count={visibleProducts} />
         }
         defaultFallbackOptions={{ className: "my-15 h-74 w-full" }}
       >
-        {({ data: productComments }) => (
+        {(productComments) => (
           <ProductsCommentsList productComments={productComments} />
         )}
-      </AsyncBoundary>
+      </QueryBoundary>
     </div>
   );
 };

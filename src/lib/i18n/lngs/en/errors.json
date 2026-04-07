@@ -24,7 +24,7 @@
   "failed": "Failed to {{action}} {{entity}}",
   "not_available": "{{entity}} not available",
 
-  "an_error_has_occured": "an error has occured",
+  "an_error_has_occurred": "An error has occurred",
 
   "data_not_available": "data not available",
   "failed_to_fetch_data": "failed to fetch data",
@@ -49,6 +49,36 @@
   "failed_to_post_order": "failed to post order",
   "failed_to_update_order": "failed to update order",
   "failed_to_delete_order": "failed to delete order",
+
+  "product_not_available": "product not available",
+  "failed_to_fetch_product": "failed to fetch product",
+  "failed_to_post_product": "failed to post product",
+  "failed_to_update_product": "failed to update product",
+  "failed_to_delete_product": "failed to delete product",
+
+  "product_comment_not_available": "product_comment not available",
+  "failed_to_fetch_product_comment": "failed to fetch product comment",
+  "failed_to_post_product_comment": "failed to post product comment",
+  "failed_to_update_product_comment": "failed to update product comment",
+  "failed_to_delete_product_comment": "failed to delete product comment",
+
+  "brand_not_available": "brand not available",
+  "failed_to_fetch_brand": "failed to fetch brand",
+  "failed_to_post_brand": "failed to post brand",
+  "failed_to_update_brand": "failed to update brand",
+  "failed_to_delete_brand": "failed to delete brand",
+
+  "main_category_not_available": "main category not available",
+  "failed_to_fetch_main_category": "failed to fetch main category",
+  "failed_to_post_main_category": "failed to post main category",
+  "failed_to_update_main_category": "failed to update main category",
+  "failed_to_delete_main_category": "failed to delete brand",
+
+  "category_not_available": "category not available",
+  "failed_to_fetch_category": "failed to fetch category",
+  "failed_to_post_category": "failed to post category",
+  "failed_to_update_category": "failed to update category",
+  "failed_to_delete_category": "failed to delete category",
 
   "persist": {
     "failed_to_read_cart": "failed to read cart",

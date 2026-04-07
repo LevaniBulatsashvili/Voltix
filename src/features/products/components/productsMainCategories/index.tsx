@@ -1,16 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useFetchMainCategories } from "../../../../hooks/useFetchMainCategories";
-import AsyncBoundary from "../../../../components/feedback/AsyncBoundary";
 import MainCategoriesGrid from "./ProductsMainCategoriesGrid";
 import ProductsMainCategoriesSkeleton from "../productsSkeleton/ProductsMainCategoriesSkeleton";
+import { QueryBoundary } from "../../../../components/feedback/QueryBoundary";
+import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD";
 
 const ProductsMainCategories = () => {
   const { t } = useTranslation();
-  const {
-    data: mainCategoriesData,
-    isLoading: mainCategoriesLoading,
-    error: mainCategoriesError,
-  } = useFetchMainCategories();
+  const mainCategoriesQuery = useFetchMainCategories({});
 
   return (
     <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
@@ -18,17 +14,15 @@ const ProductsMainCategories = () => {
         {t("products.browse_by_category")}
       </h2>
 
-      <AsyncBoundary
-        data={mainCategoriesData}
-        isLoading={mainCategoriesLoading}
-        error={mainCategoriesError}
+      <QueryBoundary
+        query={mainCategoriesQuery}
         loadingFallback={<ProductsMainCategoriesSkeleton />}
         defaultFallbackOptions={{ className: "h-145 w-full" }}
       >
         {(mainCategories) => (
           <MainCategoriesGrid t={t} mainCategories={mainCategories} />
         )}
-      </AsyncBoundary>
+      </QueryBoundary>
     </div>
   );
 };

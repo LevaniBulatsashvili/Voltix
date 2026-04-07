@@ -44,12 +44,12 @@ const Profile = () => {
             query={profileQuery}
             loadingFallback={<ProfileHeaderWithActionsSkeleton />}
             defaultFallbackOptions={{
-              className: "w-70! h-25! p-0! space-y-1! mb-2!",
+              className: "h-40 p-0! space-y-1! mb-2!",
             }}
           >
-            {(profile) => (
+            {(profileArr) => (
               <ProfileHeaderWithActions
-                profile={profile}
+                profile={profileArr[0]}
                 isEditing={isEditing}
                 isSaving={isSaving}
                 onEdit={() => onEdit(() => {})}
@@ -71,17 +71,17 @@ const Profile = () => {
             query={profileQuery}
             loadingFallback={<ProfileSecuritySectionSkeleton />}
             defaultFallbackOptions={{
-              className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
+              className: "mt-8 h-60 space-y-1! mb-14!",
             }}
           >
-            {(profile) => <ProfileSecuritySection profile={profile} />}
+            {(profileArr) => <ProfileSecuritySection profile={profileArr[0]} />}
           </QueryBoundary>
 
           <QueryBoundary
             query={ordersQuery}
             loadingFallback={<ProfileOrdersSkeleton />}
             defaultFallbackOptions={{
-              className: "mt-8 w-full! h-25! p-0! space-y-1! mx-0! mb-2!",
+              className: "mt-8 h-65! space-y-1!",
             }}
           >
             {(orders) => <ProfileOrders orders={orders} />}

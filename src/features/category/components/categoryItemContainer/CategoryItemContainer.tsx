@@ -1,40 +1,37 @@
+import { useTranslation } from "react-i18next";
+import { QueryBoundary } from "../../../../components/feedback/QueryBoundary";
+import type { IProduct } from "../../../../types/product";
+import { useFetchProducts } from "../../../product/hooks/productCRUD";
 import ProductCard from "../../../products/components/productsShowcase/ProductCard";
-import type {
-  IProductsResponse,
-  ISortBy,
-} from "../../api/fetchSelectedProducts";
 import CategoryHeader from "./categoryHeader/CategoryHeader";
 import CategoryPagination from "./categoryHeader/CategoryPagination";
-import type { TFunction } from "i18next";
+import type { IFetchManyOptions } from "../../../../lib/supabase/createSupabaseService";
+import type { ISortBy } from "..";
+import CategoryProductCardGridSkeleton from "../categorySkeleton/CategoryProductCardSkeleton";
 
 interface ICategoryItemContainer {
-  t: TFunction;
-  productsData?: IProductsResponse;
-  currentPage?: number;
-  onPageChange?: (page: number) => void;
-  title?: string;
-  onChangeSort: (sortBy: ISortBy) => void;
+  title: string;
+  fetchOptions: IFetchManyOptions<IProduct>;
   sortBy: ISortBy;
+  limit: number;
+  onPageChange?: (page: number) => void;
+  onChangeSort: (sortBy: ISortBy) => void;
 }
 
 const CategoryItemContainer = ({
-  t,
-  productsData,
-  currentPage = 1,
-  onPageChange,
-  title = "Products",
-  onChangeSort,
+  title,
+  fetchOptions,
   sortBy,
+  limit,
+  onPageChange,
+  onChangeSort,
 }: ICategoryItemContainer) => {
-  if (!productsData || productsData.products.length === 0) {
-    return (
-      <div className="h-[60vh] flex items-center justify-center text-gray-500">
-        No products found
-      </div>
-    );
-  }
+  const { t } = useTranslation();
+  const productsQuery = useFetchProducts(fetchOptions);
 
-  const { products, totalCount, totalPages } = productsData;
+  const currentPage = productsQuery.data?.page ?? 0;
+  const totalCount = productsQuery.data?.total ?? 0;
+  const totalPages = Math.ceil(totalCount / limit) || 1;
 
   return (
     <div>
@@ -43,17 +40,25 @@ const CategoryItemContainer = ({
           t={t}
           title={title}
           currentPage={currentPage}
-          pageSize={products.length}
+          pageSize={totalPages}
           totalCount={totalCount}
           onChangeSort={onChangeSort}
           sortBy={sortBy}
         />
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <QueryBoundary
+          query={productsQuery}
+          defaultFallbackOptions={{ className: "h-[64dvh]" }}
+          loadingFallback={<CategoryProductCardGridSkeleton count={4} />}
+        >
+          {(products) => (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+        </QueryBoundary>
       </div>
 
       {onPageChange && (

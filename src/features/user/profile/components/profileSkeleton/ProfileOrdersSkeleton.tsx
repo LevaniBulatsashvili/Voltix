@@ -1,4 +1,4 @@
-import { Skeleton } from "../../../../../components/ui/Skeleton";
+import { Skeleton } from "../../../../../components/skeleton/Skeleton";
 
 const ProfileOrdersSkeleton = () => {
   const fakeOrders = Array.from({ length: 2 });
@@ -29,7 +29,7 @@ const ProfileOrdersSkeleton = () => {
 
           <div className="border-t pt-3 flex justify-between">
             <Skeleton className="h-5 w-16 rounded-md" />
-            <Skeleton className="h-5 w-20 rounded-md" /> 
+            <Skeleton className="h-5 w-20 rounded-md" />
           </div>
         </div>
       ))}

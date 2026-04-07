@@ -1,4 +1,4 @@
-import { Skeleton } from "../../../../components/ui/Skeleton";
+import { Skeleton } from "../../../../components/skeleton/Skeleton";
 
 const spanPattern = [
   "lg:col-span-2",

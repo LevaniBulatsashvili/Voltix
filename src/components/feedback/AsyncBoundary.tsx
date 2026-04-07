@@ -1,13 +1,18 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import EmptyState from "./EmptyState";
 import Spinner from "./Spinner";
 import ErrorState from "./ErrorState";
 import { useAppSelector } from "../../hooks/redux";
 import { useFlicker } from "../../hooks/useFlicker";
+import type { IDataResponse } from "../../types/common/api";
+import {
+  normalizeResponse,
+  resolveAsyncState,
+} from "../../utils/asyncBoundary";
 
 export interface IFallbackOptions {
-  noDataOpt?: { title?: string; description?: string; classname: string };
-  errorOpt?: { className: string };
+  noDataOpt?: { title?: string; description?: string; classname?: string };
+  errorOpt?: { className?: string };
   className?: string;
 }
 
@@ -16,8 +21,15 @@ export interface ILoadingOptions {
   spinnerClassName?: string;
 }
 
-type IAsyncBoundary<T> = {
-  data?: T;
+export type IAsyncBoundaryMeta = {
+  total?: number;
+  page?: number;
+  limit?: number;
+  hasMore?: boolean;
+};
+
+type IAsyncBoundaryProps<T> = {
+  response?: T | IDataResponse<T>;
   isLoading: boolean;
   isRefetching?: boolean;
   error: Error | null;
@@ -27,11 +39,11 @@ type IAsyncBoundary<T> = {
   defaultFallbackOptions?: IFallbackOptions;
   defaultLoadingOptions?: ILoadingOptions;
   onRetry?: () => void;
-  children: (data: T) => ReactNode;
+  children: (items: T[], meta: IAsyncBoundaryMeta) => ReactNode;
 };
 
 function AsyncBoundary<T>({
-  data,
+  response,
   isLoading,
   isRefetching,
   error,
@@ -42,72 +54,69 @@ function AsyncBoundary<T>({
   defaultLoadingOptions,
   onRetry,
   children,
-}: IAsyncBoundary<T>) {
-  const {
-    permaNoDataState,
-    permaLoadingState,
-    permaErrorState,
-    flickerNoDataState,
-    flickerLoadingState,
-    flickerErrorState,
-  } = useAppSelector((state) => state.settings);
+}: IAsyncBoundaryProps<T>) {
+  const settings = useAppSelector((state) => state.settings);
+
   const flicker = useFlicker({
-    flickerLoading: flickerLoadingState,
-    flickerError: flickerErrorState,
-    flickerEmpty: flickerNoDataState,
+    flickerLoading: settings.flickerLoadingState,
+    flickerError: settings.flickerErrorState,
+    flickerEmpty: settings.flickerNoDataState,
   });
 
-  if (permaLoadingState || isLoading || flicker === "loading")
+  const { items, meta } = normalizeResponse(response);
+  const isEmpty = items.length === 0;
+
+  const state = resolveAsyncState({
+    isLoading,
+    error,
+    isEmpty,
+    flicker,
+    settings,
+  });
+
+  if (state === "loading")
     return (
-      <>
-        {loadingFallback ?? (
-          <Spinner
-            containerClass={`w-[90%]! flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl ${defaultLoadingOptions?.containerClassName}`}
-            spinnerclass={`${defaultLoadingOptions?.spinnerClassName}`}
-          />
-        )}
-      </>
+      loadingFallback ?? (
+        <Spinner
+          containerClass={defaultLoadingOptions?.containerClassName}
+          spinnerclass={defaultLoadingOptions?.spinnerClassName}
+        />
+      )
     );
 
-  if (permaErrorState || error || flicker === "error")
+  if (state === "error")
     return (
-      <>
-        {errorFallback ?? (
-          <ErrorState
-            title={error?.message || "an_error_has_occured"}
-            className={
-              defaultFallbackOptions?.errorOpt?.className ??
-              defaultFallbackOptions?.className
-            }
-            isRetrying={isRefetching ?? false}
-            onRetry={onRetry}
-          />
-        )}
-      </>
+      errorFallback ?? (
+        <ErrorState
+          title={error?.message || "an_error_has_occurred"}
+          className={
+            defaultFallbackOptions?.errorOpt?.className ??
+            defaultFallbackOptions?.className
+          }
+          isRetrying={isRefetching ?? false}
+          onRetry={onRetry}
+        />
+      )
     );
 
-  const isEmpty = !data || (Array.isArray(data) && data.length === 0);
-
-  if (permaNoDataState || isEmpty || flicker === "empty")
+  if (state === "empty")
     return (
-      <>
-        {noDataFallback ?? (
-          <EmptyState
-            title={
-              defaultFallbackOptions?.noDataOpt?.title ||
-              "common.no_data_available"
-            }
-            description={defaultFallbackOptions?.noDataOpt?.description}
-            className={
-              defaultFallbackOptions?.noDataOpt?.classname ??
-              defaultFallbackOptions?.className
-            }
-          />
-        )}
-      </>
+      noDataFallback ?? (
+        <EmptyState
+          title={
+            defaultFallbackOptions?.noDataOpt?.title ??
+            "common.no_data_available"
+          }
+          description={defaultFallbackOptions?.noDataOpt?.description}
+          className={
+            defaultFallbackOptions?.noDataOpt?.classname ??
+            defaultFallbackOptions?.className
+          }
+        />
+      )
     );
 
-  return <>{children(data)}</>;
+  return <>{children(items, meta)}</>;
 }
 
 export default AsyncBoundary;

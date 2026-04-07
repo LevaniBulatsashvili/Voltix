@@ -5,12 +5,12 @@ import ProductsHeader from "./productsHeader";
 import ProductShowcase from "./productsShowcase";
 import { PAGE } from "../../../pages/pageConfig";
 import ProductsMainCategories from "./productsMainCategories";
-import AsyncBoundary from "../../../components/feedback/AsyncBoundary";
 import ProductShowcaseSkeleton from "./productsSkeleton/ProductShowcaseSkeleton";
-import useFetchBrands from "../../category/hooks/useFetchBrands";
+import { useFetchbrands } from "../../category/hooks/brandCRUD";
 import ProductsCarouselSkeleton from "./productsSkeleton/ProductsCarouselSkeleton";
 import ProductsComments from "./productsComments";
-import useFetchProducts from "../hooks/useFetchProducts";
+import { useFetchProducts } from "../../product/hooks/productCRUD";
+import { QueryBoundary } from "../../../components/feedback/QueryBoundary";
 
 const Products = () => {
   const { t } = useTranslation();
@@ -29,21 +29,15 @@ const Products = () => {
     },
   ];
 
-  const {
-    data: newestProductsData,
-    isLoading: newestProductsLoading,
-    error: newestProductsError,
-  } = useFetchProducts({ limit: 4, sortBy: "newest" });
-  const {
-    data: topSellingProductsData,
-    isLoading: topSellingProductsLoading,
-    error: topSellingProductsError,
-  } = useFetchProducts({ limit: 4, sortBy: "topSelling" });
-  const {
-    data: brandsData,
-    isLoading: brandsLoading,
-    error: brandsError,
-  } = useFetchBrands();
+  const newestProductQuery = useFetchProducts({
+    limit: 4,
+    sort: [{ field: "created_at", ascending: false }],
+  });
+  const topSellingProductsDataQuery = useFetchProducts({
+    limit: 4,
+    sort: [{ field: "total_sold", ascending: false }],
+  });
+  const brandsQuery = useFetchbrands({});
 
   return (
     <div className="grid">
@@ -56,11 +50,12 @@ const Products = () => {
         stats={stats}
       />
 
-      <AsyncBoundary
-        data={brandsData}
-        isLoading={brandsLoading}
-        error={brandsError}
+      <QueryBoundary
+        query={brandsQuery}
         loadingFallback={<ProductsCarouselSkeleton />}
+        defaultFallbackOptions={{
+          className: "h-50 my-11 border-y-4 rounded-none",
+        }}
       >
         {(brands) => (
           <Carousel
@@ -71,15 +66,13 @@ const Products = () => {
             itemClassName="size-[4em] sm:size-[4.5em] lg:size-[5em] text-[2.5rem] sm:text-[3rem]"
           />
         )}
-      </AsyncBoundary>
+      </QueryBoundary>
 
-      <AsyncBoundary
-        data={newestProductsData}
-        isLoading={newestProductsLoading}
-        error={newestProductsError}
+      <QueryBoundary
+        query={newestProductQuery}
         loadingFallback={<ProductShowcaseSkeleton />}
         defaultFallbackOptions={{
-          className: "my-15 h-120",
+          className: "w-[90%]! my-15 h-160",
         }}
       >
         {(newestProducts) => (
@@ -89,17 +82,15 @@ const Products = () => {
             viewAllLink={PAGE.PRODUCTS}
           />
         )}
-      </AsyncBoundary>
+      </QueryBoundary>
 
       <hr className="w-[90%] mx-auto opacity-20" />
 
-      <AsyncBoundary
-        data={topSellingProductsData}
-        isLoading={topSellingProductsLoading}
-        error={topSellingProductsError}
+      <QueryBoundary
+        query={topSellingProductsDataQuery}
         loadingFallback={<ProductShowcaseSkeleton />}
         defaultFallbackOptions={{
-          className: "my-15 h-120",
+          className: "w-[90%]! my-15 h-160",
         }}
       >
         {(topSellingProducts) => (
@@ -109,7 +100,7 @@ const Products = () => {
             viewAllLink={PAGE.PRODUCTS}
           />
         )}
-      </AsyncBoundary>
+      </QueryBoundary>
 
       <ProductsMainCategories />
 

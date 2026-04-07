@@ -5,7 +5,6 @@ interface IUseSlider {
   max: number;
   step?: number;
 
-  // 👇 supports both modes
   value?: number;
   minValue?: number;
   maxValue?: number;

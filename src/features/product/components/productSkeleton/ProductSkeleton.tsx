@@ -4,11 +4,11 @@ import ProductTabsSkeleton from "./ProductTabsSkeleton";
 
 const ProductSkeleton = () => {
   return (
-    <>
+    <div className="mt-[5dvh]">
       <ProductBreadcrumbsSKeleton />
       <ProductDisplaySkeleton />
       <ProductTabsSkeleton />
-    </>
+    </div>
   );
 };
 

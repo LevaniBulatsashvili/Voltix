@@ -29,7 +29,7 @@ const CategoryPagination = ({
           <span key={i}>...</span>
         ) : (
           <button
-            key={page}
+            key={i}
             onClick={() => onChange(page)}
             className={`size-10 border rounded ${
               currentPage === page ? "bg-black text-white" : "hover:bg-gray-100"

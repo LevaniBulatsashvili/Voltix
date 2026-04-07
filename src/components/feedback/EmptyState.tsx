@@ -12,7 +12,7 @@ const EmptyState = ({ title, description, className }: IEmptyState) => {
 
   return (
     <div
-      className={`w-[90%] flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl ${className}`}
+      className={`w-full flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl ${className}`}
     >
       <Box className="size-16 opacity-85 mb-6" />
       <h3 className="text-xl font-semibold mb-2 capitalize">{t(title)}</h3>

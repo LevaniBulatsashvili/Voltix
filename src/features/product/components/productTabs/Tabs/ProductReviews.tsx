@@ -2,8 +2,9 @@ import { useState } from "react";
 import ProductCommentCard from "../../../../../components/cards/ProductCommentCard";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useFetchProductCommentsInfinite } from "../../../hooks/useFetchProductCommentsInfinite";
+import { useInfiniteFetchProductComments } from "../../../hooks/productCommentCRUD";
 import Spinner from "../../../../../components/feedback/Spinner";
+import { useInfiniteFlatten } from "../../../../../hooks/useInfiniteFlatten"; // adjust path
 
 interface IProductReviews {
   productId: number;
@@ -14,26 +15,25 @@ const ProductReviews = ({ productId }: IProductReviews) => {
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   const {
-    data: productCommentsData,
+    data: productCommentsQuery,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isLoading,
+    isFetching,
     error,
-  } = useFetchProductCommentsInfinite({
-    productId,
-    sortOrder,
+  } = useInfiniteFetchProductComments({
     limit: 2,
+    sort: [
+      { field: "created_at", ascending: sortOrder === "newest" ? true : false },
+    ],
+    filters: { eq: { product_id: productId } },
   });
 
   const toggleSortOrder = () =>
     setSortOrder((prev) => (prev === "newest" ? "oldest" : "newest"));
 
-  const allComments =
-    productCommentsData?.pages.flatMap(
-      ({ data: productComments }) => productComments,
-    ) ?? [];
-  const totalComments = productCommentsData?.pages[0]?.total ?? "...";
+  const { items: allComments, total: totalComments } =
+    useInfiniteFlatten(productCommentsQuery);
 
   return (
     <div className="p-6 w-full flex flex-col gap-6">
@@ -63,13 +63,19 @@ const ProductReviews = ({ productId }: IProductReviews) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {allComments.map((comment) => (
-          <ProductCommentCard key={comment.id} productComment={comment} />
-        ))}
-      </div>
+      {error ? (
+        <div className="text-red-600 capitalize">
+          {t("product.load_more_reviews")}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {allComments.map((comment) => (
+            <ProductCommentCard key={comment.id} productComment={comment} />
+          ))}
+        </div>
+      )}
 
-      {hasNextPage && (
+      {!isFetching && hasNextPage && (
         <button
           onClick={() => fetchNextPage()}
           disabled={isFetchingNextPage}
@@ -81,12 +87,7 @@ const ProductReviews = ({ productId }: IProductReviews) => {
         </button>
       )}
 
-      {isLoading && <Spinner />}
-      {error && (
-        <p className="text-red-500">
-          {t("product.comments_could_not_be_fetched")}
-        </p>
-      )}
+      {isFetching && <Spinner />}
     </div>
   );
 };

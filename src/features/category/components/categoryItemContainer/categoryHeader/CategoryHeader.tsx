@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import type { TFunction } from "i18next";
-import type { ISortBy } from "../../../api/fetchSelectedProducts";
+import type { ISortBy } from "../..";
 
 interface ICategoryHeader {
   t: TFunction;
@@ -41,17 +41,17 @@ const CategoryHeader = ({
 
         <button
           onClick={() =>
-            onChangeSort(sortBy === "popular" ? "newest" : "popular")
+            onChangeSort(sortBy === "total_sold" ? "created_at" : "total_sold")
           }
           className="flex items-center gap-1 font-semibold capitalize"
         >
-          {sortBy === "popular"
+          {sortBy === "total_sold"
             ? t("category.most_popular")
             : t("category.newest")}
           <ChevronDown
             size={18}
             className={`transition-transform duration-30 ${
-              sortBy === "popular" ? "rotate-180" : "rotate-0"
+              sortBy === "total_sold" ? "rotate-180" : "rotate-0"
             }`}
           />
         </button>

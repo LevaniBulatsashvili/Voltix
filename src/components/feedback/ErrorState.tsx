@@ -13,9 +13,9 @@ const ErrorState = ({ title, className, isRetrying, onRetry }: IErrorState) => {
 
   return (
     <div
-      className={`w-[90%] relative px-8 py-12 text-center border rounded-2xl bg-red-50 ${className}`}
+      className={`w-full relative px-8 py-12 text-center border rounded-2xl bg-red-50 mx-auto flex flex-col items-center justify-center ${className}`}
     >
-      <AlertTriangle className="size-16 text-red-500 mb-6 mx-auto" />
+      <AlertTriangle className="size-16 text-red-500 mb-6" />
       <h3 className="text-xl font-semibold mb-2 text-red-700">
         {t(`errors.${title}`)}
       </h3>

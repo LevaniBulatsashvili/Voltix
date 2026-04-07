@@ -12,7 +12,9 @@ export const useProfilePageLogic = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const profileQuery = useFetchProfile(user!.id);
-  const ordersQuery = useFetchOrders({ filters: { profile_id: user!.id } });
+  const ordersQuery = useFetchOrders({
+    filters: { eq: { profile_id: user!.id } },
+  });
 
   const { mutateAsync: updateProfile, isPending: updateProfilePending } =
     useUpdateProfile();
