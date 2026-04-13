@@ -1,4 +1,4 @@
-import { PAGE } from "../../../../pages/pageConfig";
+import { PAGE } from "@/pages/pageConfig";
 import Container from "./ui/Container";
 import Heading from "./ui/Heading";
 import Text from "./ui/Text";
@@ -19,7 +19,7 @@ const VerificationSuccess = () => {
         )}
       </Text>
       <div className="flex justify-center gap-4">
-        <LinkBtn className="capitalize" to={PAGE.BASE}>
+        <LinkBtn className="capitalize" to={PAGE.PUBLIC.BASE}>
           {t("verificationSuccess.home")}
         </LinkBtn>
       </div>

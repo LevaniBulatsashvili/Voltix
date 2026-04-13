@@ -1,5 +1,5 @@
-import AppLink from "../../components/button/AppLink";
-import { PAGE } from "../../pages/pageConfig";
+import AppLink from "@/components/button/AppLink";
+import { PAGE } from "@/pages/pageConfig";
 
 interface ILogo {
   label: string;
@@ -8,7 +8,7 @@ interface ILogo {
 
 const Logo = ({ label, className = "" }: ILogo) => (
   <AppLink
-    to={PAGE.BASE}
+    to={PAGE.PUBLIC.BASE}
     className={`text-3xl sm:text-4xl font-extrabold ${className}`}
   >
     {label}

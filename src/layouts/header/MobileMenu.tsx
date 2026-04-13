@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import NavLinks from "./NavLinks";
-import SearchBar from "../../components/ui/SearchBar";
+import SearchBar from "@/components/ui/SearchBar";
 import Actions from "./Actions";
-import type { IMobileMenu } from "../../types/header/MobileMenu";
+import type { IMobileMenu } from "@/types/header/MobileMenu";
 
 const MobileMenu = ({
   navLinks,

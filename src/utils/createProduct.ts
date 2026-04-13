@@ -1,5 +1,5 @@
-import { supabase } from "../lib/supabase";
-import type { IProduct } from "../types/product";
+import { supabase } from "@/lib/supabase";
+import type { IProduct } from "@/types/product";
 
 interface ICreateProductInput {
   product: Omit<IProduct, "id" | "created_at" | "updated_at" | "comment">;

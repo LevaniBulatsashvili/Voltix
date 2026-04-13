@@ -1,5 +1,5 @@
-import { createEntityHooks } from "../../../../hooks/createEntityHooks";
-import { Query_Keys } from "../../../../lib/react-query/configs";
+import { createEntityHooks } from "@/hooks/createEntityHooks";
+import { Query_Keys } from "@/lib/react-query/configs";
 import { profileService } from "../service/profileService";
 
 export const {

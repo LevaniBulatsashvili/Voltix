@@ -1,16 +1,17 @@
 import { Linkedin, Github } from "lucide-react";
-import AppLink from "../../components/button/AppLink";
+import AppLink from "@/components/button/AppLink";
 import { useTranslation } from "react-i18next";
+import { PAGE } from "@/pages/pageConfig";
 
 const SocialLinks = () => (
   <ul className="flex gap-4 mt-4">
     <li>
-      <AppLink to="#">
+      <AppLink to={PAGE.SOCIAL.LINKDIN}>
         <Linkedin className="size-5 hover:scale-110 transition-transform" />
       </AppLink>
     </li>
     <li>
-      <AppLink to="#">
+      <AppLink to={PAGE.SOCIAL.GITHUB}>
         <Github className="size-5 hover:scale-110 transition-transform" />
       </AppLink>
     </li>

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import AppLink from "../../../components/button/AppLink";
+import AppLink from "@/components/button/AppLink";
 import { PAGE } from "../../pageConfig";
 
 const OopsPage = () => {
@@ -15,7 +15,7 @@ const OopsPage = () => {
       </p>
       <AppLink
         className="w-45 py-4 rounded-full! text-background bg-primary hover:opacity-85"
-        to={PAGE.BASE}
+        to={PAGE.PUBLIC.BASE}
       >
         {t("errors.go_home")}
       </AppLink>

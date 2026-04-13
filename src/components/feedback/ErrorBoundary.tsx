@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from "react";
-import { notifyError } from "../../lib/toast/notifyError";
+import { notifyError } from "@/lib/toast/notifyError";
 
 interface IErrorBoundary {
   children: ReactNode;

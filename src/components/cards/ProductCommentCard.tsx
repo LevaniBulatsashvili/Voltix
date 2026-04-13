@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
-import type { IProductComment } from "../../types/product";
+import type { IProductComment } from "@/types/product";
 import Avatar from "../ui/Avatar";
-import { formatDateLong } from "../../utils/formatDateLong";
+import { formatDateLong } from "@/utils/formatDateLong";
 
 interface IProductCommentCard {
   productComment: IProductComment;

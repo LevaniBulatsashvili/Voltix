@@ -4,11 +4,11 @@ import Logo from "./Logo";
 import NavDropdown from "./NavDropdown";
 import Actions from "./Actions";
 import MobileMenu from "./MobileMenu";
-import SearchBar from "../../components/ui/SearchBar";
-import { useAppDispatch } from "../../hooks/redux";
-import { toggleTheme } from "../../store/theme/theme.slice";
+import SearchBar from "@/components/ui/SearchBar";
+import { useAppDispatch } from "@/hooks/redux";
+import { toggleTheme } from "@/store/theme/theme.slice";
 import { Menu, X } from "lucide-react";
-import type { IHeader } from "../../types/header";
+import type { IHeader } from "@/types/header";
 
 const UserHeader = ({ navLinks, languages }: IHeader) => {
   const { i18n } = useTranslation();

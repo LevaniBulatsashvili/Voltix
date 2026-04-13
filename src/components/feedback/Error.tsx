@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { PAGE } from "../../pages/pageConfig";
+import { PAGE } from "@/pages/pageConfig";
 import { useEffect } from "react";
 
 interface IError {

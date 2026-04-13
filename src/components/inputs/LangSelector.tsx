@@ -1,6 +1,6 @@
 import "flag-icons/css/flag-icons.min.css";
 import { useState, useRef, useEffect } from "react";
-import type { ILanguage } from "../../types/header";
+import type { ILanguage } from "@/types/header";
 
 interface ILangSelector {
   value: string;

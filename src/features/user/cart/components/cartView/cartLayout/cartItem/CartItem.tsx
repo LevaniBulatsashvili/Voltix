@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../../../../../../hooks/redux";
+import { useAppDispatch } from "@/hooks/redux";
 import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
 } from "../../../../store/cart.slice";
 import CartItemView from "./CartItemView";
-import type { ICartItem } from "../../../../../../../types/common/cart";
+import type { ICartItem } from "@/types/common/cart";
 
 interface ICartItemProps {
   item: ICartItem;

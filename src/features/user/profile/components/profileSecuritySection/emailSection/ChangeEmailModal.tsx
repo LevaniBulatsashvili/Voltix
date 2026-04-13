@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import PrimaryButton from "../../../../../../components/button/PrimaryBtn";
-import { FormInput } from "../../../../../../components/form/Input/FormInput";
-import Modal from "../../../../../../components/ui/Modal";
+import PrimaryButton from "@/components/button/PrimaryBtn";
+import { FormInput } from "@/components/form/Input/FormInput";
+import Modal from "@/components/ui/Modal";
 import {
   changeEmailSchema,
   type TChangeEmail,
 } from "../../../schemas/changeEmailSchema";
 import { authService } from "../../../../../auth/services/authService";
-import { notifySupabaseError } from "../../../../../../lib/toast/notifySupabaseError";
-import { notifySuccess } from "../../../../../../lib/toast/notifySuccess";
+import { notifySupabaseError } from "@/lib/toast/notifySupabaseError";
+import { notifySuccess } from "@/lib/toast/notifySuccess";
 
 interface IChangeEmailModal {
   isOpen: boolean;

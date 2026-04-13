@@ -1,5 +1,5 @@
-import type { INavLink } from "../../types/header/Nav";
-import AppLink from "../../components/button/AppLink";
+import type { INavLink } from "@/types/header/Nav";
+import AppLink from "@/components/button/AppLink";
 
 interface INavLinks {
   links: INavLink[];

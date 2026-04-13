@@ -1,4 +1,4 @@
-import PrimaryButton from "../../../../../components/button/PrimaryBtn";
+import PrimaryButton from "@/components/button/PrimaryBtn";
 
 interface IProfileActions {
   isEditing: boolean;

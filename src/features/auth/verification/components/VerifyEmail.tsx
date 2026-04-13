@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { PAGE } from "../../../../pages/pageConfig";
+import { PAGE } from "@/pages/pageConfig";
 import Container from "./ui/Container";
 import Heading from "./ui/Heading";
 import Text from "./ui/Text";
@@ -17,7 +17,7 @@ const VerifyEmail = () => {
         )}
       </Text>
 
-      <LinkBtn to={PAGE.LOGIN}>{t("verifyEmail.back_to_login")}</LinkBtn>
+      <LinkBtn to={PAGE.AUTH.LOGIN}>{t("verifyEmail.back_to_login")}</LinkBtn>
     </Container>
   );
 };

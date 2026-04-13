@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAppSelector } from "../../../../hooks/redux";
+import { useAppSelector } from "@/hooks/redux";
 import { useUpdateAddress } from "./addressCRUD";
 import { useFetchProfile, useUpdateProfile } from "./profileCRUD";
 import type { TProfileForm } from "../schemas/profileSchema";
-import { notifySuccess } from "../../../../lib/toast/notifySuccess";
+import { notifySuccess } from "@/lib/toast/notifySuccess";
 import { useTranslation } from "react-i18next";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
 import { useFetchOrders } from "./ordersCRUD";

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useEscKey } from "../../hooks/useEscKey";
+import { useEscKey } from "@/hooks/useEscKey";
 import { useTranslation } from "react-i18next";
 
 interface IModal {

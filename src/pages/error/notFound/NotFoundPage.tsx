@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import AppLink from "../../../components/button/AppLink";
+import AppLink from "@/components/button/AppLink";
 import { PAGE } from "../../pageConfig";
 
 const NotFoundPage = () => {
@@ -22,13 +22,13 @@ const NotFoundPage = () => {
       <div className="mt-10 flex flex-col font-semibold sm:flex-row gap-3 w-full max-w-md">
         <AppLink
           className="w-full py-4 rounded-full! border! border-primary! hover:opacity-85 hover:shadow-lg"
-          to={`${PAGE.SHOP}`}
+          to={`${PAGE.PUBLIC.SEARCH}`}
         >
           {t("errors.continue_shopping")}
         </AppLink>
 
         <AppLink
-          to={PAGE.BASE}
+          to={PAGE.PUBLIC.BASE}
           className="w-full py-4 rounded-full! text-background bg-primary hover:opacity-85"
         >
           {t("errors.go_home")}

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../../../hooks/redux";
+import { useAppSelector } from "@/hooks/redux";
 import { useCartPricing } from "../hooks/useCartPricing";
 import CartView from "./cartView/CartView";
 

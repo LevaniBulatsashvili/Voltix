@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import PrimaryButton from "../../../../../../components/button/PrimaryBtn";
-import Modal from "../../../../../../components/ui/Modal";
+import PrimaryButton from "@/components/button/PrimaryBtn";
+import Modal from "@/components/ui/Modal";
 import {
   changePasswordSchema,
   type TChangePassword,
 } from "../../../schemas/changePasswordSchema";
 import { authService } from "../../../../../auth/services/authService";
-import PasswordInput from "../../../../../../components/form/Input/PasswordInput";
-import { notifySuccess } from "../../../../../../lib/toast/notifySuccess";
-import { notifySupabaseError } from "../../../../../../lib/toast/notifySupabaseError";
+import PasswordInput from "@/components/form/Input/PasswordInput";
+import { notifySuccess } from "@/lib/toast/notifySuccess";
+import { notifySupabaseError } from "@/lib/toast/notifySupabaseError";
 
 interface IChangePasswordModal {
   isOpen: boolean;

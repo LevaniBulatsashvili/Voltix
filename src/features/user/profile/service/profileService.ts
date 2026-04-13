@@ -1,10 +1,7 @@
-import { Query_Tables } from "../../../../lib/react-query/configs";
-import { createSupabaseService } from "../../../../lib/supabase/createSupabaseService";
-import type {
-  ICreatePayload,
-  IUpdatePayload,
-} from "../../../../types/common/api";
-import type { IProfile } from "../../../../types/profile";
+import { Query_Tables } from "@/lib/react-query/configs";
+import { createSupabaseService } from "@/lib/supabase/createSupabaseService";
+import type { ICreatePayload, IUpdatePayload } from "@/types/common/api";
+import type { IProfile } from "@/types/profile";
 
 export const profileService = createSupabaseService<
   IProfile,

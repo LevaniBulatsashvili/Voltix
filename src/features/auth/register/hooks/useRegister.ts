@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import type { IAuthResponse, IRegisterInput } from "../../../../types/auth";
+import type { IAuthResponse, IRegisterInput } from "@/types/auth";
 import { authService } from "../../services/authService";
-import { useAppDispatch } from "../../../../hooks/redux";
+import { useAppDispatch } from "@/hooks/redux";
 import { setSession, setUser } from "../../store/auth.slice";
-import { notifySuccess } from "../../../../lib/toast/notifySuccess";
-import { notifyError } from "../../../../lib/toast/notifyError";
+import { notifySuccess } from "@/lib/toast/notifySuccess";
+import { notifyError } from "@/lib/toast/notifyError";
 
 export const useRegister = () => {
   const dispatch = useAppDispatch();

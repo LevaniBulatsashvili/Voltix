@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import AsyncBoundary, { type IFallbackOptions } from "./AsyncBoundary";
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { IDataResponse } from "../../types/common/api";
+import type { IDataResponse } from "@/types/common/api";
 
 interface IQueryBoundary<T> {
   query: UseQueryResult<T | IDataResponse<T>, Error>;

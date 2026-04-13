@@ -1,10 +1,10 @@
 import ProfileHeader from "./ProfileHeader";
 import ProfileActions from "./ProfileActions";
-import userImg from "../../../../../assets/images/User.png";
-import type { IProfile } from "../../../../../types/profile";
+import userImg from "@/assets/images/User.png";
+import type { IProfile } from "@/types/profile";
 import type { UseFormHandleSubmit } from "react-hook-form";
 import type { TProfileForm } from "../../schemas/profileSchema";
-import { notifySuccess } from "../../../../../lib/toast/notifySuccess";
+import { notifySuccess } from "@/lib/toast/notifySuccess";
 
 interface IProfileHeaderWithActions {
   profile: IProfile;

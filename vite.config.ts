@@ -10,7 +10,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      gsap: path.resolve(__dirname, "node_modules/gsap/dist/gsap.min.js"),
+      "@": path.resolve(__dirname, "src"),
+      // gsap: path.resolve(__dirname, "node_modules/gsap/dist/gsap.min.js"),
     },
   },
 });

@@ -1,7 +1,7 @@
-import type { IProfile } from "../../../../types/profile";
-import type { TUserForm } from "../schemas/profileSchema";
+import type { IProfile } from "@/types/profile";
+import type { TProfileForm } from "../schemas/profileSchema";
 
-export const mapProfileToForm = (profile: IProfile): TUserForm => ({
+export const mapProfileToForm = (profile: IProfile): TProfileForm => ({
   full_name: profile.full_name ?? "",
   phone: profile.phone ?? "",
   address: {

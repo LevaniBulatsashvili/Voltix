@@ -1,11 +1,11 @@
-import { supabase } from "../../../lib/supabase";
-import { PAGE } from "../../../pages/pageConfig";
+import { supabase } from "@/lib/supabase";
+import { PAGE } from "@/pages/pageConfig";
 import type {
   IAuthResponse,
   IAuthService,
   IOAuthResponse,
   IOtpResponse,
-} from "../../../types/auth";
+} from "@/types/auth";
 import { profileService } from "../../user/profile/service/profileService";
 
 import {
@@ -43,7 +43,7 @@ export const authService: IAuthService = {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}${PAGE.VERIFY_SUCCESS}`,
+        emailRedirectTo: `${window.location.origin}${PAGE.AUTH.VERIFY_SUCCESS}`,
       },
     });
     if (error) throw error;

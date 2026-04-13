@@ -1,13 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
-import { useFetchProducts } from "../../features/product/hooks/productCRUD";
-import { useSearchDebounce } from "../../hooks/useSeachDebounce";
+import { useFetchProducts } from "@/features/public/product/hooks/productCRUD";
+import { useSearchDebounce } from "@/hooks/useSeachDebounce";
 import { QueryBoundary } from "../feedback/QueryBoundary";
-import { NavLink } from "react-router-dom";
-import { PAGE } from "../../pages/pageConfig";
+import { useNavigate } from "react-router-dom";
+import { PAGE } from "@/pages/pageConfig";
 import Spinner from "../feedback/Spinner";
+import { buildProductLink } from "@/features/public/product/utils/buildProductLink";
+import type { IProduct } from "@/types/product";
 
 export default function SearchBar({ delay = 700 }) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const disabled = false;
   const limit = 4;
@@ -22,6 +25,22 @@ export default function SearchBar({ delay = 700 }) {
     { limit, filters: searchFilters },
     !!searchFilters,
   );
+
+  const onViewAllResults = () => {
+    setSearchVal("");
+    navigate(PAGE.PUBLIC.SEARCH_RESULTS.replace(":searchVal", searchVal));
+  };
+
+  const onNavigateToProduct = (product: IProduct) => {
+    setSearchVal("");
+    navigate(
+      buildProductLink(
+        product.main_category.name,
+        product.category.name,
+        product.id,
+      ),
+    );
+  };
 
   return (
     <div className="relative w-full max-w-100 ml-auto">
@@ -58,6 +77,7 @@ export default function SearchBar({ delay = 700 }) {
               {products.map((product) => (
                 <li
                   key={product.id}
+                  onClick={() => onNavigateToProduct(product)}
                   className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
                   {product.thumbnail && (
@@ -71,10 +91,11 @@ export default function SearchBar({ delay = 700 }) {
                 </li>
               ))}
               {products.length > limit && (
-                <div className="pl-4 py-1 text-lg font-medium hover:bg-gray-100 cursor-pointer">
-                  <NavLink to={`${PAGE.SHOP}/${searchVal}`}>
-                    {t("header.all_results")}
-                  </NavLink>
+                <div
+                  onClick={onViewAllResults}
+                  className="pl-4 py-1 text-lg font-medium hover:bg-gray-100 cursor-pointer"
+                >
+                  {t("header.all_results")}
                 </div>
               )}
             </ul>

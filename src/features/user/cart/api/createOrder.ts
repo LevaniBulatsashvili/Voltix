@@ -1,5 +1,5 @@
-import { supabase } from "../../../../lib/supabase";
-import type { IOrderItem, IOrderRaw } from "../../../../types/profile";
+import { supabase } from "@/lib/supabase";
+import type { IOrderItem, IOrderRaw } from "@/types/profile";
 
 export const createOrder = async ({
   profile_id: profileId,

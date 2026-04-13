@@ -1,4 +1,4 @@
-import { Skeleton } from "../../../../../components/skeleton/Skeleton";
+import { Skeleton } from "@/components/skeleton/Skeleton";
 
 const ProfileOrdersSkeleton = () => {
   const fakeOrders = Array.from({ length: 2 });

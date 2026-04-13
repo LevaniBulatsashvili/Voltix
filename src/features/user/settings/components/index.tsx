@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
-import ToggleBtn from "../../../../components/button/ToggleBtn";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import ToggleBtn from "@/components/button/ToggleBtn";
 
 import { type ISettings, toggleSetting } from "../store/settings.slice";
 import { useTranslation } from "react-i18next";

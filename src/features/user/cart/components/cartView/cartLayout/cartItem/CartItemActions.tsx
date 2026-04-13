@@ -1,4 +1,4 @@
-import QuantitySelector from "../../../../../../../components/ui/QuantitySelector";
+import QuantitySelector from "@/components/ui/QuantitySelector";
 import { Trash2 } from "lucide-react";
 
 interface ICartItemActions {

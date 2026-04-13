@@ -1,5 +1,5 @@
 import { supabase } from ".";
-import type { IDataResponse } from "../../types/common/api";
+import type { IDataResponse } from "@/types/common/api";
 import { applyFilters } from "./applyFilters";
 
 export type IFilters<T> = {

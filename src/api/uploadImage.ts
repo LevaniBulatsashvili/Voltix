@@ -1,4 +1,4 @@
-import { supabase } from "../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export const uploadImage = async (file: File, bucket: string) => {
   const fileName = `${Date.now()}-${file.name}`;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../../hooks/redux";
+import { useAppDispatch } from "@/hooks/redux";
 import { setSession, setUser } from "../../store/auth.slice";
-import { supabase } from "../../../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export const useSyncSession = () => {
   const dispatch = useAppDispatch();

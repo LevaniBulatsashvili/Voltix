@@ -1,5 +1,5 @@
 import { isAnyOf, type Middleware } from "@reduxjs/toolkit";
-import { notifyError } from "../../lib/toast/notifyError";
+import { notifyError } from "@/lib/toast/notifyError";
 
 export function createPersistenceMiddleware<RootState, SliceState>({
   sliceSelector,

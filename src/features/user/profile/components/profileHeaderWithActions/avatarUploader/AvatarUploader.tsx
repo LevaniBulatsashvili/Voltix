@@ -3,9 +3,9 @@ import { useUploadAvatar } from "../../../hooks/useUploadAvatar";
 import { useUpdateProfile } from "../../../hooks/profileCRUD";
 import { getPathFromUrl } from "../../../utils/getPathFromUrl";
 import { deleteAvatar } from "../../../api/deleteAvatar";
-import Avatar from "../../../../../../components/ui/Avatar";
+import Avatar from "@/components/ui/Avatar";
 import AvatarOverlay from "./AvatarOverlay";
-import Spinner from "../../../../../../components/feedback/Spinner";
+import Spinner from "@/components/feedback/Spinner";
 
 interface IAvatarUploader {
   currentAvatar: string;

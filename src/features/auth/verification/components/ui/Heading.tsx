@@ -1,4 +1,3 @@
-// components/ui/Heading.tsx
 import type { ReactNode } from "react";
 
 interface IHeading {

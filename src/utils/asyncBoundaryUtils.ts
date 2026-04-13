@@ -1,6 +1,6 @@
-import type { IAsyncBoundaryMeta } from "../components/feedback/AsyncBoundary";
-import type { RootState } from "../store";
-import type { IDataResponse } from "../types/common/api";
+import type { IAsyncBoundaryMeta } from "@/components/feedback/AsyncBoundary";
+import type { RootState } from "@/store";
+import type { IDataResponse } from "@/types/common/api";
 
 type TAsyncState = "loading" | "error" | "empty" | "success";
 

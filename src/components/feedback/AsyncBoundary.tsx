@@ -2,13 +2,13 @@ import type { ReactNode } from "react";
 import EmptyState from "./EmptyState";
 import Spinner from "./Spinner";
 import ErrorState from "./ErrorState";
-import { useAppSelector } from "../../hooks/redux";
-import { useFlicker } from "../../hooks/useFlicker";
-import type { IDataResponse } from "../../types/common/api";
+import { useAppSelector } from "@/hooks/redux";
+import { useFlicker } from "@/hooks/useFlicker";
+import type { IDataResponse } from "@/types/common/api";
 import {
   normalizeResponse,
   resolveAsyncState,
-} from "../../utils/asyncBoundaryUtils";
+} from "@/utils/asyncBoundaryUtils";
 
 export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname?: string };

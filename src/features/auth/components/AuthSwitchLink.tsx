@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import AppLink from "../../../components/button/AppLink";
+import AppLink from "@/components/button/AppLink";
 
 interface IAuthFooter {
   to: string;

@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../hooks/redux";
-import { toggleTheme } from "../../store/theme/theme.slice";
+import { useAppDispatch } from "@/hooks/redux";
+import { toggleTheme } from "@/store/theme/theme.slice";
 import Logo from "./Logo";
 import Actions from "./Actions";
-import type { ILanguage } from "../../types/header";
+import type { ILanguage } from "@/types/header";
 
 const GuestHeader = ({ languages }: { languages: ILanguage[] }) => {
   const { t, i18n } = useTranslation();

@@ -1,4 +1,4 @@
-import defaultUser from "../../assets/images/User.png";
+import defaultUser from "@/assets/images/User.png";
 
 interface IAvatar {
   src?: string;

@@ -1,5 +1,5 @@
-import PriceTag from "../../../../../../../components/ui/PriceTag";
-import type { IProduct } from "../../../../../../../types/product";
+import PriceTag from "@/components/ui/PriceTag";
+import type { IProduct } from "@/types/product";
 interface ICartItemInfo {
   product: IProduct;
 }

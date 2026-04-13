@@ -1,5 +1,5 @@
-import { usePrice } from "../../features/user/cart/hooks/usePrice";
-import calculateDiscount from "../../utils/calculateDiscount";
+import { usePrice } from "@/features/user/cart/hooks/usePrice";
+import calculateDiscount from "@/utils/calculateDiscount";
 
 interface IPriceTag {
   price: number;

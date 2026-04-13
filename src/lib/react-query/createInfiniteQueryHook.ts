@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import type { IDataResponse } from "../../types/common/api";
+import type { IDataResponse } from "@/types/common/api";
 
 export const createInfiniteQueryHook = <TItem, TOptions extends object>(
   queryKeyFn: (options: TOptions) => readonly unknown[],

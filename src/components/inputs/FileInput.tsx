@@ -1,12 +1,21 @@
-import { Controller } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 
-interface FileInputProps {
-  control: any;
-  name: string;
+interface FileInputProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   multiple?: boolean;
 }
 
-const FileInput = ({ control, name, multiple = false }: FileInputProps) => (
+const FileInput = <T extends FieldValues>({
+  control,
+  name,
+  multiple = false,
+}: FileInputProps<T>) => (
   <Controller
     control={control}
     name={name}

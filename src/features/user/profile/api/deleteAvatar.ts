@@ -1,4 +1,4 @@
-import { supabase } from "../../../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 export const deleteAvatar = async (filePath: string) => {
   if (!filePath) return;

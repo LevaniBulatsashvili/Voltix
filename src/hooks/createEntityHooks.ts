@@ -1,12 +1,12 @@
-import { createInfiniteQueryHook } from "../lib/react-query/createInfiniteQueryHook";
-import { createMutationHook } from "../lib/react-query/createMutationHook";
-import { createQueryHook } from "../lib/react-query/createQueryHook";
-import type { IFetchManyOptions } from "../lib/supabase/createSupabaseService";
+import { createInfiniteQueryHook } from "@/lib/react-query/createInfiniteQueryHook";
+import { createMutationHook } from "@/lib/react-query/createMutationHook";
+import { createQueryHook } from "@/lib/react-query/createQueryHook";
+import type { IFetchManyOptions } from "@/lib/supabase/createSupabaseService";
 import type {
   IDataResponse,
   ICreatePayload,
   IUpdatePayload,
-} from "../types/common/api";
+} from "@/types/common/api";
 
 export const createEntityHooks = <
   T extends { id: IDType },

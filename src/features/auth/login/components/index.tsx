@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 import LoginForm from "./loginForm/LoginForm";
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
-import { PAGE } from "../../../../pages/pageConfig";
+import { PAGE } from "@/pages/pageConfig";
 import AuthSwitchLink from "../../components/AuthSwitchLink";
-import FormHeader from "../../../../components/form/FormHeader";
-import FormContainer from "../../../../components/form/FormContainer";
+import FormHeader from "@/components/form/FormHeader";
+import FormContainer from "@/components/form/FormContainer";
 import ErrorMessage from "../../components/ErrorMessage";
 
 const LoginPage = () => {
@@ -25,7 +25,7 @@ const LoginPage = () => {
 
   const onSubmit = (data: LoginFormData) => {
     login(data, {
-      onSuccess: () => navigate(PAGE.BASE),
+      onSuccess: () => navigate(PAGE.PUBLIC.BASE),
       onError: (err: Error) => console.error(err),
     });
   };
@@ -45,7 +45,7 @@ const LoginPage = () => {
       <AuthSwitchLink
         text="login.don't_have_an_account?"
         linkText="login.register"
-        to={PAGE.REGISTER}
+        to={PAGE.AUTH.REGISTER}
       />
     </FormContainer>
   );

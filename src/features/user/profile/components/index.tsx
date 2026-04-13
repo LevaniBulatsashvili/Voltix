@@ -6,7 +6,7 @@ import ProfileOrders from "./profileOrders/ProfileOrders";
 import ProfileForm from "./profileForm/ProfileForm";
 import { useProfilePageLogic } from "../hooks/useProfilePageLogic";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
-import { QueryBoundary } from "../../../../components/feedback/QueryBoundary";
+import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import ProfileHeaderWithActions from "./profileHeaderWithActions/ProfileHeaderWithActions";
 import ProfileHeaderWithActionsSkeleton from "./profileSkeleton/ProfileWithActionsSkeleton";
 import ProfileSecuritySection from "./profileSecuritySection/profileSecuritySection";

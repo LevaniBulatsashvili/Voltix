@@ -1,10 +1,10 @@
 import { Tag } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
-import PrimaryButton from "../../../../../../../components/button/PrimaryBtn";
+import PrimaryButton from "@/components/button/PrimaryBtn";
 import SummaryRow from "./SummaryRow";
 import { useTranslation } from "react-i18next";
-import { notify } from "../../../../../../../lib/toast/toast";
-import { useAppSelector } from "../../../../../../../hooks/redux";
+import { notify } from "@/lib/toast/toast";
+import { useAppSelector } from "@/hooks/redux";
 import { usePrice } from "../../../../hooks/usePrice";
 import { useCreateOrder } from "../../../../hooks/useCreateOrder";
 

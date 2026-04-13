@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAppSelector } from "../hooks/redux";
-import { PAGE } from "../pages/pageConfig";
-import Spinner from "../components/feedback/Spinner";
+import { useAppSelector } from "@/hooks/redux";
+import { PAGE } from "@/pages/pageConfig";
+import Spinner from "@/components/feedback/Spinner";
 
 interface IAuthRoute {
   requireAuth?: boolean;
@@ -27,30 +27,30 @@ const AuthRoute = ({
   // Guest-only pages: Login/Register
   if (guestOnly) {
     if (user && user.email_verified)
-      return <Navigate to={redirectPath ?? PAGE.PRODUCTS} replace />;
+      return <Navigate to={PAGE.PUBLIC.SHOP} replace />;
 
     return <Outlet />;
   }
 
   // Verify pages: only for logged-in users without verified email
   if (verifyPagesOnly) {
-    if (!user) return <Navigate to={PAGE.LOGIN} replace />;
-    if (user.email_verified) return <Navigate to={PAGE.PRODUCTS} replace />; // redirect verified users
+    if (!user) return <Navigate to={PAGE.AUTH.LOGIN} replace />;
+    if (user.email_verified) return <Navigate to={PAGE.PUBLIC.SHOP} replace />; // redirect verified users
 
     return <Outlet />;
   }
 
   // Protected pages
   if (requireAuth && !user)
-    return <Navigate to={redirectPath ?? PAGE.LOGIN} replace />;
+    return <Navigate to={redirectPath ?? PAGE.AUTH.LOGIN} replace />;
 
   // Role check
   if (requireAuth && allowedRoles && user && !allowedRoles.includes(user.role))
-    return <Navigate to={redirectPath ?? PAGE.PRODUCTS} replace />;
+    return <Navigate to={redirectPath ?? PAGE.PUBLIC.SHOP} replace />;
 
   // Email verification required
   if (requireAuth && requireEmailVerified && user && !user.email_verified)
-    return <Navigate to={PAGE.VERIFY_EMAIL} replace />;
+    return <Navigate to={PAGE.AUTH.VERIFY_EMAIL} replace />;
 
   return <Outlet />;
 };

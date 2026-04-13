@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import NavLinks from "./NavLinks";
-import type { INavLink } from "../../types/header/Nav";
-import { useClickOutside } from "../../hooks/useClickOutside";
+import type { INavLink } from "@/types/header/Nav";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface INavDropdown {
   navLinks: INavLink[];

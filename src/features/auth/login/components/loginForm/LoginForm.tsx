@@ -1,8 +1,8 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormInput } from "../../../../../components/form/FormInput";
+import { FormInput } from "@/components/form/FormInput";
 import type { LoginFormData } from "../../schemas/loginSchema";
-import FormBtn from "../../../../../components/form/FormBtn";
-import Form from "../../../../../components/form/Form";
+import FormBtn from "@/components/form/FormBtn";
+import Form from "@/components/form/Form";
 
 interface LoginFormProps {
   register: UseFormRegister<LoginFormData>;

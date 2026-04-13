@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import PrimaryButton from "../../../../../../components/button/PrimaryBtn";
+import PrimaryButton from "@/components/button/PrimaryBtn";
 
 interface IProfileFormSection {
   title: string;

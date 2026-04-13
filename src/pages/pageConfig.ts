@@ -1,21 +1,37 @@
 const PAGE = {
-  BASE: "/",
-  LOGIN: "/login",
-  REGISTER: "/register",
-  VERIFY_EMAIL: "/verify-email",
-  VERIFY_SUCCESS: "/verify-success",
-  ORDERS: "/",
-  WISHLIST: "/",
-  SETTINGS: "/settings",
-  Admin: "/admin",
-  PRODUCTS: "/products",
-  PRODUCT: "shop/:category/:subcategory/:id",
-  SHOP: "/shop/category",
-  SALE: "/shop/category/sale",
-  ARRIVALS: "/shop/category/new-arrivals",
-  POPULAR: "/shop/category/popular",
-  CART: "/cart",
-  PROFILE: "/profile",
+  AUTH: {
+    LOGIN: "/login",
+    REGISTER: "/register",
+    VERIFY_EMAIL: "/verify-email",
+    VERIFY_SUCCESS: "/verify-success",
+  },
+
+  PUBLIC: {
+    BASE: "/",
+    SHOP: "/shop",
+    PRODUCT: "/shop/:mainCategory/:category/:productId",
+    SEARCH: "/shop/search",
+    SEARCH_RESULTS: "/shop/search/:searchVal",
+    CATEGORY: "/shop/category/:categoryName",
+  },
+
+  USER: {
+    PROFILE: "/profile",
+    ORDERS: "/orders",
+    WISHLIST: "/wishlist",
+    CART: "/cart",
+    SETTINGS: "/settings",
+  },
+
+  ADMIN: {
+    BASE: "/admin",
+  },
+
+  SOCIAL: {
+    LINKDIN: "https://www.linkedin.com/in/levan-bulatsashvili-b7b33831a/",
+    GITHUB: "https://github.com/LevaniBulatsashvili",
+  },
+
   NOT_FOUND: "*",
 };
 

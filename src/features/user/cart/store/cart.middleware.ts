@@ -1,4 +1,4 @@
-import { createPersistenceMiddleware } from "../../../../store/utils/createPersistenceMiddleware";
+import { createPersistenceMiddleware } from "@/store/utils/createPersistenceMiddleware";
 import { cartStorage } from "./cart.storage";
 import {
   addToCart,
@@ -8,7 +8,7 @@ import {
   clearCart,
   type ICartState,
 } from "./cart.slice";
-import type { RootState } from "../../../../store";
+import type { RootState } from "@/store";
 
 export const cartMiddleware = createPersistenceMiddleware<
   RootState,

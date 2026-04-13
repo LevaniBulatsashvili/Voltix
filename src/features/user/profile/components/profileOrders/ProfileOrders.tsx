@@ -1,4 +1,4 @@
-import type { IOrder } from "../../../../../types/profile";
+import type { IOrder } from "@/types/profile";
 import { usePrice } from "../../../cart/hooks/usePrice";
 
 interface IProfileOrders {

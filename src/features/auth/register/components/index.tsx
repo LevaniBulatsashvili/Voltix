@@ -7,10 +7,10 @@ import {
   registerSchema,
   type RegisterFormData,
 } from "../schemas/registerSchema";
-import { PAGE } from "../../../../pages/pageConfig";
+import { PAGE } from "@/pages/pageConfig";
 import AuthSwitchLink from "../../components/AuthSwitchLink";
-import FormHeader from "../../../../components/form/FormHeader";
-import FormContainer from "../../../../components/form/FormContainer";
+import FormHeader from "@/components/form/FormHeader";
+import FormContainer from "@/components/form/FormContainer";
 import ErrorMessage from "../../components/ErrorMessage";
 
 const RegisterPage = () => {
@@ -28,7 +28,7 @@ const RegisterPage = () => {
 
   const onSubmit = (data: RegisterFormData) => {
     registerUser(data, {
-      onSuccess: () => navigate(PAGE.VERIFY_EMAIL),
+      onSuccess: () => navigate(PAGE.AUTH.VERIFY_EMAIL),
     });
   };
 
@@ -47,7 +47,7 @@ const RegisterPage = () => {
       <AuthSwitchLink
         text="register.already_have_an_account?"
         linkText="register.login"
-        to={PAGE.LOGIN}
+        to={PAGE.AUTH.LOGIN}
       />
     </FormContainer>
   );

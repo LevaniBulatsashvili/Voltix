@@ -1,6 +1,6 @@
 import { QueryClient, QueryCache, MutationCache } from "@tanstack/react-query";
 import { handleQueryError } from "./handleQueryError";
-import { isHttpError } from "../../utils/error";
+import { isHttpError } from "@/utils/error";
 
 export const client = new QueryClient({
   queryCache: new QueryCache({

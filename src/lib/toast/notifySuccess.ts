@@ -1,5 +1,5 @@
-import { store } from "../../store";
-import { addNotification } from "../../store/notification/notification.slice";
+import { store } from "@/store";
+import { addNotification } from "@/store/notification/notification.slice";
 
 export const notifySuccess = (message: string) => {
   store.dispatch(
