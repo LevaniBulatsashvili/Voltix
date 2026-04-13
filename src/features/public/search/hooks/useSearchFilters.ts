@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useCategoryFilters = (
+export const useSearchFilters = (
   initial?: Partial<{
     minPrice: number;
     maxPrice: number;

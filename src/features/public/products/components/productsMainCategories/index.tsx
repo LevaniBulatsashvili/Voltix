@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import MainCategoriesGrid from "./ProductsMainCategoriesGrid";
 import ProductsMainCategoriesSkeleton from "../productsSkeleton/ProductsMainCategoriesSkeleton";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
-import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD";
+import { useFetchMainCategories } from "../../../search/hooks/mainCategoryCRUD";
 
 const ProductsMainCategories = () => {
   const { t } = useTranslation();

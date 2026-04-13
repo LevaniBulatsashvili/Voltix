@@ -1,12 +1,12 @@
 import { Skeleton } from "@/components/skeleton/Skeleton";
 
-interface IProductCardGridSkeleton {
+interface ISearchProductCardGridSkeleton {
   count?: number;
 }
 
-const CategoryProductCardGridSkeleton = ({
+const SearchProductCardGridSkeleton = ({
   count = 6,
-}: IProductCardGridSkeleton) => {
+}: ISearchProductCardGridSkeleton) => {
   return (
     <div className="grid sm:grid-cols-2 gap-4">
       {Array.from({ length: count }).map((_, i) => (
@@ -27,4 +27,4 @@ const CategoryProductCardGridSkeleton = ({
   );
 };
 
-export default CategoryProductCardGridSkeleton;
+export default SearchProductCardGridSkeleton;

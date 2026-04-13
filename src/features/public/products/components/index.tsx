@@ -4,7 +4,7 @@ import ProductsHeader from "./productsHeader";
 import ProductShowcase from "./productsShowcase";
 import ProductsMainCategories from "./productsMainCategories";
 import ProductShowcaseSkeleton from "./productsSkeleton/ProductShowcaseSkeleton";
-import { useFetchbrands } from "../../category/hooks/brandCRUD";
+import { useFetchbrands } from "../../search/hooks/brandCRUD";
 import ProductsCarouselSkeleton from "./productsSkeleton/ProductsCarouselSkeleton";
 import ProductsComments from "./productsComments";
 import { useFetchProducts } from "../../product/hooks/productCRUD";

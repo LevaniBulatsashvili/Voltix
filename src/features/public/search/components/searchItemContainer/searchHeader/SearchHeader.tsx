@@ -2,7 +2,7 @@ import { ChevronDown } from "lucide-react";
 import type { TFunction } from "i18next";
 import type { ISortBy } from "../..";
 
-interface ICategoryHeader {
+interface ISearchHeader {
   t: TFunction;
   title: string;
   currentPage: number;
@@ -12,7 +12,7 @@ interface ICategoryHeader {
   sortBy: ISortBy;
 }
 
-const CategoryHeader = ({
+const SearchHeader = ({
   t,
   title,
   currentPage,
@@ -20,7 +20,7 @@ const CategoryHeader = ({
   totalCount,
   onChangeSort,
   sortBy,
-}: ICategoryHeader) => {
+}: ISearchHeader) => {
   const start = (currentPage - 1) * pageSize + 1;
   const end = Math.min(currentPage * pageSize, totalCount);
 
@@ -32,7 +32,7 @@ const CategoryHeader = ({
 
       <div className="flex flex-col xl:mr-0 sm:mr-12 lg:items-end">
         <p className="opacity-80">
-          {t("category.showing_products", {
+          {t("search.showing_products", {
             start,
             end,
             total: totalCount,
@@ -46,8 +46,8 @@ const CategoryHeader = ({
           className="flex items-center gap-1 font-semibold capitalize"
         >
           {sortBy === "total_sold"
-            ? t("category.most_popular")
-            : t("category.newest")}
+            ? t("search.most_popular")
+            : t("search.newest")}
           <ChevronDown
             size={18}
             className={`transition-transform duration-30 ${
@@ -60,4 +60,4 @@ const CategoryHeader = ({
   );
 };
 
-export default CategoryHeader;
+export default SearchHeader;

@@ -3,13 +3,17 @@ import { ChevronDown, Star } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import Slider from "@/components/ui/Slider";
 
-interface IRatingFilter {
+interface ISearchRatingFilter {
   t: (key: string) => string;
   value?: number | null;
   onChange?: (rating?: number) => void;
 }
 
-const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
+const SearchRatingFilter = ({
+  t,
+  value = null,
+  onChange,
+}: ISearchRatingFilter) => {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(value ?? 0);
 
@@ -26,7 +30,7 @@ const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
         className="w-full py-3 flex justify-between items-center transition-all"
       >
         <h2 className="text-xl font-semibold capitalize">
-          {t("category.rating")}
+          {t("search.rating")}
         </h2>
 
         <ChevronDown
@@ -67,4 +71,4 @@ const RatingFilter = ({ t, value = null, onChange }: IRatingFilter) => {
   );
 };
 
-export default RatingFilter;
+export default SearchRatingFilter;

@@ -10,9 +10,10 @@ import MainLayout from "@/layouts/PageLayout";
 import ProductPage from "@/pages/public/product/ProductPage";
 import ProfilePage from "@/pages/user/profile/ProfilePage";
 import CartPage from "@/pages/user/cart/CartPage";
-import CategoryPage from "@/pages/public/category/CategoryPage";
+import SearchPage from "@/pages/public/search/SearchPage";
 import NotFoundPage from "@/pages/error/notFound/NotFoundPage";
 import SettingsPage from "@/pages/user/settings/SettingsPage";
+import CategoryPage from "@/pages/public/category/CategoryPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -38,7 +39,8 @@ const AppRoutes = () => (
         <Route element={<AuthRoute requireAuth />}>
           <Route path={PAGE.PUBLIC.SHOP} element={<ProductsPage />} />
           <Route path={PAGE.PUBLIC.PRODUCT} element={<ProductPage />} />
-          <Route path={PAGE.PUBLIC.SEARCH} element={<CategoryPage />} />
+          <Route path={PAGE.PUBLIC.SEARCH} element={<SearchPage />} />
+          <Route path={PAGE.PUBLIC.CATEGORY} element={<CategoryPage />} />
 
           {/* user */}
           <Route path={PAGE.USER.PROFILE} element={<ProfilePage />} />

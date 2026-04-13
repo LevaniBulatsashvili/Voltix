@@ -1,4 +1,4 @@
-import { useSlider } from "@/features/public/category/hooks/useSlider";
+import { useSlider } from "@/features/public/search/hooks/useSlider";
 
 interface ISlider {
   min: number;

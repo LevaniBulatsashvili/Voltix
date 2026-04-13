@@ -4,19 +4,19 @@ import { usePrice } from "@/features/user/cart/hooks/usePrice";
 import { useDebounce } from "@/hooks/useDebounce";
 import Slider from "@/components/ui/Slider";
 
-interface IPriceFilter {
+interface ISearchPriceFilter {
   t: (key: string) => string;
   min?: number;
   max?: number;
   onPriceFilterChange?: (min: number, max: number) => void;
 }
 
-const PriceFilter = ({
+const SearchPriceFilter = ({
   t,
   min = 0,
   max = 5000,
   onPriceFilterChange,
-}: IPriceFilter) => {
+}: ISearchPriceFilter) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [minPrice, setMinPrice] = useState(min);
@@ -36,7 +36,7 @@ const PriceFilter = ({
         className="w-full py-3 flex justify-between items-center transition-all"
       >
         <h2 className="text-xl font-semibold capitalize">
-          {t("category.price")}
+          {t("search.price")}
         </h2>
         <ChevronDown
           size={16}
@@ -67,4 +67,4 @@ const PriceFilter = ({
   );
 };
 
-export default PriceFilter;
+export default SearchPriceFilter;

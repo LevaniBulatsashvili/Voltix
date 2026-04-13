@@ -3,7 +3,7 @@ import type { ICrumb } from "@/types/common/crumbs";
 import { PAGE } from "@/pages/pageConfig";
 import type { ICategory } from "@/types/product";
 
-export const buildCategoryBreadcrumbs = (
+export const buildSearchCrumbs = (
   t: TFunction,
   category?: ICategory["name"],
 ): ICrumb[] => {
@@ -13,7 +13,7 @@ export const buildCategoryBreadcrumbs = (
       to: PAGE.PUBLIC.BASE,
     },
     {
-      label: t(`common.${category ? category : "categories"}`),
+      label: t(`common.${category ? category : "search"}`),
     },
   ];
 };

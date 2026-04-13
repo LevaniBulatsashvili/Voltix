@@ -1,16 +1,16 @@
 import { useState } from "react";
 import Breadcrumbs from "@/components/ui/BreadCrumbs";
-import { buildCategoryBreadcrumbs } from "../utils/BuildCategoryCrumbs";
+import { buildSearchCrumbs } from "../utils/buildSearchCrumbs";
 import { useTranslation } from "react-i18next";
-import Filters from "./filters/Filters";
-import CategoryItemContainer from "./categoryItemContainer/CategoryItemContainer";
+import SearchFilters from "./searchFilters/SearchFilters";
+import SearchItemContainer from "./searchItemContainer/SearchItemContainer";
 import type { IBrand, ICategory } from "@/types/product";
-import { useCategoryFilters } from "../hooks/useCategoryFilters";
+import { useSearchFilters } from "../hooks/useSearchFilters";
 
 export type ISortBy = "created_at" | "total_sold";
 const limit = 6;
 
-const CategoryPage = () => {
+const Search = () => {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(
     null,
@@ -27,7 +27,7 @@ const CategoryPage = () => {
     handlePriceChange,
     handleRatingChange,
     handleHasDiscountChange,
-  } = useCategoryFilters();
+  } = useSearchFilters();
 
   const handleCategoryChange = (category: ICategory | null) => {
     setSelectedCategory(category);
@@ -42,14 +42,11 @@ const CategoryPage = () => {
   return (
     <div className="p-6 w-full md:w-[95%] lg:w-[90%] min-h-[88dvh] text-primary bg-background">
       <Breadcrumbs
-        items={buildCategoryBreadcrumbs(
-          t,
-          selectedCategory?.name.toLowerCase(),
-        )}
+        items={buildSearchCrumbs(t, selectedCategory?.name.toLowerCase())}
       />
 
       <div className="grid xl:grid-cols-[1fr_4fr] gap-4">
-        <Filters
+        <SearchFilters
           t={t}
           selectedCategory={selectedCategory}
           onFilterCategory={handleCategoryChange}
@@ -62,7 +59,7 @@ const CategoryPage = () => {
           onSelectedBrandChange={handleBrandChange}
         />
 
-        <CategoryItemContainer
+        <SearchItemContainer
           onPageChange={setPage}
           title={`common.${selectedCategory?.name.toLocaleLowerCase() || "all_categories"}`}
           sortBy={sortBy}
@@ -85,4 +82,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default Search;

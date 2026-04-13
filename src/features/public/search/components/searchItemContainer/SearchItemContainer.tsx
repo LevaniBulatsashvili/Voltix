@@ -3,13 +3,13 @@ import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import type { IProduct } from "@/types/product";
 import { useFetchProducts } from "../../../product/hooks/productCRUD";
 import ProductCard from "../../../products/components/productsShowcase/ProductCard";
-import CategoryHeader from "./categoryHeader/CategoryHeader";
-import CategoryPagination from "./categoryHeader/CategoryPagination";
+import SearchHeader from "./searchHeader/SearchHeader";
+import SearchPagination from "./SearchProductPagination";
 import type { IFetchManyOptions } from "@/lib/supabase/createSupabaseService";
 import type { ISortBy } from "..";
-import CategoryProductCardGridSkeleton from "../categorySkeleton/CategoryProductCardSkeleton";
+import SearchProductCardGridSkeleton from "../searchSkeleton/SearchProductCardSkeleton";
 
-interface ICategoryItemContainer {
+interface ISearchItemContainer {
   title: string;
   fetchOptions: IFetchManyOptions<IProduct>;
   sortBy: ISortBy;
@@ -18,14 +18,14 @@ interface ICategoryItemContainer {
   onChangeSort: (sortBy: ISortBy) => void;
 }
 
-const CategoryItemContainer = ({
+const SearchItemContainer = ({
   title,
   fetchOptions,
   sortBy,
   limit,
   onPageChange,
   onChangeSort,
-}: ICategoryItemContainer) => {
+}: ISearchItemContainer) => {
   const { t } = useTranslation();
   const productsQuery = useFetchProducts(fetchOptions);
 
@@ -36,7 +36,7 @@ const CategoryItemContainer = ({
   return (
     <div>
       <div className="xl:ml-4 pb-8 border-b border-gray-300 min-h-[66dvh]">
-        <CategoryHeader
+        <SearchHeader
           t={t}
           title={title}
           currentPage={currentPage}
@@ -49,7 +49,7 @@ const CategoryItemContainer = ({
         <QueryBoundary
           query={productsQuery}
           defaultFallbackOptions={{ className: "h-[64dvh]" }}
-          loadingFallback={<CategoryProductCardGridSkeleton count={4} />}
+          loadingFallback={<SearchProductCardGridSkeleton count={4} />}
         >
           {(products) => (
             <div className="grid sm:grid-cols-2 gap-4">
@@ -62,7 +62,7 @@ const CategoryItemContainer = ({
       </div>
 
       {onPageChange && (
-        <CategoryPagination
+        <SearchPagination
           currentPage={currentPage}
           totalPages={totalPages}
           onChange={onPageChange}
@@ -72,4 +72,4 @@ const CategoryItemContainer = ({
   );
 };
 
-export default CategoryItemContainer;
+export default SearchItemContainer;

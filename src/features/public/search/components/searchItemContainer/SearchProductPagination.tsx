@@ -1,17 +1,17 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePagination } from "@/hooks/usePagination";
 
-interface ICategoryPagination {
+interface ISearchPagination {
   currentPage: number;
   totalPages: number;
   onChange: (page: number) => void;
 }
 
-const CategoryPagination = ({
+const SearchPagination = ({
   currentPage,
   totalPages,
   onChange,
-}: ICategoryPagination) => {
+}: ISearchPagination) => {
   const { pages } = usePagination(currentPage, totalPages);
 
   return (
@@ -29,7 +29,7 @@ const CategoryPagination = ({
           <span key={i}>...</span>
         ) : (
           <button
-            key={i}
+            key={page}
             onClick={() => onChange(page)}
             className={`size-10 border rounded ${
               currentPage === page ? "bg-black text-white" : "hover:bg-gray-100"
@@ -51,4 +51,4 @@ const CategoryPagination = ({
   );
 };
 
-export default CategoryPagination;
+export default SearchPagination;

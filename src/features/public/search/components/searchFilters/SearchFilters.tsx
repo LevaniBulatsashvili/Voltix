@@ -3,9 +3,9 @@ import { Sliders, X } from "lucide-react";
 import { SelectDropdown } from "@/components/ui/SelectDropdown";
 import type { IBrand, ICategory } from "@/types/product";
 import type { TFunction } from "i18next";
-import PriceFilter from "./PriceFilter";
-import RatingFilter from "./RatingFilter";
-import DiscountFilter from "./DiscountFilter";
+import SearchPriceFilter from "./SearchPriceFilter";
+import SearchRatingFilter from "./SearchRatingFilter";
+import SearchDiscountFilter from "./SearchDiscountFilter";
 import PrimaryButton from "@/components/button/PrimaryBtn";
 import { useFetchMainCategories } from "../../hooks/mainCategoryCRUD";
 import { useFetchbrands } from "../../hooks/brandCRUD";
@@ -13,7 +13,7 @@ import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SelectDropdownSkeleton from "@/components/skeleton/SelectDropdownSkeleton";
 import SelectDropdownGridSkeleton from "@/components/skeleton/SelectDropdownGridSkeleton";
 
-interface IFilters {
+interface ISearchFilters {
   t: TFunction;
   selectedCategory: ICategory | null;
   onFilterCategory: (selectedCategory: ICategory | null) => void;
@@ -26,7 +26,7 @@ interface IFilters {
   onHasDiscountChange?: (value: boolean) => void;
 }
 
-const Filters = ({
+const SearchFilters = ({
   t,
   selectedCategory,
   onFilterCategory,
@@ -37,7 +37,7 @@ const Filters = ({
   onHasDiscountChange,
   selectedBrand,
   onSelectedBrandChange,
-}: IFilters) => {
+}: ISearchFilters) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const mainCategoriesQuery = useFetchMainCategories({
@@ -72,7 +72,7 @@ const Filters = ({
       >
         <div className="flex justify-between items-center mb-6 xl:hidden">
           <h2 className="text-xl font-bold capitalize">
-            {t("category.filters")}
+            {t("search.filters")}
           </h2>
           <button onClick={() => setIsOpen(false)}>
             <X size={24} />
@@ -81,7 +81,7 @@ const Filters = ({
 
         <div className="hidden xl:flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold capitalize">
-            {t("category.filters")}
+            {t("search.filters")}
           </h2>
           <button className="xl:hidden" onClick={() => setIsOpen(false)}>
             <X size={24} />
@@ -115,11 +115,15 @@ const Filters = ({
           )}
         </QueryBoundary>
 
-        <PriceFilter t={t} onPriceFilterChange={onPriceFilterChange} />
+        <SearchPriceFilter t={t} onPriceFilterChange={onPriceFilterChange} />
 
-        <RatingFilter t={t} value={selectedRating} onChange={onRatingChange} />
+        <SearchRatingFilter
+          t={t}
+          value={selectedRating}
+          onChange={onRatingChange}
+        />
 
-        <DiscountFilter
+        <SearchDiscountFilter
           t={t}
           hasDiscount={hasDiscount}
           onHasDiscountChange={onHasDiscountChange}
@@ -136,7 +140,7 @@ const Filters = ({
             <div className="py-3 border-y border-gray-300">
               <SelectDropdown<IBrand>
                 t={t}
-                name="category.brands"
+                name="search.brands"
                 items={brandsData}
                 onSelect={onSelectedBrandChange}
                 selectedKey={selectedBrand ? String(selectedBrand.id) : null}
@@ -148,7 +152,7 @@ const Filters = ({
         </QueryBoundary>
 
         <PrimaryButton
-          text={t("category.apply_filters")}
+          text={t("search.apply_filters")}
           className="mt-6 py-4 w-full! rounded-full!"
         />
       </div>
@@ -156,4 +160,4 @@ const Filters = ({
   );
 };
 
-export default Filters;
+export default SearchFilters;

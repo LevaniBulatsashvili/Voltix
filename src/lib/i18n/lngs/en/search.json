@@ -1,0 +1,11 @@
+{
+  "filters": "filters",
+  "showing_products": "Showing {{start}}–{{end}} of {{total}} products",
+  "most_popular": "most popular",
+  "newest": "newest",
+  "price": "price",
+  "rating": "rating",
+  "discounted": "discounted",
+  "brands": "brands",
+  "apply_filters": "apply filters"
+}
