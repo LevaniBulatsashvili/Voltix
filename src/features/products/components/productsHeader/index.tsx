@@ -1,5 +1,6 @@
 import AppLink from "../../../../components/button/AppLink";
 import { PAGE } from "../../../../pages/pageConfig";
+import ProductsDisplayBanner from "../productsDisplayBanner/ProductsDisplayBanner";
 import ProductHeaderStatCard from "./ProductsHeaderStatCard";
 
 interface IStat {
@@ -11,8 +12,6 @@ interface IProductsHeader {
   title: string;
   description: string;
   buttonText: string;
-  image: string;
-  imageAlt: string;
   stats: IStat[];
 }
 
@@ -20,8 +19,6 @@ const ProductsHeader = ({
   title,
   description,
   buttonText,
-  image,
-  imageAlt,
   stats,
 }: IProductsHeader) => {
   return (
@@ -58,13 +55,7 @@ const ProductsHeader = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center">
-        <img
-          src={image}
-          alt={imageAlt}
-          className="h-full w-full object-cover rounded-lg"
-        />
-      </div>
+      <ProductsDisplayBanner />
     </div>
   );
 };

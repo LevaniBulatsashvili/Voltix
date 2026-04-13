@@ -1,4 +1,3 @@
-import electronicsImg from "../../../assets/images/Electronics.png";
 import Carousel from "../../../components/carousel/Carousel";
 import { useTranslation } from "react-i18next";
 import ProductsHeader from "./productsHeader";
@@ -45,8 +44,6 @@ const Products = () => {
         title={t("products.header")}
         description={t("products.description")}
         buttonText={t("products.shop_btn")}
-        image={electronicsImg}
-        imageAlt={t("products.electronics")}
         stats={stats}
       />
 
