@@ -13,6 +13,7 @@ import category from "./category.json";
 import common from "./common.json";
 import settings from "./settings.json";
 import search from "./search.json";
+import search_results from "./search_results.json";
 
 export const ka = {
   header,
@@ -30,4 +31,5 @@ export const ka = {
   common,
   settings,
   search,
+  search_results,
 };

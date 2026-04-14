@@ -3,10 +3,12 @@ import Breadcrumbs from "@/components/ui/BreadCrumbs";
 import { buildSearchCrumbs } from "../utils/buildSearchCrumbs";
 import { useTranslation } from "react-i18next";
 import SearchFilters from "./searchFilters/SearchFilters";
-import SearchItemContainer from "./searchItemContainer/SearchItemContainer";
 import type { IBrand, ICategory } from "@/types/product";
 import { useSearchFilters } from "../hooks/useSearchFilters";
 import PageWrapper from "@/components/ui/PageWrapper";
+import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
+import { useFetchProducts } from "../../product/hooks/productCRUD";
+import ProductCard from "../../products/components/productsShowcase/ProductCard";
 
 export type ISortBy = "created_at" | "total_sold";
 const limit = 6;
@@ -29,6 +31,18 @@ const Search = () => {
     handleRatingChange,
     handleHasDiscountChange,
   } = useSearchFilters();
+
+  const productsQuery = useFetchProducts({
+    page,
+    limit,
+    sort: [{ field: sortBy, ascending: false }],
+    filters: {
+      eq: { brand_id: brand?.id, category_id: selectedCategory?.id },
+      gte: { price: minPrice, rating_avg: rating },
+      lte: { price_final: maxPrice },
+      gt: { discount_percentage: hasDiscount ? 0 : undefined },
+    },
+  });
 
   const handleCategoryChange = (category: ICategory | null) => {
     setSelectedCategory(category);
@@ -60,23 +74,15 @@ const Search = () => {
           onSelectedBrandChange={handleBrandChange}
         />
 
-        <SearchItemContainer
-          onPageChange={setPage}
+        <PaginatedGridSection
+          query={productsQuery}
           title={`common.${selectedCategory?.name.toLocaleLowerCase() || "all_categories"}`}
-          sortBy={sortBy}
-          limit={limit}
-          onChangeSort={(by: ISortBy) => setSortBy(by)}
-          fetchOptions={{
-            page,
-            limit,
-            sort: [{ field: sortBy, ascending: false }],
-            filters: {
-              eq: { brand_id: brand?.id, category_id: selectedCategory?.id },
-              gte: { price: minPrice, rating_avg: rating },
-              lte: { price_final: maxPrice },
-              gt: { discount_percentage: hasDiscount ? 0 : undefined },
-            },
-          }}
+          description="common.showing_products"
+          sortOptions={{ sortBy, onChangeSort: (by: ISortBy) => setSortBy(by) }}
+          onPageChange={setPage}
+          renderItem={(product) => (
+            <ProductCard key={product.id} product={product} />
+          )}
         />
       </div>
     </PageWrapper>

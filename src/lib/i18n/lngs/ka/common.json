@@ -6,6 +6,8 @@
   "no_data_available": "მონაცემები არ არის ხელმისაწვდომი",
   "an_error_has_occured": "შეცდომა მოხდა",
   "categories": "კატეგორიები",
+  "showing_products": "{{start}}–{{end}} შედეგი {{total}}-დან",
+  "keyword": "ძიება: {{keyword}}",
   "electronics": "ელექტრონიკა",
   "cameras": "კამერები",
   "gaming": "გეიმინგი",
