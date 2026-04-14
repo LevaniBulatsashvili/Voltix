@@ -5,6 +5,7 @@ import { buildCartBreadcrumbs } from "../../utils/buildCartBreadCrumbs";
 import CartLoading from "./cartSkeleton/CartLoading";
 import CartLayout from "./cartLayout/CartLayout";
 import CartEmpty from "./cartEmpty/CartEmpty";
+import PageWrapper from "@/components/ui/PageWrapper";
 
 interface ICartViewProps {
   t: TFunction;
@@ -20,7 +21,7 @@ interface ICartViewProps {
 
 const CartView = ({ t, items, pricing }: ICartViewProps) => {
   return (
-    <div className="p-6 w-full md:w-[95%] lg:w-[90%] min-h-[88dvh] text-primary bg-background">
+    <PageWrapper>
       <Breadcrumbs items={buildCartBreadcrumbs(t)} />
 
       <h1 className="mb-5 text-4xl font-extrabold uppercase">
@@ -34,7 +35,7 @@ const CartView = ({ t, items, pricing }: ICartViewProps) => {
       ) : (
         <CartLayout items={items} pricing={pricing} />
       )}
-    </div>
+    </PageWrapper>
   );
 };
 

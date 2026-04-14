@@ -13,7 +13,7 @@ const Breadcrumbs = ({
   className = "",
 }: IBreadcrumbs) => {
   return (
-    <nav className={`text-primary mb-6 ${className}`} aria-label="breadcrumb">
+    <nav className={`mb-6 ${className}`} aria-label="breadcrumb">
       <ol className="flex flex-wrap items-center gap-1">
         {items.map((crumb, idx) => (
           <li

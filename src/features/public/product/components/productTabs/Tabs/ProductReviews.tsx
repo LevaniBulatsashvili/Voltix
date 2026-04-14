@@ -3,8 +3,8 @@ import ProductCommentCard from "@/components/cards/ProductCommentCard";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useInfiniteFetchProductComments } from "../../../hooks/productCommentCRUD";
-import Spinner from "@/components/feedback/Spinner";
-import { useInfiniteFlatten } from "@/hooks/useInfiniteFlatten";
+import { InfiniteGrid } from "@/components/ui/InfiniteGrid";
+import { useInfiniteList } from "@/hooks/useInfiniteList";
 
 interface IProductReviews {
   productId: number;
@@ -15,33 +15,30 @@ const ProductReviews = ({ productId }: IProductReviews) => {
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   const {
-    data: productCommentsQuery,
+    items,
+    total,
+    error,
+    isFetching,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    isFetching,
-    error,
-  } = useInfiniteFetchProductComments({
-    limit: 2,
-    sort: [
-      { field: "created_at", ascending: sortOrder === "newest" ? true : false },
-    ],
-    filters: { eq: { product_id: productId } },
-  });
+  } = useInfiniteList(
+    useInfiniteFetchProductComments({
+      limit: 2,
+      sort: [{ field: "created_at", ascending: sortOrder === "newest" }],
+      filters: { eq: { product_id: productId } },
+    }),
+  );
 
   const toggleSortOrder = () =>
     setSortOrder((prev) => (prev === "newest" ? "oldest" : "newest"));
-
-  const { items: allComments, total: totalComments } =
-    useInfiniteFlatten(productCommentsQuery);
 
   return (
     <div className="p-6 w-full flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <h2 className="text-xl sm:text-2xl font-bold capitalize">
-          {t("product.customer_reviews")} ({totalComments})
+          {t("product.customer_reviews")} ({total})
         </h2>
-
         <div className="flex items-center gap-2">
           <button
             className="bg-gray-200 text-gray-700 w-30 px-6 py-3 rounded-full font-semibold flex items-center gap-1 hover:bg-gray-300 justify-center capitalize"
@@ -63,17 +60,15 @@ const ProductReviews = ({ productId }: IProductReviews) => {
         </div>
       </div>
 
-      {error ? (
-        <div className="text-red-600 capitalize">
-          {t("product.load_more_reviews")}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {allComments.map((comment) => (
-            <ProductCommentCard key={comment.id} productComment={comment} />
-          ))}
-        </div>
-      )}
+      <InfiniteGrid
+        items={items}
+        error={error}
+        isFetching={isFetching}
+        gridClassName="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        renderItem={(comment) => (
+          <ProductCommentCard key={comment.id} productComment={comment} />
+        )}
+      />
 
       {!isFetching && hasNextPage && (
         <button
@@ -86,8 +81,6 @@ const ProductReviews = ({ productId }: IProductReviews) => {
             : t("product.load_more_reviews")}
         </button>
       )}
-
-      {isFetching && <Spinner />}
     </div>
   );
 };

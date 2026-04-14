@@ -32,7 +32,7 @@ const PAGE = {
     GITHUB: "https://github.com/LevaniBulatsashvili",
   },
 
-  NOT_FOUND: "*",
+  NOT_FOUND: "/404",
 };
 
 export { PAGE };

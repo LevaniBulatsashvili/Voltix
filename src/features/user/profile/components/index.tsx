@@ -12,6 +12,7 @@ import ProfileHeaderWithActionsSkeleton from "./profileSkeleton/ProfileWithActio
 import ProfileSecuritySection from "./profileSecuritySection/profileSecuritySection";
 import ProfileSecuritySectionSkeleton from "./profileSkeleton/ProfileSecuritySectionSkeleton";
 import ProfileOrdersSkeleton from "./profileSkeleton/ProfileOrdersSkeleton";
+import PageWrapper from "@/components/ui/PageWrapper";
 
 const Profile = () => {
   const {
@@ -35,60 +36,58 @@ const Profile = () => {
   }, [profileQuery.data, reset]);
 
   return (
-    <div className="w-full">
-      <div className="bg-white my-12 w-[90%] mx-auto">
-        <div className="h-25 bg-linear-to-r from-primary to-background"></div>
+    <PageWrapper>
+      <div className="h-25 bg-linear-to-r from-primary to-background"></div>
 
-        <div className="p-4 sm:p-10 text-black!">
-          <QueryBoundary
-            query={profileQuery}
-            loadingFallback={<ProfileHeaderWithActionsSkeleton />}
-            defaultFallbackOptions={{
-              className: "h-40 p-0! space-y-1! mb-2!",
-            }}
-          >
-            {(profileArr) => (
-              <ProfileHeaderWithActions
-                profile={profileArr[0]}
-                isEditing={isEditing}
-                isSaving={isSaving}
-                onEdit={() => onEdit(() => {})}
-                onSubmit={handleSubmit(onSubmit)}
-              />
-            )}
-          </QueryBoundary>
+      <div className="p-4 sm:p-10 text-black!">
+        <QueryBoundary
+          query={profileQuery}
+          loadingFallback={<ProfileHeaderWithActionsSkeleton />}
+          defaultFallbackOptions={{
+            className: "h-40 p-0! space-y-1! mb-2!",
+          }}
+        >
+          {(profileArr) => (
+            <ProfileHeaderWithActions
+              profile={profileArr[0]}
+              isEditing={isEditing}
+              isSaving={isSaving}
+              onEdit={() => onEdit(() => {})}
+              onSubmit={handleSubmit(onSubmit)}
+            />
+          )}
+        </QueryBoundary>
 
-          <ProfileForm
-            isEditing={isEditing}
-            isSaving={isSaving}
-            isAddressOpen={isAddressOpen}
-            toggleIsAddressOpen={toggleIsAddressOpen}
-            onSubmit={onSubmit}
-            formMethods={formMethods}
-          />
+        <ProfileForm
+          isEditing={isEditing}
+          isSaving={isSaving}
+          isAddressOpen={isAddressOpen}
+          toggleIsAddressOpen={toggleIsAddressOpen}
+          onSubmit={onSubmit}
+          formMethods={formMethods}
+        />
 
-          <QueryBoundary
-            query={profileQuery}
-            loadingFallback={<ProfileSecuritySectionSkeleton />}
-            defaultFallbackOptions={{
-              className: "mt-8 h-60 space-y-1! mb-14!",
-            }}
-          >
-            {(profileArr) => <ProfileSecuritySection profile={profileArr[0]} />}
-          </QueryBoundary>
+        <QueryBoundary
+          query={profileQuery}
+          loadingFallback={<ProfileSecuritySectionSkeleton />}
+          defaultFallbackOptions={{
+            className: "mt-8 h-60 space-y-1! mb-14!",
+          }}
+        >
+          {(profileArr) => <ProfileSecuritySection profile={profileArr[0]} />}
+        </QueryBoundary>
 
-          <QueryBoundary
-            query={ordersQuery}
-            loadingFallback={<ProfileOrdersSkeleton />}
-            defaultFallbackOptions={{
-              className: "mt-8 h-65! space-y-1!",
-            }}
-          >
-            {(orders) => <ProfileOrders orders={orders} />}
-          </QueryBoundary>
-        </div>
+        <QueryBoundary
+          query={ordersQuery}
+          loadingFallback={<ProfileOrdersSkeleton />}
+          defaultFallbackOptions={{
+            className: "mt-8 h-65! space-y-1!",
+          }}
+        >
+          {(orders) => <ProfileOrders orders={orders} />}
+        </QueryBoundary>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 

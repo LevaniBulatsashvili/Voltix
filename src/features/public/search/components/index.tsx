@@ -6,6 +6,7 @@ import SearchFilters from "./searchFilters/SearchFilters";
 import SearchItemContainer from "./searchItemContainer/SearchItemContainer";
 import type { IBrand, ICategory } from "@/types/product";
 import { useSearchFilters } from "../hooks/useSearchFilters";
+import PageWrapper from "@/components/ui/PageWrapper";
 
 export type ISortBy = "created_at" | "total_sold";
 const limit = 6;
@@ -40,7 +41,7 @@ const Search = () => {
   };
 
   return (
-    <div className="p-6 w-full md:w-[95%] lg:w-[90%] min-h-[88dvh] text-primary bg-background">
+    <PageWrapper>
       <Breadcrumbs
         items={buildSearchCrumbs(t, selectedCategory?.name.toLowerCase())}
       />
@@ -78,7 +79,7 @@ const Search = () => {
           }}
         />
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 

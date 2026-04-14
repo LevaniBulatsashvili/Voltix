@@ -27,6 +27,7 @@ export type IAsyncBoundaryMeta = {
 type IAsyncBoundaryProps<T> = {
   response?: T | IDataResponse<T>;
   isLoading: boolean;
+  isFetching?: boolean;
   isRefetching?: boolean;
   error: Error | null;
   noDataFallback?: ReactNode;
@@ -34,12 +35,14 @@ type IAsyncBoundaryProps<T> = {
   errorFallback?: ReactNode;
   defaultFallbackOptions?: IFallbackOptions;
   onRetry?: () => void;
+  renderFooter?: () => ReactNode;
   children: (items: T[], meta: IAsyncBoundaryMeta) => ReactNode;
 };
 
 function AsyncBoundary<T>({
   response,
   isLoading,
+  isFetching,
   isRefetching,
   error,
   noDataFallback,
@@ -47,6 +50,7 @@ function AsyncBoundary<T>({
   errorFallback,
   defaultFallbackOptions,
   onRetry,
+  renderFooter,
   children,
 }: IAsyncBoundaryProps<T>) {
   const settings = useAppSelector((state) => state.settings);
@@ -63,7 +67,7 @@ function AsyncBoundary<T>({
   const state = resolveAsyncState({
     isLoading,
     error,
-    isEmpty,
+    isEmpty: isEmpty && !isFetching,
     flicker,
     settings,
   });
@@ -112,7 +116,12 @@ function AsyncBoundary<T>({
       )
     );
 
-  return <>{children(items, meta)}</>;
+  return (
+    <>
+      {children(items, meta)}
+      {renderFooter?.()}
+    </>
+  );
 }
 
 export default AsyncBoundary;
