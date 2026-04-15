@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 import ProductCard from "./ProductCard";
 import ViewProducts from "./ViewProducts";
 import { PAGE } from "@/pages/pageConfig";

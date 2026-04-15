@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 import ProductGallery from "./ProductGallery";
 import ProductInfo from "./ProductInfo";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";

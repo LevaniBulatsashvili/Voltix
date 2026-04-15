@@ -15,6 +15,7 @@ import NotFoundPage from "@/pages/error/notFound/NotFoundPage";
 import SettingsPage from "@/pages/user/settings/SettingsPage";
 import CategoryPage from "@/pages/public/category/CategoryPage";
 import SearchResultsPage from "@/pages/public/searchResults/SearchResultsPage";
+import WhishlistPage from "@/pages/user/whishlist/WhishlistPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -51,6 +52,7 @@ const AppRoutes = () => (
           <Route path={PAGE.USER.PROFILE} element={<ProfilePage />} />
           <Route path={PAGE.USER.CART} element={<CartPage />} />
           <Route path={PAGE.USER.SETTINGS} element={<SettingsPage />} />
+          <Route path={PAGE.USER.WISHLIST} element={<WhishlistPage />} />
         </Route>
 
         {/* Admin-only pages */}

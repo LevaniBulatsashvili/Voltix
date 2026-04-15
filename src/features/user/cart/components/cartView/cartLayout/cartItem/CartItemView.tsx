@@ -1,7 +1,7 @@
 import CartInfo from "./CartItemInfo";
 import CartItemActions from "./CartItemActions";
 import type { TFunction } from "i18next";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 
 interface ICartItemViewProps {
   t: TFunction;

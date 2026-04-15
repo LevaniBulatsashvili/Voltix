@@ -5,7 +5,7 @@ import ProductsCommentsList from "./ProductsCommentsList";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { IDataResponse } from "@/types/common/api";
-import type { IProductComment } from "@/types/product";
+import type { IProductComment } from "@/types/public/product";
 
 interface IProductsCommentsView {
   title: string;

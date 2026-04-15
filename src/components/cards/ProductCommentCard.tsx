@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import type { IProductComment } from "@/types/product";
+import type { IProductComment } from "@/types/public/product";
 import Avatar from "../ui/Avatar";
 import { formatDateLong } from "@/utils/formatDateLong";
 

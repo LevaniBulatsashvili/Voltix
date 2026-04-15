@@ -1,6 +1,6 @@
 import ProductHeader from "./ProductHeader";
 import ProductActions from "./ProductActions";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 
 interface IProductInfo {
   product: IProduct;

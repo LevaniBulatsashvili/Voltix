@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { PAGE } from "@/pages/pageConfig";
 import Spinner from "../feedback/Spinner";
 import { buildProductLink } from "@/features/public/product/utils/buildProductLink";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 
 export default function SearchBar({ delay = 700 }) {
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ export default function SearchBar({ delay = 700 }) {
                   <span className="truncate">{product.name}</span>
                 </li>
               ))}
-              {products.length > limit && (
+              {products.length > limit - 1 && (
                 <div
                   onClick={onViewAllResults}
                   className="pl-4 py-1 text-lg font-medium hover:bg-gray-100 cursor-pointer"

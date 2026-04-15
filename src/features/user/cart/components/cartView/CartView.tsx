@@ -1,5 +1,5 @@
 import type { TFunction } from "i18next";
-import type { ICartItem } from "@/types/common/cart";
+import type { ICartItem } from "@/types/user/cart";
 import Breadcrumbs from "@/components/ui/BreadCrumbs";
 import { buildCartBreadcrumbs } from "../../utils/buildCartBreadCrumbs";
 import CartLoading from "./cartSkeleton/CartLoading";

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useAppSelector } from "@/hooks/redux";
 import { usePrice } from "./usePrice";
-import type { ICartItem } from "@/types/common/cart";
+import type { ICartItem } from "@/types/user/cart";
 
 const calculateSubtotal = (items: ICartItem[]) =>
   items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);

@@ -36,5 +36,5 @@ export const Query_Tables = {
   profiles: "profiles",
   spec_values: "spec_values",
   specs: "specs",
-  whishlists: "whishlists",
+  wishlists: "wishlists",
 };

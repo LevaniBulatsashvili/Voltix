@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAppDispatch } from "@/hooks/redux";
-import type { IAuthResponse, ILoginInput } from "@/types/auth";
+import type { IAuthResponse, ILoginInput } from "@/types/auth/auth";
 import { setSession, setUser } from "../../store/auth.slice";
 import { authService } from "../../services/authService";
 import { notifySuccess } from "@/lib/toast/notifySuccess";

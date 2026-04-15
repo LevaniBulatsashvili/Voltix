@@ -1,4 +1,4 @@
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import ProductBtn from "@/components/button/ProductBtn";
 

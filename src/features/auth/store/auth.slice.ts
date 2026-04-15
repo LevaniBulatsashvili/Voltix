@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IAuthUser } from "@/types/auth";
+import type { IAuthUser } from "@/types/auth/auth";
 import type { Session } from "@supabase/supabase-js";
 
 interface IAuthState {

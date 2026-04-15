@@ -1,4 +1,4 @@
-import type { IProductComment } from "@/types/product";
+import type { IProductComment } from "@/types/public/product";
 import ProductCommentCard from "@/components/cards/ProductCommentCard";
 
 interface IProductsCommentsList {

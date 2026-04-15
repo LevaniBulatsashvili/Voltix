@@ -1,5 +1,5 @@
 import type { IFilters } from "@/lib/supabase/createSupabaseService";
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 
 export type TMainCategory =
   | "electronics"

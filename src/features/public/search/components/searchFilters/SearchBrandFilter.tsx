@@ -1,4 +1,4 @@
-import type { IBrand } from "@/types/product";
+import type { IBrand } from "@/types/public/product";
 import type { TFunction } from "i18next";
 
 interface ISearchBrandFilter {

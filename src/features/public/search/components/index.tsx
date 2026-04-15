@@ -3,7 +3,7 @@ import Breadcrumbs from "@/components/ui/BreadCrumbs";
 import { buildSearchCrumbs } from "../utils/buildSearchCrumbs";
 import { useTranslation } from "react-i18next";
 import SearchFilters from "./searchFilters/SearchFilters";
-import type { IBrand, ICategory } from "@/types/product";
+import type { IBrand, ICategory } from "@/types/public/product";
 import { useSearchFilters } from "../hooks/useSearchFilters";
 import PageWrapper from "@/components/ui/PageWrapper";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";

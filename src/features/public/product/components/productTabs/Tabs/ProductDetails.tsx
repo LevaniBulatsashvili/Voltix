@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { IProductSpec } from "@/types/product";
+import type { IProductSpec } from "@/types/public/product";
 
 interface IProductDetails {
   specs?: IProductSpec[];

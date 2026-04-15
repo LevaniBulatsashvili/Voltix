@@ -1,4 +1,4 @@
-import type { IProduct } from "@/types/product";
+import type { IProduct } from "@/types/public/product";
 import PriceTag from "@/components/ui/PriceTag";
 import PlaceholderImg from "@/assets/images/Electronics.png";
 import StarRating from "@/components/ui/StarRatings";

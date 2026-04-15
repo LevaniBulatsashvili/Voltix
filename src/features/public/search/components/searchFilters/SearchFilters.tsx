@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Sliders, X } from "lucide-react";
 import { SelectDropdown } from "@/components/ui/SelectDropdown";
-import type { IBrand, ICategory } from "@/types/product";
+import type { IBrand, ICategory } from "@/types/public/product";
 import type { TFunction } from "i18next";
 import SearchPriceFilter from "./SearchPriceFilter";
 import SearchRatingFilter from "./SearchRatingFilter";
 import SearchDiscountFilter from "./SearchDiscountFilter";
 import PrimaryButton from "@/components/button/PrimaryBtn";
-import { useFetchMainCategories } from "../../hooks/mainCategoryCRUD";
+import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD";
 import { useFetchbrands } from "../../hooks/brandCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SelectDropdownSkeleton from "@/components/skeleton/SelectDropdownSkeleton";

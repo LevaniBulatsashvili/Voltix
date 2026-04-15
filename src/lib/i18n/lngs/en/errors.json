@@ -80,6 +80,12 @@
   "failed_to_update_category": "failed to update category",
   "failed_to_delete_category": "failed to delete category",
 
+  "whishlist_not_available": "whishlist not available",
+  "failed_to_fetch_whishlist": "failed to fetch whishlist",
+  "failed_to_post_whishlist": "failed to post whishlist",
+  "failed_to_update_whishlist": "failed to update whishlist",
+  "failed_to_delete_whishlist": "failed to delete whishlist",
+
   "persist": {
     "failed_to_read_cart": "failed to read cart",
     "failed_to_save_cart": "failed to save cart",

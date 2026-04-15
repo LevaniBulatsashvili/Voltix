@@ -46,7 +46,7 @@ const PaginatedGridSection = <T,>({
           title={title}
           description={description}
           currentPage={currentPage}
-          pageSize={totalPages}
+          pageSize={data?.limit ?? 0}
           totalCount={totalCount}
           sortOptions={sortOptions}
         />

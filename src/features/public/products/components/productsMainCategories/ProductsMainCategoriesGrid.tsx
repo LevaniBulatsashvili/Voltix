@@ -1,4 +1,4 @@
-import type { IMainCategory } from "@/types/product";
+import type { IMainCategory } from "@/types/public/product";
 import { buildCategoryLink } from "../../utils/buildCategoryLink";
 import ProductsMainCategoryCard from "./ProductsMainCategoryCard";
 import type { TFunction } from "i18next";

@@ -1,6 +1,6 @@
-import type { ICartItem } from "./common/cart";
-import type { ICurrency } from "./common/currency";
-import type { IProduct } from "./product";
+import type { ICartItem } from "./cart";
+import type { ICurrency } from "@/types/common/currency";
+import type { IProduct } from "@/types/public/product";
 
 export interface IProfile {
   id: string;

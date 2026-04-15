@@ -14,6 +14,7 @@ import common from "./common.json";
 import settings from "./settings.json";
 import search from "./search.json";
 import search_results from "./search_results.json";
+import wishlist from "./wishlist.json";
 
 export const en = {
   header,
@@ -32,4 +33,5 @@ export const en = {
   settings,
   search,
   search_results,
+  wishlist,
 };

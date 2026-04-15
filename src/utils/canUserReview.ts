@@ -1,5 +1,4 @@
-
-import type { IProductComment } from "@/types/product";
+import type { IProductComment } from "@/types/public/product";
 import type { IOrder } from "@/types/profile";
 
 export const canUserReview = (
