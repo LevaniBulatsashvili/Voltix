@@ -5,6 +5,7 @@ import ProductCard from "../../products/components/productsShowcase/ProductCard"
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
 
 const SearchResults = () => {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ const SearchResults = () => {
     limit: 9,
     filters: { ilike: { name: `%${searchVal}%` } },
   });
+  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
 
   return (
     <PageWrapper className="xl:px-0">
@@ -27,7 +29,13 @@ const SearchResults = () => {
         description="common.showing_products"
         onPageChange={setPage}
         renderItem={(product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onToggleLike={() => toggleWishlist(product.id)}
+            isLiked={isLiked(product.id)}
+            wishlistId={getWishlistId(product.id)}
+          />
         )}
         maxCols={3}
       />

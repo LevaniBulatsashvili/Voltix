@@ -3,6 +3,8 @@ import type { IProduct } from "@/types/public/product";
 import ProductCard from "./ProductCard";
 import ViewProducts from "./ViewProducts";
 import { PAGE } from "@/pages/pageConfig";
+import { useWishlistedIds } from "@/features/user/wishlist/hooks/useFetchWishlistIds";
+import { useToggleWishlist } from "@/features/user/wishlist/hooks/useToggleWishlist";
 
 interface IProductShowcase {
   title: string;
@@ -16,6 +18,8 @@ const ProductShowcase = ({
   viewAllLink = PAGE.PUBLIC.SHOP,
 }: IProductShowcase) => {
   const { t } = useTranslation();
+  const { wishlistedIds, wishlistIdByProductId } = useWishlistedIds();
+  const { toggleWishlist } = useToggleWishlist();
 
   return (
     <div className="w-[90%] mx-auto my-15 text-center">
@@ -23,7 +27,13 @@ const ProductShowcase = ({
 
       <div className="w-full mb-9 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onToggleLike={toggleWishlist}
+            isLiked={wishlistedIds.has(product!.id)}
+            wishlistId={wishlistIdByProductId.get(product!.id)}
+          />
         ))}
       </div>
 

@@ -5,7 +5,7 @@ export interface IWishlist {
   id: string;
   profile_id: IProfile["id"];
   product_id: IProduct["id"];
-  created_at: string;
+  created_at?: string;
 
-  product: IProduct;
+  product?: IProduct;
 }

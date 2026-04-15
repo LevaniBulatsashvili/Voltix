@@ -5,11 +5,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetchWishlists } from "../hooks/whishlistCRUD";
 import { useAppSelector } from "@/hooks/redux";
+import { useWishlist } from "../hooks/useWishlist";
 
 const Whishlist = () => {
   const { t } = useTranslation();
   const { profile } = useAppSelector((state) => state.profile);
   const [page, setPage] = useState(1);
+  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
 
   const productsQuery = useFetchWishlists({
     page,
@@ -27,7 +29,13 @@ const Whishlist = () => {
         description="common.showing_products"
         onPageChange={setPage}
         renderItem={({ product }) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product!.id}
+            product={product!}
+            onToggleLike={() => toggleWishlist(product!.id)}
+            isLiked={isLiked(product!.id)}
+            wishlistId={getWishlistId(product!.id)}
+          />
         )}
         maxCols={3}
       />

@@ -9,6 +9,7 @@ import { useInfiniteList } from "@/hooks/useInfiniteList.ts";
 import { InfiniteGrid } from "@/components/ui/InfiniteGrid.tsx";
 import PageWrapper from "@/components/ui/PageWrapper.tsx";
 import CategoryInfiniteGridSkeleton from "./skeleton/CategoryInfiniteGridSkeleton.tsx";
+import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist.ts";
 
 const Category = () => {
   const { t } = useTranslation();
@@ -24,6 +25,8 @@ const Category = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteList(useInfiniteFetchProducts({ limit: 9, ...options }));
+
+  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
 
   const { observerRef } = useInfiniteAutoFetch({
     fetchNextPage,
@@ -46,7 +49,13 @@ const Category = () => {
         error={error}
         isFetching={isFetching}
         renderItem={(product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onToggleLike={() => toggleWishlist(product.id)}
+            isLiked={isLiked(product.id)}
+            wishlistId={getWishlistId(product.id)}
+          />
         )}
         loadingFallback={<CategoryInfiniteGridSkeleton />}
         defaultFallbackOptions={{ className: "h-[70dvh]" }}

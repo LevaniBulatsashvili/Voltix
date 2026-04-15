@@ -9,6 +9,7 @@ import PageWrapper from "@/components/ui/PageWrapper";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import { useFetchProducts } from "../../product/hooks/productCRUD";
 import ProductCard from "../../products/components/productsShowcase/ProductCard";
+import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
 
 export type ISortBy = "created_at" | "total_sold";
 const limit = 6;
@@ -43,6 +44,8 @@ const Search = () => {
       gt: { discount_percentage: hasDiscount ? 0 : undefined },
     },
   });
+
+  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
 
   const handleCategoryChange = (category: ICategory | null) => {
     setSelectedCategory(category);
@@ -81,7 +84,13 @@ const Search = () => {
           sortOptions={{ sortBy, onChangeSort: (by: ISortBy) => setSortBy(by) }}
           onPageChange={setPage}
           renderItem={(product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onToggleLike={() => toggleWishlist(product.id)}
+              isLiked={isLiked(product.id)}
+              wishlistId={getWishlistId(product.id)}
+            />
           )}
         />
       </div>

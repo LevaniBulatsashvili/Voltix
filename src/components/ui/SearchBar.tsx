@@ -28,7 +28,12 @@ export default function SearchBar({ delay = 700 }) {
 
   const onViewAllResults = () => {
     setSearchVal("");
-    navigate(PAGE.PUBLIC.SEARCH_RESULTS.replace(":searchVal", searchVal));
+    navigate(
+      PAGE.PUBLIC.SEARCH_RESULTS.replace(
+        ":searchVal",
+        encodeURIComponent(searchVal.trim()),
+      ),
+    );
   };
 
   const onNavigateToProduct = (product: IProduct) => {
@@ -42,6 +47,13 @@ export default function SearchBar({ delay = 700 }) {
     );
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
+    if (!searchVal.trim()) return;
+    e.preventDefault();
+    onViewAllResults();
+  };
+
   return (
     <div className="relative w-full max-w-100 ml-auto">
       <Search className="absolute left-3 top-3 w-5 h-5 text-text pointer-events-none" />
@@ -53,6 +65,7 @@ export default function SearchBar({ delay = 700 }) {
         value={searchVal}
         disabled={disabled}
         onChange={(e) => setSearchVal(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
 
       {searchedProductsQuery.data && (
