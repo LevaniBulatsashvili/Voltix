@@ -6,15 +6,11 @@ import type { TProfileForm } from "../schemas/profileSchema";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
 import { useTranslation } from "react-i18next";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
-import { useFetchOrders } from "./ordersCRUD";
 
 export const useProfilePageLogic = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const profileQuery = useFetchProfile(user!.id);
-  const ordersQuery = useFetchOrders({
-    filters: { eq: { profile_id: user!.id } },
-  });
 
   const { mutateAsync: updateProfile, isPending: updateProfilePending } =
     useUpdateProfile();
@@ -60,7 +56,6 @@ export const useProfilePageLogic = () => {
 
   return {
     profileQuery,
-    ordersQuery,
     isEditing,
     isAddressOpen,
     isSaving,

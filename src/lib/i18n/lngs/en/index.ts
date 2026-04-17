@@ -15,6 +15,7 @@ import settings from "./settings.json";
 import search from "./search.json";
 import search_results from "./search_results.json";
 import wishlist from "./wishlist.json";
+import orders from "./orders.json";
 
 export const en = {
   header,
@@ -34,4 +35,5 @@ export const en = {
   search,
   search_results,
   wishlist,
+  orders,
 };

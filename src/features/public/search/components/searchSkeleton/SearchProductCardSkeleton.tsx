@@ -2,13 +2,15 @@ import { Skeleton } from "@/components/skeleton/Skeleton";
 
 interface ISearchProductCardGridSkeleton {
   count?: number;
+  cols?: number;
 }
 
 const SearchProductCardGridSkeleton = ({
   count = 6,
+  cols = 2,
 }: ISearchProductCardGridSkeleton) => {
   return (
-    <div className="grid sm:grid-cols-2 gap-4">
+    <div className={`grid sm:grid-cols-${cols} gap-4`}>
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}

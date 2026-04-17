@@ -54,7 +54,9 @@ const PaginatedGridSection = <T,>({
         <QueryBoundary
           query={query}
           defaultFallbackOptions={{ className: "h-[64dvh]" }}
-          loadingFallback={<SearchProductCardGridSkeleton count={4} />}
+          loadingFallback={
+            <SearchProductCardGridSkeleton count={maxCols * 2} cols={maxCols} />
+          }
         >
           {(products) => (
             <div

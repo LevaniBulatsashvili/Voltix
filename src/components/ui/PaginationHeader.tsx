@@ -29,7 +29,7 @@ const PaginationhHeader = ({
   const end = Math.min(currentPage * pageSize, totalCount);
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-4">
+    <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4 mb-8">
       <h1 className="text-4xl font-bold capitalize max-w-125 md:max-w-full">
         {t(title)}
       </h1>

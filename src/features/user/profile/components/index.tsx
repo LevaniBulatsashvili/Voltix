@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { profileSchema, type TProfileForm } from "../schemas/profileSchema";
-import ProfileOrders from "./profileOrders/ProfileOrders";
 import ProfileForm from "./profileForm/ProfileForm";
 import { useProfilePageLogic } from "../hooks/useProfilePageLogic";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
@@ -11,7 +10,6 @@ import ProfileHeaderWithActions from "./profileHeaderWithActions/ProfileHeaderWi
 import ProfileHeaderWithActionsSkeleton from "./profileSkeleton/ProfileWithActionsSkeleton";
 import ProfileSecuritySection from "./profileSecuritySection/profileSecuritySection";
 import ProfileSecuritySectionSkeleton from "./profileSkeleton/ProfileSecuritySectionSkeleton";
-import ProfileOrdersSkeleton from "./profileSkeleton/ProfileOrdersSkeleton";
 import PageWrapper from "@/components/ui/PageWrapper";
 
 const Profile = () => {
@@ -20,7 +18,6 @@ const Profile = () => {
     isAddressOpen,
     isSaving,
     profileQuery,
-    ordersQuery,
     onEdit,
     toggleIsAddressOpen,
     onSubmit,
@@ -75,16 +72,6 @@ const Profile = () => {
           }}
         >
           {(profileArr) => <ProfileSecuritySection profile={profileArr[0]} />}
-        </QueryBoundary>
-
-        <QueryBoundary
-          query={ordersQuery}
-          loadingFallback={<ProfileOrdersSkeleton />}
-          defaultFallbackOptions={{
-            className: "mt-8 h-65! space-y-1!",
-          }}
-        >
-          {(orders) => <ProfileOrders orders={orders} />}
         </QueryBoundary>
       </div>
     </PageWrapper>
