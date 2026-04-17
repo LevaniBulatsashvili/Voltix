@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { PAGE } from "@/pages/pageConfig";
 import {
   getCategoryQueryOptions,
-  type TMainCategory,
+  type TCategoryQueries,
 } from "../utils/categoryQueryMap";
 
-export const useCategoryFilterOptions = (categoryName?: TMainCategory) => {
+export const useCategoryFilterOptions = (categoryName?: TCategoryQueries) => {
   const navigate = useNavigate();
 
   const options = useMemo(() => {

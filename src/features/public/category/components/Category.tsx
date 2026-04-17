@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useCategoryFilterOptions } from "../hooks/useCategoryFilterOptions.ts";
-import type { TMainCategory } from "../utils/categoryQueryMap";
+import type { TCategoryQueries } from "../utils/categoryQueryMap";
 import { useInfiniteFetchProducts } from "../../product/hooks/productCRUD.ts";
 import ProductCard from "../../products/components/productsShowcase/ProductCard.tsx";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,7 @@ import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions.ts
 const Category = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
-  const { categoryName } = useParams<{ categoryName: TMainCategory }>();
+  const { categoryName } = useParams<{ categoryName: TCategoryQueries }>();
 
   const options = useCategoryFilterOptions(categoryName);
   const {
