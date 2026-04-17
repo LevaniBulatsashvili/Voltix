@@ -6,12 +6,14 @@ import { useTranslation } from "react-i18next";
 import { useFetchWishlists } from "../hooks/whishlistCRUD";
 import { useAppSelector } from "@/hooks/redux";
 import { useWishlist } from "../hooks/useWishlist";
+import { getLikeOptions } from "../utils/getLikeOptions";
 
 const Whishlist = () => {
   const { t } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
   const { profile } = useAppSelector((state) => state.profile);
   const [page, setPage] = useState(1);
-  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
+  const { isLiked, toggleWishlist } = useWishlist();
 
   const productsQuery = useFetchWishlists({
     page,
@@ -32,9 +34,12 @@ const Whishlist = () => {
           <ProductCard
             key={product!.id}
             product={product!}
-            onToggleLike={() => toggleWishlist(product!.id)}
-            isLiked={isLiked(product!.id)}
-            wishlistId={getWishlistId(product!.id)}
+            likeOptions={getLikeOptions({
+              userId: user!.id,
+              productId: product!.id,
+              isLiked,
+              toggleWishlist,
+            })}
           />
         )}
         maxCols={3}

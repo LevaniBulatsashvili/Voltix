@@ -3,8 +3,9 @@ import type { IProduct } from "@/types/public/product";
 import ProductCard from "./ProductCard";
 import ViewProducts from "./ViewProducts";
 import { PAGE } from "@/pages/pageConfig";
-import { useWishlistedIds } from "@/features/user/wishlist/hooks/useFetchWishlistIds";
-import { useToggleWishlist } from "@/features/user/wishlist/hooks/useToggleWishlist";
+import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
+import { useAppSelector } from "@/hooks/redux";
+import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
 
 interface IProductShowcase {
   title: string;
@@ -18,8 +19,8 @@ const ProductShowcase = ({
   viewAllLink = PAGE.PUBLIC.SHOP,
 }: IProductShowcase) => {
   const { t } = useTranslation();
-  const { wishlistedIds, wishlistIdByProductId } = useWishlistedIds();
-  const { toggleWishlist } = useToggleWishlist();
+  const { user } = useAppSelector((state) => state.auth);
+  const { isLiked, toggleWishlist } = useWishlist();
 
   return (
     <div className="w-[90%] mx-auto my-15 text-center">
@@ -30,9 +31,12 @@ const ProductShowcase = ({
           <ProductCard
             key={product.id}
             product={product}
-            onToggleLike={toggleWishlist}
-            isLiked={wishlistedIds.has(product!.id)}
-            wishlistId={wishlistIdByProductId.get(product!.id)}
+            likeOptions={getLikeOptions({
+              userId: user?.id,
+              productId: product.id,
+              isLiked,
+              toggleWishlist,
+            })}
           />
         ))}
       </div>

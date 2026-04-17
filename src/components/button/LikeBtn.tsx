@@ -1,8 +1,9 @@
 import { useCooldown } from "@/hooks/useCooldown";
 import { Heart } from "lucide-react";
 
-interface ILikeBtn {
+export interface ILikeBtnOptions {
   isLiked: boolean;
+  wishlistId?: number;
   onLike: () => void;
   heartSize?: number;
   className?: string;
@@ -15,7 +16,7 @@ const LikeBtn = ({
   heartSize = 30,
   cooldownMs = 1000,
   className = "",
-}: ILikeBtn) => {
+}: ILikeBtnOptions) => {
   const { isCoolingDown, run } = useCooldown(cooldownMs);
 
   return (

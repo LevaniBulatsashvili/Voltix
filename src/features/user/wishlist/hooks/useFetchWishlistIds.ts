@@ -4,11 +4,14 @@ import { useFetchWishlists } from "./whishlistCRUD";
 export function useWishlistedIds() {
   const { user } = useAppSelector((state) => state.auth);
 
-  const query = useFetchWishlists({
-    filters: { eq: { profile_id: user!.id } },
-    selectField: "id, product_id",
-    limit: 1000,
-  });
+  const query = useFetchWishlists(
+    {
+      filters: { eq: { profile_id: user?.id ?? "" } },
+      selectField: "id, product_id",
+      limit: 1000,
+    },
+    !!user,
+  );
 
   const wishlistedIds = new Set(
     (query.data?.data ?? []).map((w) => w.product_id),

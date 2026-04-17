@@ -4,25 +4,14 @@ import PlaceholderImg from "@/assets/images/Electronics.png";
 import StarRating from "@/components/ui/StarRatings";
 import AppLink from "@/components/button/AppLink";
 import { buildProductLink } from "../../../product/utils/buildProductLink";
-import LikeBtn from "@/components/button/LikeBtn";
+import LikeBtn, { type ILikeBtnOptions } from "@/components/button/LikeBtn";
 
 export interface IProductCard {
   product: IProduct;
-  isLiked: boolean;
-  wishlistId?: string;
-  onToggleLike: (args: {
-    productId: number;
-    isLiked: boolean;
-    wishlistId?: string;
-  }) => void;
+  likeOptions?: ILikeBtnOptions;
 }
 
-const ProductCard = ({
-  product,
-  isLiked,
-  wishlistId,
-  onToggleLike,
-}: IProductCard) => {
+const ProductCard = ({ product, likeOptions }: IProductCard) => {
   return (
     <AppLink
       to={buildProductLink(
@@ -32,12 +21,9 @@ const ProductCard = ({
       )}
       className="relative bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer"
     >
-      <LikeBtn
-        isLiked={isLiked}
-        onLike={() =>
-          onToggleLike({ productId: product.id, isLiked, wishlistId })
-        }
-      />
+      {likeOptions && (
+        <LikeBtn isLiked={likeOptions.isLiked} onLike={likeOptions.onLike} />
+      )}
 
       <div className="overflow-hidden rounded-lg">
         <img

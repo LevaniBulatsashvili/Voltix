@@ -38,18 +38,18 @@ const AppRoutes = () => (
           />
         </Route>
 
-        {/* Protected pages for any logged-in user */}
-        <Route element={<AuthRoute requireAuth />}>
-          <Route path={PAGE.PUBLIC.SHOP} element={<ProductsPage />} />
-          <Route path={PAGE.PUBLIC.PRODUCT} element={<ProductPage />} />
-          <Route path={PAGE.PUBLIC.SEARCH} element={<SearchPage />} />
-          <Route path={PAGE.PUBLIC.CATEGORY} element={<CategoryPage />} />
-          <Route
-            path={PAGE.PUBLIC.SEARCH_RESULTS}
-            element={<SearchResultsPage />}
-          />
+        {/* Public pages — accessible regardless of auth state */}
+        <Route path={PAGE.PUBLIC.SHOP} element={<ProductsPage />} />
+        <Route path={PAGE.PUBLIC.PRODUCT} element={<ProductPage />} />
+        <Route path={PAGE.PUBLIC.SEARCH} element={<SearchPage />} />
+        <Route path={PAGE.PUBLIC.CATEGORY} element={<CategoryPage />} />
+        <Route
+          path={PAGE.PUBLIC.SEARCH_RESULTS}
+          element={<SearchResultsPage />}
+        />
 
-          {/* user */}
+        {/* Protected pages — logged-in users only */}
+        <Route element={<AuthRoute requireAuth />}>
           <Route path={PAGE.USER.PROFILE} element={<ProfilePage />} />
           <Route path={PAGE.USER.ORDERS} element={<OrdersPage />} />
           <Route path={PAGE.USER.WISHLIST} element={<WhishlistPage />} />
@@ -62,7 +62,6 @@ const AppRoutes = () => (
           {/* <Route path={PAGE.ADMIN} element={<AdminPage />} /> */}
         </Route>
 
-        {/* Catch-all: redirect unknown routes */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

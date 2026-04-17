@@ -6,9 +6,12 @@ import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
+import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
+import { useAppSelector } from "@/hooks/redux";
 
 const SearchResults = () => {
   const { t } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
   const { searchVal } = useParams<string>();
   const [page, setPage] = useState(1);
 
@@ -17,7 +20,7 @@ const SearchResults = () => {
     limit: 9,
     filters: { ilike: { name: `%${searchVal}%` } },
   });
-  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
+  const { isLiked, toggleWishlist } = useWishlist();
 
   return (
     <PageWrapper className="xl:px-0">
@@ -32,9 +35,12 @@ const SearchResults = () => {
           <ProductCard
             key={product.id}
             product={product}
-            onToggleLike={() => toggleWishlist(product.id)}
-            isLiked={isLiked(product.id)}
-            wishlistId={getWishlistId(product.id)}
+            likeOptions={getLikeOptions({
+              userId: user?.id,
+              productId: product.id,
+              isLiked,
+              toggleWishlist,
+            })}
           />
         )}
         maxCols={3}

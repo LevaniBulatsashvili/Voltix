@@ -1,12 +1,5 @@
 import { useRef, useState } from "react";
-import {
-  ShoppingCart,
-  User,
-  LogOut,
-  Settings,
-  Heart,
-  Package,
-} from "lucide-react";
+import { ShoppingCart, User } from "lucide-react";
 import AppLink from "@/components/button/AppLink";
 import LangSelector from "@/components/inputs/LangSelector";
 import ToggleBtn from "@/components/button/ToggleBtn";
@@ -16,6 +9,8 @@ import type { ILanguage } from "@/types/header";
 import { useLogout } from "@/hooks/useLogout";
 import { useTranslation } from "react-i18next";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import ProfileDropdownItem from "./ProfileDropdownItem";
+import { getGuestMenu, getUserMenu } from "../utils/menuGenerators";
 
 interface IActions {
   languages: ILanguage[];
@@ -45,6 +40,10 @@ const Actions = ({
     setDropdownOpen(false);
   };
 
+  const menu = user?.email_verified
+    ? getUserMenu(t, handleLogout)
+    : getGuestMenu(t);
+
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
       {user?.email_verified && (
@@ -58,57 +57,26 @@ const Actions = ({
         </AppLink>
       )}
 
-      {user?.email_verified && (
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={() => setDropdownOpen((prev) => !prev)}
-            className="size-8 rounded-full flex items-center justify-center border border-background opacity-80 hover:opacity-100
-                        focus:outline-none focus:ring-1 focus:ring-indigo-500
-                      "
-          >
-            <User className="w-6 h-6 " />
-          </button>
+      <div className="relative">
+        <button
+          onClick={() => setDropdownOpen((prev) => !prev)}
+          className="size-8 rounded-full flex items-center justify-center"
+        >
+          <User className="size-7  object-cover rounded-full border" />
+        </button>
 
-          {dropdownOpen && (
-            <div className="absolute -right-19  sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50">
-              <AppLink
-                to={PAGE.USER.PROFILE}
+        {dropdownOpen && (
+          <div className="absolute -right-19 sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50">
+            {menu.map((item, i) => (
+              <ProfileDropdownItem
+                key={i}
+                item={item}
                 onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
-              >
-                <User className="w-4 h-4" /> {t("header.profile")}
-              </AppLink>
-              <AppLink
-                to={PAGE.USER.ORDERS}
-                onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
-              >
-                <Package className="w-4 h-4" /> {t("header.orders")}
-              </AppLink>
-              <AppLink
-                to={PAGE.USER.WISHLIST}
-                onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
-              >
-                <Heart className="w-4 h-4" /> {t("header.wishlist")}
-              </AppLink>
-              <AppLink
-                to={PAGE.USER.SETTINGS}
-                onClick={() => setDropdownOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
-              >
-                <Settings className="w-4 h-4" /> {t("header.settings")}
-              </AppLink>
-              <button
-                onClick={handleLogout}
-                className="w-full text-left flex items-center gap-2 px-4 py-2 hover:opacity-90"
-              >
-                <LogOut className="w-4 h-4" /> {t("header.logout")}
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <LangSelector
         value={currentLanguage}

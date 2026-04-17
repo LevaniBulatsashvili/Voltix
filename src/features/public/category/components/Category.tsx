@@ -10,9 +10,12 @@ import { InfiniteGrid } from "@/components/ui/InfiniteGrid.tsx";
 import PageWrapper from "@/components/ui/PageWrapper.tsx";
 import CategoryInfiniteGridSkeleton from "./skeleton/CategoryInfiniteGridSkeleton.tsx";
 import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist.ts";
+import { useAppSelector } from "@/hooks/redux.ts";
+import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions.ts";
 
 const Category = () => {
   const { t } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
   const { categoryName } = useParams<{ categoryName: TMainCategory }>();
 
   const options = useCategoryFilterOptions(categoryName);
@@ -26,7 +29,7 @@ const Category = () => {
     isFetchingNextPage,
   } = useInfiniteList(useInfiniteFetchProducts({ limit: 9, ...options }));
 
-  const { isLiked, getWishlistId, toggleWishlist } = useWishlist();
+  const { isLiked, toggleWishlist } = useWishlist();
 
   const { observerRef } = useInfiniteAutoFetch({
     fetchNextPage,
@@ -52,9 +55,12 @@ const Category = () => {
           <ProductCard
             key={product.id}
             product={product}
-            onToggleLike={() => toggleWishlist(product.id)}
-            isLiked={isLiked(product.id)}
-            wishlistId={getWishlistId(product.id)}
+            likeOptions={getLikeOptions({
+              userId: user?.id,
+              productId: product.id,
+              isLiked,
+              toggleWishlist,
+            })}
           />
         )}
         loadingFallback={<CategoryInfiniteGridSkeleton />}
