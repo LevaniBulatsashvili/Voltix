@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useInfiniteFetchProductComments } from "../../../hooks/productCommentCRUD";
 import { InfiniteGrid } from "@/components/ui/InfiniteGrid";
 import { useInfiniteList } from "@/hooks/useInfiniteList";
+import { useAppSelector } from "@/hooks/redux";
 
 interface IProductReviews {
   productId: number;
@@ -12,6 +13,7 @@ interface IProductReviews {
 
 const ProductReviews = ({ productId }: IProductReviews) => {
   const { t } = useTranslation();
+  const { user } = useAppSelector((state) => state.auth);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   const {
@@ -54,9 +56,11 @@ const ProductReviews = ({ productId }: IProductReviews) => {
             />
           </button>
 
-          <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
-            {t("product.review")}
-          </button>
+          {user?.email_verified && (
+            <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
+              {t("product.review")}
+            </button>
+          )}
         </div>
       </div>
 

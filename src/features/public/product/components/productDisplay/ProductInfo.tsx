@@ -9,6 +9,7 @@ interface IProductInfo {
   increase: () => void;
   decrease: () => void;
   handleAddToCart: () => void;
+  productActionsDisabled: boolean;
 }
 
 const ProductInfo = ({
@@ -18,6 +19,7 @@ const ProductInfo = ({
   increase,
   decrease,
   handleAddToCart,
+  productActionsDisabled,
 }: IProductInfo) => {
   const { name, rating_avg, price, discount_percentage, description } = product;
 
@@ -30,14 +32,16 @@ const ProductInfo = ({
         discount={discount_percentage}
       />
       <p>{description}</p>
-      <ProductActions
-        product={product}
-        maxQuantity={maxQuantity}
-        quantity={quantity}
-        increase={increase}
-        decrease={decrease}
-        handleAddToCart={handleAddToCart}
-      />
+      {productActionsDisabled && (
+        <ProductActions
+          product={product}
+          maxQuantity={maxQuantity}
+          quantity={quantity}
+          increase={increase}
+          decrease={decrease}
+          handleAddToCart={handleAddToCart}
+        />
+      )}
     </div>
   );
 };
