@@ -60,6 +60,11 @@ export const getAdminMenu = (t: TFunction, signOut: () => void): MenuItem[] => [
     to: PAGE.ADMIN.PRODUCTS,
   },
   {
+    label: t("header.settings"),
+    icon: <Settings className="size-4" />,
+    to: PAGE.USER.SETTINGS,
+  },
+  {
     label: t("header.logout"),
     icon: <LogOut className="size-4" />,
     type: "button",

@@ -1,5 +1,7 @@
+import { useAppSelector } from "@/hooks/redux";
 import TableEmpty from "./TableEmpty";
-import TableLoading from "./TableLoading";
+import { useFlicker } from "@/hooks/useFlicker";
+import Spinner from "@/components/feedback/Spinner";
 
 interface IDataTableProps<T> {
   data: T[];
@@ -18,8 +20,22 @@ export function DataTable<T>({
   loadingComponent,
   emptyComponent,
 }: IDataTableProps<T>) {
-  if (isLoading) return loadingComponent ?? <TableLoading colSpan={colSpan} />;
-  if (!data.length) return emptyComponent ?? <TableEmpty colSpan={colSpan} />;
+  const {
+    permaNoDataState,
+    permaLoadingState,
+    flickerNoDataState,
+    flickerLoadingState,
+  } = useAppSelector((state) => state.settings);
+
+  const flicker = useFlicker({
+    flickerLoading: flickerLoadingState,
+    flickerEmpty: flickerNoDataState,
+  });
+
+  if (isLoading || permaLoadingState || flicker === "loading")
+    return loadingComponent ?? <Spinner />;
+  if (!data.length || permaNoDataState || flicker === "empty")
+    return emptyComponent ?? <TableEmpty colSpan={colSpan} />;
 
   return <>{data.map(renderRow)}</>;
 }

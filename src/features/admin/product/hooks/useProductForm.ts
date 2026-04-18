@@ -10,7 +10,7 @@ import {
   defaultProductForm,
   productSchema,
   type ProductFormData,
-} from "../schemas/schema";
+} from "../schemas/productSchema";
 import type { ICreatePayload } from "@/types/common/api";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
 

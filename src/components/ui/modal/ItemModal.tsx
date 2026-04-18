@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "./Modal";
+import PrimaryButton from "@/components/button/PrimaryBtn";
 
 interface IItemModal {
   open: boolean;
@@ -23,34 +24,31 @@ const ItemModal = ({
   return (
     <Modal isOpen={open} onClose={onClose} className="max-w-lg">
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-base font-medium">
+        <h2 className="text-xl font-medium">
           {isEditing
             ? t("admin_products.edit_product")
             : t("admin_products.add_product")}
         </h2>
 
-        <button onClick={onClose} className="text-gray-400 hover:text-gray-700">
-          <X size={16} />
+        <button onClick={onClose} className="opacity-70 hover:opacity-100">
+          <X size={20} />
         </button>
       </div>
 
-      {/* Content */}
       {children}
 
       <div className="flex justify-end gap-2 mt-5">
-        <button
+        <PrimaryButton
+          text={t("common.cancel")}
           onClick={onClose}
-          className="h-9 px-4 border border-gray-200 rounded-lg text-sm hover:bg-gray-50"
-        >
-          {t("common.cancel")}
-        </button>
+          className="py-2! text-primary! bg-background! border"
+        />
 
-        <button
+        <PrimaryButton
+          text={isEditing ? t("common.save_changes") : t("common.create")}
           onClick={onSubmit}
-          className="h-9 px-4 bg-gray-900 text-white rounded-lg text-sm hover:opacity-85"
-        >
-          {isEditing ? t("common.save_changes") : t("common.create")}
-        </button>
+          className="py-2!"
+        />
       </div>
     </Modal>
   );

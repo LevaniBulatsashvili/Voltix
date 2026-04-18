@@ -1,6 +1,6 @@
 import { FormInput } from "@/components/form/Input/FormInput";
 import type { UseFormRegister, FieldErrors, Control } from "react-hook-form";
-import type { ProductFormData } from "../../schemas/schema";
+import type { ProductFormData } from "../../schemas/productSchema";
 import { useTranslation } from "react-i18next";
 import { Label } from "@/components/form/Input/Label";
 import { useFetchBrands } from "@/features/public/search/hooks/brandCRUD";
@@ -16,7 +16,7 @@ interface IProductFormFields {
   mainCategoryId?: number;
 }
 
-interface IFormSelectProps {
+interface IFormSelect {
   name: keyof ProductFormData;
   label: string;
   control: Control<ProductFormData>;
@@ -32,7 +32,7 @@ const FormSelect = ({
   options,
   error,
   baseLabel,
-}: IFormSelectProps) => {
+}: IFormSelect) => {
   const { t } = useTranslation();
   const { field } = useController({ name, control });
 
@@ -44,6 +44,7 @@ const FormSelect = ({
         onChange={(val) => field.onChange(val === "" ? "" : Number(val))}
         options={options}
         baseLabel={baseLabel ?? "common.select"}
+        selectBtnClassName="py-4"
       />
       {error && (
         <p className="mt-1 text-sm text-red-500">{t(`errors.${error}`)}</p>

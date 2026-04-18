@@ -58,5 +58,7 @@
   "manage": "Manage",
   "all": "All",
   "select": "Select",
-  "create": "Create"
+  "create": "Create",
+  "no_data_found": "No Data Found",
+  "try_adjusting_filters": "Try Adjusting Filters"
 }

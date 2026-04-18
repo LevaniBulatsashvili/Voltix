@@ -28,7 +28,7 @@ const Modal = ({ isOpen, children, onClose, className = "" }: IModal) => {
       <div
         ref={ref}
         onClick={(e) => e.stopPropagation()}
-        className={`bg-background text-primary border border-primary/30 rounded-xl p-6 sm:p-8 w-full max-w-xl shadow-lg mx-4 ${className}`}
+        className={`bg-background text-primary border border-primary/30 rounded-xl py-8 px-3 sm:px-6 lg:px-8 w-full max-w-xl shadow-lg mx-4 ${className}`}
       >
         {children}
       </div>

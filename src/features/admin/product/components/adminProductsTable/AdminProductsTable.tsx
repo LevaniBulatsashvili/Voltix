@@ -7,6 +7,7 @@ import { TableRow } from "@/components/ui/table/TableRow";
 import { usePrice } from "@/features/user/cart/hooks/usePrice";
 import type { IProduct } from "@/types/public/product";
 import { useTranslation } from "react-i18next";
+import AdminProductsTableSkeleton from "./AdminProductsTableSkeleton";
 
 interface IAdminProductsTable {
   products: IProduct[];
@@ -41,6 +42,7 @@ const AdminProductsTable = ({
           data={products}
           isLoading={isLoading}
           colSpan={8}
+          loadingComponent={<AdminProductsTableSkeleton />}
           renderRow={(product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
