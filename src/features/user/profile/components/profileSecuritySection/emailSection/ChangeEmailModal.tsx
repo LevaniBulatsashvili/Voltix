@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PrimaryButton from "@/components/button/PrimaryBtn";
 import { FormInput } from "@/components/form/Input/FormInput";
-import Modal from "@/components/ui/Modal";
+import Modal from "@/components/ui/modal/Modal";
 import {
   changeEmailSchema,
   type TChangeEmail,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import NavLinks from "./NavLinks";
-import SearchBar from "@/components/ui/SearchBar";
+import ProductSearchBar from "@/features/public/product/components/productSearchBar/ProductSearchBar.";
 import Actions from "./Actions";
 import type { IMobileMenu } from "@/types/header/MobileMenu";
 
@@ -41,7 +41,7 @@ const MobileMenu = ({
             onToggleTheme={onToggleTheme}
           />
 
-          <SearchBar />
+          <ProductSearchBar />
 
           <nav className="flex flex-col gap-2 mt-2">
             <NavLinks

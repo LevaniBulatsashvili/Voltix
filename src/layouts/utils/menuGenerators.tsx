@@ -52,3 +52,17 @@ export const getGuestMenu = (t: TFunction): MenuItem[] => [
     to: PAGE.AUTH.REGISTER,
   },
 ];
+
+export const getAdminMenu = (t: TFunction, signOut: () => void): MenuItem[] => [
+  {
+    label: t("header.managment"),
+    icon: <Package className="size-4" />,
+    to: PAGE.ADMIN.PRODUCTS,
+  },
+  {
+    label: t("header.logout"),
+    icon: <LogOut className="size-4" />,
+    type: "button",
+    onClick: signOut,
+  },
+];

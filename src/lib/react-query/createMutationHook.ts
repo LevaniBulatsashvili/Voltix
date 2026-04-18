@@ -3,12 +3,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 interface IUseMutationStatic<TInput, TOutput, TKey> {
   mutationFn: (input: TInput) => Promise<TOutput>;
   queryKey: TKey;
+  invalidateKey?: TKey;
   isDelete?: boolean;
 }
 
 interface IUseMutationDynamic<TInput, TOutput, TKey> {
   mutationFn: (input: TInput) => Promise<TOutput>;
   queryKey: (input: TInput, result: TOutput) => TKey;
+  invalidateKey?: TKey | ((input: TInput, result: TOutput) => TKey);
   isDelete?: boolean;
 }
 
@@ -24,6 +26,7 @@ export const createMutationHook = <
 >({
   mutationFn,
   queryKey,
+  invalidateKey,
   isDelete = false,
 }: IUseMutationOptions<TInput, TOutput, TKey>) => {
   return () => {
@@ -38,6 +41,14 @@ export const createMutationHook = <
 
         if (isDelete) queryClient.removeQueries({ queryKey: key });
         else queryClient.setQueryData<TCache>(key, data as unknown as TCache);
+
+        const toInvalidate: TKey | undefined =
+          typeof invalidateKey === "function"
+            ? invalidateKey(input, data)
+            : invalidateKey;
+
+        if (toInvalidate)
+          queryClient.invalidateQueries({ queryKey: toInvalidate });
       },
     });
   };

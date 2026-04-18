@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { buildCategoryLink } from "@/features/public/products/utils/buildCategoryLink";
 import Actions from "./Actions";
-import SearchBar from "@/components/ui/SearchBar";
+import ProductSearchBar from "@/features/public/product/components/productSearchBar/ProductSearchBar.";
 import Logo from "./Logo";
 import { useAppDispatch } from "@/hooks/redux";
 import { toggleTheme } from "@/store/theme/theme.slice";
@@ -54,7 +54,7 @@ const Header = () => {
 
         <div className="flex items-center gap-4 flex-1 min-w-0 justify-end">
           <div className="flex-1 min-w-21.5 max-w-lg">
-            <SearchBar />
+            <ProductSearchBar />
           </div>
           <Actions
             languages={languages}

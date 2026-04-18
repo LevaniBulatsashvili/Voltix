@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "./useDebounce";
 
-export function useSearchDebounce(initialValue: string, delay: number) {
+export function useSearchDebounce(initialValue: string, delay: number = 700) {
   const [value, setValue] = useState(
     () => localStorage.getItem(initialValue) ?? "",
   );

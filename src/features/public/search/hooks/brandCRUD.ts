@@ -4,9 +4,9 @@ import { brandService } from "../services/brandService";
 
 export const {
   useInfiniteFetchMany: useInfiniteFetchBrandWithTotal,
-  useFetchMany: useFetchbrands,
-  useFetch: useFetchbrand,
-  useCreate: useCreatebrand,
-  useUpdate: useUpdatebrand,
-  useDelete: useDeletebrand,
+  useFetchMany: useFetchBrands,
+  useFetch: useFetchBrand,
+  useCreate: useCreateBrand,
+  useUpdate: useUpdateBrand,
+  useDelete: useDeleteBrand,
 } = createEntityHooks(brandService, Query_Keys.brand);

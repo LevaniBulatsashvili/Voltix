@@ -25,6 +25,7 @@ const PAGE = {
 
   ADMIN: {
     BASE: "/admin",
+    PRODUCTS: "/admin/products",
   },
 
   SOCIAL: {

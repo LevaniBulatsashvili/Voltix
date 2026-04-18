@@ -17,6 +17,7 @@ import CategoryPage from "@/pages/public/category/CategoryPage";
 import SearchResultsPage from "@/pages/public/searchResults/SearchResultsPage";
 import WhishlistPage from "@/pages/user/whishlist/WhishlistPage";
 import OrdersPage from "@/pages/user/orders/OrdersPage";
+import AdminProductPage from "@/pages/admin/product/AdminProductsPage";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -58,8 +59,8 @@ const AppRoutes = () => (
         </Route>
 
         {/* Admin-only pages */}
-        <Route element={<AuthRoute requireAuth allowedRoles={["admin"]} />}>
-          {/* <Route path={PAGE.ADMIN} element={<AdminPage />} /> */}
+        <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
+          <Route path={PAGE.ADMIN.PRODUCTS} element={<AdminProductPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

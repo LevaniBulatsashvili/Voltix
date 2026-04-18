@@ -2,10 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "@/hooks/redux";
 import { PAGE } from "@/pages/pageConfig";
 import Spinner from "@/components/feedback/Spinner";
+import { useFetchProfile } from "@/features/user/profile/hooks/profileCRUD";
+import type { IProfile } from "@/types/user/profile";
 
 interface IAuthRoute {
   requireAuth?: boolean;
-  allowedRoles?: Array<"user" | "admin">;
+  allowedRoles?: IProfile["role"];
   redirectPath?: string;
   requireEmailVerified?: boolean;
   guestOnly?: boolean; // For Login/Register
@@ -21,6 +23,7 @@ const AuthRoute = ({
   verifyPagesOnly = false,
 }: IAuthRoute) => {
   const { user, isLoading } = useAppSelector((state) => state.auth);
+  const { data: profile } = useFetchProfile(user?.id ?? "", !!user?.id);
 
   if (isLoading) return <Spinner />;
 
@@ -45,7 +48,12 @@ const AuthRoute = ({
     return <Navigate to={redirectPath ?? PAGE.AUTH.LOGIN} replace />;
 
   // Role check
-  if (requireAuth && allowedRoles && user && !allowedRoles.includes(user.role))
+  if (
+    requireAuth &&
+    allowedRoles &&
+    profile &&
+    !allowedRoles.includes(profile.role)
+  )
     return <Navigate to={redirectPath ?? PAGE.PUBLIC.SHOP} replace />;
 
   // Email verification required

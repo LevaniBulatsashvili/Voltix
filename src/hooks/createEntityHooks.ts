@@ -42,16 +42,19 @@ export const createEntityHooks = <
   const useCreate = createMutationHook({
     mutationFn: service.create,
     queryKey: (_: ICreatePayload<T>, data: T) => [queryKeyPrefix, data.id],
+    invalidateKey: [queryKeyPrefix],
   });
 
   const useUpdate = createMutationHook({
     mutationFn: service.update,
     queryKey: (_: IUpdatePayload<T>, data: T) => [queryKeyPrefix, data.id],
+    invalidateKey: [queryKeyPrefix],
   });
 
   const useDelete = createMutationHook({
     mutationFn: service.delete,
     queryKey: (id: IDType) => [queryKeyPrefix, id],
+    invalidateKey: [queryKeyPrefix],
     isDelete: true,
   });
 

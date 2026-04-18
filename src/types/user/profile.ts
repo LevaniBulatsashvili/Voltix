@@ -9,6 +9,7 @@ export interface IProfile {
   phone?: string;
   avatar_url?: string;
   created_at: string;
+  role: "user" | "courier" | "admin" | "developer";
 
   addresses: IAddress[];
   orders?: IOrder[];

@@ -7,6 +7,7 @@
   "an_error_has_occured": "შეცდომა მოხდა",
   "categories": "კატეგორიები",
   "showing_products": "{{start}}–{{end}} შედეგი {{total}}-დან",
+  "showing_items": "{{start}}–{{end}} შედეგი {{total}}-დან",
   "keyword": "ძიება: {{keyword}}",
   "electronics": "ელექტრონიკა",
   "cameras": "კამერები",
@@ -50,5 +51,12 @@
   "new-arrivals": "უახლესი",
   "top-selling": "პოპულარული",
   "on-sale": "ფასდაკლებული",
-  "search": "ძიება"
+  "search": "ძიება",
+  "save_changes": "შენახვა",
+  "cancel": "გაუქმება",
+  "delete": "წაშლა",
+  "manage": "მენეჯმენტი",
+  "all": "ყველა",
+  "select": "არჩევა",
+  "create": "შექმნა"
 }

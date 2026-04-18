@@ -54,7 +54,7 @@ export const authService: IAuthService = {
       return { authUser, user: null, session: data.session };
     }
 
-    const profile = await profileService.create({ email });
+    const profile = await profileService.create({ email, role: "user" });
 
     return {
       authUser,

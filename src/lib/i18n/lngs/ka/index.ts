@@ -1,21 +1,33 @@
-import header from "./header.json";
-import footer from "./footer.json";
-import products from "./products.json";
-import product from "./product.json";
-import login from "./login.json";
-import register from "./register.json";
-import verifyEmail from "./verify_email.json";
-import verificationSuccess from "./verification_success.json";
-import errors from "./errors.json";
-import profile from "./profile.json";
-import cart from "./cart.json";
-import category from "./category.json";
-import common from "./common.json";
-import settings from "./settings.json";
-import search from "./search.json";
-import search_results from "./search_results.json";
-import wishlist from "./wishlist.json";
-import orders from "./orders.json";
+// Layout
+import header from "./layout/header.json";
+import footer from "./layout/footer.json";
+
+// Auth
+import login from "./auth/login.json";
+import register from "./auth/register.json";
+import verifyEmail from "./auth/verify_email.json";
+import verificationSuccess from "./auth/verification_success.json";
+
+// Public
+import products from "./public/products.json";
+import product from "./public/product.json";
+import category from "./public/category.json";
+import search from "./public/search.json";
+import search_results from "./public/search_results.json";
+
+// User
+import profile from "./user/profile.json";
+import orders from "./user/orders.json";
+import wishlist from "./user/wishlist.json";
+import settings from "./user/settings.json";
+import cart from "./user/cart.json";
+
+// Admin
+import admin_products from "./admin/admin_products.json";
+
+// Shared
+import errors from "./shared/errors.json";
+import common from "./shared/common.json";
 
 export const ka = {
   header,
@@ -36,4 +48,5 @@ export const ka = {
   search_results,
   wishlist,
   orders,
+  admin_products,
 };

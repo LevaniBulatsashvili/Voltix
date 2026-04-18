@@ -11,5 +11,11 @@
   "review": "review",
   "load_more_reviews": "load more reviews",
   "no_specifications_available_for_this_product": "no specifications available for this product",
-  "loading": "loading..."
+  "loading": "loading...",
+  "product": "Product",
+  "category": "Category",
+  "price": "Price",
+  "stock": "Stock",
+  "rating": "Rating",
+  "sold": "Sold"
 }

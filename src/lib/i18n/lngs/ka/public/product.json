@@ -11,5 +11,11 @@
   "review": "შეაფასე",
   "load_more_reviews": "მეტის ჩვენება",
   "no_specifications_available_for_this_product": "პროდუქტს სპეციფიკაციები არ აქვს.",
-  "loading": "იტვირთება..."
+  "loading": "იტვირთება...",
+  "product": "პროდუქტი",
+  "category": "კატეგორია",
+  "price": "ფასი",
+  "stock": "მარაგი",
+  "rating": "რეიტინგი",
+  "sold": "გაყიდული"
 }

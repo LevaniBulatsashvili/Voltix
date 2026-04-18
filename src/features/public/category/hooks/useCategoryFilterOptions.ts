@@ -6,7 +6,10 @@ import {
   type TCategoryQueries,
 } from "../utils/categoryQueryMap";
 
-export const useCategoryFilterOptions = (categoryName?: TCategoryQueries) => {
+export const useCategoryFilterOptions = (
+  categoryName: TCategoryQueries,
+  shouldNavigate = true,
+) => {
   const navigate = useNavigate();
 
   const options = useMemo(() => {
@@ -14,9 +17,13 @@ export const useCategoryFilterOptions = (categoryName?: TCategoryQueries) => {
   }, [categoryName]);
 
   useEffect(() => {
-    if (categoryName && !getCategoryQueryOptions(categoryName))
+    if (
+      shouldNavigate &&
+      categoryName &&
+      !getCategoryQueryOptions(categoryName)
+    )
       navigate(PAGE.NOT_FOUND);
-  }, [categoryName, navigate]);
+  }, [categoryName, navigate, shouldNavigate]);
 
   return options;
 };

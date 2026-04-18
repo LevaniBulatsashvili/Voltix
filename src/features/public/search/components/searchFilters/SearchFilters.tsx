@@ -8,7 +8,7 @@ import SearchRatingFilter from "./SearchRatingFilter";
 import SearchDiscountFilter from "./SearchDiscountFilter";
 import PrimaryButton from "@/components/button/PrimaryBtn";
 import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD";
-import { useFetchbrands } from "../../hooks/brandCRUD";
+import { useFetchBrands } from "../../hooks/brandCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SelectDropdownSkeleton from "@/components/skeleton/SelectDropdownSkeleton";
 import SelectDropdownGridSkeleton from "@/components/skeleton/SelectDropdownGridSkeleton";
@@ -44,7 +44,7 @@ const SearchFilters = ({
     sort: [{ field: "id", ascending: true }],
     selectField: "*, categories(id,name)",
   });
-  const brandQuery = useFetchbrands({});
+  const brandQuery = useFetchBrands({});
 
   return (
     <>

@@ -10,5 +10,6 @@
   "settings": "settings",
   "logout": "logout",
   "all_results": "All Results",
-  "no_results_found": "No Results Found"
+  "no_results_found": "No Results Found",
+  "managment": "Managment"
 }

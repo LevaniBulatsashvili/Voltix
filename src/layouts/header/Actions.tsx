@@ -10,7 +10,12 @@ import { useLogout } from "@/hooks/useLogout";
 import { useTranslation } from "react-i18next";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import ProfileDropdownItem from "./ProfileDropdownItem";
-import { getGuestMenu, getUserMenu } from "../utils/menuGenerators";
+import {
+  getAdminMenu,
+  getGuestMenu,
+  getUserMenu,
+} from "../utils/menuGenerators";
+import { useFetchProfile } from "@/features/user/profile/hooks/profileCRUD";
 
 interface IActions {
   languages: ILanguage[];
@@ -34,15 +39,20 @@ const Actions = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   useClickOutside(dropdownRef, () => setDropdownOpen(false));
   const totalItems = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
+  const { data: profile } = useFetchProfile(user?.id ?? "", !!user?.id);
 
   const handleLogout = () => {
     signOut();
     setDropdownOpen(false);
   };
 
-  const menu = user?.email_verified
-    ? getUserMenu(t, handleLogout)
-    : getGuestMenu(t);
+  let menu;
+
+  if (!profile) menu = getGuestMenu(t);
+  else if (profile.role === "user") menu = getUserMenu(t, handleLogout);
+  else if (profile.role === "admin") menu = getAdminMenu(t, handleLogout);
+  else if (profile.role === "courier") menu = getUserMenu(t, handleLogout);
+  else menu = getUserMenu(t, handleLogout);
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">

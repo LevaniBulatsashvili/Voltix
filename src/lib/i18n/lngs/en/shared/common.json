@@ -7,6 +7,7 @@
   "categories": "Categories",
   "all_categories": "All Categories",
   "showing_products": "Showing {{start}}–{{end}} of {{total}} products",
+  "showing_items": "Showing {{start}}–{{end}} of {{total}} items",
   "keyword": "Search: {{keyword}}",
   "electronics": "Electronics",
   "cameras": "Cameras",
@@ -50,5 +51,12 @@
   "new-arrivals": "New Arrivals",
   "top-selling": "Top Selling",
   "on-sale": "On Sale",
-  "search": "Search"
+  "search": "Search",
+  "save_changes": "Save Changes",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "manage": "Manage",
+  "all": "All",
+  "select": "Select",
+  "create": "Create"
 }

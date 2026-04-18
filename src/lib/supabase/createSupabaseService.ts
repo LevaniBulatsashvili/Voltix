@@ -39,7 +39,7 @@ export interface ICrudServiceOptions<T> {
 
 export const createSupabaseService = <
   T,
-  TCreate,
+  TCreate extends Record<string, unknown>,
   TUpdate,
   TKey = string | number,
 >({
@@ -120,7 +120,7 @@ export const createSupabaseService = <
   async function create(item: TCreate): Promise<T> {
     const { data, error } = await supabase
       .from(table)
-      .insert(item)
+      .insert(item as unknown as Record<string, unknown>)
       .select(selectFieldOptions?.createSelectField ?? "*")
       .single<T>();
 

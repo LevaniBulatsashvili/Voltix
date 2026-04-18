@@ -1,10 +1,11 @@
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SearchProductCardGridSkeleton from "@/features/public/search/components/searchSkeleton/SearchProductCardSkeleton";
 import Pagination from "@/components/ui/Pagination";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { IDataResponse } from "@/types/common/api";
 import PaginationhHeader, { type ISortOptions } from "./PaginationHeader";
+import { useCachedQueryData } from "@/hooks/useCachedQueryData";
 
 interface IPaginatedGridSection<T> {
   query: UseQueryResult<IDataResponse<T>, Error>;
@@ -27,15 +28,8 @@ const PaginatedGridSection = <T,>({
   renderItem,
   className,
 }: IPaginatedGridSection<T>) => {
-  const [cachedData, setCachedData] = useState<IDataResponse<T> | null>(null);
-
-  const data = query.data ?? cachedData;
-  if (query.data && query.data !== cachedData) setCachedData(query.data);
-
-  const currentPage = data?.page ?? 0;
-  const totalCount = data?.total ?? 0;
-  const totalPages =
-    data?.limit && totalCount ? Math.ceil(totalCount / data.limit) : 1;
+  const { data, currentPage, totalCount, totalPages } =
+    useCachedQueryData(query);
 
   return (
     <div>
