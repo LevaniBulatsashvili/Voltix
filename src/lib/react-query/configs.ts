@@ -19,6 +19,7 @@ export const Query_Keys = {
   getCurrencyRates: "currency-rates",
   searchProducts: "searched-Products",
   wishlist: "wishlist",
+  product_images: "product-images",
 };
 
 export const Query_Tables = {

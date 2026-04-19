@@ -60,5 +60,6 @@
   "select": "Select",
   "create": "Create",
   "no_data_found": "No Data Found",
-  "try_adjusting_filters": "Try Adjusting Filters"
+  "try_adjusting_filters": "Try Adjusting Filters",
+  "uploading": "Uploading..."
 }

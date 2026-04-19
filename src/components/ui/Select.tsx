@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 interface ISelectOption {
   value: string;
@@ -23,12 +22,11 @@ export function Select({
   value,
   onChange,
   options,
-  baseLabel = "common.all",
+  baseLabel = "",
   baseValue = "",
   className = "",
   selectBtnClassName = "",
 }: ISelect) {
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const displayLabel =
@@ -45,7 +43,7 @@ export function Select({
         onClick={() => setOpen((p) => !p)}
         className={`w-full border border-primary/30 rounded-lg p-3 text-sm text-left flex justify-between items-center ${selectBtnClassName}`}
       >
-        <span>{t(displayLabel)}</span>
+        <span>{displayLabel}</span>
         <ChevronDown
           className={`w-4 h-4 text-gray-400 transition-transform duration-100 ${open ? "rotate-180" : ""}`}
         />
@@ -62,7 +60,7 @@ export function Select({
               isSelected(baseValue) ? "bg-gray-100 font-medium" : ""
             }`}
           >
-            {t(baseLabel)}
+            {baseLabel}
             {isSelected(baseValue) && <Check className="w-4 h-4" />}
           </div>
 
@@ -77,7 +75,7 @@ export function Select({
                 isSelected(option.value) ? "bg-gray-100 font-medium" : ""
               }`}
             >
-              {t(option.label)}
+              {option.label}
               {isSelected(option.value) && (
                 <Check className="w-4 h-4 text-green-600" />
               )}

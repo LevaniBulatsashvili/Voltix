@@ -33,11 +33,11 @@ export const FormInput = <T extends FieldValues>({
 
   return (
     <div>
-      <Label htmlFor={String(name)} text={label} />
+      <Label htmlFor={String(name)} text={t(label)} />
 
       <Input
         type={type}
-        placeholder={placeholder ? placeholder : String(name)}
+        placeholder={placeholder ? t(placeholder) : String(t(name))}
         disabled={disabled}
         {...register(name)}
       />

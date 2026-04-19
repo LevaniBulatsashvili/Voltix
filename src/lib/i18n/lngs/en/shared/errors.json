@@ -9,6 +9,7 @@
   "comments_could_not_be_fetched": "comments could not be fetched",
   "main_categories_could_not_be_fetched": "main categories could not be fetched",
   "brands_could_not_be_fetched": "brands could not be fetched",
+  "upload_failed": "Upload Failed",
 
   "entities": {
     "data": "Data",

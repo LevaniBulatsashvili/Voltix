@@ -60,5 +60,6 @@
   "select": "არჩევა",
   "create": "შექმნა",
   "no_data_found": "მონაცემები ვერ მოიძებნა",
-  "try_adjusting_filters": "სცადეთ ფილტრების შეცვლა"
+  "try_adjusting_filters": "სცადეთ ფილტრების შეცვლა",
+  "uploading": "იტვირთება..."
 }

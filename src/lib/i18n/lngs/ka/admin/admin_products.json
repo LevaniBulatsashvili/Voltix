@@ -1,1 +1,27 @@
-{}
+{
+  "products": "პროდუქტები",
+  "manage_your_product_catalog": "მართეთ თქვენი პროდუქციის კატალოგი",
+  "add_product": "პროდუქტის დამატება",
+  "total_products": "ყველა პროდუქტი",
+  "in_stock": "მარაგშია",
+  "out_of_stock": "ამოწურულია",
+  "avg_price": "საშუალო ფასი",
+  "all_categories": "ყველა კატეგორია",
+  "delete_product": "პროდუქტის წაშლა",
+  "are_you_sure_you_want_to_delete": "დარწმუნებული ხართ, რომ გსურთ წაშლა",
+  "this_action_cannot_be_undone": "ეს მოქმედება უკანასკნელია.",
+  "edit_product": "რედაქტირება",
+  "name": "სახელი",
+  "description": "აღწერა",
+  "brand": "ბრენდი",
+  "main_category": "მთავარი კატეგორია",
+  "category": "კატეგორია",
+  "price": "ფასი",
+  "discount": "ფასდაკლება",
+  "stock": "მარაგი",
+  "thumbnail": "მინიატურა",
+  "product_created": "პროდუქტი შეიქმნა!",
+  "product_updated": "პროდუქტი განახლდა!",
+  "product_deleted": "პროდუქტი წაიშალა!",
+  "upload_images": "სურათების ატვირთვა"
+}

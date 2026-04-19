@@ -116,6 +116,17 @@ export const createSupabaseService = <
     return data;
   }
 
+  // --- Create Many ---
+  async function createMany(items: TCreate[]): Promise<T[]> {
+    const { data, error } = await supabase
+      .from(table)
+      .insert(items as unknown as Record<string, unknown>[])
+      .select(selectFieldOptions?.createSelectField ?? "*");
+
+    if (error) throw new Error(`failed_to_create_${serviceName}`);
+    return (data ?? []) as T[];
+  }
+
   // --- Create ---
   async function create(item: TCreate): Promise<T> {
     const { data, error } = await supabase
@@ -143,6 +154,15 @@ export const createSupabaseService = <
     return data;
   }
 
+  // --- Delete Many ---
+  async function deleteMany(filters: IFilters<T>): Promise<void> {
+    let query = supabase.from(table).delete();
+    query = applyFilters<T>(query, filters);
+    const { error } = await query;
+
+    if (error) throw new Error(`failed_to_delete_${serviceName}`);
+  }
+
   // --- Delete ---
   async function deleteItem(id: TKey): Promise<void> {
     const { error } = await supabase
@@ -157,8 +177,10 @@ export const createSupabaseService = <
     fetchMany,
     infiniteFetch,
     fetch,
+    createMany,
     create,
     update,
+    deleteMany,
     delete: deleteItem,
   };
 };

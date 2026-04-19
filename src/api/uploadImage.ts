@@ -5,7 +5,10 @@ export const uploadImage = async (file: File, bucket: string) => {
 
   const { data, error } = await supabase.storage
     .from(bucket)
-    .upload(fileName, file);
+    .upload(fileName, file, {
+      contentType: "image/webp",
+      upsert: false,
+    });
 
   if (error) throw new Error("failed_to_upload_image");
 

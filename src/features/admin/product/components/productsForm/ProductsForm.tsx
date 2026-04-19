@@ -1,86 +1,41 @@
 import { FormInput } from "@/components/form/Input/FormInput";
 import type { UseFormRegister, FieldErrors, Control } from "react-hook-form";
 import type { ProductFormData } from "../../schemas/productSchema";
+import { ImageSelector } from "@/features/shared/components/imageSelector/ImageSelector";
+import { type RefObject } from "react";
+import type { IProduct } from "@/types/public/product";
+import FormSelect from "@/components/form/Input/FormSelect";
 import { useTranslation } from "react-i18next";
-import { Label } from "@/components/form/Input/Label";
-import { useFetchBrands } from "@/features/public/search/hooks/brandCRUD";
-import { useFetchMainCategories } from "@/features/public/category/hooks/mainCategoryCRUD";
-import { useFetchCategories } from "@/features/public/category/hooks/categoryCRUD";
-import { Select } from "@/components/ui/Select";
-import { useController } from "react-hook-form";
+import { useProductFormOptions } from "../../hooks/useProductFormOptions";
 
 interface IProductFormFields {
   register: UseFormRegister<ProductFormData>;
   errors: FieldErrors<ProductFormData>;
   control: Control<ProductFormData>;
   mainCategoryId?: number;
+  uploadRef: RefObject<(() => Promise<string[]>) | null>;
+  formKey?: number;
+  editingProduct: IProduct | null;
 }
-
-interface IFormSelect {
-  name: keyof ProductFormData;
-  label: string;
-  control: Control<ProductFormData>;
-  options: { value: string; label: string }[];
-  error?: string;
-  baseLabel?: string;
-}
-
-const FormSelect = ({
-  name,
-  label,
-  control,
-  options,
-  error,
-  baseLabel,
-}: IFormSelect) => {
-  const { t } = useTranslation();
-  const { field } = useController({ name, control });
-
-  return (
-    <div>
-      <Label htmlFor={name} text={label} />
-      <Select
-        value={String(field.value ?? "")}
-        onChange={(val) => field.onChange(val === "" ? "" : Number(val))}
-        options={options}
-        baseLabel={baseLabel ?? "common.select"}
-        selectBtnClassName="py-4"
-      />
-      {error && (
-        <p className="mt-1 text-sm text-red-500">{t(`errors.${error}`)}</p>
-      )}
-    </div>
-  );
-};
 
 const ProductFormFields = ({
   register,
   errors,
   control,
   mainCategoryId,
+  uploadRef,
+  formKey = 0,
+  editingProduct,
 }: IProductFormFields) => {
-  const { data: brandsData } = useFetchBrands({});
-  const { data: mainCategoriesData } = useFetchMainCategories({});
-  const { data: categoriesData } = useFetchCategories({
-    filters: mainCategoryId
-      ? { eq: { main_category_id: mainCategoryId } }
-      : undefined,
-  });
-
-  const brandOptions = (brandsData?.data ?? []).map((b) => ({
-    value: String(b.id),
-    label: b.name,
-  }));
-
-  const mainCategoryOptions = (mainCategoriesData?.data ?? []).map((mc) => ({
-    value: String(mc.id),
-    label: mc.name,
-  }));
-
-  const categoryOptions = (categoriesData?.data ?? []).map((c) => ({
-    value: String(c.id),
-    label: c.name,
-  }));
+  const { t } = useTranslation();
+  const {
+    brandOptions,
+    mainCategoryOptions,
+    categoryOptions,
+    brandsFetching,
+    mainCategoriesFetching,
+    categoriesFetching,
+  } = useProductFormOptions(mainCategoryId);
 
   return (
     <div className="grid grid-cols-2 gap-3">
@@ -90,39 +45,48 @@ const ProductFormFields = ({
           label="admin_products.name"
           register={register}
           errors={errors}
+          placeholder="admin_products.name"
         />
       </div>
+
       <div className="col-span-2">
         <FormInput
           name="description"
           label="admin_products.description"
           register={register}
           errors={errors}
+          placeholder="admin_products.description"
         />
       </div>
 
       <FormSelect
         name="brand_id"
-        label="admin_products.brand"
+        label={t("admin_products.brand")}
+        baseLabel={t("common.select")}
         control={control}
         options={brandOptions}
-        error={errors.brand_id?.message}
+        error={t(`errors.${errors.brand_id?.message}`)}
+        isLoading={brandsFetching}
       />
 
       <FormSelect
         name="main_category_id"
-        label="admin_products.main_category"
+        label={t("admin_products.main_category")}
+        baseLabel={t("common.select")}
         control={control}
         options={mainCategoryOptions}
-        error={errors.main_category_id?.message}
+        error={t(`errors.${errors.main_category_id?.message}`)}
+        isLoading={mainCategoriesFetching}
       />
 
       <FormSelect
         name="category_id"
-        label="admin_products.category"
+        label={t("admin_products.category")}
+        baseLabel={t("common.select")}
         control={control}
         options={categoryOptions}
-        error={errors.category_id?.message}
+        error={t(`errors.${errors.category_id?.message}`)}
+        isLoading={categoriesFetching}
       />
 
       <FormInput
@@ -131,7 +95,9 @@ const ProductFormFields = ({
         type="number"
         register={register}
         errors={errors}
+        placeholder="admin_products.price"
       />
+
       <FormInput
         name="discount_percentage"
         label="admin_products.discount"
@@ -140,19 +106,27 @@ const ProductFormFields = ({
         errors={errors}
         placeholder="admin_products.discount"
       />
+
       <FormInput
         name="stock"
         label="admin_products.stock"
         type="number"
         register={register}
         errors={errors}
+        placeholder="admin_products.stock"
       />
-      <FormInput
-        name="thumbnail"
-        label="admin_products.thumbnail"
-        register={register}
-        errors={errors}
-      />
+
+      <div className="col-span-2 mt-4">
+        <ImageSelector
+          key={formKey}
+          bucket="product-images"
+          maxImages={3}
+          uploadRef={uploadRef}
+          initialImages={
+            editingProduct?.product_images?.map((img) => img.image_url) ?? []
+          }
+        />
+      </div>
     </div>
   );
 };

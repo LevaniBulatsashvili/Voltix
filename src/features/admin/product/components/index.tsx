@@ -35,8 +35,10 @@ const AdminProduct = () => {
   } = useProductQuery();
 
   const {
+    formKey,
     modalOpen,
     editingProduct,
+    uploadRef,
     register,
     handleSubmit,
     errors,
@@ -74,9 +76,9 @@ const AdminProduct = () => {
         onSelect={onSelectCategory}
         selectOptions={CATEGORIES.map((category) => ({
           value: capitalize(category),
-          label: "common." + category,
+          label: t(`common.${category}`),
         }))}
-        selectBaseLabel="admin_products.all_categories"
+        selectBaseLabel={t("admin_products.all_categories")}
       />
 
       <TableContainer>
@@ -100,12 +102,16 @@ const AdminProduct = () => {
         isEditing={!!editingProduct}
         onClose={closeModal}
         onSubmit={handleSubmit(onSubmit)}
+        disableClickOutside={true}
       >
         <ProductFormFields
           register={register}
           errors={errors}
           control={control}
           mainCategoryId={Number(watchedMainCategory) || undefined}
+          uploadRef={uploadRef}
+          formKey={formKey}
+          editingProduct={editingProduct}
         />
       </ItemModal>
 

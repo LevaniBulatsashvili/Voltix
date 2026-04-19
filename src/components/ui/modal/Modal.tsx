@@ -8,19 +8,26 @@ interface IModal {
   children: ReactNode;
   onClose: () => void;
   className?: string;
+  disableClickOutside?: boolean;
 }
 
-const Modal = ({ isOpen, children, onClose, className = "" }: IModal) => {
+const Modal = ({
+  isOpen,
+  children,
+  onClose,
+  className = "",
+  disableClickOutside = false,
+}: IModal) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  useClickOutside(ref, () => isOpen && onClose());
+  useClickOutside(ref, () => isOpen && !disableClickOutside && onClose());
   useEscKey(() => isOpen && onClose());
 
   if (!isOpen) return null;
 
   return (
     <div
-      onClick={onClose}
+      onClick={() => !disableClickOutside && onClose()}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
       role="dialog"
       aria-modal="true"

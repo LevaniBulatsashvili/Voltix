@@ -1,24 +1,31 @@
 import { createInfiniteQueryHook } from "@/lib/react-query/createInfiniteQueryHook";
 import { createMutationHook } from "@/lib/react-query/createMutationHook";
 import { createQueryHook } from "@/lib/react-query/createQueryHook";
-import type { IFetchManyOptions } from "@/lib/supabase/createSupabaseService";
+import type {
+  IFetchManyOptions,
+  IFilters,
+} from "@/lib/supabase/createSupabaseService";
 import type {
   IDataResponse,
   ICreatePayload,
   IUpdatePayload,
 } from "@/types/common/api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const createEntityHooks = <
   T extends { id: IDType },
   IDType extends string | number,
+  TCreate extends Record<string, unknown> = ICreatePayload<T>,
   FetchManyOpts extends IFetchManyOptions<T> = IFetchManyOptions<T>,
 >(
   service: {
     fetch: (id: IDType) => Promise<T>;
     fetchMany: (options?: FetchManyOpts) => Promise<IDataResponse<T>>;
     infiniteFetch: (options: FetchManyOpts) => Promise<IDataResponse<T>>;
-    create: (payload: ICreatePayload<T>) => Promise<T>;
+    createMany: (payload: TCreate[]) => Promise<T[]>;
+    create: (payload: TCreate) => Promise<T>;
     update: (payload: IUpdatePayload<T>) => Promise<T>;
+    deleteMany: (filters: IFilters<T>) => Promise<void>;
     delete: (id: IDType) => Promise<void>;
   },
   queryKeyPrefix: string,
@@ -39,9 +46,19 @@ export const createEntityHooks = <
     (optionsWithPage) => service.infiniteFetch(optionsWithPage),
   );
 
+  const useCreateMany = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (payload: TCreate[]) => service.createMany(payload),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [queryKeyPrefix] });
+      },
+    });
+  };
+
   const useCreate = createMutationHook({
-    mutationFn: service.create,
-    queryKey: (_: ICreatePayload<T>, data: T) => [queryKeyPrefix, data.id],
+    mutationFn: (payload: TCreate) => service.create(payload),
+    queryKey: (_: TCreate, data: T) => [queryKeyPrefix, data.id],
     invalidateKey: [queryKeyPrefix],
   });
 
@@ -50,6 +67,16 @@ export const createEntityHooks = <
     queryKey: (_: IUpdatePayload<T>, data: T) => [queryKeyPrefix, data.id],
     invalidateKey: [queryKeyPrefix],
   });
+
+  const useDeleteMany = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (filters: IFilters<T>) => service.deleteMany(filters),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [queryKeyPrefix] });
+      },
+    });
+  };
 
   const useDelete = createMutationHook({
     mutationFn: service.delete,
@@ -62,8 +89,10 @@ export const createEntityHooks = <
     useFetch,
     useFetchMany,
     useInfiniteFetchMany,
+    useCreateMany,
     useCreate,
     useUpdate,
+    useDeleteMany,
     useDelete,
   };
 };

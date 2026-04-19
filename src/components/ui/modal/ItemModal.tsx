@@ -10,6 +10,7 @@ interface IItemModal {
   onClose: () => void;
   onSubmit: () => void;
   children: ReactNode;
+  disableClickOutside?: boolean;
 }
 
 const ItemModal = ({
@@ -18,11 +19,17 @@ const ItemModal = ({
   onClose,
   onSubmit,
   children,
+  disableClickOutside,
 }: IItemModal) => {
   const { t } = useTranslation();
 
   return (
-    <Modal isOpen={open} onClose={onClose} className="max-w-lg">
+    <Modal
+      isOpen={open}
+      onClose={onClose}
+      className="max-w-lg"
+      disableClickOutside={disableClickOutside}
+    >
       <div className="flex justify-between items-center mb-5">
         <h2 className="text-xl font-medium">
           {isEditing

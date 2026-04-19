@@ -28,6 +28,26 @@ export const useProductQuery = () => {
     limit: LIMIT,
     filters: { ...categoryFilterOptions.filters, ...searchFilters },
     sort: [{ field: "id", ascending: false }],
+    selectField: `
+            id,
+            name,
+            description,
+            price,
+            price_final,
+            discount_percentage,
+            stock,
+            thumbnail,
+            rating_avg,
+            rating_count,
+            total_sold,
+            brand_id,
+            main_category_id,
+            category_id,
+            brand:brand_id(name),
+            main_category:main_category_id(name),
+            category:category_id(name),
+            product_images(image_url)
+    `,
   });
 
   const {

@@ -18,7 +18,7 @@ const Category = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { categoryName } = useParams<{ categoryName: TCategoryQueries }>();
 
-  const options = useCategoryFilterOptions(categoryName);
+  const options = useCategoryFilterOptions(categoryName!);
   const {
     items,
     total,

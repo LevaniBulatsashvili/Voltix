@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -11,12 +11,18 @@ import {
   productSchema,
   type ProductFormData,
 } from "../schemas/productSchema";
-import type { ICreatePayload } from "@/types/common/api";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
+import {
+  useCreateManyProductImages,
+  useDeleteManyProductImages,
+} from "@/features/public/product/hooks/productImagesCRUD";
+import type { ICreatePayload } from "@/types/common/api";
 
 export const useProductForm = () => {
+  const [formKey, setFormKey] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
+  const uploadRef = useRef<(() => Promise<string[]>) | null>(null);
 
   const {
     register,
@@ -31,13 +37,16 @@ export const useProductForm = () => {
 
   const watchedMainCategory = useWatch({ control, name: "main_category_id" });
 
-  const { mutate: createProduct } = useCreateProduct();
-  const { mutate: updateProduct } = useUpdateProduct();
+  const { mutateAsync: createProduct } = useCreateProduct();
+  const { mutateAsync: updateProduct } = useUpdateProduct();
+  const { mutateAsync: createManyProductImages } = useCreateManyProductImages();
+  const { mutateAsync: deleteManyProductImages } = useDeleteManyProductImages();
 
   const openCreate = () => {
     setEditingProduct(null);
     reset(defaultProductForm);
     setModalOpen(true);
+    setFormKey((k) => k + 1);
   };
 
   const openEdit = (product: IProduct) => {
@@ -54,24 +63,52 @@ export const useProductForm = () => {
       thumbnail: product.thumbnail,
     });
     setModalOpen(true);
+    setFormKey((k) => k + 1);
   };
 
   const closeModal = () => setModalOpen(false);
 
-  const onSubmit = (data: ProductFormData) => {
+  const onSubmit = async (data: ProductFormData) => {
+    const imageUrls = (await uploadRef.current?.()) ?? [];
+    const thumbnail = imageUrls[0] ?? data.thumbnail;
+
     if (editingProduct) {
-      updateProduct({ id: editingProduct.id, ...data });
+      await updateProduct({ id: editingProduct.id, ...data, thumbnail });
+      if (imageUrls.length) {
+        await deleteManyProductImages({
+          eq: { product_id: editingProduct.id },
+        });
+        await createManyProductImages(
+          imageUrls.map((url) => ({
+            product_id: editingProduct.id,
+            image_url: url,
+          })),
+        );
+      }
       notifySuccess("admin_products.product_updated");
     } else {
-      createProduct(data as ICreatePayload<IProduct>);
+      const newProduct = await createProduct({
+        ...data,
+        thumbnail,
+      } as unknown as ICreatePayload<IProduct>);
+      if (imageUrls.length)
+        await createManyProductImages(
+          imageUrls.map((url) => ({
+            product_id: newProduct.id,
+            image_url: url,
+          })),
+        );
       notifySuccess("admin_products.product_created");
     }
+
     closeModal();
   };
 
   return {
+    formKey,
     modalOpen,
     editingProduct,
+    uploadRef,
     register,
     handleSubmit,
     errors,
