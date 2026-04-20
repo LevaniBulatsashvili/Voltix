@@ -1,12 +1,12 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAppSelector } from "@/hooks/redux";
 import { useCreateWishlist, useDeleteWishlist } from "./wishlistCRUD";
-import type { IWishlist } from "@/types/user/wishlist";
+import type { IWishlist } from "@/types/profile/wishlist";
 import type { IDataResponse } from "@/types/common/api";
 import { wishlistKeys } from "../utils/wishlistKeys";
 
 export function useToggleWishlist() {
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const queryClient = useQueryClient();
   const { mutate: createWishlist } = useCreateWishlist();
   const { mutate: deleteWishlist } = useDeleteWishlist();
@@ -20,7 +20,7 @@ export function useToggleWishlist() {
     isLiked: boolean;
     wishlistId?: string;
   }) => {
-    const idsKey = wishlistKeys.ids(user!.id);
+    const idsKey = wishlistKeys.ids(profile!.id);
 
     queryClient.setQueryData<
       IDataResponse<Pick<IWishlist, "id" | "product_id">>
@@ -40,7 +40,7 @@ export function useToggleWishlist() {
       });
     } else {
       createWishlist(
-        { product_id: productId, profile_id: user!.id },
+        { product_id: productId, profile_id: profile!.id },
         {
           onError: () => queryClient.invalidateQueries({ queryKey: idsKey }),
           onSuccess: () => queryClient.invalidateQueries({ queryKey: idsKey }),

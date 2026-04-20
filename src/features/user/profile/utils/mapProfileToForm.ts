@@ -1,4 +1,4 @@
-import type { IProfile } from "@/types/profile";
+import type { IProfile } from "@/types/profile/profile";
 import type { TProfileForm } from "../schemas/profileSchema";
 
 export const mapProfileToForm = (profile: IProfile): TProfileForm => ({

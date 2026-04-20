@@ -15,7 +15,6 @@ import {
   getGuestMenu,
   getUserMenu,
 } from "../utils/menuGenerators";
-import { useFetchProfile } from "@/features/user/profile/hooks/profileCRUD";
 
 interface IActions {
   languages: ILanguage[];
@@ -33,13 +32,12 @@ const Actions = ({
   const { t } = useTranslation();
   const { signOut } = useLogout();
   const { theme } = useAppSelector((state) => state.theme);
-  const user = useAppSelector((state) => state.auth.user);
+  const { profile } = useAppSelector((state) => state.profile);
   const { items: cartItems } = useAppSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   useClickOutside(dropdownRef, () => setDropdownOpen(false));
   const totalItems = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
-  const { data: profile } = useFetchProfile(user?.id ?? "", !!user?.id);
 
   const handleLogout = () => {
     signOut();
@@ -56,7 +54,7 @@ const Actions = ({
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
-      {user?.email_verified && (
+      {profile && profile.role === "user" && (
         <AppLink to={PAGE.USER.CART} className="relative">
           <ShoppingCart className="w-6 h-6" />
           {totalItems > 0 && (
@@ -76,7 +74,10 @@ const Actions = ({
         </button>
 
         {dropdownOpen && (
-          <div className="absolute -right-19 sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50">
+          <div
+            ref={dropdownRef}
+            className="absolute -right-19 sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50"
+          >
             {menu.map((item, i) => (
               <ProfileDropdownItem
                 key={i}

@@ -1,6 +1,5 @@
 import { Mail } from "lucide-react";
 import { formatDateLong } from "@/utils/formatDateLong";
-import type { IProfile } from "@/types/profile";
 import { useState } from "react";
 import ChangeEmailModal from "./ChangeEmailModal";
 import { useTranslation } from "react-i18next";
@@ -8,10 +7,11 @@ import ProfileFormSection from "../shared/ProfileFormSection";
 import ProfileInfoRow from "../shared/ProfileInfoRow";
 
 interface IEmailSection {
-  profile: IProfile;
+  email: string;
+  created_at: string;
 }
 
-const EmailSection = ({ profile }: IEmailSection) => {
+const EmailSection = ({ email, created_at }: IEmailSection) => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
 
@@ -30,8 +30,8 @@ const EmailSection = ({ profile }: IEmailSection) => {
               size={40}
             />
           }
-          title={profile.email}
-          subtitle={formatDateLong(profile.created_at)}
+          title={email}
+          subtitle={formatDateLong(created_at)}
         />
       </ProfileFormSection>
 

@@ -17,8 +17,8 @@ export const useSyncSession = () => {
           setUser({
             id: session.user.id,
             email: session.user.email!,
-            role: "user",
             email_verified: session.user.email_confirmed_at != null,
+            created_at: session.user.created_at,
           }),
         );
         dispatch(setSession(session));

@@ -1,7 +1,7 @@
 import type { ILikeBtnOptions } from "@/components/button/LikeBtn";
 
 interface IGetLikeOptions {
-  userId?: string;
+  profileId?: string;
   productId: number;
   isLiked: (productId: number) => boolean;
   toggleWishlist: (productId: number) => void;
@@ -9,13 +9,13 @@ interface IGetLikeOptions {
 }
 
 export const getLikeOptions = ({
-  userId,
+  profileId,
   productId,
   isLiked,
   toggleWishlist,
   getWishlistId,
 }: IGetLikeOptions) => {
-  if (!userId) return undefined;
+  if (!profileId) return undefined;
   const likeOptions: ILikeBtnOptions = {
     isLiked: isLiked(productId),
     onLike: () => toggleWishlist(productId),

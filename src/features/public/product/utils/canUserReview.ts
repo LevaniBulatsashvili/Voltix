@@ -1,5 +1,5 @@
 import type { IProductComment } from "@/types/public/product";
-import type { IOrder } from "@/types/user/profile";
+import type { IOrder } from "@/types/profile/profile";
 
 export const canUserReview = (
   userId: string | undefined,
@@ -12,7 +12,7 @@ export const canUserReview = (
   const hasDeliveredOrder = orders.some(
     (order) =>
       order.status === "delivered" &&
-      order.items.some((item) => item.product_id === productId),
+      order.items!.some((item) => item.product_id === productId),
   );
 
   const alreadyReviewed = comments?.some((c) => c.user_id === userId);

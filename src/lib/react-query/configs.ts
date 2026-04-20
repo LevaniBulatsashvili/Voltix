@@ -20,6 +20,7 @@ export const Query_Keys = {
   searchProducts: "searched-Products",
   wishlist: "wishlist",
   product_images: "product-images",
+  order_items: "order-items",
 };
 
 export const Query_Tables = {

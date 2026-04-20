@@ -1,4 +1,4 @@
-import type { IOrderItem } from "@/types/user/profile";
+import type { IOrderItem } from "@/types/profile/profile";
 
 interface OrderItem {
   item: IOrderItem;

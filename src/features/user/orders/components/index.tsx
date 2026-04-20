@@ -10,11 +10,11 @@ import { useTranslation } from "react-i18next";
 const Orders = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const ordersQuery = useFetchOrders({
     page,
     limit: 6,
-    filters: { eq: { profile_id: user!.id } },
+    filters: { eq: { profile_id: profile!.id } },
   });
 
   const { format } = usePrice();

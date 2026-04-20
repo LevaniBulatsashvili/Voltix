@@ -6,13 +6,8 @@ import type {
   IOAuthResponse,
   IOtpResponse,
 } from "@/types/auth/auth";
-import { profileService } from "../../user/profile/service/profileService";
-
-import {
-  getCurrentAuthUser,
-  reauthenticate,
-  mapAuthUser,
-} from "./auth.helpers";
+import { getCurrentAuthUser, reauthenticate } from "./auth.helpers";
+import { mapUser } from "../utils/mapUser";
 
 export const authService: IAuthService = {
   // =========================
@@ -25,12 +20,10 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
 
-    const authUser = mapAuthUser(data.user);
-    const user = authUser?.id ? await profileService.fetch(data.user.id) : null;
+    const authUser = mapUser(data.user);
 
     return {
       authUser,
-      user,
       session: data.session,
     };
   },
@@ -48,17 +41,11 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
 
-    const authUser = mapAuthUser(data.user!);
-
-    if (!authUser?.id) {
-      return { authUser, user: null, session: data.session };
-    }
-
-    const profile = await profileService.create({ email, role: "user" });
+    const authUser = mapUser(data.user);
+    if (!authUser?.id) return { authUser, session: data.session };
 
     return {
       authUser,
-      user: profile,
       session: data.session,
     };
   },
@@ -107,7 +94,7 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
 
-    return mapAuthUser(data.user);
+    return mapUser(data.user);
   },
 
   // =========================

@@ -11,7 +11,7 @@ import { useAppSelector } from "@/hooks/redux";
 
 const SearchResults = () => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const { searchVal } = useParams<string>();
   const [page, setPage] = useState(1);
 
@@ -36,7 +36,7 @@ const SearchResults = () => {
             key={product.id}
             product={product}
             likeOptions={getLikeOptions({
-              userId: user?.id,
+              profileId: profile?.id,
               productId: product.id,
               isLiked,
               toggleWishlist,

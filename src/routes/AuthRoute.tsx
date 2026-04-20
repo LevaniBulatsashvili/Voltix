@@ -2,8 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "@/hooks/redux";
 import { PAGE } from "@/pages/pageConfig";
 import Spinner from "@/components/feedback/Spinner";
-import { useFetchProfile } from "@/features/user/profile/hooks/profileCRUD";
-import type { IProfile } from "@/types/user/profile";
+import type { IProfile } from "@/types/profile/profile";
 
 interface IAuthRoute {
   requireAuth?: boolean;
@@ -23,7 +22,7 @@ const AuthRoute = ({
   verifyPagesOnly = false,
 }: IAuthRoute) => {
   const { user, isLoading } = useAppSelector((state) => state.auth);
-  const { data: profile } = useFetchProfile(user?.id ?? "", !!user?.id);
+  const { profile } = useAppSelector((state) => state.profile);
 
   if (isLoading) return <Spinner />;
 

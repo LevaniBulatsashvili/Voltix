@@ -1,15 +1,18 @@
-import type { IProfile } from "@/types/profile";
 import EmailSection from "./emailSection/EmailSection";
 import PasswordSection from "./passwordSection/PasswordSection";
 
 interface IProfileSecuritySection {
-  profile: IProfile;
+  email: string | null;
+  createdAt: string;
 }
 
-const ProfileSecuritySection = ({ profile }: IProfileSecuritySection) => {
+const ProfileSecuritySection = ({
+  email,
+  createdAt,
+}: IProfileSecuritySection) => {
   return (
     <>
-      <EmailSection profile={profile} />
+      {email && <EmailSection email={email} created_at={createdAt} />}
       <PasswordSection />
     </>
   );

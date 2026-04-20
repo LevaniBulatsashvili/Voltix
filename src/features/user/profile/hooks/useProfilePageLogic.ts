@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "@/hooks/redux";
 import { useUpdateAddress } from "./addressCRUD";
-import { useFetchProfile, useUpdateProfile } from "./profileCRUD";
+import { useUpdateProfile } from "./profileCRUD";
 import type { TProfileForm } from "../schemas/profileSchema";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,9 @@ import { mapProfileToForm } from "../utils/mapProfileToForm";
 export const useProfilePageLogic = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
-  const profileQuery = useFetchProfile(user!.id);
+  const { profile, loading: profileLoading } = useAppSelector(
+    (state) => state.profile,
+  );
 
   const { mutateAsync: updateProfile, isPending: updateProfilePending } =
     useUpdateProfile();
@@ -21,11 +23,10 @@ export const useProfilePageLogic = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isAddressOpen, setIsAddressOpen] = useState(false);
   const isSaving =
-    profileQuery.isLoading || updateProfilePending || updateAddressPending;
+    profileLoading || updateProfilePending || updateAddressPending;
 
   const onEdit = (reset: (data: TProfileForm) => void) => {
-    if (isEditing && profileQuery.data)
-      reset(mapProfileToForm(profileQuery.data));
+    if (isEditing && profile) reset(mapProfileToForm(profile));
     setIsEditing((prev) => !prev);
   };
 
@@ -35,12 +36,12 @@ export const useProfilePageLogic = () => {
     try {
       const { address, ...rest } = data;
 
-      if (rest) await updateProfile({ id: user!.id, ...rest });
+      if (rest) await updateProfile({ id: profile!.id, ...rest });
 
       if (address)
         await updateAddress({
           ...address,
-          id: profileQuery.data!.addresses![0].id,
+          id: profile!.addresses[0].id,
         });
 
       setIsEditing(false);
@@ -55,7 +56,8 @@ export const useProfilePageLogic = () => {
   };
 
   return {
-    profileQuery,
+    profile,
+    user,
     isEditing,
     isAddressOpen,
     isSaving,

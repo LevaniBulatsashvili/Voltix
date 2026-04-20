@@ -8,6 +8,7 @@ import { cartMiddleware } from "@/features/user/cart/store/cart.middleware";
 import settingsReducer from "@/features/user/settings/store/settings.slice";
 import { settingsMiddleware } from "@/features/user/settings/store/settings.middleware";
 import { authMiddleware } from "@/features/auth/store/auth.middleware";
+import { profileMiddleware } from "@/features/user/profile/store/profileMiddleware";
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -25,6 +26,7 @@ export const store = configureStore({
       cartMiddleware,
       settingsMiddleware,
       authMiddleware,
+      profileMiddleware,
     ),
   devTools: true,
 });

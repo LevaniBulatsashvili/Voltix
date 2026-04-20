@@ -1,4 +1,4 @@
-import type { IOrder } from "@/types/profile";
+import type { IOrder } from "@/types/profile/profile";
 import { usePrice } from "../../../cart/hooks/usePrice";
 
 interface IProfileOrders {
@@ -32,7 +32,7 @@ const ProfileOrders = ({ orders }: IProfileOrders) => {
           </div>
 
           <p className="text-sm text-gray-500 mb-2">
-            {new Date(order.date).toLocaleDateString()}
+            {new Date(order.date!).toLocaleDateString()}
           </p>
 
           <div className="space-y-2 mb-4">

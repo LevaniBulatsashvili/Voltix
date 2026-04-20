@@ -1,15 +1,18 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IProfile } from "@/types/profile";
+import type { IProfile } from "@/types/profile/profile";
+import { profileStorage } from "./profile.storage";
 
-interface ProfileState {
-  profile: IProfile | null;
+export interface ProfileState {
+  profile: IProfile | undefined;
   loading: boolean;
   error?: string;
 }
 
+const persisted = profileStorage.get();
+
 const initialState: ProfileState = {
-  profile: null,
-  loading: false,
+  profile: persisted?.profile ?? undefined,
+  loading: !persisted?.profile,
   error: undefined,
 };
 
@@ -17,23 +20,25 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setProfile: (state, action: PayloadAction<IProfile>) => {
+    setProfile(state, action: PayloadAction<IProfile | undefined>) {
       state.profile = action.payload;
+      state.loading = false;
       state.error = undefined;
     },
-    clearProfile: (state) => {
-      state.profile = null;
+    clearProfile(state) {
+      state.profile = undefined;
       state.error = undefined;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setProfileLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
-    setError: (state, action: PayloadAction<string>) => {
+    setProfileError(state, action: PayloadAction<string | undefined>) {
       state.error = action.payload;
     },
   },
 });
 
-export const { setProfile, clearProfile, setLoading, setError } =
+export const { setProfile, clearProfile, setProfileLoading, setProfileError } =
   profileSlice.actions;
+
 export default profileSlice.reducer;

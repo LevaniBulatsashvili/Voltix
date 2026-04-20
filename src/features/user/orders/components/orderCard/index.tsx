@@ -1,4 +1,4 @@
-import type { IOrder } from "@/types/user/profile";
+import type { IOrder } from "@/types/profile/profile";
 import OrderItem from "./OrdersItem";
 import OrderStatus from "./OrdersStatus";
 import { Truck } from "lucide-react";
@@ -25,7 +25,7 @@ const OrderCard = ({ order, format }: OrderCard) => {
             <h2 className="text-sm font-medium mt-0.5 opacity-80">
               #{order.id.slice(0, 8)}
             </h2>
-            <p className="text-sm mt-1 opacity-80">{formatDate(order.date)}</p>
+            <p className="text-sm mt-1 opacity-80">{formatDate(order.date!)}</p>
           </div>
           <OrderStatus status={order.status} />
         </div>

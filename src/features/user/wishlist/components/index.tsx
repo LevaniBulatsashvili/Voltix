@@ -10,7 +10,6 @@ import { getLikeOptions } from "../utils/getLikeOptions";
 
 const Wishlist = () => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
   const { profile } = useAppSelector((state) => state.profile);
   const [page, setPage] = useState(1);
   const { isLiked, toggleWishlist } = useWishlist();
@@ -18,7 +17,7 @@ const Wishlist = () => {
   const productsQuery = useFetchWishlists({
     page,
     limit: 9,
-    filters: { eq: { profile_id: profile } },
+    filters: { eq: { profile_id: profile?.id } },
     selectField:
       "product: products(*, brand:brands(name), category:categories(name), main_category: main_categories(*))",
   });
@@ -35,7 +34,7 @@ const Wishlist = () => {
             key={product!.id}
             product={product!}
             likeOptions={getLikeOptions({
-              userId: user!.id,
+              profileId: profile?.id,
               productId: product!.id,
               isLiked,
               toggleWishlist,

@@ -1,5 +1,8 @@
-import { supabase } from "@/lib/supabase";
-import type { IOrderItem, IOrderRaw } from "@/types/user/profile";
+import type { IOrderItem, IOrderRaw } from "@/types/profile/profile";
+import { orderService } from "../../orders/service/orderService";
+import { orderItemService } from "../../orders/service/orderItemService";
+import type { ICreatePayload } from "@/types/common/api";
+import { productService } from "@/features/public/product/services/productService";
 
 export const createOrder = async ({
   profile_id: profileId,
@@ -11,53 +14,30 @@ export const createOrder = async ({
 }: IOrderRaw) => {
   if (!cartItems || cartItems.length === 0) throw new Error("Cart is empty");
 
-  const { data: orderData, error: orderError } = await supabase
-    .from("orders")
-    .insert([
-      {
-        profile_id: profileId,
-        currency,
-        status: "pending",
-        total_amount: totalAmount,
-        delivery_fee: deliveryFee,
-        discount,
-      },
-    ])
-    .select("id")
-    .single();
+  const orders = await orderService.create({
+    profile_id: profileId,
+    currency,
+    status: "pending",
+    total_amount: totalAmount,
+    delivery_fee: deliveryFee,
+    discount,
+  });
 
-  if (orderError || !orderData) throw new Error("Failed to post order");
-
-  const orderId = orderData.id;
-
-  const orderItems: IOrderItem[] = cartItems.map((item) => ({
-    order_id: orderId,
+  const orderItems: ICreatePayload<IOrderItem>[] = cartItems.map((item) => ({
+    order_id: orders.id,
     product_id: item.product.id,
     quantity: item.quantity,
     price: item.product.price_final,
     total: item.product.price_final * item.quantity,
   }));
 
-  const { error: itemsError } = await supabase
-    .from("order_items")
-    .insert(orderItems);
+  await orderItemService.createMany(orderItems);
 
-  if (itemsError) throw new Error("Failed to post ordered products");
-
-  const updatePromises = cartItems.map(({ product, quantity }) =>
-    supabase
-      .from("products")
-      .update({
-        stock: product.stock - quantity,
-        total_sold: product.total_sold + quantity,
-      })
-      .eq("id", product.id),
-  );
-
-  const results = await Promise.all(updatePromises);
-  results.forEach(({ error }) => {
-    if (error) throw new Error("Failed to update product");
+  cartItems.map(async ({ product, quantity }) => {
+    await productService.update({
+      id: product.id,
+      stock: product.stock - quantity,
+      total_sold: product.total_sold + quantity,
+    });
   });
-
-  return orderId;
 };

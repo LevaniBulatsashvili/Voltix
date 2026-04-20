@@ -1,4 +1,4 @@
-import type { ICartItem } from "@/types/user/cart";
+import type { ICartItem } from "@/types/profile/cart";
 import CartItem from "./cartItem/CartItem";
 import CartOrderSummary from "./cartOrderSummary/CartOrderSummary";
 

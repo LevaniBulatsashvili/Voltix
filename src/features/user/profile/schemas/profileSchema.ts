@@ -4,29 +4,12 @@ const addressDraftSchema = z.object({
   address_line: z.string().optional(),
   city: z.string().optional(),
   postal_code: z.string().optional(),
-  country: z
-    .string()
-    .transform((val) => val.toUpperCase())
-    .optional(),
+  country: z.string().optional(),
 });
 
-type AddressDraft = z.infer<typeof addressDraftSchema>;
+export type AddressDraft = z.infer<typeof addressDraftSchema>;
 
-const trimmedLen = (s: string | undefined) => s?.trim().length ?? 0;
-
-const addressStarted = (a: AddressDraft) =>
-  trimmedLen(a.address_line) > 0 ||
-  trimmedLen(a.city) > 0 ||
-  trimmedLen(a.postal_code) > 0 ||
-  trimmedLen(a.country) > 0;
-
-const requireIfStarted =
-  (check: (a: AddressDraft) => boolean) =>
-  (data: { address?: AddressDraft }) => {
-    const a = data.address;
-    if (!a || !addressStarted(a)) return true;
-    return check(a);
-  };
+const trimmed = (v?: string) => v?.trim() ?? "";
 
 export const profileSchema = z
   .object({
@@ -34,33 +17,55 @@ export const profileSchema = z
     phone: z.string().optional(),
     address: addressDraftSchema.optional(),
   })
-  .refine(
-    requireIfStarted((a) => trimmedLen(a.address_line) > 0),
-    {
-      error: "address_line_is_required",
-      path: ["address", "address_line"],
-    },
-  )
-  .refine(
-    requireIfStarted((a) => trimmedLen(a.city) > 0),
-    {
-      error: "city_is_required",
-      path: ["address", "city"],
-    },
-  )
-  .refine(
-    requireIfStarted((a) => trimmedLen(a.postal_code) > 0),
-    {
-      error: "postal_code_is_required",
-      path: ["address", "postal_code"],
-    },
-  )
-  .refine(
-    requireIfStarted((a) => trimmedLen(a.country) === 2),
-    {
-      error: "country_must_be_ISO_2-letter_code",
-      path: ["address", "country"],
-    },
-  );
+  .superRefine((data, ctx) => {
+    const a = data.address;
+
+    if (!a) return;
+
+    const line = trimmed(a.address_line);
+    const city = trimmed(a.city);
+    const postal = trimmed(a.postal_code);
+    const country = trimmed(a.country);
+
+    const started =
+      line.length > 0 ||
+      city.length > 0 ||
+      postal.length > 0 ||
+      country.length > 0;
+
+    if (!started) return;
+
+    if (!line) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "address_line_is_required",
+        path: ["address", "address_line"],
+      });
+    }
+
+    if (!city) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "city_is_required",
+        path: ["address", "city"],
+      });
+    }
+
+    if (!postal) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "postal_code_is_required",
+        path: ["address", "postal_code"],
+      });
+    }
+
+    if (country.length !== 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "country_must_be_ISO_2-letter_code",
+        path: ["address", "country"],
+      });
+    }
+  });
 
 export type TProfileForm = z.infer<typeof profileSchema>;

@@ -19,7 +19,7 @@ const ProductShowcase = ({
   viewAllLink = PAGE.PUBLIC.SHOP,
 }: IProductShowcase) => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const { isLiked, toggleWishlist } = useWishlist();
 
   return (
@@ -32,7 +32,7 @@ const ProductShowcase = ({
             key={product.id}
             product={product}
             likeOptions={getLikeOptions({
-              userId: user?.id,
+              profileId: profile?.id,
               productId: product.id,
               isLiked,
               toggleWishlist,

@@ -18,7 +18,7 @@ const limit = 6;
 
 const Search = () => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((user) => user.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(
     null,
   );
@@ -91,7 +91,7 @@ const Search = () => {
               key={product.id}
               product={product}
               likeOptions={getLikeOptions({
-                userId: user?.id,
+                profileId: profile?.id,
                 productId: product.id,
                 isLiked,
                 toggleWishlist,

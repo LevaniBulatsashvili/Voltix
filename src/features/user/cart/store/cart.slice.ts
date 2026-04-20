@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { ICartItem } from "@/types/user/cart";
+import type { ICartItem } from "@/types/profile/cart";
 import type { IProduct } from "@/types/public/product";
 import { cartStorage } from "./cart.storage";
 

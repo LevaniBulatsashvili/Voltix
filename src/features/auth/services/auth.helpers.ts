@@ -1,4 +1,3 @@
-import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import type { IAuthUser } from "@/types/auth/auth";
 import { mapUser } from "@/features/auth/utils/mapUser";
@@ -23,8 +22,4 @@ export const reauthenticate = async (
   });
 
   if (error) throw error;
-};
-
-export const mapAuthUser = (user: User): IAuthUser | null => {
-  return user ? mapUser(user) : null;
 };

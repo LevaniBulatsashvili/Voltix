@@ -12,7 +12,7 @@ interface IProductDisplay {
 
 const ProductDisplay = ({ product }: IProductDisplay) => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const { items } = useAppSelector((state) => state.cart);
   const inCartQuantity =
     items.find((item) => item.product.id === product.id)?.quantity || 0;
@@ -50,7 +50,7 @@ const ProductDisplay = ({ product }: IProductDisplay) => {
         increase={increase}
         decrease={decrease}
         handleAddToCart={handleAddToCart}
-        productActionsDisabled={!!user?.email_verified}
+        productActionsDisabled={!!profile}
       />
     </div>
   );

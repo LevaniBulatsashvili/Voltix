@@ -24,7 +24,7 @@ const CartOrderSummary = ({
   const { currency } = usePrice();
   const { format } = usePrice();
   const cartItems = useAppSelector((state) => state.cart.items);
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const { t } = useTranslation();
   const [promocode, setPromocode] = useState<string>("");
   const { mutate: order, isPending } = useCreateOrder();
@@ -36,7 +36,7 @@ const CartOrderSummary = ({
 
   const handlePurchase = async () => {
     order({
-      profile_id: user!.id,
+      profile_id: profile!.id,
       currency,
       total_amount: total,
       delivery_fee: deliveryFee,

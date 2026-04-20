@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../api/createOrder";
 import { notifyError } from "@/lib/toast/notifyError";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
-import type { IOrderRaw } from "@/types/profile";
+import type { IOrderRaw } from "@/types/profile/profile";
 import { useAppDispatch } from "@/hooks/redux";
 import { clearCart } from "../store/cart.slice";
 

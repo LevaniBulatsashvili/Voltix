@@ -4,11 +4,11 @@ import { supabase } from "@/lib/supabase";
 export const useUploadAvatar = () => {
   const [uploading, setUploading] = useState(false);
 
-  const uploadAvatar = async (file: File, userId: string) => {
+  const uploadAvatar = async (file: File, profileId: string) => {
     try {
       setUploading(true);
       const fileExt = file.name.split(".").pop();
-      const fileName = `${userId}-${Date.now()}.${fileExt}`;
+      const fileName = `${profileId}-${Date.now()}.${fileExt}`;
       const filePath = `avatars/${fileName}`;
 
       const { error } = await supabase.storage

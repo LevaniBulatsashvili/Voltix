@@ -2,15 +2,15 @@ import { useAppSelector } from "@/hooks/redux";
 import { useFetchWishlists } from "./wishlistCRUD";
 
 export function useWishlistedIds() {
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
 
   const query = useFetchWishlists(
     {
-      filters: { eq: { profile_id: user?.id ?? "" } },
+      filters: { eq: { profile_id: profile?.id ?? "" } },
       selectField: "id, product_id",
       limit: 1000,
     },
-    !!user,
+    !!profile,
   );
 
   const wishlistedIds = new Set(

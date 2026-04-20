@@ -15,7 +15,7 @@ import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions.ts
 
 const Category = () => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
+  const { profile } = useAppSelector((state) => state.profile);
   const { categoryName } = useParams<{ categoryName: TCategoryQueries }>();
 
   const options = useCategoryFilterOptions(categoryName!);
@@ -56,7 +56,7 @@ const Category = () => {
             key={product.id}
             product={product}
             likeOptions={getLikeOptions({
-              userId: user?.id,
+              profileId: profile?.id,
               productId: product.id,
               isLiked,
               toggleWishlist,

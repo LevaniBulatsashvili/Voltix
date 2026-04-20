@@ -6,7 +6,7 @@ import {
   removeFromCart,
 } from "../../../../store/cart.slice";
 import CartItemView from "./CartItemView";
-import type { ICartItem } from "@/types/user/cart";
+import type { ICartItem } from "@/types/profile/cart";
 
 interface ICartItemProps {
   item: ICartItem;

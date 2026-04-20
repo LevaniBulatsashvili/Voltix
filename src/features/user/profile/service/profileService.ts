@@ -1,11 +1,11 @@
 import { Query_Tables } from "@/lib/react-query/configs";
 import { createSupabaseService } from "@/lib/supabase/createSupabaseService";
-import type { ICreatePayload, IUpdatePayload } from "@/types/common/api";
-import type { IProfile } from "@/types/user/profile";
+import type { IUpdatePayload } from "@/types/common/api";
+import type { IProfile } from "@/types/profile/profile";
 
 export const profileService = createSupabaseService<
   IProfile,
-  Omit<ICreatePayload<IProfile>, "created_at" | "addresses">,
+  Omit<IProfile, "created_at" | "addresses">,
   IUpdatePayload<IProfile>,
   string
 >({
