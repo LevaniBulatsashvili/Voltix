@@ -1,5 +1,5 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import { FormInput } from "@/components/form/FormInput";
+import { FormInput } from "@/components/form/Input/FormInput";
 import type { LoginFormData } from "../../schemas/loginSchema";
 import FormBtn from "@/components/form/FormBtn";
 import Form from "@/components/form/Form";
@@ -23,13 +23,11 @@ const LoginForm = ({
         name="email"
         register={register}
         errors={errors}
-        placeholder="login.email"
       />
       <FormInput<LoginFormData>
         name="password"
         register={register}
         errors={errors}
-        placeholder="login.password"
         type="password"
       />
       <FormBtn

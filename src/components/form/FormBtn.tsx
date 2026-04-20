@@ -13,7 +13,7 @@ const FormBtn = ({ isPending, text, className }: IFormBtn) => {
     <button
       type="submit"
       disabled={isPending}
-      className={`w-full bg-primary text-background py-2 rounded hover:opacity-80 transition disabled:opacity-50 capitalize ${className ?? ""}`}
+      className={`w-full bg-primary text-background py-2 rounded hover:opacity-80 transition disabled:opacity-50 capitalize mt-2 ${className ?? ""}`}
     >
       {t(text)}
     </button>

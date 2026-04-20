@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 interface IFormInput<T extends FieldValues> {
   name: Path<T>;
-  label: string;
+  label?: string;
   register: UseFormRegister<T>;
   errors?: FieldErrors<T>;
   type?: string;
@@ -33,7 +33,7 @@ export const FormInput = <T extends FieldValues>({
 
   return (
     <div>
-      <Label htmlFor={String(name)} text={t(label)} />
+      {label && <Label htmlFor={String(name)} text={t(label)} />}
 
       <Input
         type={type}
