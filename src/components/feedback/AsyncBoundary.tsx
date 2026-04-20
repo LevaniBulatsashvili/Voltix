@@ -8,7 +8,7 @@ import type { IDataResponse } from "@/types/common/api";
 import {
   normalizeResponse,
   resolveAsyncState,
-} from "@/utils/asyncBoundaryUtils";
+} from "@/components/feedback/utils/asyncBoundaryUtils";
 
 export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname?: string };

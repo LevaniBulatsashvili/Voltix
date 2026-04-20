@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/hooks/redux";
-import { useFetchWishlists } from "./whishlistCRUD";
+import { useFetchWishlists } from "./wishlistCRUD";
 
 export function useWishlistedIds() {
   const { user } = useAppSelector((state) => state.auth);

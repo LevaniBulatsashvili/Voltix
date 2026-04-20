@@ -1,7 +1,7 @@
 import { FormInput } from "@/components/form/Input/FormInput";
 import type { UseFormRegister, FieldErrors, Control } from "react-hook-form";
 import type { ProductFormData } from "../../schemas/productSchema";
-import { ImageSelector } from "@/features/shared/components/imageSelector/ImageSelector";
+import { ImageSelector } from "@/features/shared/imageSelector/components/ImageSelector";
 import { type RefObject } from "react";
 import type { IProduct } from "@/types/public/product";
 import FormSelect from "@/components/form/Input/FormSelect";

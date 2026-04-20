@@ -1,5 +1,5 @@
 import type { IProductComment } from "@/types/public/product";
-import type { IOrder } from "@/types/profile";
+import type { IOrder } from "@/types/user/profile";
 
 export const canUserReview = (
   userId: string | undefined,

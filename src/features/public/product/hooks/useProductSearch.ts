@@ -1,4 +1,4 @@
-import { useSearchDebounce } from "@/hooks/useSeachDebounce";
+import { useSearchDebounce } from "@/hooks/useSearchDebounce";
 import { useNavigate } from "react-router-dom";
 import { useFetchProducts } from "./productCRUD";
 import { PAGE } from "@/pages/pageConfig";

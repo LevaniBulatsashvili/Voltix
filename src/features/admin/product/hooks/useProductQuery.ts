@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFetchProducts } from "@/features/public/product/hooks/productCRUD";
-import { useSearchDebounce } from "@/hooks/useSeachDebounce";
+import { useSearchDebounce } from "@/hooks/useSearchDebounce";
 import { useCachedQueryData } from "@/hooks/useCachedQueryData";
 import { useCategoryFilterOptions } from "@/features/public/category/hooks/useCategoryFilterOptions";
 import { createCategoryQuery } from "@/utils/consts";

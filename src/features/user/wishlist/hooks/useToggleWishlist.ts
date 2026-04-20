@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useAppSelector } from "@/hooks/redux";
-import { useCreateWishlist, useDeleteWishlist } from "./whishlistCRUD";
-import type { IWishlist } from "@/types/user/whishlist";
+import { useCreateWishlist, useDeleteWishlist } from "./wishlistCRUD";
+import type { IWishlist } from "@/types/user/wishlist";
 import type { IDataResponse } from "@/types/common/api";
 import { wishlistKeys } from "../utils/wishlistKeys";
 

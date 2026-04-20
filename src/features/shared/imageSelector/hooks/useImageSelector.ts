@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { uploadImage } from "@/api/uploadImage";
+import { uploadImage } from "@/features/shared/imageSelector/utils/uploadImage";
 import { convertToWebP, toSelectedImage } from "../utils/imageSelector.utils";
 
 export interface ISelectedImage {

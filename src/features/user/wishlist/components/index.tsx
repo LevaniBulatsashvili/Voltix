@@ -3,12 +3,12 @@ import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import ProductCard from "@/features/public/products/components/productsShowcase/ProductCard";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useFetchWishlists } from "../hooks/whishlistCRUD";
+import { useFetchWishlists } from "../hooks/wishlistCRUD";
 import { useAppSelector } from "@/hooks/redux";
 import { useWishlist } from "../hooks/useWishlist";
 import { getLikeOptions } from "../utils/getLikeOptions";
 
-const Whishlist = () => {
+const Wishlist = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { profile } = useAppSelector((state) => state.profile);
@@ -48,4 +48,4 @@ const Whishlist = () => {
   );
 };
 
-export default Whishlist;
+export default Wishlist;

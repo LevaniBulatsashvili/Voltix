@@ -1,4 +1,4 @@
-import type { ISelectedImage } from "../../../hooks/useImageSelector";
+import type { ISelectedImage } from "../hooks/useImageSelector";
 import ImageStatusOverlay from "./ImageStatusOverlay";
 
 interface IImagePreview {

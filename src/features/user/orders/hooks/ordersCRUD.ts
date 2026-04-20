@@ -1,4 +1,4 @@
-import { createEntityHooks } from "@/hooks/createEntityHooks";
+import { createEntityHooks } from "@/lib/react-query/createEntityHooks";
 import { Query_Keys } from "@/lib/react-query/configs";
 import { orderService } from "../service/orderService";
 

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { normalizeLocale } from "@/utils/nomalizeLocale";
+import { normalizeLocale } from "@/utils/normalizeLocale";
 
 const KA_MONTHS = [
   "იანვარი",

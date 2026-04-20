@@ -1,6 +1,6 @@
-import { createEntityHooks } from "@/hooks/createEntityHooks";
+import { createEntityHooks } from "@/lib/react-query/createEntityHooks";
 import { Query_Keys } from "@/lib/react-query/configs";
-import { wishlistService } from "../services/whishlistService";
+import { wishlistService } from "../services/wishlistService";
 
 export const {
   useInfiniteFetchMany: useInfiniteFetchWishlistWithTotal,

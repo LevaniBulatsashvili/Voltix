@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { useImageSelector } from "../../hooks/useImageSelector";
-import { ImagePreview } from "./imagePreview/ImagePreview";
-import { ImageAddSlot } from "./imageAddSlot/ImageAddSlot";
+import { useImageSelector } from "../hooks/useImageSelector";
+import { ImagePreview } from "./ImagePreview";
+import { ImageAddSlot } from "./ImageAddSlot";
 
 interface IImageSelector {
   bucket: string;

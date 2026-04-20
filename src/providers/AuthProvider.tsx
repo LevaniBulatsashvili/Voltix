@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useAppDispatch } from "@/hooks/redux";
 import { setUser, setLoading } from "@/features/auth/store/auth.slice";
-import { mapUser } from "@/utils/mapUser";
+import { mapUser } from "@/features/auth/utils/mapUser";
 import type { Session } from "@supabase/supabase-js";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {

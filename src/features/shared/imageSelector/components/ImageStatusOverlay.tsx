@@ -1,5 +1,5 @@
 import Spinner from "@/components/feedback/Spinner";
-import type { ISelectedImage } from "@/features/shared/hooks/useImageSelector";
+import type { ISelectedImage } from "../hooks/useImageSelector";
 import { useTranslation } from "react-i18next";
 
 interface IImageStatusOverlay {
