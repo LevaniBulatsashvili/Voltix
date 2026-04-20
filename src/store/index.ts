@@ -7,6 +7,7 @@ import cartReducer from "@/features/user/cart/store/cart.slice";
 import { cartMiddleware } from "@/features/user/cart/store/cart.middleware";
 import settingsReducer from "@/features/user/settings/store/settings.slice";
 import { settingsMiddleware } from "@/features/user/settings/store/settings.middleware";
+import { authMiddleware } from "@/features/auth/store/auth.middleware";
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -20,7 +21,11 @@ const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cartMiddleware, settingsMiddleware),
+    getDefaultMiddleware().concat(
+      cartMiddleware,
+      settingsMiddleware,
+      authMiddleware,
+    ),
   devTools: true,
 });
 

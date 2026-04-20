@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IAuthUser } from "@/types/auth/auth";
 import type { Session } from "@supabase/supabase-js";
+import { authStorage } from "./auth.storage";
 
 interface IAuthState {
   user: IAuthUser | null;
@@ -8,10 +9,12 @@ interface IAuthState {
   isLoading: boolean;
 }
 
+const persisted = authStorage.get();
+
 const initialState: IAuthState = {
-  user: null,
+  user: persisted?.user ?? null,
   session: null,
-  isLoading: true,
+  isLoading: !persisted?.user,
 };
 
 const authSlice = createSlice({
@@ -38,3 +41,4 @@ const authSlice = createSlice({
 
 export const { setUser, setSession, setLoading, logout } = authSlice.actions;
 export default authSlice.reducer;
+export type { IAuthState };
