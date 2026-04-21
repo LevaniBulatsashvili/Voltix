@@ -6,7 +6,9 @@ import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD
 
 const ProductsMainCategories = () => {
   const { t } = useTranslation();
-  const mainCategoriesQuery = useFetchMainCategories({});
+  const mainCategoriesQuery = useFetchMainCategories({
+    selectField: "id, name, thumbnail",
+  });
 
   return (
     <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">

@@ -7,6 +7,7 @@ import { useFetchWishlists } from "../hooks/wishlistCRUD";
 import { useAppSelector } from "@/hooks/redux";
 import { useWishlist } from "../hooks/useWishlist";
 import { getLikeOptions } from "../utils/getLikeOptions";
+import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 const Wishlist = () => {
   const { t } = useTranslation();
@@ -18,8 +19,7 @@ const Wishlist = () => {
     page,
     limit: 9,
     filters: { eq: { profile_id: profile?.id } },
-    selectField:
-      "product: products(*, brand:brands(name), category:categories(name), main_category: main_categories(*))",
+    selectField: `product: products(${PRODUCTSELECTFIELD})`,
   });
 
   return (

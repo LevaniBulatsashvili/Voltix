@@ -1,6 +1,5 @@
 import type { IProduct } from "@/types/public/product";
 import PriceTag from "@/components/ui/PriceTag";
-import PlaceholderImg from "@/assets/images/Electronics.png";
 import StarRating from "@/components/ui/StarRatings";
 import AppLink from "@/components/button/AppLink";
 import { buildProductLink } from "../../../product/utils/buildProductLink";
@@ -27,9 +26,12 @@ const ProductCard = ({ product, likeOptions }: IProductCard) => {
 
       <div className="overflow-hidden rounded-lg">
         <img
-          src={PlaceholderImg}
+          src={product.thumbnail || "/images/placeholders/product.webp"}
           alt={product.name}
-          className="object-cover w-full h-60 transform hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            e.currentTarget.src = "/images/placeholders/product.webp";
+          }}
+          className="object-contain w-full h-60 transform hover:scale-105 transition-transform duration-300"
         />
       </div>
 

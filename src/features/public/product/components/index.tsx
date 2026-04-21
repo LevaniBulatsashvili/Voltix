@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import ProductSkeleton from "./productSkeleton/ProductSkeleton";
 import { useFetchProduct } from "../hooks/productCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
+import PageWrapper from "@/components/ui/PageWrapper";
 
 const Product = () => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const Product = () => {
   const productQuery = useFetchProduct(Number(productId));
 
   return (
-    <div className="p-6 w-full md:w-[95%] lg:w-[90%] text-primary bg-background">
+    <PageWrapper>
       <QueryBoundary
         query={productQuery}
         loadingFallback={<ProductSkeleton />}
@@ -43,7 +44,7 @@ const Product = () => {
           );
         }}
       </QueryBoundary>
-    </div>
+    </PageWrapper>
   );
 };
 

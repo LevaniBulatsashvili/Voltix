@@ -1,46 +1,62 @@
 import { useState } from "react";
-import electronicsImg from "@/assets/images/Electronics.png";
-import cameraImg from "@/assets/images/Cameras.png";
-import tabletImg from "@/assets/images/Tablet.png";
+import type { IImage } from "@/types/public/product";
 
 interface ProductGalleryProps {
-  images?: string[];
+  galleryImages?: Omit<IImage, "product_id">[];
   name: string;
 }
 
-const ProductGallery = ({ images = [], name }: ProductGalleryProps) => {
-  const galleryImages = images.length
-    ? images
-    : [tabletImg, cameraImg, electronicsImg];
+const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
+  if (galleryImages.length === 0)
+    galleryImages = [{ id: 1, image_url: "/images/placeholders/product.webp" }];
 
   const [selectedImage, setSelectedImage] = useState(galleryImages[0]);
+  const [fade, setFade] = useState(true);
+
+  const handleSelect = (image: (typeof galleryImages)[0]) => {
+    if (image.id === selectedImage.id) return;
+    setFade(false);
+    setTimeout(() => {
+      setSelectedImage(image);
+      setFade(true);
+    }, 150);
+  };
 
   return (
-    <div className="flex flex-col-reverse sm:flex-row gap-4 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-[auto_1fr] gap-3 w-full items-stretch">
       {galleryImages.length > 1 && (
-        <div className="grid grid-cols-3 sm:grid-cols-1 sm:grid-rows-3 gap-1 sm:gap-2">
-          {galleryImages.slice(0, 3).map((img, idx) => (
-            <img
-              key={idx}
-              src={img}
-              alt={`${name}-${idx}`}
-              onClick={() => setSelectedImage(img)}
-              className={`sm:size-32 object-cover rounded cursor-pointer transition
-              ${
-                selectedImage === img
-                  ? "ring-2 ring-gray-600"
-                  : "hover:ring-2 hover:ring-gray-800"
-              }`}
-            />
+        <div className="flex flex-row sm:flex-col gap-4 order-2 sm:order-1">
+          {galleryImages.slice(0, 4).map((image, idx) => (
+            <button
+              key={image.id}
+              onClick={() => handleSelect(image)}
+              className={`
+                  relative flex-1 sm:flex-none aspect-square sm:size-32 shrink-0 rounded-lg overflow-hidden
+                  ring-offset-1 transition-all duration-200
+                  ${
+                    selectedImage.id === image.id
+                      ? "ring-2 ring-gray-800 opacity-100"
+                      : "ring-1 ring-gray-200 opacity-60 hover:opacity-100 hover:ring-gray-400"
+                  }
+              `}
+            >
+              <img
+                src={image.image_url}
+                alt={`${name} ${idx + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
           ))}
         </div>
       )}
 
-      <div className="flex-1">
+      <div className="order-1 sm:order-2 min-w-0 rounded-xl overflow-hidden bg-gray-50 max-h-125 aspect-square sm:aspect-5/4">
         <img
-          src={selectedImage}
+          src={selectedImage.image_url}
           alt={name}
-          className="w-full h-full object-cover rounded-lg"
+          className={`w-full h-full object-contain object-left transition-opacity duration-150 ${
+            fade ? "opacity-100" : "opacity-0"
+          }`}
         />
       </div>
     </div>

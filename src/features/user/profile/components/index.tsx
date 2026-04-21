@@ -36,7 +36,8 @@ const Profile = () => {
 
       <div className="p-4 sm:p-10 text-black!">
         <ProfileHeaderWithActions
-          profile={profile}
+          profile={profile!}
+          email={user!.email!}
           isEditing={isEditing}
           isSaving={isSaving}
           onEdit={() => onEdit(() => {})}

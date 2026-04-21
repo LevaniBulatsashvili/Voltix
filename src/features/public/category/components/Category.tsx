@@ -12,6 +12,7 @@ import CategoryInfiniteGridSkeleton from "./skeleton/CategoryInfiniteGridSkeleto
 import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist.ts";
 import { useAppSelector } from "@/hooks/redux.ts";
 import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions.ts";
+import { PRODUCTSELECTFIELD } from "@/utils/consts.ts";
 
 const Category = () => {
   const { t } = useTranslation();
@@ -27,7 +28,13 @@ const Category = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteList(useInfiniteFetchProducts({ limit: 9, ...options }));
+  } = useInfiniteList(
+    useInfiniteFetchProducts({
+      limit: 9,
+      ...options,
+      selectField: PRODUCTSELECTFIELD,
+    }),
+  );
 
   const { isLiked, toggleWishlist } = useWishlist();
 

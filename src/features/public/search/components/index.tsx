@@ -12,6 +12,7 @@ import ProductCard from "../../products/components/productsShowcase/ProductCard"
 import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
 import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
 import { useAppSelector } from "@/hooks/redux";
+import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 export type ISortBy = "created_at" | "total_sold";
 const limit = 6;
@@ -46,6 +47,7 @@ const Search = () => {
       lte: { price_final: maxPrice },
       gt: { discount_percentage: hasDiscount ? 0 : undefined },
     },
+    selectField: PRODUCTSELECTFIELD,
   });
 
   const { isLiked, toggleWishlist } = useWishlist();

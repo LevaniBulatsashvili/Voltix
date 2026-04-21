@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
 import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
 import { useAppSelector } from "@/hooks/redux";
+import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 const SearchResults = () => {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ const SearchResults = () => {
     page,
     limit: 9,
     filters: { ilike: { name: `%${searchVal}%` } },
+    selectField: PRODUCTSELECTFIELD,
   });
   const { isLiked, toggleWishlist } = useWishlist();
 

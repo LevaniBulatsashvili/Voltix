@@ -42,9 +42,9 @@ const SearchFilters = ({
 
   const mainCategoriesQuery = useFetchMainCategories({
     sort: [{ field: "id", ascending: true }],
-    selectField: "*, categories(id,name)",
+    selectField: "id, name, categories(id,name)",
   });
-  const brandQuery = useFetchBrands({});
+  const brandQuery = useFetchBrands({ selectField: "id, name" });
 
   return (
     <>

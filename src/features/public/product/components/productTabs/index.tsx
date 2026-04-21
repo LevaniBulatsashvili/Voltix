@@ -22,7 +22,7 @@ const ProductTabs = ({ children }: IProductTabs) => {
   ];
 
   return (
-    <div className="w.full">
+    <div className="w-full">
       <ProductTabHeader
         tabs={tabs}
         activeTab={activeTab}

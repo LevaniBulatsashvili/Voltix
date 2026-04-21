@@ -10,6 +10,7 @@ import ProductsComments from "./productsComments";
 import { useFetchProducts } from "../../product/hooks/productCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import { buildCategoryLink } from "../utils/buildCategoryLink";
+import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 const Products = () => {
   const { t } = useTranslation();
@@ -31,12 +32,16 @@ const Products = () => {
   const newestProductQuery = useFetchProducts({
     limit: 4,
     sort: [{ field: "created_at", ascending: false }],
+    selectField: PRODUCTSELECTFIELD,
   });
   const topSellingProductsDataQuery = useFetchProducts({
     limit: 4,
     sort: [{ field: "total_sold", ascending: false }],
+    selectField: PRODUCTSELECTFIELD,
   });
-  const brandsQuery = useFetchBrands({});
+  const brandsQuery = useFetchBrands({
+    selectField: "id, name, logo_url",
+  });
 
   return (
     <div className="grid">

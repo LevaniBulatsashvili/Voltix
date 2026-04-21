@@ -1,4 +1,3 @@
-import placeholderImg from "@/assets/images/Electronics.png";
 import AppLink from "@/components/button/AppLink";
 
 interface IProductsMainCategoryCard {
@@ -11,7 +10,7 @@ interface IProductsMainCategoryCard {
 const ProductsMainCategoryCard = ({
   title,
   to,
-  image = placeholderImg,
+  image = "/images/placeholders/product.webp",
   imgClassName,
 }: IProductsMainCategoryCard) => {
   return (

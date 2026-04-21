@@ -55,6 +55,11 @@ export const getGuestMenu = (t: TFunction): MenuItem[] => [
 
 export const getAdminMenu = (t: TFunction, signOut: () => void): MenuItem[] => [
   {
+    label: t("header.profile"),
+    icon: <User className="size-4" />,
+    to: PAGE.USER.PROFILE,
+  },
+  {
     label: t("header.managment"),
     icon: <Package className="size-4" />,
     to: PAGE.ADMIN.PRODUCTS,

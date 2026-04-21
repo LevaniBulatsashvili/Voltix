@@ -25,7 +25,7 @@ export const productService = createSupabaseService<
       category:categories(id, name),
       brand:brands(id, name),
       product_specs(id, spec, value),
-      product_images(image_url),
+      product_images(id, image_url),
       product_faqs(id, question, answer)
     `,
     createSelectField: "*",
