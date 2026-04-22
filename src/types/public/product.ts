@@ -27,7 +27,7 @@ export interface IProduct {
 
 export interface IMainCategory {
   id: number;
-  name: "Electronics" | "Headphones" | "Gaming" | "Cameras";
+  name: "Electronics" | "Headphones" | "Gaming" | "Cameras" | string;
   thumbnail: string;
   categories?: ICategory[];
   specs?: ISpecs[];

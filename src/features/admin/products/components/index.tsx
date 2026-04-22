@@ -16,6 +16,7 @@ import { useProductStats } from "../hooks/useProductStats";
 import { useDeleteProduct } from "@/features/public/product/hooks/productCRUD";
 import { useDeleteModal } from "../../hooks/useDeleteModal";
 import type { IProduct } from "@/types/public/product";
+import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
 
 const AdminProducts = () => {
   const { t } = useTranslation();
@@ -49,6 +50,7 @@ const AdminProducts = () => {
     openEdit,
     closeModal,
     onSubmit,
+    deleteManyProductImages,
   } = useProductForm();
 
   const { mutate: deleteProduct } = useDeleteProduct();
@@ -56,6 +58,24 @@ const AdminProducts = () => {
     useDeleteModal<IProduct>({
       onDelete: deleteProduct,
       itemName: "product",
+      onBeforeDelete: async (p) => {
+        const imageDeletions: Promise<void>[] = [];
+
+        if (p.thumbnail)
+          imageDeletions.push(
+            deleteStorageImage(p.thumbnail, "product-images"),
+          );
+
+        if (p.product_images?.length)
+          p.product_images.forEach((img) =>
+            imageDeletions.push(
+              deleteStorageImage(img.image_url, "product-images"),
+            ),
+          );
+
+        await Promise.all(imageDeletions);
+        await deleteManyProductImages({ eq: { product_id: p.id } });
+      },
     });
 
   const productStats = useProductStats(productList, total);
@@ -112,6 +132,7 @@ const AdminProducts = () => {
         onClose={closeModal}
         onSubmit={handleSubmit(onSubmit)}
         disableClickOutside={true}
+        itemName="product_genitive"
       >
         <ProductFormFields
           register={register}
@@ -126,7 +147,9 @@ const AdminProducts = () => {
 
       <ConfirmModal
         open={!!deleteModal}
-        title={t("admin_management.products.delete_product")}
+        title={t("admin_management.add_item", {
+          item: t("admin_management.items.product"),
+        })}
         variant="danger"
         confirmText={t("common.delete")}
         cancelText={t("common.cancel")}
@@ -134,9 +157,9 @@ const AdminProducts = () => {
         onConfirm={confirmDelete}
         description={
           <>
-            {t("admin_management.products.are_you_sure_you_want_to_delete")}{" "}
+            {t("admin_management.are_you_sure_you_want_to_delete")}{" "}
             <span className="font-bold">{deleteModal?.name}</span>?{" "}
-            {t("admin_management.products.this_action_cannot_be_undone")}
+            {t("admin_management.this_action_cannot_be_undone")}
           </>
         }
       />

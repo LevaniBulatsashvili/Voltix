@@ -54,6 +54,10 @@ const AppRoutes = () => (
               path={PAGE.ADMIN.CATEGORIES}
               element={<Page.AdminCategoriesPage />}
             />
+            <Route
+              path={PAGE.ADMIN.MAIN_CATEGORIES}
+              element={<Page.AdminMainCategoriesPage />}
+            />
           </Route>
         </Route>
 

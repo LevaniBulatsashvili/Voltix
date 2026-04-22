@@ -6,6 +6,7 @@
   "main_categories_not_found": "Main categories not found",
   "user_not_found": "User not found",
   "failed_to_upload_image": "Failed to upload image",
+  "failed_to_delete_image": "Failed to delete image",
   "comments_could_not_be_fetched": "Comments could not be fetched",
   "main_categories_could_not_be_fetched": "Main categories could not be fetched",
   "brands_could_not_be_fetched": "Brands could not be fetched",

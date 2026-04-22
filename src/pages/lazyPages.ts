@@ -46,9 +46,11 @@ export const OrdersPage = lazy(() => import("@/pages/user/orders/OrdersPage"));
 export const AdminProductsPage = lazy(
   () => import("@/pages/admin/products/AdminProductsPage"),
 );
-
 export const AdminCategoriesPage = lazy(
   () => import("@/pages/admin/categories/AdminCategoriesPage"),
+);
+export const AdminMainCategoriesPage = lazy(
+  () => import("@/pages/admin/mainCategories/MainCategoriesPage"),
 );
 
 // Error

@@ -3,10 +3,16 @@
     "product": "Product",
     "product_genitive": "Product",
     "category": "Category",
-    "category_genitive": "Category"
+    "category_genitive": "Category",
+    "main_category": "Main Category",
+    "main_category_genitive": "Main Category"
   },
+
   "manage_your_catalog": "Manage Your {{item}} Catalog",
   "add_item": "Add {{item}}",
+  "edit_item": "Edit {{item}}",
+  "are_you_sure_you_want_to_delete": "Are you sure you want to delete",
+  "this_action_cannot_be_undone": "This action cannot be undone.",
 
   "actions": {
     "create": "Created",
@@ -23,22 +29,17 @@
     "category": "Category",
     "price": "Price",
     "discount": "Discount",
-    "stock": "Stock"
+    "stock": "Stock",
+    "thumbnail": "Thumbnail"
   },
 
   "products": {
     "products": "Products",
-    "add_product": "Add Product",
     "total_products": "Total Products",
     "in_stock": "In Stock",
     "out_of_stock": "Out of Stock",
-    "avg_price": "Avarage Price",
-    "all_categories": "All Categories",
-    "delete_product": "Delete Product",
-    "are_you_sure_you_want_to_delete": "Are you sure you want to delete",
-    "this_action_cannot_be_undone": "This action cannot be undone.",
-    "edit_product": "Edit Product",
-    "upload_images": "Upload Images"
+    "avg_price": "Average Price",
+    "all_categories": "All Categories"
   },
 
   "main_categories": {
@@ -46,9 +47,7 @@
   },
 
   "categories": {
-    "categories": "Categories",
-    "category": "Category",
-    "main_category": "Main Category"
+    "categories": "Categories"
   },
 
   "brands": {

@@ -3,10 +3,16 @@
     "product": "პროდუქტი",
     "product_genitive": "პროდუქტის",
     "category": "კატეგორია",
-    "category_genitive": "კატეგორიის"
+    "category_genitive": "კატეგორიის",
+    "main_category": "მთავარი კატეგორია",
+    "main_category_genitive": "მთავარი კატეგორიის"
   },
+
   "manage_your_catalog": "მართეთ თქვენი {{item}} კატალოგი",
   "add_item": "{{item}} დამატება",
+  "edit_item": "{{item}} რედაქტირება",
+  "are_you_sure_you_want_to_delete": "დარწმუნებული ხართ, რომ გსურთ წაშლა",
+  "this_action_cannot_be_undone": "ეს მოქმედება უკანასკნელია.",
 
   "actions": {
     "create": "შეიქმნა",
@@ -23,22 +29,17 @@
     "category": "კატეგორია",
     "price": "ფასი",
     "discount": "ფასდაკლება",
-    "stock": "მარაგი"
+    "stock": "მარაგი",
+    "thumbnail": "მინიატურა"
   },
 
   "products": {
     "products": "პროდუქტები",
-    "add_product": "პროდუქტის დამატება",
     "total_products": "ყველა პროდუქტი",
     "in_stock": "მარაგშია",
     "out_of_stock": "ამოწურულია",
     "avg_price": "საშუალო ფასი",
-    "all_categories": "ყველა კატეგორია",
-    "delete_product": "პროდუქტის წაშლა",
-    "are_you_sure_you_want_to_delete": "დარწმუნებული ხართ, რომ გსურთ წაშლა",
-    "this_action_cannot_be_undone": "ეს მოქმედება უკანასკნელია.",
-    "edit_product": "პროდუქტის რედაქტირება",
-    "upload_images": "სურათების ატვირთვა"
+    "all_categories": "ყველა კატეგორია"
   },
 
   "main_categories": {
@@ -46,9 +47,7 @@
   },
 
   "categories": {
-    "categories": "კატეგორიები",
-    "category": "კატეგორია",
-    "main_category": "მთავარი კატეგორია"
+    "categories": "კატეგორიები"
   },
 
   "brands": {

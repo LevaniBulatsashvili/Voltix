@@ -24,12 +24,9 @@ const AdminCategoriesTable = ({
       data={categories}
       isLoading={isLoading}
       columns={[
+        { label: t("admin_management.items.category"), className: "w-1/2" },
         {
-          label: t("admin_management.categories.category"),
-          className: "w-1/2",
-        },
-        {
-          label: t("admin_management.categories.main_category"),
+          label: t("admin_management.items.main_category"),
           className: "w-1/2",
         },
       ]}

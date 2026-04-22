@@ -6,6 +6,7 @@
   "main_categories_not_found": "მთავარი კატეგორიები ვერ მოიძებნა",
   "user_not_found": "მომხმარებელი ვერ მოიძებნა",
   "failed_to_upload_image": "სურათის ატვირთვა ვერ მოხერხდა",
+  "failed_to_delete_image": "სურათის წაშლა ვერ მოხერხდა",
   "comments_could_not_be_fetched": "კომენტარების მიღება ვერ მოხერხდა",
   "main_categories_could_not_be_fetched": "მთავარი კატეგორიების მიღება ვერ მოხერხდა",
   "brands_could_not_be_fetched": "ბრენდების მიღება ვერ მოხერხდა",

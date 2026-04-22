@@ -104,5 +104,6 @@ export const useProductForm = () => {
     openEdit,
     closeModal,
     onSubmit,
+    deleteManyProductImages,
   };
 };

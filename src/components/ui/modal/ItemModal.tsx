@@ -11,6 +11,7 @@ interface IItemModal {
   onSubmit: () => void;
   children: ReactNode;
   disableClickOutside?: boolean;
+  itemName: string;
 }
 
 const ItemModal = ({
@@ -20,6 +21,7 @@ const ItemModal = ({
   onSubmit,
   children,
   disableClickOutside,
+  itemName,
 }: IItemModal) => {
   const { t } = useTranslation();
 
@@ -33,8 +35,12 @@ const ItemModal = ({
       <div className="flex justify-between items-center mb-5">
         <h2 className="text-xl font-medium">
           {isEditing
-            ? t("admin_management.products.edit_product")
-            : t("admin_management.products.add_product")}
+            ? t("admin_management.edit_item", {
+                item: t(`admin_management.items.${itemName}`),
+              })
+            : t("admin_management.add_item", {
+                item: t(`admin_management.items.${itemName}`),
+              })}
         </h2>
 
         <button onClick={onClose} className="opacity-70 hover:opacity-100">
@@ -50,7 +56,6 @@ const ItemModal = ({
           onClick={onClose}
           className="py-2! text-primary! bg-background! border"
         />
-
         <PrimaryButton
           text={isEditing ? t("common.save_changes") : t("common.create")}
           onClick={onSubmit}
