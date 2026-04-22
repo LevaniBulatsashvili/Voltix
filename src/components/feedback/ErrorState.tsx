@@ -1,5 +1,4 @@
 import { AlertTriangle, RefreshCcw } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 interface IErrorState {
   title: string;
@@ -9,16 +8,12 @@ interface IErrorState {
 }
 
 const ErrorState = ({ title, className, isRetrying, onRetry }: IErrorState) => {
-  const { t } = useTranslation();
-
   return (
     <div
       className={`w-full relative px-8 py-12 text-center border rounded-2xl bg-red-50 mx-auto flex flex-col items-center justify-center ${className}`}
     >
       <AlertTriangle className="size-16 text-red-500 mb-6" />
-      <h3 className="text-xl font-semibold mb-2 text-red-700">
-        {t(`errors.${title}`)}
-      </h3>
+      <h3 className="text-xl font-semibold mb-2 text-red-700">{title}</h3>
 
       {onRetry && (
         <button

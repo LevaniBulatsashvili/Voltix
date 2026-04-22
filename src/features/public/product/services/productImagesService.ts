@@ -11,7 +11,7 @@ export const productImagesService = createSupabaseService<
 >({
   table: Query_Tables.product_images,
   keyField: "id",
-  serviceName: "product_image",
+  serviceName: "product_images",
   selectFieldOptions: {
     createSelectField: "id, product_id, image_url, created_at",
   },

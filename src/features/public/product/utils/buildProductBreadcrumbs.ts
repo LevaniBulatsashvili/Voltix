@@ -15,11 +15,15 @@ export const buildProductBreadcrumbs = (
     },
     {
       label: t(`common.${product.main_category.name.toLowerCase()}`),
-      to: buildCategoryLink(product.main_category.name.toLowerCase()),
+      to: buildCategoryLink(
+        product.main_category.name.toLowerCase().replace(/\s+/g, "-"),
+      ),
     },
     {
       label: t(`common.${product.category.name.toLowerCase()}`),
-      to: buildCategoryLink(product.category.name.toLowerCase()),
+      to: buildCategoryLink(
+        product.category.name.toLowerCase().replace(/\s+/g, "-"),
+      ),
     },
     {
       label: product.name,

@@ -11,5 +11,6 @@ export const addressService = createSupabaseService<
 >({
   table: Query_Tables.addresses,
   keyField: "id",
-  serviceName: "address",
+  serviceName: "addresses",
+  singularName: "address",
 });

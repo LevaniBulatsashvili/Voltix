@@ -11,5 +11,6 @@ export const categoryService = createSupabaseService<
 >({
   table: Query_Tables.categories,
   keyField: "id",
-  serviceName: "category",
+  serviceName: "categories",
+  singularName: "category",
 });

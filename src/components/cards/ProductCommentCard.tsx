@@ -27,7 +27,10 @@ const ProductCommentCard = ({ productComment }: IProductCommentCard) => {
 
       <div className="flex items-center mb-4">
         <div className="w-12 h-12 mr-4 rounded-full bg-gray-200 flex items-center justify-center">
-          <Avatar src={productComment.avatar} className="size-8" />
+          <Avatar
+            src={productComment.avatar || "/images/placeholders/user.webp"}
+            className="size-8"
+          />
         </div>
         <div>
           <div className="flex items-center gap-2">

@@ -34,6 +34,7 @@ export interface ICrudServiceOptions<T> {
   table: string;
   keyField: keyof T;
   serviceName: string;
+  singularName?: string;
   selectFieldOptions?: ISelectFieldOptions;
 }
 
@@ -46,6 +47,7 @@ export const createSupabaseService = <
   table,
   keyField,
   serviceName,
+  singularName,
   selectFieldOptions,
 }: ICrudServiceOptions<T>) => {
   const keyFieldString = keyField as string;
@@ -82,6 +84,7 @@ export const createSupabaseService = <
     const { data, count: total, error } = await query;
 
     if (error) throw new Error(`failed_to_fetch_${serviceName}`);
+    if (!data) throw new Error(`${serviceName}_not_available`);
 
     const safeData = (data ?? []) as T[];
     const safeTotal = total ?? 0;
@@ -111,8 +114,9 @@ export const createSupabaseService = <
       .eq(keyFieldString, id)
       .single<T>();
 
-    if (error) throw new Error(`failed_to_fetch_${serviceName}`);
-    if (!data) throw new Error(`${serviceName}_not_available`);
+    const singular = singularName ?? serviceName.replace(/s$/, "");
+    if (error) throw new Error(`failed_to_fetch_${singular}`);
+    if (!data) throw new Error(`${singular}_not_available`);
     return data;
   }
 
@@ -124,6 +128,7 @@ export const createSupabaseService = <
       .select(selectFieldOptions?.createSelectField ?? "*");
 
     if (error) throw new Error(`failed_to_create_${serviceName}`);
+    if (!data) throw new Error(`${serviceName}_not_available`);
     return (data ?? []) as T[];
   }
 
@@ -135,8 +140,9 @@ export const createSupabaseService = <
       .select(selectFieldOptions?.createSelectField ?? "*")
       .single<T>();
 
-    if (error) throw new Error(`failed_to_create_${serviceName}`);
-    if (!data) throw new Error(`${serviceName}_not_available`);
+    const singular = singularName ?? serviceName.replace(/s$/, "");
+    if (error) throw new Error(`failed_to_create_${singular}`);
+    if (!data) throw new Error(`${singular}_not_available`);
     return data;
   }
 
@@ -149,8 +155,9 @@ export const createSupabaseService = <
       .select(selectFieldOptions?.updateSelectField ?? "*")
       .single<T>();
 
-    if (error) throw new Error(`failed_to_update_${serviceName}`);
-    if (!data) throw new Error(`${serviceName}_not_available`);
+    const singular = singularName ?? serviceName.replace(/s$/, "");
+    if (error) throw new Error(`failed_to_update_${singular}`);
+    if (!data) throw new Error(`${singular}_not_available`);
     return data;
   }
 
@@ -170,7 +177,8 @@ export const createSupabaseService = <
       .delete()
       .eq(keyFieldString, id);
 
-    if (error) throw new Error(`failed_to_delete_${serviceName}`);
+    const singular = singularName ?? serviceName.replace(/s$/, "");
+    if (error) throw new Error(`failed_to_delete_${singular}`);
   }
 
   return {

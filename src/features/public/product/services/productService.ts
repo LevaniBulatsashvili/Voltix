@@ -11,7 +11,7 @@ export const productService = createSupabaseService<
 >({
   table: Query_Tables.products,
   keyField: "id",
-  serviceName: "product",
+  serviceName: "products",
   selectFieldOptions: {
     fetchManySelectField: `
       *,

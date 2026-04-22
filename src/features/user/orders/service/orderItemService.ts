@@ -11,5 +11,5 @@ export const orderItemService = createSupabaseService<
 >({
   table: Query_Tables.order_items,
   keyField: "id",
-  serviceName: "order_item",
+  serviceName: "order_items",
 });

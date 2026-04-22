@@ -9,6 +9,8 @@ import {
   normalizeResponse,
   resolveAsyncState,
 } from "@/components/feedback/utils/asyncBoundaryUtils";
+import { useTranslation } from "react-i18next";
+import { parseServiceError } from "@/lib/supabase/parseServiceError";
 
 export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname?: string };
@@ -53,6 +55,7 @@ function AsyncBoundary<T>({
   renderFooter,
   children,
 }: IAsyncBoundaryProps<T>) {
+  const { t } = useTranslation();
   const settings = useAppSelector((state) => state.settings);
 
   const flicker = useFlicker({
@@ -88,7 +91,10 @@ function AsyncBoundary<T>({
     return (
       errorFallback ?? (
         <ErrorState
-          title={error?.message || "an_error_has_occurred"}
+          title={parseServiceError(
+            error?.message || "an_error_has_occurred",
+            t,
+          )}
           className={
             defaultFallbackOptions?.errorOpt?.className ??
             defaultFallbackOptions?.className
@@ -103,11 +109,14 @@ function AsyncBoundary<T>({
     return (
       noDataFallback ?? (
         <EmptyState
-          title={
+          title={t(
             defaultFallbackOptions?.noDataOpt?.title ??
-            "common.no_data_available"
+              "common.no_data_available",
+          )}
+          description={
+            defaultFallbackOptions?.noDataOpt?.description &&
+            t(defaultFallbackOptions?.noDataOpt?.description)
           }
-          description={defaultFallbackOptions?.noDataOpt?.description}
           className={
             defaultFallbackOptions?.noDataOpt?.classname ??
             defaultFallbackOptions?.className
