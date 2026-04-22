@@ -85,7 +85,7 @@ export const useProductForm = () => {
           })),
         );
       }
-      notifySuccess("admin_products.product_updated");
+      notifySuccess("admin_management.products.product_updated");
     } else {
       const newProduct = await createProduct({
         ...data,
@@ -98,7 +98,7 @@ export const useProductForm = () => {
             image_url: url,
           })),
         );
-      notifySuccess("admin_products.product_created");
+      notifySuccess("admin_management.products.product_created");
     }
 
     closeModal();

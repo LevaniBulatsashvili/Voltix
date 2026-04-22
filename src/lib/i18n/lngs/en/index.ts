@@ -23,7 +23,7 @@ import settings from "./user/settings.json";
 import cart from "./user/cart.json";
 
 // Admin
-import admin_products from "./admin/admin_products.json";
+import admin_management from "./admin/admin_management.json";
 
 // Shared
 import errors from "./shared/errors.json";
@@ -48,5 +48,5 @@ export const en = {
   search_results,
   wishlist,
   orders,
-  admin_products,
+  admin_management,
 };

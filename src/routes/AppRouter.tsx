@@ -3,6 +3,7 @@ import AuthRoute from "@/routes/AuthRoute";
 import { PAGE } from "@/pages/pageConfig";
 import MainLayout from "@/layouts/PageLayout";
 import * as Page from "@/pages/lazyPages";
+import AdminLayout from "@/features/admin/layouts/AdminLayout";
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -43,11 +44,13 @@ const AppRoutes = () => (
           <Route path={PAGE.USER.CART} element={<Page.CartPage />} />
         </Route>
 
-        <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
-          <Route
-            path={PAGE.ADMIN.PRODUCTS}
-            element={<Page.AdminProductPage />}
-          />
+        <Route element={<AdminLayout />} path={PAGE.ADMIN.BASE}>
+          <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
+            <Route
+              path={PAGE.ADMIN.PRODUCTS}
+              element={<Page.AdminProductPage />}
+            />
+          </Route>
         </Route>
 
         <Route path="*" element={<Page.NotFoundPage />} />

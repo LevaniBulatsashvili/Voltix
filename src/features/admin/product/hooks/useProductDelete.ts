@@ -13,7 +13,7 @@ export const useProductDelete = () => {
   const confirmDelete = () => {
     if (!deleteModal) return;
     deleteProduct(deleteModal.id);
-    notifySuccess("admin_products.product_deleted");
+    notifySuccess("admin_management.products.product_deleted");
     closeDelete();
   };
 

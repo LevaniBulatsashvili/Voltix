@@ -23,14 +23,17 @@ export const useProductStats = (
   const { format } = usePrice();
 
   return [
-    { label: t("admin_products.total_products"), value: total },
-    { label: t("admin_products.in_stock"), value: getInStock(productList) },
+    { label: t("admin_management.products.total_products"), value: total },
     {
-      label: t("admin_products.out_of_stock"),
+      label: t("admin_management.products.in_stock"),
+      value: getInStock(productList),
+    },
+    {
+      label: t("admin_management.products.out_of_stock"),
       value: getOutOfStock(productList),
     },
     {
-      label: t("admin_products.avg_price"),
+      label: t("admin_management.products.avg_price"),
       value: format(getAvgPrice(productList)),
     },
   ];

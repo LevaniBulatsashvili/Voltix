@@ -33,8 +33,8 @@ const ItemModal = ({
       <div className="flex justify-between items-center mb-5">
         <h2 className="text-xl font-medium">
           {isEditing
-            ? t("admin_products.edit_product")
-            : t("admin_products.add_product")}
+            ? t("admin_management.products.edit_product")
+            : t("admin_management.products.add_product")}
         </h2>
 
         <button onClick={onClose} className="opacity-70 hover:opacity-100">

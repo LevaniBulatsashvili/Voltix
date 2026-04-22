@@ -26,6 +26,9 @@ const PAGE = {
   ADMIN: {
     BASE: "/admin",
     PRODUCTS: "/admin/products",
+    MAIN_CATEGORIES: "/admin/main-categories",
+    CATEGORIES: "/admin/categories",
+    BRANDS: "/admin/brands",
   },
 
   SOCIAL: {

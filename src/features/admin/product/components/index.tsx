@@ -5,7 +5,6 @@ import ConfirmModal from "@/components/ui/modal/ConfirmModal";
 import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
 import TableContainer from "@/components/ui/table/TableContainer";
-import PageWrapper from "@/components/ui/PageWrapper";
 import AdminHeader from "../../components/AdminHeader";
 import AdminStats from "../../components/AdminStats";
 import AdminToolbar from "../../components/AdminToolbar";
@@ -56,11 +55,11 @@ const AdminProduct = () => {
   const productStats = useProductStats(productList, total);
 
   return (
-    <PageWrapper>
+    <>
       <AdminHeader
-        title={t("admin_products.products")}
-        description={t("admin_products.manage_your_product_catalog")}
-        actionText={t("admin_products.add_product")}
+        title={t("admin_management.products.products")}
+        description={t("admin_management.products.manage_your_product_catalog")}
+        actionText={t("admin_management.products.add_product")}
         onAction={openCreate}
       />
 
@@ -78,7 +77,7 @@ const AdminProduct = () => {
           value: capitalize(category),
           label: t(`common.${category}`),
         }))}
-        selectBaseLabel={t("admin_products.all_categories")}
+        selectBaseLabel={t("admin_management.products.all_categories")}
       />
 
       <TableContainer>
@@ -117,7 +116,7 @@ const AdminProduct = () => {
 
       <ConfirmModal
         open={!!deleteModal}
-        title={t("admin_products.delete_product")}
+        title={t("admin_management.products.delete_product")}
         variant="danger"
         confirmText={t("common.delete")}
         cancelText={t("common.cancel")}
@@ -125,13 +124,13 @@ const AdminProduct = () => {
         onConfirm={confirmDelete}
         description={
           <>
-            {t("admin_products.are_you_sure_you_want_to_delete")}{" "}
+            {t("admin_management.products.are_you_sure_you_want_to_delete")}{" "}
             <span className="font-bold">{deleteModal?.name}</span>?{" "}
-            {t("admin_products.this_action_cannot_be_undone")}
+            {t("admin_management.products.this_action_cannot_be_undone")}
           </>
         }
       />
-    </PageWrapper>
+    </>
   );
 };
 
