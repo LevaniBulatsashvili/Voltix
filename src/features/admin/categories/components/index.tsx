@@ -6,21 +6,21 @@ import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
 import TableContainer from "@/components/ui/table/TableContainer";
 import AdminHeader from "../../components/AdminHeader";
-import AdminStats from "../../components/AdminStats";
 import AdminToolbar from "../../components/AdminToolbar";
-import AdminProductsTable from "./adminProductsTable/AdminProductsTable";
-import ProductFormFields from "./productsForm/ProductsForm";
-import { useProductForm } from "../hooks/useProductForm";
-import { useProductDelete } from "../hooks/useProductDelete";
-import { useProductQuery } from "../hooks/useProductQuery";
-import { useProductStats } from "../hooks/useProductStats";
+import { useCategoryQuery } from "../hooks/useCategoryQuery";
+import AdminCategoriesTable from "./adminCategoriesTable/AdminCategoriesTable";
+import { useDeleteCategory } from "@/features/public/category/hooks/categoryCRUD";
+import { useDeleteModal } from "../../hooks/useDeleteModal";
+import type { ICategory } from "@/types/public/product";
+import { useCategoryForm } from "../hooks/useCategoryForm";
+import CategoryFormFields from "./categoryFormFields/CategoryFormFields";
 
-const AdminProduct = () => {
+const AdminCategories = () => {
   const { t } = useTranslation();
 
   const {
-    productsQuery,
-    productList,
+    categoriesQuery,
+    categoryList,
     currentPage,
     total,
     totalPages,
@@ -31,45 +31,46 @@ const AdminProduct = () => {
     onSelectCategory,
     categoryFilter,
     setPage,
-  } = useProductQuery();
+  } = useCategoryQuery();
 
   const {
-    formKey,
     modalOpen,
-    editingProduct,
-    uploadRef,
+    editingCategory,
     register,
     handleSubmit,
     errors,
-    watchedMainCategory,
     control,
     openCreate,
     openEdit,
     closeModal,
     onSubmit,
-  } = useProductForm();
+  } = useCategoryForm();
 
+  const { mutate: deleteCategory } = useDeleteCategory();
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
-    useProductDelete();
-
-  const productStats = useProductStats(productList, total);
+    useDeleteModal<ICategory>({
+      onDelete: deleteCategory,
+      itemName: "category",
+    });
 
   return (
     <>
       <AdminHeader
-        title={t("admin_management.products.products")}
-        description={t("admin_management.products.manage_your_product_catalog")}
-        actionText={t("admin_management.products.add_product")}
+        title={t("admin_management.categories.categories")}
+        description={t("admin_management.manage_your_catalog", {
+          item: t("admin_management.items.category_genitive"),
+        })}
+        actionText={t("admin_management.add_item", {
+          item: t("admin_management.items.category_genitive"),
+        })}
         onAction={openCreate}
       />
-
-      <AdminStats stats={productStats} />
 
       <AdminToolbar
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        hasData={!!productsQuery.data}
-        isSearchDisabled={productsQuery.isFetching}
+        hasData={!!categoriesQuery.data}
+        isSearchDisabled={categoriesQuery.isFetching}
         searchInputClassName="rounded-none!"
         selectValue={categoryFilter}
         onSelect={onSelectCategory}
@@ -81,9 +82,9 @@ const AdminProduct = () => {
       />
 
       <TableContainer>
-        <AdminProductsTable
-          products={productList}
-          isLoading={productsQuery.isFetching}
+        <AdminCategoriesTable
+          categories={categoryList}
+          isLoading={categoriesQuery.isFetching}
           onEdit={openEdit}
           onDelete={openDelete}
         />
@@ -98,19 +99,15 @@ const AdminProduct = () => {
 
       <ItemModal
         open={modalOpen}
-        isEditing={!!editingProduct}
+        isEditing={!!editingCategory}
         onClose={closeModal}
         onSubmit={handleSubmit(onSubmit)}
         disableClickOutside={true}
       >
-        <ProductFormFields
+        <CategoryFormFields
           register={register}
           errors={errors}
           control={control}
-          mainCategoryId={Number(watchedMainCategory) || undefined}
-          uploadRef={uploadRef}
-          formKey={formKey}
-          editingProduct={editingProduct}
         />
       </ItemModal>
 
@@ -134,4 +131,4 @@ const AdminProduct = () => {
   );
 };
 
-export default AdminProduct;
+export default AdminCategories;

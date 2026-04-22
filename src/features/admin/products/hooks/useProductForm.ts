@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef } from "react";
+import { useWatch } from "react-hook-form";
 import {
   useCreateProduct,
   useUpdateProduct,
@@ -11,62 +10,49 @@ import {
   productSchema,
   type ProductFormData,
 } from "../schemas/productSchema";
-import { notifySuccess } from "@/lib/toast/notifySuccess";
 import {
   useCreateManyProductImages,
   useDeleteManyProductImages,
 } from "@/features/public/product/hooks/productImagesCRUD";
 import type { ICreatePayload } from "@/types/common/api";
+import { useItemForm } from "../../hooks/useItemForm";
+import { notifyItemAction } from "../../utils/notifyItemAction";
 
 export const useProductForm = () => {
-  const [formKey, setFormKey] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
   const uploadRef = useRef<(() => Promise<string[]>) | null>(null);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors },
-  } = useForm<ProductFormData>({
-    resolver: zodResolver(productSchema),
-    defaultValues: defaultProductForm,
-  });
-
-  const watchedMainCategory = useWatch({ control, name: "main_category_id" });
-
   const { mutateAsync: createProduct } = useCreateProduct();
   const { mutateAsync: updateProduct } = useUpdateProduct();
   const { mutateAsync: createManyProductImages } = useCreateManyProductImages();
   const { mutateAsync: deleteManyProductImages } = useDeleteManyProductImages();
 
-  const openCreate = () => {
-    setEditingProduct(null);
-    reset(defaultProductForm);
-    setModalOpen(true);
-    setFormKey((k) => k + 1);
-  };
+  const {
+    formKey,
+    modalOpen,
+    editingItem: editingProduct,
+    openCreate,
+    openEdit,
+    closeModal,
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useItemForm<IProduct, ProductFormData>({
+    schema: productSchema,
+    defaultValues: defaultProductForm,
+    toFormValues: (p) => ({
+      name: p.name,
+      description: p.description,
+      brand_id: p.brand_id,
+      main_category_id: p.main_category_id,
+      category_id: p.category_id,
+      price: p.price,
+      discount_percentage: p.discount_percentage ?? 0,
+      stock: p.stock,
+      thumbnail: p.thumbnail,
+    }),
+  });
 
-  const openEdit = (product: IProduct) => {
-    setEditingProduct(product);
-    reset({
-      name: product.name,
-      description: product.description,
-      brand_id: product.brand_id,
-      main_category_id: product.main_category_id,
-      category_id: product.category_id,
-      price: product.price,
-      discount_percentage: product.discount_percentage ?? 0,
-      stock: product.stock,
-      thumbnail: product.thumbnail,
-    });
-    setModalOpen(true);
-    setFormKey((k) => k + 1);
-  };
-
-  const closeModal = () => setModalOpen(false);
+  const watchedMainCategory = useWatch({ control, name: "main_category_id" });
 
   const onSubmit = async (data: ProductFormData) => {
     const imageUrls = (await uploadRef.current?.()) ?? [];
@@ -85,7 +71,7 @@ export const useProductForm = () => {
           })),
         );
       }
-      notifySuccess("admin_management.products.product_updated");
+      notifyItemAction("product", "update");
     } else {
       const newProduct = await createProduct({
         ...data,
@@ -98,7 +84,7 @@ export const useProductForm = () => {
             image_url: url,
           })),
         );
-      notifySuccess("admin_management.products.product_created");
+      notifyItemAction("product", "create");
     }
 
     closeModal();

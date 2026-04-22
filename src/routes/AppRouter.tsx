@@ -48,7 +48,11 @@ const AppRoutes = () => (
           <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
             <Route
               path={PAGE.ADMIN.PRODUCTS}
-              element={<Page.AdminProductPage />}
+              element={<Page.AdminProductsPage />}
+            />
+            <Route
+              path={PAGE.ADMIN.CATEGORIES}
+              element={<Page.AdminCategoriesPage />}
             />
           </Route>
         </Route>

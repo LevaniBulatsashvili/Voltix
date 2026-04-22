@@ -1,4 +1,4 @@
-import AdminProducts from "@/features/admin/product/components";
+import AdminProducts from "@/features/admin/products/components";
 
 const AdminProductsPage = () => {
   return <AdminProducts />;

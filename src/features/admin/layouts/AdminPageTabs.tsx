@@ -1,4 +1,4 @@
-import AdminProductsPage from "@/pages/admin/product/AdminProductsPage";
+import AdminProductsPage from "@/pages/admin/products/AdminProductsPage";
 
 interface IAdminPageTabs {
   currentPage: string;

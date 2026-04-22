@@ -1,7 +1,33 @@
 {
+  "items": {
+    "product": "Product",
+    "product_genitive": "Product",
+    "category": "Category",
+    "category_genitive": "Category"
+  },
+  "manage_your_catalog": "Manage Your {{item}} Catalog",
+  "add_item": "Add {{item}}",
+
+  "actions": {
+    "create": "Created",
+    "update": "Updated",
+    "delete": "Deleted"
+  },
+  "item_action": "{{item}} {{action}}!",
+
+  "form": {
+    "name": "Name",
+    "description": "Description",
+    "brand": "Brand",
+    "main_category": "Main Category",
+    "category": "Category",
+    "price": "Price",
+    "discount": "Discount",
+    "stock": "Stock"
+  },
+
   "products": {
     "products": "Products",
-    "manage_your_product_catalog": "Manage your product catalog",
     "add_product": "Add Product",
     "total_products": "Total Products",
     "in_stock": "In Stock",
@@ -12,18 +38,6 @@
     "are_you_sure_you_want_to_delete": "Are you sure you want to delete",
     "this_action_cannot_be_undone": "This action cannot be undone.",
     "edit_product": "Edit Product",
-    "name": "Name",
-    "description": "Description",
-    "brand": "Brand",
-    "main_category": "Main Category",
-    "category": "Category",
-    "price": "Price",
-    "discount": "Discount",
-    "stock": "Stock",
-    "thumbnail": "Thumbnail",
-    "product_created": "Product Created!",
-    "product_updated": "Product Updated!",
-    "product_deleted": "Product Deleted!",
     "upload_images": "Upload Images"
   },
 
@@ -32,7 +46,9 @@
   },
 
   "categories": {
-    "categories": "Categories"
+    "categories": "Categories",
+    "category": "Category",
+    "main_category": "Main Category"
   },
 
   "brands": {

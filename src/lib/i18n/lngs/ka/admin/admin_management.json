@@ -1,7 +1,33 @@
 {
+  "items": {
+    "product": "პროდუქტი",
+    "product_genitive": "პროდუქტის",
+    "category": "კატეგორია",
+    "category_genitive": "კატეგორიის"
+  },
+  "manage_your_catalog": "მართეთ თქვენი {{item}} კატალოგი",
+  "add_item": "{{item}} დამატება",
+
+  "actions": {
+    "create": "შეიქმნა",
+    "update": "განახლდა",
+    "delete": "წაიშალა"
+  },
+  "item_action": "{{item}} {{action}}!",
+
+  "form": {
+    "name": "სახელი",
+    "description": "აღწერა",
+    "brand": "ბრენდი",
+    "main_category": "მთავარი კატეგორია",
+    "category": "კატეგორია",
+    "price": "ფასი",
+    "discount": "ფასდაკლება",
+    "stock": "მარაგი"
+  },
+
   "products": {
     "products": "პროდუქტები",
-    "manage_your_product_catalog": "მართეთ თქვენი პროდუქციის კატალოგი",
     "add_product": "პროდუქტის დამატება",
     "total_products": "ყველა პროდუქტი",
     "in_stock": "მარაგშია",
@@ -11,19 +37,21 @@
     "delete_product": "პროდუქტის წაშლა",
     "are_you_sure_you_want_to_delete": "დარწმუნებული ხართ, რომ გსურთ წაშლა",
     "this_action_cannot_be_undone": "ეს მოქმედება უკანასკნელია.",
-    "edit_product": "რედაქტირება",
-    "name": "სახელი",
-    "description": "აღწერა",
-    "brand": "ბრენდი",
-    "main_category": "მთავარი კატეგორია",
-    "category": "კატეგორია",
-    "price": "ფასი",
-    "discount": "ფასდაკლება",
-    "stock": "მარაგი",
-    "thumbnail": "მინიატურა",
-    "product_created": "პროდუქტი შეიქმნა!",
-    "product_updated": "პროდუქტი განახლდა!",
-    "product_deleted": "პროდუქტი წაიშალა!",
+    "edit_product": "პროდუქტის რედაქტირება",
     "upload_images": "სურათების ატვირთვა"
+  },
+
+  "main_categories": {
+    "main_categories": "მთავარი კატეგორიები"
+  },
+
+  "categories": {
+    "categories": "კატეგორიები",
+    "category": "კატეგორია",
+    "main_category": "მთავარი კატეგორია"
+  },
+
+  "brands": {
+    "brands": "ბრენდები"
   }
 }

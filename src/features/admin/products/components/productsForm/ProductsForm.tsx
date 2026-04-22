@@ -42,26 +42,26 @@ const ProductFormFields = ({
       <div className="col-span-2">
         <FormInput
           name="name"
-          label="admin_management.products.name"
+          label="admin_management.form.name"
           register={register}
           errors={errors}
-          placeholder="admin_management.products.name"
+          placeholder="admin_management.form.name"
         />
       </div>
 
       <div className="col-span-2">
         <FormInput
           name="description"
-          label="admin_management.products.description"
+          label="admin_management.form.description"
           register={register}
           errors={errors}
-          placeholder="admin_management.products.description"
+          placeholder="admin_management.form.description"
         />
       </div>
 
       <FormSelect
         name="brand_id"
-        label={t("admin_management.products.brand")}
+        label={t("admin_management.form.brand")}
         baseLabel={t("common.select")}
         control={control}
         options={brandOptions}
@@ -71,7 +71,7 @@ const ProductFormFields = ({
 
       <FormSelect
         name="main_category_id"
-        label={t("admin_management.products.main_category")}
+        label={t("admin_management.form.main_category")}
         baseLabel={t("common.select")}
         control={control}
         options={mainCategoryOptions}
@@ -81,7 +81,7 @@ const ProductFormFields = ({
 
       <FormSelect
         name="category_id"
-        label={t("admin_management.products.category")}
+        label={t("admin_management.form.category")}
         baseLabel={t("common.select")}
         control={control}
         options={categoryOptions}
@@ -91,29 +91,29 @@ const ProductFormFields = ({
 
       <FormInput
         name="price"
-        label="admin_management.products.price"
+        label="admin_management.form.price"
         type="number"
         register={register}
         errors={errors}
-        placeholder="admin_management.products.price"
+        placeholder="admin_management.form.price"
       />
 
       <FormInput
         name="discount_percentage"
-        label="admin_management.products.discount"
+        label="admin_management.form.discount"
         type="number"
         register={register}
         errors={errors}
-        placeholder="admin_management.products.discount"
+        placeholder="admin_management.form.discount"
       />
 
       <FormInput
         name="stock"
-        label="admin_management.products.stock"
+        label="admin_management.form.stock"
         type="number"
         register={register}
         errors={errors}
-        placeholder="admin_management.products.stock"
+        placeholder="admin_management.form.stock"
       />
 
       <div className="col-span-2 mt-4">

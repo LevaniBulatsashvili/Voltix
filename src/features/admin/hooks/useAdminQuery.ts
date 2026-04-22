@@ -1,14 +1,31 @@
 import { useState } from "react";
-import { useFetchProducts } from "@/features/public/product/hooks/productCRUD";
 import { useSearchDebounce } from "@/hooks/useSearchDebounce";
 import { useCachedQueryData } from "@/hooks/useCachedQueryData";
 import { useCategoryFilterOptions } from "@/features/public/category/hooks/useCategoryFilterOptions";
 import { createCategoryQuery } from "@/utils/consts";
 import type { TCategoryQueries } from "@/features/public/category/utils/categoryQueryMap";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { IDataResponse } from "@/types/common/api";
 
-const LIMIT = 9;
+interface IUseAdminQuery<T> {
+  useQuery: (options: {
+    page: number;
+    limit: number;
+    filters: object;
+    sort: { field: keyof T; ascending: boolean }[];
+    selectField: string;
+  }) => UseQueryResult<IDataResponse<T>>;
+  selectField: string;
+  sort?: { field: keyof T; ascending: boolean }[];
+  limit?: number;
+}
 
-export const useProductQuery = () => {
+export const useAdminQuery = <T>({
+  useQuery,
+  selectField,
+  sort = [{ field: "id" as keyof T, ascending: false }],
+  limit = 9,
+}: IUseAdminQuery<T>) => {
   const [page, setPage] = useState(1);
   const [categoryFilter, setCategoryFilter] = useState("");
 
@@ -23,41 +40,22 @@ export const useProductQuery = () => {
     false,
   );
 
-  const productsQuery = useFetchProducts({
+  const query = useQuery({
     page,
-    limit: LIMIT,
+    limit,
     filters: { ...categoryFilterOptions.filters, ...searchFilters },
-    sort: [{ field: "id", ascending: false }],
-    selectField: `
-            id,
-            name,
-            description,
-            price,
-            price_final,
-            discount_percentage,
-            stock,
-            thumbnail,
-            rating_avg,
-            rating_count,
-            total_sold,
-            brand_id,
-            main_category_id,
-            category_id,
-            brand:brand_id(name),
-            main_category:main_category_id(name),
-            category:category_id(name),
-            product_images(image_url)
-    `,
+    sort,
+    selectField,
   });
 
   const {
-    data: products,
+    data,
     currentPage,
     totalCount: total,
     totalPages,
     start,
     end,
-  } = useCachedQueryData(productsQuery);
+  } = useCachedQueryData(query);
 
   const onSelectCategory = (category: string) => {
     setSearchValue("");
@@ -65,15 +63,15 @@ export const useProductQuery = () => {
   };
 
   return {
-    productsQuery,
-    products,
-    productList: products?.data ?? [],
+    query,
+    data,
+    list: data?.data ?? [],
     currentPage,
     total,
     totalPages,
     start,
     end,
-    limit: LIMIT,
+    limit,
     searchValue,
     setSearchValue,
     categoryFilter,

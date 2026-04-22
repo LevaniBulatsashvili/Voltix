@@ -1,21 +1,25 @@
-import type { ProductFormData } from "@/features/admin/product/schemas/productSchema";
-import { useController, type Control } from "react-hook-form";
+import {
+  useController,
+  type Control,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 import { Label } from "./Label";
 import { Select } from "@/components/ui/Select";
 import { useAppSelector } from "@/hooks/redux";
 import { useFlicker } from "@/hooks/useFlicker";
 
-interface IFormSelect {
-  name: keyof ProductFormData;
+interface IFormSelect<T extends FieldValues> {
+  name: Path<T>;
   label: string;
-  control: Control<ProductFormData>;
-  options: { value: string; label: string }[];
+  control: Control<T>;
+  options: { value: string | number; label: string }[];
   error?: string;
   baseLabel?: string;
   isLoading?: boolean;
 }
 
-const FormSelect = ({
+const FormSelect = <T extends FieldValues>({
   name,
   label,
   control,
@@ -23,7 +27,7 @@ const FormSelect = ({
   error,
   baseLabel,
   isLoading,
-}: IFormSelect) => {
+}: IFormSelect<T>) => {
   const { permaLoadingState, flickerLoadingState } = useAppSelector(
     (state) => state.settings,
   );
@@ -39,7 +43,7 @@ const FormSelect = ({
         <Select
           value={String(field.value ?? "")}
           onChange={(val) => field.onChange(val === "" ? "" : Number(val))}
-          options={options}
+          options={options.map((o) => ({ ...o, value: String(o.value) }))}
           baseLabel={baseLabel}
           selectBtnClassName="py-4"
         />

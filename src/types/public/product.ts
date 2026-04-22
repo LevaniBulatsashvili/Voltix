@@ -36,6 +36,7 @@ export interface IMainCategory {
 export interface ICategory {
   id: number;
   main_category_id: IMainCategory["id"];
+  main_category?: IMainCategory;
   name: string;
   specs?: ISpecs[];
 }

@@ -29,7 +29,7 @@ const SkeletonRow = () => (
   </TableRow>
 );
 
-const AdminProductsTableSkeleton = () => (
+const AdminTableSkeleton = () => (
   <>
     {Array.from({ length: 9 }).map((_, i) => (
       <SkeletonRow key={i} />
@@ -37,4 +37,4 @@ const AdminProductsTableSkeleton = () => (
   </>
 );
 
-export default AdminProductsTableSkeleton;
+export default AdminTableSkeleton;
