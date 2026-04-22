@@ -150,5 +150,21 @@
     "Network error. Please try again.": "Network error. Please try again.",
     "Request timed out": "Request timed out",
     "Something went wrong": "Something went wrong"
+  },
+
+  "validation": {
+    "email_is_required": "Email is required",
+    "invalid_email_address": "Invalid email address",
+    "password_must_be_at_least_6_characters": "Password must be at least 6 characters",
+    "please_confirm_your_new_password": "Please confirm your new password",
+    "passwords_do_not_match": "Passwords do not match",
+    "address_line_is_required": "Address line is required",
+    "city_is_required": "City is required",
+    "postal_code_is_required": "Postal code is required",
+    "country_must_be_ISO_2-letter_code": "Country must be a 2-letter ISO code",
+    "required": "This field is required",
+    "must_be_positive": "Must be a positive number",
+    "max_100": "Cannot exceed 100",
+    "invalid_url": "Must be a valid URL"
   }
 }

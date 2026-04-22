@@ -49,5 +49,21 @@
     "Network error. Please try again.": "ქსელის შეცდომა. სცადეთ თავიდან",
     "Request timed out": "თხოვნა ამოიწურა",
     "Something went wrong": "დაფიქსირდა შეცდომა"
+  },
+
+  "validation": {
+    "email_is_required": "ელფოსტა აუცილებელია",
+    "invalid_email_address": "არასწორი ელფოსტის მისამართი",
+    "password_must_be_at_least_6_characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს",
+    "please_confirm_your_new_password": "გთხოვთ დაადასტუროთ ახალი პაროლი",
+    "passwords_do_not_match": "პაროლები არ ემთხვევა",
+    "address_line_is_required": "მისამართის ველი აუცილებელია",
+    "city_is_required": "ქალაქი აუცილებელია",
+    "postal_code_is_required": "საფოსტო კოდი აუცილებელია",
+    "country_must_be_ISO_2-letter_code": "ქვეყანა უნდა იყოს ISO 2-ასოიანი კოდი",
+    "required": "ეს ველი აუცილებელია",
+    "must_be_positive": "უნდა იყოს დადებითი რიცხვი",
+    "max_100": "არ უნდა აღემატებოდეს 100-ს",
+    "invalid_url": "უნდა იყოს სწორი URL მისამართი"
   }
 }

@@ -2,14 +2,18 @@ import { z } from "zod";
 
 export const changePasswordSchema = z
   .object({
-    currentPassword: z.string().min(6, "current_password_is_required"),
+    currentPassword: z
+      .string()
+      .min(6, "validation.password_must_be_at_least_6_characters"),
     newPassword: z
       .string()
-      .min(6, "new_password_must_be_at_least_6_characters"),
-    confirmPassword: z.string().min(6, "please_confirm_your_new_password"),
+      .min(6, "validation.password_must_be_at_least_6_characters"),
+    confirmPassword: z
+      .string()
+      .min(6, "validation.please_confirm_your_new_password"),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "passwords_do_not_match",
+    message: "validation.passwords_do_not_match",
     path: ["confirmPassword"],
   });
 

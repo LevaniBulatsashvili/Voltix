@@ -38,7 +38,7 @@ export const profileSchema = z
     if (!line) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "address_line_is_required",
+        message: "validation.address_line_is_required",
         path: ["address", "address_line"],
       });
     }
@@ -46,7 +46,7 @@ export const profileSchema = z
     if (!city) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "city_is_required",
+        message: "validation.city_is_required",
         path: ["address", "city"],
       });
     }
@@ -54,7 +54,7 @@ export const profileSchema = z
     if (!postal) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "postal_code_is_required",
+        message: "validation.postal_code_is_required",
         path: ["address", "postal_code"],
       });
     }
@@ -62,7 +62,7 @@ export const profileSchema = z
     if (country.length !== 2) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "country_must_be_ISO_2-letter_code",
+        message: "validation.country_must_be_ISO_2-letter_code",
         path: ["address", "country"],
       });
     }

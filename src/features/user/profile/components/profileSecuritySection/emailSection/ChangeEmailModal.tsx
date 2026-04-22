@@ -37,7 +37,7 @@ const ChangeEmailModal = ({ isOpen, onClose }: IChangeEmailModal) => {
   };
 
   return (
-    <Modal isOpen={isOpen} title={"profile.change_email"} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <FormInput<TChangeEmail>
           name="newEmail"
