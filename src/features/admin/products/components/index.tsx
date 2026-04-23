@@ -101,13 +101,15 @@ const AdminProducts = () => {
         hasData={!!productsQuery.data}
         isSearchDisabled={productsQuery.isFetching}
         searchInputClassName="rounded-none!"
-        selectValue={categoryFilter}
-        onSelect={onSelectCategory}
-        selectOptions={CATEGORIES.map((category) => ({
-          value: capitalize(category),
-          label: t(`common.${category}`),
-        }))}
-        selectBaseLabel={t("admin_management.products.all_categories")}
+        selectDropdownOptions={{
+          selectValue: categoryFilter,
+          onSelect: onSelectCategory,
+          selectOptions: CATEGORIES.map((category) => ({
+            value: capitalize(category),
+            label: t(`common.${category.replace(/\s+/g, "-")}`),
+          })),
+          selectBaseLabel: t("admin_management.products.all_categories"),
+        }}
       />
 
       <TableContainer>
@@ -147,8 +149,8 @@ const AdminProducts = () => {
 
       <ConfirmModal
         open={!!deleteModal}
-        title={t("admin_management.add_item", {
-          item: t("admin_management.items.product"),
+        title={t("admin_management.delete_item", {
+          item: t("admin_management.items.product_genitive"),
         })}
         variant="danger"
         confirmText={t("common.delete")}

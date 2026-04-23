@@ -58,6 +58,10 @@ const AppRoutes = () => (
               path={PAGE.ADMIN.MAIN_CATEGORIES}
               element={<Page.AdminMainCategoriesPage />}
             />
+            <Route
+              path={PAGE.ADMIN.BRANDS}
+              element={<Page.AdminBrandsPage />}
+            />
           </Route>
         </Route>
 

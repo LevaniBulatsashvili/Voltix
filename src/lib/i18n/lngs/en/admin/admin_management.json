@@ -5,12 +5,15 @@
     "category": "Category",
     "category_genitive": "Category",
     "main_category": "Main Category",
-    "main_category_genitive": "Main Category"
+    "main_category_genitive": "Main Category",
+    "brand": "Brand",
+    "brand_genitive": "Brand"
   },
 
   "manage_your_catalog": "Manage Your {{item}} Catalog",
   "add_item": "Add {{item}}",
   "edit_item": "Edit {{item}}",
+  "delete_item": "Delete {{item}}",
   "are_you_sure_you_want_to_delete": "Are you sure you want to delete",
   "this_action_cannot_be_undone": "This action cannot be undone.",
 
@@ -30,7 +33,9 @@
     "price": "Price",
     "discount": "Discount",
     "stock": "Stock",
-    "thumbnail": "Thumbnail"
+    "thumbnail": "Thumbnail",
+    "logo": "Logo",
+    "website_url": "Website URL"
   },
 
   "products": {

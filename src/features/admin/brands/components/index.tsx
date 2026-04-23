@@ -1,26 +1,25 @@
 import { useTranslation } from "react-i18next";
-import { MAINCATEGORIES } from "@/utils/consts";
-import { capitalize } from "@/utils/capitalize";
 import ConfirmModal from "@/components/ui/modal/ConfirmModal";
 import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
 import TableContainer from "@/components/ui/table/TableContainer";
 import AdminHeader from "../../components/AdminHeader";
 import AdminToolbar from "../../components/AdminToolbar";
-import { useCategoryQuery } from "../hooks/useCategoryQuery";
-import AdminCategoriesTable from "./adminCategoriesTable/AdminCategoriesTable";
-import { useDeleteCategory } from "@/features/public/category/hooks/categoryCRUD";
 import { useDeleteModal } from "../../hooks/useDeleteModal";
-import type { ICategory } from "@/types/public/product";
-import { useCategoryForm } from "../hooks/useCategoryForm";
-import CategoryFormFields from "./categoryFormFields/CategoryFormFields";
+import type { IBrand } from "@/types/public/product";
+import { useBrandQuery } from "../hooks/useBrandQuery";
+import { useBrandForm } from "../hooks/useBrandForm";
+import { useDeleteBrand } from "@/features/public/search/hooks/brandCRUD";
+import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
+import { BrandsTable } from "./brandsTable/BrandsTable";
+import BrandFormFields from "./brandFormFields/BrandFormFields";
 
-const AdminCategories = () => {
+const AdminBrands = () => {
   const { t } = useTranslation();
 
   const {
-    categoriesQuery,
-    categoryList,
+    brandsQuery,
+    brandList,
     currentPage,
     total,
     totalPages,
@@ -28,40 +27,42 @@ const AdminCategories = () => {
     end,
     searchValue,
     setSearchValue,
-    onSelectCategory,
-    categoryFilter,
     setPage,
-  } = useCategoryQuery();
+  } = useBrandQuery();
 
   const {
+    formKey,
     modalOpen,
-    editingCategory,
+    editingBrand,
+    uploadRef,
     register,
     handleSubmit,
     errors,
-    control,
     openCreate,
     openEdit,
     closeModal,
     onSubmit,
-  } = useCategoryForm();
+  } = useBrandForm();
 
-  const { mutate: deleteCategory } = useDeleteCategory();
+  const { mutate: deleteBrand } = useDeleteBrand();
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
-    useDeleteModal<ICategory>({
-      onDelete: deleteCategory,
-      itemName: "category",
+    useDeleteModal<IBrand>({
+      onDelete: deleteBrand,
+      itemName: "brand",
+      onBeforeDelete: (b) => {
+        if (b.logo_url) return deleteStorageImage(b.logo_url, "brands");
+      },
     });
 
   return (
     <>
       <AdminHeader
-        title={t("admin_management.categories.categories")}
+        title={t("admin_management.brands.brands")}
         description={t("admin_management.manage_your_catalog", {
-          item: t("admin_management.items.category_genitive"),
+          item: t("admin_management.items.brand_genitive"),
         })}
         actionText={t("admin_management.add_item", {
-          item: t("admin_management.items.category_genitive"),
+          item: t("admin_management.items.brand_genitive"),
         })}
         onAction={openCreate}
       />
@@ -69,24 +70,15 @@ const AdminCategories = () => {
       <AdminToolbar
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        hasData={!!categoriesQuery.data}
-        isSearchDisabled={categoriesQuery.isFetching}
+        hasData={!!brandsQuery.data}
+        isSearchDisabled={brandsQuery.isFetching}
         searchInputClassName="rounded-none!"
-        selectDropdownOptions={{
-          selectValue: categoryFilter,
-          onSelect: onSelectCategory,
-          selectOptions: MAINCATEGORIES.map((mainCategory) => ({
-            value: capitalize(mainCategory),
-            label: t(`common.${mainCategory}`),
-          })),
-          selectBaseLabel: t("admin_management.products.all_categories"),
-        }}
       />
 
       <TableContainer>
-        <AdminCategoriesTable
-          categories={categoryList}
-          isLoading={categoriesQuery.isFetching}
+        <BrandsTable
+          brands={brandList}
+          isLoading={brandsQuery.isFetching}
           onEdit={openEdit}
           onDelete={openDelete}
         />
@@ -101,23 +93,25 @@ const AdminCategories = () => {
 
       <ItemModal
         open={modalOpen}
-        isEditing={!!editingCategory}
+        isEditing={!!editingBrand}
         onClose={closeModal}
         onSubmit={handleSubmit(onSubmit)}
         disableClickOutside={true}
-        itemName="category_genitive"
+        itemName="brand_genitive"
       >
-        <CategoryFormFields
+        <BrandFormFields
           register={register}
           errors={errors}
-          control={control}
+          uploadRef={uploadRef}
+          formKey={formKey}
+          editingBrand={editingBrand}
         />
       </ItemModal>
 
       <ConfirmModal
         open={!!deleteModal}
         title={t("admin_management.delete_item", {
-          item: t("admin_management.items.category_genitive"),
+          item: t("admin_management.items.brand_genitive"),
         })}
         variant="danger"
         confirmText={t("common.delete")}
@@ -136,4 +130,4 @@ const AdminCategories = () => {
   );
 };
 
-export default AdminCategories;
+export default AdminBrands;

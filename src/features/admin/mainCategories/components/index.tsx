@@ -1,6 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { CATEGORIES } from "@/utils/consts";
-import { capitalize } from "@/utils/capitalize";
 import ConfirmModal from "@/components/ui/modal/ConfirmModal";
 import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
@@ -29,8 +27,6 @@ const AdminMainCategories = () => {
     end,
     searchValue,
     setSearchValue,
-    onSelectCategory,
-    categoryFilter,
     setPage,
   } = useMainCategoryQuery();
 
@@ -78,13 +74,6 @@ const AdminMainCategories = () => {
         hasData={!!mainCategoriesQuery.data}
         isSearchDisabled={mainCategoriesQuery.isFetching}
         searchInputClassName="rounded-none!"
-        selectValue={categoryFilter}
-        onSelect={onSelectCategory}
-        selectOptions={CATEGORIES.map((category) => ({
-          value: capitalize(category),
-          label: t(`common.${category}`),
-        }))}
-        selectBaseLabel={t("admin_management.products.all_categories")}
       />
 
       <TableContainer>
@@ -122,8 +111,8 @@ const AdminMainCategories = () => {
 
       <ConfirmModal
         open={!!deleteModal}
-        title={t("admin_management.add_item", {
-          item: t("admin_management.items.main_category"),
+        title={t("admin_management.delete_item", {
+          item: t("admin_management.items.main_category_genitive"),
         })}
         variant="danger"
         confirmText={t("common.delete")}

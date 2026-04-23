@@ -76,8 +76,11 @@ export const useImageSelector = ({
     for (const entry of pendingImages) {
       updateImageStatus(entry.id, { status: "uploading" });
       try {
-        const webpFile = await convertToWebP(entry.file);
-        const url = await uploadImage(webpFile, bucket);
+        const isSvg = entry.file.type === "image/svg+xml";
+        const fileToUpload = isSvg
+          ? entry.file
+          : await convertToWebP(entry.file);
+        const url = await uploadImage(fileToUpload, bucket);
         updateImageStatus(entry.id, { status: "done", uploadedUrl: url });
         newImages.push(url);
       } catch {

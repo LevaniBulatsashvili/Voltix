@@ -5,12 +5,15 @@
     "category": "კატეგორია",
     "category_genitive": "კატეგორიის",
     "main_category": "მთავარი კატეგორია",
-    "main_category_genitive": "მთავარი კატეგორიის"
+    "main_category_genitive": "მთავარი კატეგორიის",
+    "brand": "ბრენდი",
+    "brand_genitive": "ბრენდის"
   },
 
   "manage_your_catalog": "მართეთ თქვენი {{item}} კატალოგი",
   "add_item": "{{item}} დამატება",
   "edit_item": "{{item}} რედაქტირება",
+  "delete_item": "{{item}} წაშლა",
   "are_you_sure_you_want_to_delete": "დარწმუნებული ხართ, რომ გსურთ წაშლა",
   "this_action_cannot_be_undone": "ეს მოქმედება უკანასკნელია.",
 
@@ -30,7 +33,9 @@
     "price": "ფასი",
     "discount": "ფასდაკლება",
     "stock": "მარაგი",
-    "thumbnail": "მინიატურა"
+    "thumbnail": "მინიატურა",
+    "logo": "ლოგო",
+    "website_url": "ვებსაიტი"
   },
 
   "products": {

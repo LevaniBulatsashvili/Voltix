@@ -9,6 +9,7 @@ interface IImageSelector {
   onUploadsComplete?: (urls: string[]) => void;
   uploadRef?: RefObject<(() => Promise<string[]>) | null>;
   initialImages?: string[];
+  accept?: string;
 }
 
 export const ImageSelector = ({

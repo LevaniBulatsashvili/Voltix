@@ -13,10 +13,12 @@ interface IAdminToolbar {
   isSearchDisabled?: boolean;
   searchInputClassName?: string;
 
-  selectValue: string;
-  onSelect: (value: string) => void;
-  selectOptions: ISelectOption[];
-  selectBaseLabel?: string;
+  selectDropdownOptions?: {
+    selectValue: string;
+    onSelect: (value: string) => void;
+    selectOptions: ISelectOption[];
+    selectBaseLabel?: string;
+  };
 }
 
 const AdminToolbar = ({
@@ -25,10 +27,7 @@ const AdminToolbar = ({
   hasData,
   isSearchDisabled,
   searchInputClassName,
-  selectValue,
-  onSelect,
-  selectOptions,
-  selectBaseLabel,
+  selectDropdownOptions,
 }: IAdminToolbar) => {
   return (
     <div className="flex gap-3 mb-4">
@@ -39,12 +38,14 @@ const AdminToolbar = ({
         isSearchDisabled={isSearchDisabled}
         searchInputClassName={searchInputClassName}
       />
-      <Select
-        value={selectValue}
-        onChange={onSelect}
-        options={selectOptions}
-        baseLabel={selectBaseLabel}
-      />
+      {selectDropdownOptions && (
+        <Select
+          value={selectDropdownOptions.selectValue}
+          onChange={selectDropdownOptions.onSelect}
+          options={selectDropdownOptions.selectOptions}
+          baseLabel={selectDropdownOptions.selectBaseLabel}
+        />
+      )}
     </div>
   );
 };

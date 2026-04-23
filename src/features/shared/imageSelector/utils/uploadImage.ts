@@ -2,11 +2,12 @@ import { supabase } from "@/lib/supabase";
 
 export const uploadImage = async (file: File, bucket: string) => {
   const fileName = `${Date.now()}-${file.name}`;
+  const isSvg = file.type === "image/svg+xml";
 
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(fileName, file, {
-      contentType: "image/webp",
+      contentType: isSvg ? "image/svg+xml" : "image/webp",
       upsert: false,
     });
 

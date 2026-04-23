@@ -27,6 +27,13 @@ export const CATEGORIES = [
   "camera accessories",
 ] as const;
 
+export const MAINCATEGORIES = [
+  "electronics",
+  "cameras",
+  "gaming",
+  "headphones",
+] as const;
+
 export const NAME_OVERRIDES: Partial<Record<TCategoryQueries, string>> = {
   "in-ear": "In-Ear",
   "over-ear": "Over-Ear",
