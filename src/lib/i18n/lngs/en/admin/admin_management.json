@@ -52,7 +52,8 @@
   },
 
   "categories": {
-    "categories": "Categories"
+    "categories": "Categories",
+    "main_category": "Main Category"
   },
 
   "brands": {

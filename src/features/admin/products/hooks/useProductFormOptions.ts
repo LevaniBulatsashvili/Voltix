@@ -6,14 +6,18 @@ import { useTranslation } from "react-i18next";
 export const useProductFormOptions = (mainCategoryId?: number) => {
   const { t } = useTranslation();
   const { data: brandsData, isFetching: brandsFetching } = useFetchBrands({
+    limit: 1000,
     selectField: "id, name",
   });
+
   const { data: mainCategoriesData, isFetching: mainCategoriesFetching } =
     useFetchMainCategories({
+      limit: 1000,
       selectField: "id, name",
     });
   const { data: categoriesData, isFetching: categoriesFetching } =
     useFetchCategories({
+      limit: 1000,
       filters: mainCategoryId
         ? { eq: { main_category_id: mainCategoryId } }
         : undefined,
@@ -33,7 +37,7 @@ export const useProductFormOptions = (mainCategoryId?: number) => {
     ),
     categoryOptions: (categoriesData?.data ?? []).map((category) => ({
       value: String(category.id),
-      label: t(`common.${category.name.toLowerCase()}`),
+      label: t(`common.${category.name.toLowerCase().replace(/\s+/g, "-")}`),
     })),
     brandsFetching,
     mainCategoriesFetching,

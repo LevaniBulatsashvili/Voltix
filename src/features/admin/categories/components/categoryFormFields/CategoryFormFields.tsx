@@ -19,7 +19,7 @@ const CategoryFormFields = ({
   const { t } = useTranslation();
 
   const { data: mainCategoriesData, isFetching: mainCategoriesFetching } =
-    useFetchMainCategories({ selectField: "id, name" });
+    useFetchMainCategories({ limit: 1000, selectField: "id, name" });
 
   const mainCategoryOptions =
     mainCategoriesData?.data?.map((mc) => ({
