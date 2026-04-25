@@ -11,11 +11,13 @@ const AppRoutes = () => (
       <Route element={<MainLayout />} path={PAGE.PUBLIC.BASE}>
         <Route index element={<Navigate to={PAGE.PUBLIC.SHOP} replace />} />
 
+        {/* Authentication */}
         <Route element={<AuthRoute guestOnly />}>
           <Route path={PAGE.AUTH.LOGIN} element={<Page.LoginPage />} />
           <Route path={PAGE.AUTH.REGISTER} element={<Page.RegisterPage />} />
         </Route>
 
+        {/* Waiting Verification */}
         <Route element={<AuthRoute verifyPagesOnly />}>
           <Route
             path={PAGE.AUTH.VERIFY_EMAIL}
@@ -27,6 +29,7 @@ const AppRoutes = () => (
           />
         </Route>
 
+        {/* Public */}
         <Route path={PAGE.PUBLIC.SHOP} element={<Page.ProductsPage />} />
         <Route path={PAGE.PUBLIC.PRODUCT} element={<Page.ProductPage />} />
         <Route path={PAGE.PUBLIC.SEARCH} element={<Page.SearchPage />} />
@@ -36,14 +39,20 @@ const AppRoutes = () => (
           element={<Page.SearchResultsPage />}
         />
 
+        {/* Authenticated */}
         <Route element={<AuthRoute requireAuth />}>
           <Route path={PAGE.USER.PROFILE} element={<Page.ProfilePage />} />
+          <Route path={PAGE.USER.SETTINGS} element={<Page.SettingsPage />} />
+        </Route>
+
+        {/* User */}
+        <Route element={<AuthRoute requireAuth allowedRoles="user" />}>
           <Route path={PAGE.USER.ORDERS} element={<Page.OrdersPage />} />
           <Route path={PAGE.USER.WISHLIST} element={<Page.WishlistPage />} />
-          <Route path={PAGE.USER.SETTINGS} element={<Page.SettingsPage />} />
           <Route path={PAGE.USER.CART} element={<Page.CartPage />} />
         </Route>
 
+        {/* ADMIN */}
         <Route element={<AdminLayout />} path={PAGE.ADMIN.BASE}>
           <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
             <Route
