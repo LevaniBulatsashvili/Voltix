@@ -38,22 +38,22 @@ const Pagination = ({
             <ChevronLeft size={18} />
           </button>
 
-          {pages.map((page, i) =>
-            page === "..." ? (
-              <span key={i} className="shrink-0 px-2">
+          {pages.map(({ key, value }) =>
+            value === "..." ? (
+              <span key={key} className="shrink-0 px-2">
                 ...
               </span>
             ) : (
               <button
-                key={page}
-                onClick={() => onChange(page)}
+                key={key}
+                onClick={() => onChange(value)}
                 className={`size-10 border rounded shrink-0 ${
-                  currentPage === page
+                  currentPage === value
                     ? "bg-black text-white"
                     : "hover:bg-gray-100"
                 }`}
               >
-                {page}
+                {value}
               </button>
             ),
           )}
