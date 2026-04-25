@@ -116,7 +116,9 @@ export const authService: IAuthService = {
   // 📩 RESET PASSWORD
   // =========================
   async sendPasswordResetEmail(email): Promise<void> {
-    const { error } = await supabase.auth.resetPasswordForEmail(email);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}${PAGE.AUTH.RESET_PASSWORD}`,
+    });
     if (error) throw error;
   },
 };

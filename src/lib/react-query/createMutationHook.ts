@@ -26,6 +26,7 @@ export const createMutationHook = <TVariables, TData>({
     const queryClient = useQueryClient();
 
     return useMutation({
+      meta: messages ? { hasToast: true } : undefined,
       mutationFn: (variables: TVariables) => {
         const promise = mutationFn(variables);
         if (messages) notify.promise(promise, messages);

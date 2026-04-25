@@ -11,6 +11,12 @@ export const VerifyEmailPage = lazy(
 export const VerificationSuccessPage = lazy(
   () => import("@/pages/auth/verification/VerificationSuccessPage"),
 );
+export const ForgotPasswordPage = lazy(
+  () => import("@/pages/auth/forgotPassword/ForgotPasswordPage"),
+);
+export const ResetPasswordPage = lazy(
+  () => import("@/pages/auth/resetPassword/ResetPasswordPage"),
+);
 
 // Public
 export const ProductsPage = lazy(

@@ -51,7 +51,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event: string, session: Session | null) => {
-        handleSession(session); // check for bugs
+        handleSession(session);
         dispatch(setUser(mapUser(session?.user ?? null)));
       },
     );

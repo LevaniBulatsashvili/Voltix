@@ -131,6 +131,7 @@
     "required": "This field is required",
     "must_be_positive": "Must be a positive number",
     "max_100": "Cannot exceed 100",
-    "invalid_url": "Must be a valid URL"
+    "invalid_url": "Must be a valid URL",
+    "password_too_short": "Password too short"
   }
 }

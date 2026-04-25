@@ -43,9 +43,15 @@ const LoginPage = () => {
       {error && <ErrorMessage message={error.message} />}
 
       <AuthSwitchLink
-        text="login.don't_have_an_account?"
+        text="login.don't_have_an_account"
         linkText="login.register"
         to={PAGE.AUTH.REGISTER}
+      />
+      <AuthSwitchLink
+        text="login.forgot_password"
+        linkText="login.reset_it"
+        to={PAGE.AUTH.FORGOT_PASSWORD}
+        className="mt-2!"
       />
     </FormContainer>
   );

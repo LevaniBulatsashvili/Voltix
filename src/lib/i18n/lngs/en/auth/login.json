@@ -4,9 +4,11 @@
   "password": "password",
   "login": "login",
   "logging_in": "logging in...",
-  "don't_have_an_account?": "don't have an account?",
+  "don't_have_an_account": "don't have an account?",
   "register": "register",
   "email_is_required": "email is required",
   "invalid_email_address": "invalid email address",
-  "password_must_be_at_least_6_characters": "password must be at least 6 characters"
+  "password_must_be_at_least_6_characters": "password must be at least 6 characters",
+  "forgot_password": "Forgot Password?",
+  "reset_it": "Reset it"
 }

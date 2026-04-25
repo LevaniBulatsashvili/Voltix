@@ -7,6 +7,8 @@ import login from "./auth/login.json";
 import register from "./auth/register.json";
 import verifyEmail from "./auth/verify_email.json";
 import verificationSuccess from "./auth/verification_success.json";
+import forgot_password from "./auth/forgot_password.json";
+import reset_password from "./auth/reset_password.json";
 
 // Public
 import products from "./public/products.json";
@@ -51,4 +53,6 @@ export const ka = {
   orders,
   admin_management,
   entities,
+  forgot_password,
+  reset_password,
 };

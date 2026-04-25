@@ -4,6 +4,8 @@ const PAGE = {
     REGISTER: "/register",
     VERIFY_EMAIL: "/verify-email",
     VERIFY_SUCCESS: "/verify-success",
+    FORGOT_PASSWORD: "/forgot-password",
+    RESET_PASSWORD: "/reset-password",
   },
 
   PUBLIC: {

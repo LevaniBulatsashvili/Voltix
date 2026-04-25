@@ -5,13 +5,19 @@ interface IAuthFooter {
   to: string;
   text: string;
   linkText: string;
+  className?: string;
 }
 
-const AuthSwitchLink = ({ to, text, linkText }: IAuthFooter) => {
+const AuthSwitchLink = ({
+  to,
+  text,
+  linkText,
+  className = "",
+}: IAuthFooter) => {
   const { t } = useTranslation();
 
   return (
-    <p className="mt-10 text-center text-sm">
+    <p className={`mt-10 text-center text-sm ${className}`}>
       {t(text)}
       <AppLink
         className="ml-1.5 font-semibold underline hover:opacity-80"

@@ -15,7 +15,13 @@ const AppRoutes = () => (
         <Route element={<AuthRoute guestOnly />}>
           <Route path={PAGE.AUTH.LOGIN} element={<Page.LoginPage />} />
           <Route path={PAGE.AUTH.REGISTER} element={<Page.RegisterPage />} />
+          <Route
+            path={PAGE.AUTH.FORGOT_PASSWORD}
+            element={<Page.ForgotPasswordPage />}
+          />
         </Route>
+
+        <Route path={PAGE.AUTH.RESET_PASSWORD} element={<Page.ResetPasswordPage />} />
 
         {/* Waiting Verification */}
         <Route element={<AuthRoute verifyPagesOnly />}>
