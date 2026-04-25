@@ -2,13 +2,15 @@ import type { ICartItem } from "./cart";
 import type { ICurrency } from "@/types/common/currency";
 import type { IProduct } from "@/types/public/product";
 
+export type IProfileRole = "user" | "courier" | "admin" | "developer";
+
 export interface IProfile {
   id: string;
   full_name?: string;
   phone?: string;
   avatar_url?: string;
   created_at: string;
-  role: "user" | "courier" | "admin" | "developer";
+  role: IProfileRole;
 
   addresses: IAddress[];
   orders?: IOrder[];

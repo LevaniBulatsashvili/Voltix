@@ -5,7 +5,9 @@ import { useTranslation } from "react-i18next";
 import { useInfiniteFetchProductComments } from "../../../hooks/productCommentCRUD";
 import { InfiniteGrid } from "@/components/ui/InfiniteGrid";
 import { useInfiniteList } from "@/hooks/useInfiniteList";
-import { useAppSelector } from "@/hooks/redux";
+import PrimaryButton from "@/components/button/PrimaryBtn";
+import { useRole } from "@/features/user/profile/hooks/useRole";
+import { notify } from "@/lib/toast/toast";
 
 interface IProductReviews {
   productId: number;
@@ -13,7 +15,7 @@ interface IProductReviews {
 
 const ProductReviews = ({ productId }: IProductReviews) => {
   const { t } = useTranslation();
-  const { user } = useAppSelector((state) => state.auth);
+  const { isVerified, isRole } = useRole();
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   const {
@@ -56,10 +58,13 @@ const ProductReviews = ({ productId }: IProductReviews) => {
             />
           </button>
 
-          {user?.email_verified && (
-            <button className="bg-primary text-background rounded-full px-6 py-3 font-semibold hover:bg-primary/80 transition capitalize">
-              {t("product.review")}
-            </button>
+          {isVerified && (
+            <PrimaryButton
+              text={t("product.review")}
+              className={`rounded-full! ${isRole(["admin", "developer"]) ? "opacity-70! pointer-events-none" : ""}`}
+              disabled={isRole(["admin", "developer"])}
+              onClick={() => notify.info("coming soon!")}
+            />
           )}
         </div>
       </div>

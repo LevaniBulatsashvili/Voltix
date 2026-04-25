@@ -15,6 +15,7 @@ import {
   getGuestMenu,
   getUserMenu,
 } from "../utils/menuGenerators";
+import { useRole } from "@/features/user/profile/hooks/useRole";
 
 interface IActions {
   languages: ILanguage[];
@@ -33,6 +34,7 @@ const Actions = ({
   const { signOut } = useLogout();
   const { theme } = useAppSelector((state) => state.theme);
   const { profile } = useAppSelector((state) => state.profile);
+  const { isUser, isCourier, isAdmin, isVerified } = useRole();
   const { items: cartItems } = useAppSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -47,14 +49,14 @@ const Actions = ({
   let menu;
 
   if (!profile) menu = getGuestMenu(t);
-  else if (profile.role === "user") menu = getUserMenu(t, handleLogout);
-  else if (profile.role === "admin") menu = getAdminMenu(t, handleLogout);
-  else if (profile.role === "courier") menu = getUserMenu(t, handleLogout);
+  else if (isUser) menu = getUserMenu(t, handleLogout);
+  else if (isAdmin) menu = getAdminMenu(t, handleLogout);
+  else if (isCourier) menu = getUserMenu(t, handleLogout);
   else menu = getUserMenu(t, handleLogout);
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
-      {profile && profile.role === "user" && (
+      {isVerified && isUser && (
         <AppLink to={PAGE.USER.CART} className="relative">
           <ShoppingCart className="w-6 h-6" />
           {totalItems > 0 && (

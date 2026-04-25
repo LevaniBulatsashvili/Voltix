@@ -1,6 +1,7 @@
 import type { IProduct } from "@/types/public/product";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import ProductBtn from "@/components/button/ProductBtn";
+import { useAppSelector } from "@/hooks/redux";
 
 interface IProductActions {
   product: IProduct;
@@ -19,6 +20,9 @@ const ProductActions = ({
   decrease,
   handleAddToCart,
 }: IProductActions) => {
+  const { profile } = useAppSelector((state) => state.profile);
+  const isDisabled = profile?.role !== "user";
+
   return (
     <div className="mt-auto pt-4 flex items-center gap-4">
       {product.stock > 0 ? (
@@ -28,12 +32,14 @@ const ProductActions = ({
             maxQuantity={maxQuantity}
             onIncrease={increase}
             onDecrease={decrease}
+            isDisabled={isDisabled}
           />
 
           <ProductBtn
             text="product.add_to_cart"
             onClick={handleAddToCart}
-            className="bg-primary max-w-60 text-background flex-1 hover:opacity-80"
+            className={`bg-primary max-w-60 text-background flex-1 hover:opacity-80 ${isDisabled ? "opacity-70 pointer-events-none" : ""}`}
+            disabled={isDisabled}
           />
         </>
       ) : (
