@@ -15,4 +15,5 @@ export const {
 } = createEntityHooks<IImage, number, Pick<IImage, "product_id" | "image_url">>(
   productImagesService,
   Query_Keys.product_images,
+  Query_Keys.product_images,
 );

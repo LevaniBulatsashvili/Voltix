@@ -1,0 +1,16 @@
+{
+  "product": "პროდუქტი",
+  "product_comment": "პროდუქტის კომენტარი",
+  "product_images": "პროდუქტის სურათები",
+  "product_faq": "პროდუქტის FAQ",
+  "product_spec": "პროდუქტის მახასიათებელი",
+  "spec_values": "მახასიათებლის მნიშვნელობა",
+  "main_category": "მთავარი კატეგორია",
+  "category": "კატეგორია",
+  "brand": "ბრენდი",
+  "order": "შეკვეთა",
+  "order_items": "შეკვეთის ნივთები",
+  "profile": "პროფილი",
+  "address": "მისამართი",
+  "wishlist": "სურვილების სია"
+}

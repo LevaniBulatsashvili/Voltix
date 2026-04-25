@@ -8,4 +8,8 @@ export const {
   useCreate: useCreateMainCategory,
   useUpdate: useUpdateMainCategory,
   useDelete: useDeleteMainCategory,
-} = createEntityHooks(mainCategoryService, Query_Keys.main_category);
+} = createEntityHooks(
+  mainCategoryService,
+  Query_Keys.main_category,
+  Query_Keys.main_category,
+);

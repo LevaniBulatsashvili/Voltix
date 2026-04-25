@@ -9,4 +9,4 @@ export const {
   useCreate: useCreateBrand,
   useUpdate: useUpdateBrand,
   useDelete: useDeleteBrand,
-} = createEntityHooks(brandService, Query_Keys.brand);
+} = createEntityHooks(brandService, Query_Keys.brand, Query_Keys.brand);

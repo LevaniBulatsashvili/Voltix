@@ -8,4 +8,4 @@ export const {
   useCreate: useCreateAddress,
   useUpdate: useUpdateAddress,
   useDelete: useDeleteAddress,
-} = createEntityHooks(addressService, Query_Keys.address);
+} = createEntityHooks(addressService, Query_Keys.address, Query_Keys.address);

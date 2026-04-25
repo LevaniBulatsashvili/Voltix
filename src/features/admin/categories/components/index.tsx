@@ -50,7 +50,6 @@ const AdminCategories = () => {
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
     useDeleteModal<ICategory>({
       onDelete: deleteCategory,
-      itemName: "category",
     });
 
   return (

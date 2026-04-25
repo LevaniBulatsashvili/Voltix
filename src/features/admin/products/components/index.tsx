@@ -57,7 +57,6 @@ const AdminProducts = () => {
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
     useDeleteModal<IProduct>({
       onDelete: deleteProduct,
-      itemName: "product",
       onBeforeDelete: async (p) => {
         const imageDeletions: Promise<void>[] = [];
 

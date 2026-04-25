@@ -48,7 +48,6 @@ const AdminMainCategories = () => {
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
     useDeleteModal<IMainCategory>({
       onDelete: deleteCategory,
-      itemName: "main_category",
       onBeforeDelete: (mc) => {
         if (mc.thumbnail)
           return deleteStorageImage(mc.thumbnail, "main-categories");

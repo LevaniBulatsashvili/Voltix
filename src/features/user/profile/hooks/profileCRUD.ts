@@ -8,4 +8,4 @@ export const {
   useCreate: useCreateProfile,
   useUpdate: useUpdateProfile,
   useDelete: useDeleteProfile,
-} = createEntityHooks(profileService, Query_Keys.profile);
+} = createEntityHooks(profileService, Query_Keys.profile, Query_Keys.profile);

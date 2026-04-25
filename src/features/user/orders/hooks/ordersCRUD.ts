@@ -9,4 +9,4 @@ export const {
   useCreate: useCreateOrder,
   useUpdate: useUpdateOrder,
   useDelete: useDeleteOrder,
-} = createEntityHooks(orderService, Query_Keys.order);
+} = createEntityHooks(orderService, Query_Keys.order, Query_Keys.order);

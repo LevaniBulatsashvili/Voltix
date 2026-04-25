@@ -9,4 +9,4 @@ export const {
   useCreate: useCreateProduct,
   useUpdate: useUpdateProduct,
   useDelete: useDeleteProduct,
-} = createEntityHooks(productService, Query_Keys.product);
+} = createEntityHooks(productService, Query_Keys.product, Query_Keys.product);

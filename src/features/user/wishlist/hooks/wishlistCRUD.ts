@@ -9,4 +9,8 @@ export const {
   useCreate: useCreateWishlist,
   useUpdate: useUpdateWishlist,
   useDelete: useDeleteWishlist,
-} = createEntityHooks(wishlistService, Query_Keys.wishlist);
+} = createEntityHooks(
+  wishlistService,
+  Query_Keys.wishlist,
+  Query_Keys.wishlist,
+);

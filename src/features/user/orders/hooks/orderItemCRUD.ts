@@ -9,4 +9,8 @@ export const {
   useCreate: useCreateOrderItem,
   useUpdate: useUpdateOrderItem,
   useDelete: useDeleteOrderItem,
-} = createEntityHooks(orderItemService, Query_Keys.order_items);
+} = createEntityHooks(
+  orderItemService,
+  Query_Keys.order_items,
+  Query_Keys.order_items,
+);

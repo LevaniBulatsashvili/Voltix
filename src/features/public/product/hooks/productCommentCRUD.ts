@@ -9,4 +9,8 @@ export const {
   useCreate: useCreateProductComment,
   useUpdate: useUpdateProductComment,
   useDelete: useDeleteProductComment,
-} = createEntityHooks(productCommentService, Query_Keys.product_comment);
+} = createEntityHooks(
+  productCommentService,
+  Query_Keys.product_comment,
+  Query_Keys.product_comment,
+);

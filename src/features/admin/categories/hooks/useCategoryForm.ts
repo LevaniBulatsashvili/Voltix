@@ -1,5 +1,5 @@
 import type { ICategory } from "@/types/public/product";
-import { notifySuccess } from "@/lib/toast/notifySuccess";
+
 import type { ICreatePayload } from "@/types/common/api";
 import { useItemForm } from "../../hooks/useItemForm";
 import {
@@ -36,13 +36,9 @@ export const useCategoryForm = () => {
   });
 
   const onSubmit = async (data: CategoryFormData) => {
-    if (editingCategory) {
+    if (editingCategory)
       await updateCategory({ id: editingCategory.id, ...data });
-      notifySuccess("admin_management.categories.category_updated");
-    } else {
-      await createCategory(data as unknown as ICreatePayload<ICategory>);
-      notifySuccess("admin_management.categories.category_created");
-    }
+    else await createCategory(data as unknown as ICreatePayload<ICategory>);
 
     closeModal();
   };

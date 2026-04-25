@@ -29,7 +29,26 @@ export const createEntityHooks = <
     delete: (id: IDType) => Promise<void>;
   },
   queryKeyPrefix: string,
+  entityName: string,
 ) => {
+  const messages = {
+    create: {
+      loading: "common.mutation.creating",
+      success: "common.mutation.created",
+      params: { entity: entityName },
+    },
+    update: {
+      loading: "common.mutation.updating",
+      success: "common.mutation.updated",
+      params: { entity: entityName },
+    },
+    delete: {
+      loading: "common.mutation.deleting",
+      success: "common.mutation.deleted",
+      params: { entity: entityName },
+    },
+  };
+
   const useFetch = createQueryHook(
     (id: IDType) => [queryKeyPrefix, id],
     service.fetch,
@@ -60,12 +79,14 @@ export const createEntityHooks = <
     mutationFn: (payload: TCreate) => service.create(payload),
     queryKey: (_: TCreate, data: T) => [queryKeyPrefix, data.id],
     invalidateKey: [queryKeyPrefix],
+    messages: messages.create,
   });
 
   const useUpdate = createMutationHook({
     mutationFn: service.update,
     queryKey: (_: IUpdatePayload<T>, data: T) => [queryKeyPrefix, data.id],
     invalidateKey: [queryKeyPrefix],
+    messages: messages.update,
   });
 
   const useDeleteMany = () => {
@@ -83,6 +104,7 @@ export const createEntityHooks = <
     queryKey: (id: IDType) => [queryKeyPrefix, id],
     invalidateKey: [queryKeyPrefix],
     isDelete: true,
+    messages: messages.delete,
   });
 
   return {

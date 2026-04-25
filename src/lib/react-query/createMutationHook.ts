@@ -1,54 +1,43 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { notify } from "../toast/toast";
 
-interface IUseMutationStatic<TInput, TOutput, TKey> {
-  mutationFn: (input: TInput) => Promise<TOutput>;
-  queryKey: TKey;
-  invalidateKey?: TKey;
-  isDelete?: boolean;
+interface MutationMessages {
+  loading: string;
+  success: string;
+  error?: string;
 }
 
-interface IUseMutationDynamic<TInput, TOutput, TKey> {
-  mutationFn: (input: TInput) => Promise<TOutput>;
-  queryKey: (input: TInput, result: TOutput) => TKey;
-  invalidateKey?: TKey | ((input: TInput, result: TOutput) => TKey);
+interface CreateMutationHookOptions<TVariables, TData> {
+  mutationFn: (variables: TVariables) => Promise<TData>;
+  queryKey?: (variables: TVariables, data: TData) => unknown[];
+  invalidateKey?: unknown[];
   isDelete?: boolean;
+  messages?: MutationMessages;
 }
 
-type IUseMutationOptions<TInput, TOutput, TKey> =
-  | IUseMutationStatic<TInput, TOutput, TKey>
-  | IUseMutationDynamic<TInput, TOutput, TKey>;
-
-export const createMutationHook = <
-  TInput,
-  TOutput,
-  TKey extends readonly unknown[],
-  TCache = TOutput,
->({
+export const createMutationHook = <TVariables, TData>({
   mutationFn,
   queryKey,
   invalidateKey,
-  isDelete = false,
-}: IUseMutationOptions<TInput, TOutput, TKey>) => {
+  isDelete,
+  messages,
+}: CreateMutationHookOptions<TVariables, TData>) => {
   return () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-      mutationFn,
-
-      onSuccess: (data: TOutput, input: TInput) => {
-        const key: TKey =
-          typeof queryKey === "function" ? queryKey(input, data) : queryKey;
-
-        if (isDelete) queryClient.removeQueries({ queryKey: key });
-        else queryClient.setQueryData<TCache>(key, data as unknown as TCache);
-
-        const toInvalidate: TKey | undefined =
-          typeof invalidateKey === "function"
-            ? invalidateKey(input, data)
-            : invalidateKey;
-
-        if (toInvalidate)
-          queryClient.invalidateQueries({ queryKey: toInvalidate });
+      mutationFn: (variables: TVariables) => {
+        const promise = mutationFn(variables);
+        if (messages) notify.promise(promise, messages);
+        return promise;
+      },
+      onSuccess: (data, variables) => {
+        if (invalidateKey)
+          queryClient.invalidateQueries({ queryKey: invalidateKey });
+        if (isDelete && queryKey)
+          queryClient.removeQueries({ queryKey: queryKey(variables, data) });
+        else if (queryKey)
+          queryClient.setQueryData(queryKey(variables, data), data);
       },
     });
   };

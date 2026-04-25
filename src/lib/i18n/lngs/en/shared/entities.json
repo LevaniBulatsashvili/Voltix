@@ -1,0 +1,16 @@
+{
+  "product": "Product",
+  "product_comment": "Product Comment",
+  "product_images": "Product Images",
+  "product_faq": "Product FAQ",
+  "product_spec": "Product Spec",
+  "spec_values": "Spec value",
+  "main_category": "Main Category",
+  "category": "Category",
+  "brand": "Brand",
+  "order": "Order",
+  "order_items": "Order Items",
+  "profile": "Profile",
+  "address": "Address",
+  "wishlist": "Wishlist"
+}

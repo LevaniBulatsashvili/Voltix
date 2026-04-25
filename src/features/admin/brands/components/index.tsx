@@ -48,7 +48,6 @@ const AdminBrands = () => {
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
     useDeleteModal<IBrand>({
       onDelete: deleteBrand,
-      itemName: "brand",
       onBeforeDelete: (b) => {
         if (b.logo_url) return deleteStorageImage(b.logo_url, "brands");
       },

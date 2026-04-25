@@ -1,7 +1,6 @@
 import type { IMainCategory } from "@/types/public/product";
 import type { ICreatePayload } from "@/types/common/api";
 import { useItemForm } from "../../hooks/useItemForm";
-import { notifyItemAction } from "../../utils/notifyItemAction";
 import {
   mainCategorySchema,
   defaultMainCategoryForm,
@@ -54,13 +53,11 @@ export const useMainCategoryForm = () => {
         ...data,
         thumbnail,
       });
-      notifyItemAction("main_category", "update");
     } else {
       await createMainCategory({
         ...data,
         thumbnail,
       } as unknown as ICreatePayload<IMainCategory>);
-      notifyItemAction("main_category", "create");
     }
 
     closeModal();

@@ -2,7 +2,6 @@ import { useRef } from "react";
 import type { IBrand } from "@/types/public/product";
 import type { ICreatePayload } from "@/types/common/api";
 import { useItemForm } from "../../hooks/useItemForm";
-import { notifyItemAction } from "../../utils/notifyItemAction";
 import {
   brandSchema,
   defaultBrandForm,
@@ -47,14 +46,11 @@ export const useBrandForm = () => {
       if (imageUrls.length && editingBrand.logo_url)
         await deleteStorageImage(editingBrand.logo_url, "brands");
       await updateBrand({ id: editingBrand.id, ...data, logo_url });
-      notifyItemAction("brand", "update");
-    } else {
+    } else
       await createBrand({
         ...data,
         logo_url,
       } as unknown as ICreatePayload<IBrand>);
-      notifyItemAction("brand", "create");
-    }
 
     closeModal();
   };

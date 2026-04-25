@@ -28,6 +28,7 @@ import admin_management from "./admin/admin_management.json";
 // Shared
 import errors from "./shared/errors.json";
 import common from "./shared/common.json";
+import entities from "./shared/entities.json";
 
 export const ka = {
   header,
@@ -49,4 +50,5 @@ export const ka = {
   wishlist,
   orders,
   admin_management,
+  entities,
 };

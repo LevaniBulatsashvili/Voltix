@@ -16,7 +16,6 @@ import {
 } from "@/features/public/product/hooks/productImagesCRUD";
 import type { ICreatePayload } from "@/types/common/api";
 import { useItemForm } from "../../hooks/useItemForm";
-import { notifyItemAction } from "../../utils/notifyItemAction";
 
 export const useProductForm = () => {
   const uploadRef = useRef<(() => Promise<string[]>) | null>(null);
@@ -71,7 +70,6 @@ export const useProductForm = () => {
           })),
         );
       }
-      notifyItemAction("product", "update");
     } else {
       const newProduct = await createProduct({
         ...data,
@@ -84,7 +82,6 @@ export const useProductForm = () => {
             image_url: url,
           })),
         );
-      notifyItemAction("product", "create");
     }
 
     closeModal();

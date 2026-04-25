@@ -63,5 +63,14 @@
   "create": "შექმნა",
   "no_data_found": "მონაცემები ვერ მოიძებნა",
   "try_adjusting_filters": "სცადეთ ფილტრების შეცვლა",
-  "uploading": "იტვირთება..."
+  "uploading": "იტვირთება...",
+
+  "mutation": {
+    "creating": "{{entity}} იქმნება...",
+    "created": "{{entity}} წარმატებით შეიქმნა",
+    "updating": "{{entity}} ახლდება...",
+    "updated": "{{entity}} წარმატებით განახლდა",
+    "deleting": "{{entity}} იშლება...",
+    "deleted": "{{entity}} წარმატებით წაიშალა"
+  }
 }

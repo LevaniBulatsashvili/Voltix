@@ -64,5 +64,14 @@
   "create": "Create",
   "no_data_found": "No Data Found",
   "try_adjusting_filters": "Try Adjusting Filters",
-  "uploading": "Uploading..."
+  "uploading": "Uploading...",
+
+  "mutation": {
+    "creating": "Creating {{entity}}...",
+    "created": "{{entity}} created successfully",
+    "updating": "Updating {{entity}}...",
+    "updated": "{{entity}} updated successfully",
+    "deleting": "Deleting {{entity}}...",
+    "deleted": "{{entity}} deleted successfully"
+  }
 }
