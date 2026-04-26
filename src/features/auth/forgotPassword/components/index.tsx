@@ -48,6 +48,7 @@ const ForgotPassword = () => {
             label="forgot_password.email"
             register={register}
             errors={errors}
+            placeholder="forgot_password.email"
           />
           <PrimaryButton
             text="forgot_password.send_reset_link"

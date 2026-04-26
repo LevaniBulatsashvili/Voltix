@@ -23,12 +23,14 @@ const LoginForm = ({
         name="email"
         register={register}
         errors={errors}
+        placeholder="common.email"
       />
       <FormInput<LoginFormData>
         name="password"
         register={register}
         errors={errors}
         type="password"
+        placeholder="common.password"
       />
       <FormBtn
         isPending={isPending}

@@ -65,6 +65,8 @@
   "try_adjusting_filters": "სცადეთ ფილტრების შეცვლა",
   "uploading": "იტვირთება...",
   "or": "ან",
+  "email": "ელ. პოსტა",
+  "password": "პაროლი",
 
   "mutation": {
     "creating": "{{entity}} იქმნება...",

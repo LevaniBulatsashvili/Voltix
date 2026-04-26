@@ -51,6 +51,7 @@ const ResetPassword = () => {
           type="password"
           register={register}
           errors={errors}
+          placeholder="reset_password.new_password"
         />
         <FormInput
           name="confirmPassword"
@@ -58,7 +59,9 @@ const ResetPassword = () => {
           type="password"
           register={register}
           errors={errors}
+          placeholder="reset_password.confirm_password"
         />
+
         <PrimaryButton text="reset_password.submit" disabled={isPending} />
         {error && <ErrorMessage message={error.message} />}
       </form>

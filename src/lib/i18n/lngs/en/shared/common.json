@@ -66,6 +66,8 @@
   "try_adjusting_filters": "Try Adjusting Filters",
   "uploading": "Uploading...",
   "or": "or",
+  "email": "Email",
+  "password": "Password",
 
   "mutation": {
     "creating": "Creating {{entity}}...",

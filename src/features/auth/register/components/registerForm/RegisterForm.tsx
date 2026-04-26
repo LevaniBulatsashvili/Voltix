@@ -24,12 +24,14 @@ const RegisterForm = ({
         register={register}
         errors={errors}
         type="email"
+        placeholder="common.email"
       />
       <FormInput<RegisterFormData>
         name="password"
         register={register}
         errors={errors}
         type="password"
+        placeholder="common.password"
       />
       <FormBtn
         isPending={isPending}

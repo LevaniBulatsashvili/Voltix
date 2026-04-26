@@ -10,6 +10,7 @@ import FormHeader from "@/components/form/FormHeader";
 import FormContainer from "@/components/form/FormContainer";
 import ErrorMessage from "../../components/ErrorMessage";
 import OAuthProviders from "../../components/OauthProviders";
+import TestCredentials from "../../components/TestCredentials";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -31,8 +32,11 @@ const LoginPage = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer className="relative">
+      <TestCredentials />
+
       <FormHeader text="login.welcome_back" />
+
       <LoginForm
         register={register}
         errors={errors}
