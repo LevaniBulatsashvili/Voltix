@@ -4,7 +4,6 @@ import type {
   IAuthResponse,
   IAuthService,
   IOAuthResponse,
-  IOtpResponse,
 } from "@/types/auth/auth";
 import { getCurrentAuthUser, reauthenticate } from "./auth.helpers";
 import { mapUser } from "../utils/mapUser";
@@ -62,16 +61,6 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
     return data as IOAuthResponse;
-  },
-
-  // =========================
-  // 🔑 OTP LOGIN
-  // =========================
-  async loginWithOtp(email): Promise<IOtpResponse> {
-    const { data, error } = await supabase.auth.signInWithOtp({ email });
-    if (error) throw error;
-
-    return data as IOtpResponse;
   },
 
   // =========================

@@ -4,7 +4,6 @@ export interface IAuthService {
   loginWithEmail(email: string, password: string): Promise<IAuthResponse>;
   registerWithEmail(email: string, password: string): Promise<IAuthResponse>;
   loginWithGoogle(): Promise<IOAuthResponse>;
-  loginWithOtp(email: string): Promise<IOtpResponse>;
   logout(): Promise<void>;
   updateEmail(
     newEmail: string,
@@ -29,12 +28,6 @@ export interface IAuthResponse {
 export interface IOAuthResponse {
   url: string;
   provider: string;
-}
-
-export interface IOtpResponse {
-  user: null;
-  session: null;
-  messageId?: string | null;
 }
 
 export interface ILoginInput {
