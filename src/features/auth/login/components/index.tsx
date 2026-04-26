@@ -9,6 +9,7 @@ import AuthSwitchLink from "../../components/AuthSwitchLink";
 import FormHeader from "@/components/form/FormHeader";
 import FormContainer from "@/components/form/FormContainer";
 import ErrorMessage from "../../components/ErrorMessage";
+import OAuthProviders from "../../components/OauthProviders";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -26,14 +27,12 @@ const LoginPage = () => {
   const onSubmit = (data: LoginFormData) => {
     login(data, {
       onSuccess: () => navigate(PAGE.PUBLIC.BASE),
-      onError: (err: Error) => console.error(err),
     });
   };
 
   return (
     <FormContainer>
       <FormHeader text="login.welcome_back" />
-
       <LoginForm
         register={register}
         errors={errors}
@@ -41,7 +40,7 @@ const LoginPage = () => {
         isPending={isPending}
       />
       {error && <ErrorMessage message={error.message} />}
-
+      <OAuthProviders />
       <AuthSwitchLink
         text="login.don't_have_an_account"
         linkText="login.register"

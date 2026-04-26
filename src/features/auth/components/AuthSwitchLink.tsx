@@ -17,7 +17,7 @@ const AuthSwitchLink = ({
   const { t } = useTranslation();
 
   return (
-    <p className={`mt-10 text-center text-sm ${className}`}>
+    <p className={`mt-7 text-center text-sm ${className}`}>
       {t(text)}
       <AppLink
         className="ml-1.5 font-semibold underline hover:opacity-80"

@@ -10,5 +10,6 @@
   "invalid_email_address": "ელ. ფოსტა არასწორია",
   "password_must_be_at_least_6_characters": "პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს",
   "forgot_password": "დაგავიწყდათ პაროლი?",
-  "reset_it": "აღდგენა"
+  "reset_it": "აღდგენა",
+  "continue_with_google": "Google-ით გაგრძელება"
 }

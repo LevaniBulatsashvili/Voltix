@@ -56,9 +56,11 @@ export const authService: IAuthService = {
   async loginWithGoogle(): Promise<IOAuthResponse> {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}${PAGE.PUBLIC.SHOP}`,
+      },
     });
     if (error) throw error;
-
     return data as IOAuthResponse;
   },
 

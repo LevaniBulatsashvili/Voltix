@@ -65,6 +65,7 @@
   "no_data_found": "No Data Found",
   "try_adjusting_filters": "Try Adjusting Filters",
   "uploading": "Uploading...",
+  "or": "or",
 
   "mutation": {
     "creating": "Creating {{entity}}...",

@@ -64,6 +64,7 @@
   "no_data_found": "მონაცემები ვერ მოიძებნა",
   "try_adjusting_filters": "სცადეთ ფილტრების შეცვლა",
   "uploading": "იტვირთება...",
+  "or": "ან",
 
   "mutation": {
     "creating": "{{entity}} იქმნება...",
