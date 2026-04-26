@@ -41,7 +41,7 @@ const ChangePasswordModal = ({ isOpen, onClose }: IChangePasswordModal) => {
   };
 
   return (
-    <Modal isOpen={isOpen} title={"profile.change_password"} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <PasswordInput
           name="currentPassword"

@@ -9,7 +9,7 @@ import { clearCart } from "../store/cart.slice";
 export const useCreateOrder = () => {
   const dispatch = useAppDispatch();
 
-  return useMutation<string, Error, IOrderRaw>({
+  return useMutation<void, Error, IOrderRaw>({
     mutationFn: (order) => createOrder({ ...order }),
 
     onSuccess: () => {

@@ -34,7 +34,7 @@ const Profile = () => {
     <PageWrapper>
       <div className="h-25 bg-linear-to-r from-primary to-background"></div>
 
-      <div className="p-4 sm:p-10 text-black!">
+      <div className="p-4 sm:p-10 text-primary bg-background border border-primary/50 border-t-0 border-r-primary/30 ">
         <ProfileHeaderWithActions
           profile={profile!}
           email={user!.email!}
