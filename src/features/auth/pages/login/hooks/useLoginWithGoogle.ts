@@ -1,5 +1,5 @@
+import { authService } from "@/features/auth/services/authService";
 import { useMutation } from "@tanstack/react-query";
-import { authService } from "../../services/authService";
 
 export const useLoginWithGoogle = () => {
   const { mutate, isPending } = useMutation({

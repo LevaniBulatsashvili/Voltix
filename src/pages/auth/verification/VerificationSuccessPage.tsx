@@ -1,4 +1,4 @@
-import VerificationSuccess from "@/features/auth/verification/components/VerificationSuccess";
+import VerificationSuccess from "@/features/auth/pages/verification/components/VerificationSuccess";
 
 const VerificationSuccessPage = () => {
   return <VerificationSuccess />;

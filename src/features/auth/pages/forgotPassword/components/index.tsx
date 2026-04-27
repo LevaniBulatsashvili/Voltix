@@ -11,8 +11,8 @@ import {
   type ForgotPasswordFormData,
 } from "../schemas/forgotPasswordSchema";
 import { FormInput } from "@/components/form/Input/FormInput";
-import ErrorMessage from "../../components/ErrorMessage";
-import AuthSwitchLink from "../../components/AuthSwitchLink";
+import ErrorMessage from "@/features/auth/components/ErrorMessage";
+import AuthSwitchLink from "@/features/auth/components/AuthSwitchLink";
 import { CheckCircle } from "lucide-react";
 
 const ForgotPassword = () => {

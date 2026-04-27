@@ -1,3 +1,4 @@
+import DeleteAccountSection from "./deleteAccountSection/DeleteAccountSettings";
 import EmailSection from "./emailSection/EmailSection";
 import PasswordSection from "./passwordSection/PasswordSection";
 
@@ -16,6 +17,7 @@ const ProfileSecuritySection = ({
     <>
       {email && <EmailSection email={email} created_at={createdAt} />}
       {!isOAuth && <PasswordSection />}
+      <DeleteAccountSection />
     </>
   );
 };

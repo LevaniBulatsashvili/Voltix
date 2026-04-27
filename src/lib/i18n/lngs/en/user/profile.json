@@ -35,5 +35,11 @@
   "image_successfully_updated": "image successfully updated!",
   "profile_successfully_updated": "profile successfully updated",
   "password_update_successful": "password update successful",
-  "please_check_both_emails_to_verify": "please check both emails to verify"
+  "please_check_both_emails_to_verify": "please check both emails to verify",
+  "danger_zone": "Danger Zone",
+  "delete_account_warning": "Delete Account Warning",
+  "delete_account": "Delete Account",
+  "confirm_delete": "Confirm Delete",
+  "deleting_account": "Deleting Account",
+  "account_deleted": "Account Deleted"
 }

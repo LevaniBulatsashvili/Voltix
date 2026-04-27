@@ -1,4 +1,4 @@
-import Login from "@/features/auth/login/components";
+import Login from "@/features/auth/pages/login/components";
 
 const LoginPage = () => {
   return <Login />;

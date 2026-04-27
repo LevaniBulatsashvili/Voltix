@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { authService } from "../../services/authService";
+import { authService } from "@/features/auth/services/authService";
 import { notify } from "@/lib/toast/toast";
 
 export const useForgotPassword = () => {

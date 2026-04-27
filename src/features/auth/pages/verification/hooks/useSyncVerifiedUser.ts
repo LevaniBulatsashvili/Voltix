@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "@/hooks/redux";
-import { setSession, setUser } from "../../store/auth.slice";
+import { setSession, setUser } from "@/features/auth/store/auth.slice";
 import { supabase } from "@/lib/supabase";
 
 export const useSyncSession = () => {
@@ -19,6 +19,7 @@ export const useSyncSession = () => {
             email: session.user.email!,
             email_verified: session.user.email_confirmed_at != null,
             created_at: session.user.created_at,
+            app_metadata: session.user.app_metadata,
           }),
         );
         dispatch(setSession(session));

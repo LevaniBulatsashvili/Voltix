@@ -9,5 +9,6 @@ export const mapUser = (user: User | null): IAuthUser | null => {
     email: user.email ?? null,
     email_verified: user.email_confirmed_at ? true : false,
     created_at: user.created_at ?? "",
+    app_metadata: user.app_metadata ?? {},
   };
 };

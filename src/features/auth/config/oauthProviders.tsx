@@ -1,4 +1,4 @@
-import { useLoginWithGoogle } from "../login/hooks/useLoginWithGoogle";
+import { useLoginWithGoogle } from "../pages/login/hooks/useLoginWithGoogle";
 
 interface IOAuthProvider {
   id: string;

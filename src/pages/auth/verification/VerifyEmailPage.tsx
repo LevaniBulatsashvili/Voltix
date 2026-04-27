@@ -1,4 +1,4 @@
-import VerifyEmail from "@/features/auth/verification/components/VerifyEmail";
+import VerifyEmail from "@/features/auth/pages/verification/components/VerifyEmail";
 
 const VerifyEmailPage = () => {
   return <VerifyEmail />;

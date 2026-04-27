@@ -10,7 +10,7 @@ import FormContainer from "@/components/form/FormContainer";
 import FormHeader from "@/components/form/FormHeader";
 import PrimaryButton from "@/components/button/PrimaryBtn";
 import { PAGE } from "@/pages/pageConfig";
-import ErrorMessage from "../../components/ErrorMessage";
+import ErrorMessage from "@/features/auth/components/ErrorMessage";
 import { FormInput } from "@/components/form/Input/FormInput";
 import Spinner from "@/components/feedback/Spinner";
 import { useEffect } from "react";

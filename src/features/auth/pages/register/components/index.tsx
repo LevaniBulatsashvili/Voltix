@@ -8,10 +8,11 @@ import {
   type RegisterFormData,
 } from "../schemas/registerSchema";
 import { PAGE } from "@/pages/pageConfig";
-import AuthSwitchLink from "../../components/AuthSwitchLink";
+
 import FormHeader from "@/components/form/FormHeader";
 import FormContainer from "@/components/form/FormContainer";
-import ErrorMessage from "../../components/ErrorMessage";
+import ErrorMessage from "@/features/auth/components/ErrorMessage";
+import AuthSwitchLink from "@/features/auth/components/AuthSwitchLink";
 
 const RegisterPage = () => {
   const navigate = useNavigate();

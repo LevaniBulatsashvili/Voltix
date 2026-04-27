@@ -35,5 +35,11 @@
   "image_successfully_updated": "პოტო წარმატებით განახლდა!",
   "profile_successfully_updated": "პროფილი წარმატებით განახლდა",
   "password_update_successful": "პაროლი წარმატებით განახლდა",
-  "please_check_both_emails_to_verify": "გთხოვთ შეამოწმოთ ორივე ელფოსტა დადასტურებისთვის"
+  "please_check_both_emails_to_verify": "გთხოვთ შეამოწმოთ ორივე ელფოსტა დადასტურებისთვის",
+  "danger_zone": "საფრთხის ზონა",
+  "delete_account_warning": "ანგარიშის წაშლის გაფრთხილება",
+  "delete_account": "ანგარიშის წაშლა",
+  "confirm_delete": "წაშლის დადასტურება",
+  "deleting_account": "ანგარიში იშლება",
+  "account_deleted": "ანგარიში წაიშალა"
 }

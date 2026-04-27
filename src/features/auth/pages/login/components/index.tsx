@@ -5,12 +5,12 @@ import { useLogin } from "../hooks/useLogin";
 import LoginForm from "./loginForm/LoginForm";
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
 import { PAGE } from "@/pages/pageConfig";
-import AuthSwitchLink from "../../components/AuthSwitchLink";
+import TestCredentials from "@/features/auth/components/TestCredentials";
+import ErrorMessage from "@/features/auth/components/ErrorMessage";
+import OAuthProviders from "@/features/auth/components/OauthProviders";
+import AuthSwitchLink from "@/features/auth/components/AuthSwitchLink";
 import FormHeader from "@/components/form/FormHeader";
 import FormContainer from "@/components/form/FormContainer";
-import ErrorMessage from "../../components/ErrorMessage";
-import OAuthProviders from "../../components/OauthProviders";
-import TestCredentials from "../../components/TestCredentials";
 
 const LoginPage = () => {
   const navigate = useNavigate();

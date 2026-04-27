@@ -1,29 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
+import type { IAuthResponse, IRegisterInput } from "@/types/auth/auth";
+import { authService } from "@/features/auth/services/authService";
 import { useAppDispatch } from "@/hooks/redux";
-import type { IAuthResponse, ILoginInput } from "@/types/auth/auth";
-import { setSession, setUser } from "../../store/auth.slice";
-import { authService } from "../../services/authService";
+import { setSession, setUser } from "@/features/auth/store/auth.slice";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
 import { notifyError } from "@/lib/toast/notifyError";
 
-export const useLogin = () => {
+export const useRegister = () => {
   const dispatch = useAppDispatch();
 
-  const mutation = useMutation<IAuthResponse, Error, ILoginInput>({
+  const mutation = useMutation<IAuthResponse, Error, IRegisterInput>({
     mutationFn: ({ email, password }) =>
-      authService.loginWithEmail(email, password),
+      authService.registerWithEmail(email, password),
     onSuccess: (data) => {
       if (data.authUser) dispatch(setUser(data.authUser));
-
       if (data.session) dispatch(setSession(data.session));
 
-      notifySuccess("login.welcome_back");
+      notifySuccess("success.register");
     },
     onError: (error) => notifyError(error),
   });
 
   return {
-    login: mutation.mutate,
+    register: mutation.mutate,
     isPending: mutation.isPending,
     error: mutation.error,
     data: mutation.data,
