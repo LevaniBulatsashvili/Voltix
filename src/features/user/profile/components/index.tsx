@@ -56,6 +56,7 @@ const Profile = () => {
         <ProfileSecuritySection
           email={user!.email}
           createdAt={user!.created_at}
+          isOAuth={user!.app_metadata?.provider !== "email"}
         />
       </div>
     </PageWrapper>

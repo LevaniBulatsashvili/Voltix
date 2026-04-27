@@ -18,6 +18,10 @@ export interface IAuthUser {
   email: string | null;
   email_verified: boolean;
   created_at: string;
+  app_metadata: {
+    provider?: string;
+    providers?: string[];
+  };
 }
 
 export interface IAuthResponse {
