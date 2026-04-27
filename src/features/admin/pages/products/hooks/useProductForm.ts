@@ -15,7 +15,8 @@ import {
   useDeleteManyProductImages,
 } from "@/features/public/product/hooks/productImagesCRUD";
 import type { ICreatePayload } from "@/types/common/api";
-import { useItemForm } from "../../hooks/useItemForm";
+import { useItemForm } from "@/features/admin/hooks/useItemForm";
+
 
 export const useProductForm = () => {
   const uploadRef = useRef<(() => Promise<string[]>) | null>(null);

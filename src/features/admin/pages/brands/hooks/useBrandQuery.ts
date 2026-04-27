@@ -1,4 +1,4 @@
-import { useAdminQuery } from "../../hooks/useAdminQuery";
+import { useAdminQuery } from "../../../hooks/useAdminQuery";
 import { useFetchBrands } from "@/features/public/search/hooks/brandCRUD";
 import type { IBrand } from "@/types/public/product";
 

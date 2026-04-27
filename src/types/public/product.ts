@@ -1,3 +1,5 @@
+import type { IProfile } from "../profile/profile";
+
 export interface IProduct {
   id: number;
   name: string;
@@ -27,6 +29,7 @@ export interface IProduct {
 
 export interface IMainCategory {
   id: number;
+  profile_id: IProfile["id"];
   name: "Electronics" | "Headphones" | "Gaming" | "Cameras" | string;
   thumbnail: string;
   categories?: ICategory[];
@@ -35,6 +38,7 @@ export interface IMainCategory {
 
 export interface ICategory {
   id: number;
+  profile_id: IProfile["id"];
   main_category_id: IMainCategory["id"];
   main_category?: IMainCategory;
   name: string;
@@ -71,7 +75,7 @@ export interface IProductSpec {
 export interface IProductComment {
   id: string;
   product_id: IProduct["id"];
-  user_id: string;
+  profile_id: IProfile["id"];
 
   name: string;
   avatar?: string;
@@ -91,6 +95,7 @@ export interface IImage {
 export interface IFAQ {
   id: string;
   product_id: IProduct["id"];
+  profile_id: IProfile["id"];
   question: string;
   answer: string;
 }

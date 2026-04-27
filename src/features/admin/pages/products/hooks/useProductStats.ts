@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import type { IStatItem } from "../../components/AdminStats";
 import type { IProduct } from "@/types/public/product";
 import { usePrice } from "@/features/user/cart/hooks/usePrice";
+import type { IStatItem } from "@/features/admin/components/AdminStats";
 
 const getAvgPrice = (products: IProduct[]): number => {
   if (!products.length) return 0;

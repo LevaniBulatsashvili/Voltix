@@ -6,11 +6,11 @@ import type { IProfile } from "@/types/profile/profile";
 
 interface IAuthRoute {
   requireAuth?: boolean;
-  allowedRoles?: IProfile["role"];
+  allowedRoles?: IProfile["role"] | IProfile["role"][];
   redirectPath?: string;
   requireEmailVerified?: boolean;
-  guestOnly?: boolean; // For Login/Register
-  verifyPagesOnly?: boolean; // For verify-email / verify-success
+  guestOnly?: boolean;
+  verifyPagesOnly?: boolean;
 }
 
 const AuthRoute = ({
@@ -47,13 +47,11 @@ const AuthRoute = ({
     return <Navigate to={redirectPath ?? PAGE.AUTH.LOGIN} replace />;
 
   // Role check
-  if (
-    requireAuth &&
-    allowedRoles &&
-    profile &&
-    !allowedRoles.includes(profile.role)
-  )
-    return <Navigate to={redirectPath ?? PAGE.PUBLIC.SHOP} replace />;
+  if (requireAuth && allowedRoles && profile) {
+    const roles = Array.isArray(allowedRoles) ? allowedRoles : [allowedRoles];
+    if (!roles.includes(profile.role))
+      return <Navigate to={redirectPath ?? PAGE.PUBLIC.SHOP} replace />;
+  }
 
   // Email verification required
   if (requireAuth && requireEmailVerified && user && !user.email_verified)

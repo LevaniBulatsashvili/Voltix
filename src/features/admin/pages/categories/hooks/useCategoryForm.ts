@@ -1,7 +1,7 @@
 import type { ICategory } from "@/types/public/product";
 
 import type { ICreatePayload } from "@/types/common/api";
-import { useItemForm } from "../../hooks/useItemForm";
+import { useItemForm } from "../../../hooks/useItemForm";
 import {
   useCreateCategory,
   useUpdateCategory,

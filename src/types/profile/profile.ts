@@ -41,6 +41,7 @@ export type IOrderRaw = Omit<IOrder<ICartItem>, "id" | "status" | "date">;
 
 export interface IOrderItem {
   id: string;
+  profile_id: string;
   order_id?: string;
   product_id: number;
   product?: IProduct;

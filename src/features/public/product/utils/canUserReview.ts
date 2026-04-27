@@ -15,7 +15,7 @@ export const canUserReview = (
       order.items!.some((item) => item.product_id === productId),
   );
 
-  const alreadyReviewed = comments?.some((c) => c.user_id === userId);
+  const alreadyReviewed = comments?.some((c) => c.profile_id === userId);
 
   return hasDeliveredOrder && !alreadyReviewed;
 };

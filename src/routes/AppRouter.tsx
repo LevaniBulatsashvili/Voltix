@@ -21,7 +21,10 @@ const AppRoutes = () => (
           />
         </Route>
 
-        <Route path={PAGE.AUTH.RESET_PASSWORD} element={<Page.ResetPasswordPage />} />
+        <Route
+          path={PAGE.AUTH.RESET_PASSWORD}
+          element={<Page.ResetPasswordPage />}
+        />
 
         {/* Waiting Verification */}
         <Route element={<AuthRoute verifyPagesOnly />}>
@@ -52,7 +55,9 @@ const AppRoutes = () => (
         </Route>
 
         {/* User */}
-        <Route element={<AuthRoute requireAuth allowedRoles="user" />}>
+        <Route
+          element={<AuthRoute requireAuth allowedRoles={["user", "admin"]} />}
+        >
           <Route path={PAGE.USER.ORDERS} element={<Page.OrdersPage />} />
           <Route path={PAGE.USER.WISHLIST} element={<Page.WishlistPage />} />
           <Route path={PAGE.USER.CART} element={<Page.CartPage />} />
@@ -60,7 +65,11 @@ const AppRoutes = () => (
 
         {/* ADMIN */}
         <Route element={<AdminLayout />} path={PAGE.ADMIN.BASE}>
-          <Route element={<AuthRoute requireAuth allowedRoles={"admin"} />}>
+          <Route
+            element={
+              <AuthRoute requireAuth allowedRoles={["admin", "developer"]} />
+            }
+          >
             <Route
               path={PAGE.ADMIN.PRODUCTS}
               element={<Page.AdminProductsPage />}

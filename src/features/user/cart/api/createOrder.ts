@@ -25,6 +25,7 @@ export const createOrder = async ({
 
   const orderItems: ICreatePayload<IOrderItem>[] = cartItems.map((item) => ({
     order_id: orders.id,
+    profile_id: profileId,
     product_id: item.product.id,
     quantity: item.quantity,
     price: item.product.price_final,

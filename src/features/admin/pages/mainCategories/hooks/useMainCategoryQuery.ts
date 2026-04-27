@@ -1,6 +1,6 @@
-import { useAdminQuery } from "../../hooks/useAdminQuery";
-import { useFetchMainCategories } from "@/features/public/category/hooks/mainCategoryCRUD";
 import type { IMainCategory } from "@/types/public/product";
+import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
+import { useFetchMainCategories } from "@/features/public/category/hooks/mainCategoryCRUD";
 
 export const useMainCategoryQuery = () => {
   const result = useAdminQuery<IMainCategory>({

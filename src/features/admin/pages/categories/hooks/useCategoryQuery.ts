@@ -1,5 +1,5 @@
 import { useFetchCategories } from "@/features/public/category/hooks/categoryCRUD";
-import { useAdminQuery } from "../../hooks/useAdminQuery";
+import { useAdminQuery } from "../../../hooks/useAdminQuery";
 import type { ICategory } from "@/types/public/product";
 
 export const useCategoryQuery = () => {

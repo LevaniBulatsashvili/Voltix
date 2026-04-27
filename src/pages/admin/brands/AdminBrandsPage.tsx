@@ -1,4 +1,4 @@
-import AdminBrands from "@/features/admin/brands/components";
+import AdminBrands from "@/features/admin/pages/brands/components";
 
 const AdminBrandsPage = () => {
   return <AdminBrands />;

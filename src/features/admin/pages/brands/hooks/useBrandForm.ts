@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import type { IBrand } from "@/types/public/product";
 import type { ICreatePayload } from "@/types/common/api";
-import { useItemForm } from "../../hooks/useItemForm";
+import { useItemForm } from "../../../hooks/useItemForm";
 import {
   brandSchema,
   defaultBrandForm,

@@ -1,25 +1,26 @@
 import { useTranslation } from "react-i18next";
+import { MAINCATEGORIES } from "@/utils/consts";
+import { capitalize } from "@/utils/capitalize";
 import ConfirmModal from "@/components/ui/modal/ConfirmModal";
 import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
 import TableContainer from "@/components/ui/table/TableContainer";
-import AdminHeader from "../../components/AdminHeader";
-import AdminToolbar from "../../components/AdminToolbar";
-import { useDeleteModal } from "../../hooks/useDeleteModal";
-import type { IMainCategory } from "@/types/public/product";
-import MainCategoryFormFields from "./mainCategoryFormFields/MainCategoryFormFields";
-import { MainCategoriesTable } from "./mainCategoriesTable/MainCategoriesTable";
-import { useMainCategoryForm } from "../hooks/useMainCategoryForm";
-import { useMainCategoryQuery } from "../hooks/useMainCategoryQuery";
-import { useDeleteMainCategory } from "@/features/public/category/hooks/mainCategoryCRUD";
-import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
+import AdminHeader from "../../../components/AdminHeader";
+import AdminToolbar from "../../../components/AdminToolbar";
+import { useCategoryQuery } from "../hooks/useCategoryQuery";
+import AdminCategoriesTable from "./adminCategoriesTable/AdminCategoriesTable";
+import { useDeleteCategory } from "@/features/public/category/hooks/categoryCRUD";
+import { useDeleteModal } from "../../../hooks/useDeleteModal";
+import type { ICategory } from "@/types/public/product";
+import { useCategoryForm } from "../hooks/useCategoryForm";
+import CategoryFormFields from "./categoryFormFields/CategoryFormFields";
 
-const AdminMainCategories = () => {
+const AdminCategories = () => {
   const { t } = useTranslation();
 
   const {
-    mainCategoriesQuery,
-    mainCategoryList,
+    categoriesQuery,
+    categoryList,
     currentPage,
     total,
     totalPages,
@@ -27,42 +28,39 @@ const AdminMainCategories = () => {
     end,
     searchValue,
     setSearchValue,
+    onSelectCategory,
+    categoryFilter,
     setPage,
-  } = useMainCategoryQuery();
+  } = useCategoryQuery();
 
   const {
-    uploadRef,
-    formKey,
     modalOpen,
-    editingMainCategory,
+    editingCategory,
     register,
     handleSubmit,
     errors,
+    control,
     openCreate,
     openEdit,
     closeModal,
     onSubmit,
-  } = useMainCategoryForm();
+  } = useCategoryForm();
 
-  const { mutate: deleteCategory } = useDeleteMainCategory();
+  const { mutate: deleteCategory } = useDeleteCategory();
   const { deleteModal, openDelete, closeDelete, confirmDelete } =
-    useDeleteModal<IMainCategory>({
+    useDeleteModal<ICategory>({
       onDelete: deleteCategory,
-      onBeforeDelete: (mc) => {
-        if (mc.thumbnail)
-          return deleteStorageImage(mc.thumbnail, "main-categories");
-      },
     });
 
   return (
     <>
       <AdminHeader
-        title={t("admin_management.main_categories.main_categories")}
+        title={t("admin_management.categories.categories")}
         description={t("admin_management.manage_your_catalog", {
-          item: t("admin_management.items.main_category_genitive"),
+          item: t("admin_management.items.category_genitive"),
         })}
         actionText={t("admin_management.add_item", {
-          item: t("admin_management.items.main_category_genitive"),
+          item: t("admin_management.items.category_genitive"),
         })}
         onAction={openCreate}
       />
@@ -70,15 +68,24 @@ const AdminMainCategories = () => {
       <AdminToolbar
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        hasData={!!mainCategoriesQuery.data}
-        isSearchDisabled={mainCategoriesQuery.isFetching}
+        hasData={!!categoriesQuery.data}
+        isSearchDisabled={categoriesQuery.isFetching}
         searchInputClassName="rounded-none!"
+        selectDropdownOptions={{
+          selectValue: categoryFilter,
+          onSelect: onSelectCategory,
+          selectOptions: MAINCATEGORIES.map((mainCategory) => ({
+            value: capitalize(mainCategory),
+            label: t(`common.${mainCategory}`),
+          })),
+          selectBaseLabel: t("admin_management.products.all_categories"),
+        }}
       />
 
       <TableContainer>
-        <MainCategoriesTable
-          mainCategories={mainCategoryList}
-          isLoading={mainCategoriesQuery.isFetching}
+        <AdminCategoriesTable
+          categories={categoryList}
+          isLoading={categoriesQuery.isFetching}
           onEdit={openEdit}
           onDelete={openDelete}
         />
@@ -93,25 +100,23 @@ const AdminMainCategories = () => {
 
       <ItemModal
         open={modalOpen}
-        isEditing={!!editingMainCategory}
+        isEditing={!!editingCategory}
         onClose={closeModal}
         onSubmit={handleSubmit(onSubmit)}
         disableClickOutside={true}
-        itemName="main_category_genitive"
+        itemName="category_genitive"
       >
-        <MainCategoryFormFields
+        <CategoryFormFields
           register={register}
           errors={errors}
-          uploadRef={uploadRef}
-          formKey={formKey}
-          editingMainCategory={editingMainCategory}
+          control={control}
         />
       </ItemModal>
 
       <ConfirmModal
         open={!!deleteModal}
         title={t("admin_management.delete_item", {
-          item: t("admin_management.items.main_category_genitive"),
+          item: t("admin_management.items.category_genitive"),
         })}
         variant="danger"
         confirmText={t("common.delete")}
@@ -130,4 +135,4 @@ const AdminMainCategories = () => {
   );
 };
 
-export default AdminMainCategories;
+export default AdminCategories;

@@ -12,6 +12,7 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import ProfileDropdownItem from "./ProfileDropdownItem";
 import {
   getAdminMenu,
+  getDeveloperMenu,
   getGuestMenu,
   getUserMenu,
 } from "../utils/menuGenerators";
@@ -52,7 +53,7 @@ const Actions = ({
   else if (isUser) menu = getUserMenu(t, handleLogout);
   else if (isAdmin) menu = getAdminMenu(t, handleLogout);
   else if (isCourier) menu = getUserMenu(t, handleLogout);
-  else menu = getUserMenu(t, handleLogout);
+  else menu = getDeveloperMenu(t, handleLogout);
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">

@@ -1,6 +1,5 @@
 import type { IMainCategory } from "@/types/public/product";
 import type { ICreatePayload } from "@/types/common/api";
-import { useItemForm } from "../../hooks/useItemForm";
 import {
   mainCategorySchema,
   defaultMainCategoryForm,
@@ -12,6 +11,7 @@ import {
 } from "@/features/public/category/hooks/mainCategoryCRUD";
 import { useRef } from "react";
 import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
+import { useItemForm } from "@/features/admin/hooks/useItemForm";
 
 export const useMainCategoryForm = () => {
   const uploadRef = useRef<(() => Promise<string[]>) | null>(null);

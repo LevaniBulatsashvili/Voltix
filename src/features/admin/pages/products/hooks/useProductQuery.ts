@@ -1,5 +1,5 @@
+import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { useFetchProducts } from "@/features/public/product/hooks/productCRUD";
-import { useAdminQuery } from "../../hooks/useAdminQuery";
 import type { IProduct } from "@/types/public/product";
 
 export const useProductQuery = () => {

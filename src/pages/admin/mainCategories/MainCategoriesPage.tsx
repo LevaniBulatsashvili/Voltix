@@ -1,4 +1,4 @@
-import MainCategories from "@/features/admin/mainCategories/components";
+import MainCategories from "@/features/admin/pages/mainCategories/components";
 
 const MainCategoriesPage = () => {
   return <MainCategories />;

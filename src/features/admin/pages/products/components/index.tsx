@@ -5,18 +5,18 @@ import ConfirmModal from "@/components/ui/modal/ConfirmModal";
 import ItemModal from "@/components/ui/modal/ItemModal";
 import Pagination from "@/components/ui/Pagination";
 import TableContainer from "@/components/ui/table/TableContainer";
-import AdminHeader from "../../components/AdminHeader";
-import AdminStats from "../../components/AdminStats";
-import AdminToolbar from "../../components/AdminToolbar";
+import type { IProduct } from "@/types/public/product";
+import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
+import { useDeleteModal } from "@/features/admin/hooks/useDeleteModal";
+import AdminHeader from "@/features/admin/components/AdminHeader";
+import AdminStats from "@/features/admin/components/AdminStats";
+import AdminToolbar from "@/features/admin/components/AdminToolbar";
 import AdminProductsTable from "./adminProductsTable/AdminProductsTable";
 import ProductFormFields from "./productsForm/ProductsForm";
 import { useProductForm } from "../hooks/useProductForm";
 import { useProductQuery } from "../hooks/useProductQuery";
 import { useProductStats } from "../hooks/useProductStats";
 import { useDeleteProduct } from "@/features/public/product/hooks/productCRUD";
-import { useDeleteModal } from "../../hooks/useDeleteModal";
-import type { IProduct } from "@/types/public/product";
-import { deleteStorageImage } from "@/features/shared/imageSelector/utils/deleteStorageImage";
 
 const AdminProducts = () => {
   const { t } = useTranslation();

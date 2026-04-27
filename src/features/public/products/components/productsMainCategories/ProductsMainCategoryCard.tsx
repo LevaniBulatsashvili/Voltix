@@ -21,7 +21,7 @@ const ProductsMainCategoryCard = ({
         <img
           src={image}
           alt={title}
-          className={`absolute -bottom-8 right-0 sm:-right-8 w-full h-full object-contain ${imgClassName}`}
+          className={`absolute bottom-2.5 right-2.5 w-3/4 h-4/5 object-contain ${imgClassName}`}
         />
       </div>
     </AppLink>
