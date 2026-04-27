@@ -3,25 +3,26 @@ import { useAppSelector } from "@/hooks/redux";
 import { useUpdateAddress } from "./addressCRUD";
 import { useUpdateProfile } from "./profileCRUD";
 import type { TProfileForm } from "../schemas/profileSchema";
-import { notifySuccess } from "@/lib/toast/notifySuccess";
-import { useTranslation } from "react-i18next";
 import { mapProfileToForm } from "../utils/mapProfileToForm";
 
+const compareObjects = (a: unknown, b: unknown) =>
+  JSON.stringify(a, Object.keys(a as object).sort()) ===
+  JSON.stringify(b, Object.keys(b as object).sort());
+
 export const useProfilePageLogic = () => {
-  const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { profile, loading: profileLoading } = useAppSelector(
     (state) => state.profile,
   );
+  const [isEditing, setIsEditing] = useState(false);
+  const [isAddressOpen, setIsAddressOpen] = useState(false);
+  const [lastSavedForm, setLastSavedForm] = useState<TProfileForm | null>(null);
 
   const { mutateAsync: updateProfile, isPending: updateProfilePending } =
     useUpdateProfile();
-
   const { mutateAsync: updateAddress, isPending: updateAddressPending } =
     useUpdateAddress();
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
   const isSaving =
     profileLoading || updateProfilePending || updateAddressPending;
 
@@ -32,26 +33,29 @@ export const useProfilePageLogic = () => {
 
   const toggleIsAddressOpen = () => setIsAddressOpen((prev) => !prev);
 
+  const closeEditState = () => {
+    setIsEditing(false);
+    setIsAddressOpen(false);
+  };
+
   const onSubmit = async (data: TProfileForm) => {
     try {
       const { address, ...rest } = data;
+      const { address: originalAddress, ...originalRest } =
+        lastSavedForm ?? mapProfileToForm(profile!);
 
-      if (rest) await updateProfile({ id: profile!.id, ...rest });
+      if (!compareObjects(rest, originalRest))
+        await updateProfile({ id: profile!.id, ...rest });
 
-      if (address)
-        await updateAddress({
-          ...address,
-          id: profile!.addresses[0].id,
-        });
+      if (address && !compareObjects(address, originalAddress))
+        await updateAddress({ ...address, id: profile!.addresses[0].id });
 
-      setIsEditing(false);
-      setIsAddressOpen(false);
+      setLastSavedForm(data);
+      closeEditState();
 
-      notifySuccess(t("profile.profile_successfully_updated"));
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
-      setIsEditing(false);
-      setIsAddressOpen(false);
+      closeEditState();
     }
   };
 
