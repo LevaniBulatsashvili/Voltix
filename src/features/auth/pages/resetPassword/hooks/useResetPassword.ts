@@ -24,6 +24,7 @@ export const useResetPassword = () => {
         {
           loading: "reset_password.updating",
           success: "reset_password.updated",
+          error: "errors.failed_to_reset_password",
         },
       );
     },

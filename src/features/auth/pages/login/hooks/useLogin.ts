@@ -10,6 +10,7 @@ export const useLogin = () => {
   const dispatch = useAppDispatch();
 
   const mutation = useMutation<IAuthResponse, Error, ILoginInput>({
+    meta: { hasToast: true },
     mutationFn: ({ email, password }) =>
       authService.loginWithEmail(email, password),
     onSuccess: (data) => {

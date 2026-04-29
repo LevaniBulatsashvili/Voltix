@@ -9,6 +9,7 @@ export const useForgotPassword = () => {
       return notify.promise(authService.sendPasswordResetEmail(email), {
         loading: "forgot_password.sending",
         success: "forgot_password.email_sent",
+        error: "errors.email_not_found",
       });
     },
   });

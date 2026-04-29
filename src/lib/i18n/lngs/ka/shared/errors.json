@@ -100,23 +100,21 @@
   "brands not found": "ბრენდები ვერ მოიძებნა",
   "specs not found": "სპეციფიკაციები ვერ მოიძებნა",
 
-  "supabase": {
-    "Invalid login credentials": "არასწორი შესვლის მონაცემები",
-    "User not found": "მომხმარებელი ვერ მოიძებნა",
-    "Please confirm your email": "გთხოვთ დაადასტუროთ ელფოსტა",
-    "Failed to update password": "პაროლის განახლება ვერ მოხერხდა",
-    "Sign-up not allowed for this provider": "რეგისტრაცია ამ პროვაიდერისთვის დაუშვებელია",
-
-    "Duplicate value already exists": "დუბლირებული მნიშვნელობა უკვე არსებობს",
-    "Related record not found": "დაკავშირებული ჩანაწერი ვერ მოიძებნა",
-    "Required field missing": "სავალდებულო ველი ცარიელია",
-    "Value too long": "მნიშვნელობა ძალიან გრძელია",
-    "Invalid column specified": "არასწორი სვეტია მითითებული",
-
-    "Network error. Please try again.": "ქსელის შეცდომა. გთხოვთ სცადოთ თავიდან",
-    "Request timed out": "მოთხოვნის დრო ამოიწურა",
-    "Something went wrong": "დაფიქსირდა შეცდომა"
-  },
+  "Invalid login credentials": "არასწორი შესვლის მონაცემები",
+  "User not found": "მომხმარებელი ვერ მოიძებნა",
+  "Please confirm your email": "გთხოვთ დაადასტუროთ ელფოსტა",
+  "Failed to update password": "პაროლის განახლება ვერ მოხერხდა",
+  "Sign-up not allowed for this provider": "რეგისტრაცია ამ პროვაიდერისთვის დაუშვებელია",
+  "Duplicate value already exists": "დუბლირებული მნიშვნელობა უკვე არსებობს",
+  "Related record not found": "დაკავშირებული ჩანაწერი ვერ მოიძებნა",
+  "Required field missing": "სავალდებულო ველი ცარიელია",
+  "Value too long": "მნიშვნელობა ძალიან გრძელია",
+  "Invalid column specified": "არასწორი სვეტია მითითებული",
+  "Network error. Please try again.": "ქსელის შეცდომა. გთხოვთ სცადოთ თავიდან",
+  "Request timed out": "მოთხოვნის დრო ამოიწურა",
+  "email_already_registered": "ელ. ფოსტა არსებობს",
+  "email_not_found": "ელ. ფოსტა არ მოიძებნა",
+  "failed_to_reset_password": "პაროლის აღდგენა ვერ მოხერხდა",
 
   "validation": {
     "email_is_required": "ელფოსტა აუცილებელია",

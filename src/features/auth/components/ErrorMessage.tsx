@@ -14,7 +14,7 @@ const ErrorMessage = ({ message }: IErrorMessage) => {
 
   return (
     <p className="mt-2 text-center text-red-500">
-      {t(`errors.supabase.${message}`, {
+      {t(`errors.${message}`, {
         defaultValue: fallbackMessages[i18n.language] || "Something went wrong",
       })}
     </p>

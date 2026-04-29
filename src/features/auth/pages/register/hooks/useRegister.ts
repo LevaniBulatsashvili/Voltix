@@ -10,13 +10,14 @@ export const useRegister = () => {
   const dispatch = useAppDispatch();
 
   const mutation = useMutation<IAuthResponse, Error, IRegisterInput>({
+    meta: { hasToast: true },
     mutationFn: ({ email, password }) =>
       authService.registerWithEmail(email, password),
     onSuccess: (data) => {
       if (data.authUser) dispatch(setUser(data.authUser));
       if (data.session) dispatch(setSession(data.session));
 
-      notifySuccess("success.register");
+      notifySuccess("register.account_created_check_your_email");
     },
     onError: (error) => notifyError(error),
   });

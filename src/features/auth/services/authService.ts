@@ -40,6 +40,9 @@ export const authService: IAuthService = {
     });
     if (error) throw error;
 
+    if (data.user && data.user.identities?.length === 0)
+      throw new Error("email_already_registered");
+
     const authUser = mapUser(data.user);
     if (!authUser?.id) return { authUser, session: data.session };
 
@@ -108,8 +111,18 @@ export const authService: IAuthService = {
   // =========================
   async sendPasswordResetEmail(email): Promise<void> {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}${PAGE.AUTH.RESET_PASSWORD}`,
+      redirectTo: `${window.location.origin}/reset-password`,
     });
+
     if (error) throw error;
+
+    const { data, error: profileError } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("email", email)
+      .single();
+
+    if (profileError || !data)
+      throw new Error("email_not_found");
   },
 };
