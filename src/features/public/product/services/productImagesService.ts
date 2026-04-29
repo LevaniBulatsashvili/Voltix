@@ -7,7 +7,7 @@ export const productImagesService = createSupabaseService<
   IProductImage,
   Pick<IProductImage, "product_id" | "image_url">,
   IUpdatePayload<IProductImage>,
-  number
+  string
 >({
   table: Query_Tables.product_images,
   keyField: "id",

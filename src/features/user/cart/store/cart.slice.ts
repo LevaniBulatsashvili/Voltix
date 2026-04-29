@@ -31,6 +31,7 @@ export const cartSlice = createSlice({
         state.items.push({
           product,
           quantity: Math.min(quantity, product.stock),
+          total: product.price_final * quantity,
         });
       }
     },

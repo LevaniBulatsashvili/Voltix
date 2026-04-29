@@ -1,14 +1,16 @@
 import { useState } from "react";
-import type { IImage } from "@/types/public/product";
+import type { IProductImage } from "@/types/public/product";
 
 interface ProductGalleryProps {
-  galleryImages?: Omit<IImage, "product_id">[];
+  galleryImages?: Omit<IProductImage, "product_id">[];
   name: string;
 }
 
 const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
   if (galleryImages.length === 0)
-    galleryImages = [{ id: 1, image_url: "/images/placeholders/product.webp" }];
+    galleryImages = [
+      { id: "1", image_url: "/images/placeholders/product.webp" },
+    ];
 
   const [selectedImage, setSelectedImage] = useState(galleryImages[0]);
   const [fade, setFade] = useState(true);
