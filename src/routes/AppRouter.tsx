@@ -56,7 +56,12 @@ const AppRoutes = () => (
 
         {/* User */}
         <Route
-          element={<AuthRoute requireAuth allowedRoles={["user", "admin"]} />}
+          element={
+            <AuthRoute
+              requireAuth
+              allowedRoles={["user", "admin", "developer"]}
+            />
+          }
         >
           <Route path={PAGE.USER.ORDERS} element={<Page.OrdersPage />} />
           <Route path={PAGE.USER.WISHLIST} element={<Page.WishlistPage />} />

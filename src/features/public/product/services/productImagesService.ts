@@ -1,12 +1,12 @@
 import { Query_Tables } from "@/lib/react-query/configs";
 import { createSupabaseService } from "@/lib/supabase/createSupabaseService";
 import type { IUpdatePayload } from "@/types/common/api";
-import type { IImage } from "@/types/public/product";
+import type { IProductImage } from "@/types/public/product";
 
 export const productImagesService = createSupabaseService<
-  IImage,
-  Pick<IImage, "product_id" | "image_url">,
-  IUpdatePayload<IImage>,
+  IProductImage,
+  Pick<IProductImage, "product_id" | "image_url">,
+  IUpdatePayload<IProductImage>,
   number
 >({
   table: Query_Tables.product_images,

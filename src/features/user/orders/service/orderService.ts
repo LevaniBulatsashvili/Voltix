@@ -5,7 +5,7 @@ import type { IOrder } from "@/types/profile/profile";
 
 export const orderService = createSupabaseService<
   IOrder,
-  ICreatePayload<IOrder>,
+  ICreatePayload<Omit<IOrder, "date">>,
   IUpdatePayload<IOrder>,
   string
 >({

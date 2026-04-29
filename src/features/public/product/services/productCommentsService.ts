@@ -12,4 +12,8 @@ export const productCommentService = createSupabaseService<
   table: Query_Tables.product_comments,
   keyField: "id",
   serviceName: "product_comments",
+  selectFieldOptions: {
+    fetchManySelectField:
+      "id, comment, rating, created_at, verified, profile: profiles(avatar_url, full_name)",
+  },
 });

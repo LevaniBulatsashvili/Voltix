@@ -3,7 +3,6 @@ import ProfileActions from "./ProfileActions";
 import type { IProfile } from "@/types/profile/profile";
 import type { UseFormHandleSubmit } from "react-hook-form";
 import type { TProfileForm } from "../../schemas/profileSchema";
-import { notifySuccess } from "@/lib/toast/notifySuccess";
 
 interface IProfileHeaderWithActions {
   profile: IProfile;
@@ -29,9 +28,6 @@ const ProfileHeaderWithActions = ({
         id={profile.id}
         name={profile.full_name}
         email={email}
-        onAvatarSuccess={() =>
-          notifySuccess("profile.image_successfully_updated")
-        }
       />
 
       <ProfileActions

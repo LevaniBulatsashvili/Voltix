@@ -35,7 +35,7 @@ const Actions = ({
   const { signOut } = useLogout();
   const { theme } = useAppSelector((state) => state.theme);
   const { profile } = useAppSelector((state) => state.profile);
-  const { isUser, isCourier, isAdmin, isVerified } = useRole();
+  const { isUser, isCourier, isAdmin, isDeveloper, isVerified } = useRole();
   const { items: cartItems } = useAppSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -57,7 +57,7 @@ const Actions = ({
 
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
-      {isVerified && isUser && (
+      {isVerified && (isUser || isDeveloper) && (
         <AppLink to={PAGE.USER.CART} className="relative">
           <ShoppingCart className="w-6 h-6" />
           {totalItems > 0 && (

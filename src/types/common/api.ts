@@ -16,5 +16,9 @@ export interface IInfiniteQueryResponse<T> {
   pageParams: number[];
 }
 
-export type ICreatePayload<T> = Omit<T, "id">;
-export type IUpdatePayload<T> = Partial<T> & { id: string | number };
+export type ICreatePayload<T> = Omit<T, "id" | "created_at" | "updated_at">;
+export type IUpdatePayload<T> = Partial<
+  Omit<T, "created_at" | "updated_at">
+> & {
+  id: string | number;
+};

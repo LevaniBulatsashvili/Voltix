@@ -28,14 +28,17 @@ const ProductCommentCard = ({ productComment }: IProductCommentCard) => {
       <div className="flex items-center mb-4">
         <div className="w-12 h-12 mr-4 rounded-full bg-gray-200 flex items-center justify-center">
           <Avatar
-            src={productComment.avatar || "/images/placeholders/user.webp"}
+            src={
+              productComment.profile?.avatar_url ||
+              "/images/placeholders/user.webp"
+            }
             className="size-8"
           />
         </div>
         <div>
           <div className="flex items-center gap-2">
             <p className="text-xl font-bold text-black">
-              {productComment.name}
+              {productComment.profile?.full_name}
             </p>
             {productComment.verified && (
               <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">

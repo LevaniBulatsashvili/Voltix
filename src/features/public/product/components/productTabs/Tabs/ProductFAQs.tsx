@@ -1,12 +1,8 @@
+import type { IProductFAQ } from "@/types/public/product";
 import { useState } from "react";
 
-interface IFaq {
-  question: string;
-  answer: string;
-}
-
 interface IProductFAQs {
-  faqs: IFaq[];
+  faqs: IProductFAQ[];
 }
 
 const ProductFAQs = ({ faqs }: IProductFAQs) => {

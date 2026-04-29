@@ -2,13 +2,14 @@ import type { IProfile } from "../profile/profile";
 
 export interface IProduct {
   id: number;
+  profile_id: IProfile["id"];
   name: string;
   description: string;
-  brand_id: number;
+  brand_id: IBrand["id"];
   brand: IBrand;
-  main_category_id: number;
+  main_category_id: IMainCategory["id"];
   main_category: IMainCategory;
-  category_id: number;
+  category_id: ICategory["id"];
   category: ICategory;
   price: number;
   price_final: number;
@@ -17,23 +18,22 @@ export interface IProduct {
   rating_count: number;
   stock: number;
   thumbnail: string;
+  total_sold: number;
   created_at: string;
   updated_at: string;
-  total_sold: number;
 
   product_specs?: IProductSpec[];
   product_comments?: IProductComment[];
-  product_images?: IImage[];
-  product_faqs?: IFAQ[];
+  product_images?: IProductImage[];
+  product_faqs?: IProductFAQ[];
 }
 
 export interface IMainCategory {
   id: number;
   profile_id: IProfile["id"];
-  name: "Electronics" | "Headphones" | "Gaming" | "Cameras" | string;
+  name: string;
   thumbnail: string;
   categories?: ICategory[];
-  specs?: ISpecs[];
 }
 
 export interface ICategory {
@@ -42,24 +42,11 @@ export interface ICategory {
   main_category_id: IMainCategory["id"];
   main_category?: IMainCategory;
   name: string;
-  specs?: ISpecs[];
-}
-
-export interface ISpecs {
-  id: number;
-  category_id: ICategory["id"];
-  spec_name: string;
-  spec_values?: ISpecValues[];
-}
-
-export interface ISpecValues {
-  id: number;
-  spec_id: ISpecs["id"];
-  value: string;
 }
 
 export interface IBrand {
   id: number;
+  profile_id: IProfile["id"];
   name: string;
   logo_url?: string;
   website_url?: string;
@@ -72,30 +59,35 @@ export interface IProductSpec {
   value: string;
 }
 
+export interface ISpecValue {
+  id: number;
+  spec_id: IProductSpec["id"];
+  value: string;
+}
+
 export interface IProductComment {
   id: string;
   product_id: IProduct["id"];
   profile_id: IProfile["id"];
-
-  name: string;
-  avatar?: string;
+  profile?: Pick<IProfile, "id" | "full_name" | "avatar_url">;
   comment: string;
   rating: number;
-
   verified?: boolean;
   created_at: string;
 }
 
-export interface IImage {
-  id: number;
+export interface IProductImage {
+  id: string;
   product_id: IProduct["id"];
   image_url: string;
 }
 
-export interface IFAQ {
+export interface IProductFAQ {
   id: string;
   product_id: IProduct["id"];
   profile_id: IProfile["id"];
   question: string;
-  answer: string;
+  answer?: string;
+  answered_by?: IProfile["id"];
+  answered_at?: string;
 }

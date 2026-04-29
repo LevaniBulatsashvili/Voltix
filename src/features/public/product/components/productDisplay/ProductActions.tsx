@@ -21,7 +21,8 @@ const ProductActions = ({
   handleAddToCart,
 }: IProductActions) => {
   const { profile } = useAppSelector((state) => state.profile);
-  const isDisabled = profile?.role !== "user";
+  const isDisabled =
+    profile?.role !== "user" ? profile?.role !== "developer" : true;
 
   return (
     <div className="mt-auto pt-4 flex items-center gap-4">
