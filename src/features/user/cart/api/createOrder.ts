@@ -3,6 +3,14 @@ import { orderService } from "../../orders/service/orderService";
 import { orderItemService } from "../../orders/service/orderItemService";
 import type { ICreatePayload } from "@/types/common/api";
 import { productService } from "@/features/public/product/services/productService";
+import type { ICartItem } from "@/types/profile/cart";
+
+export type CreateOrderInput = Omit<
+  IOrder,
+  "id" | "status" | "created_at" | "updated_at" | "items" | "date"
+> & {
+  items: ICartItem[];
+};
 
 export const createOrder = async ({
   profile_id: profileId,
@@ -11,7 +19,7 @@ export const createOrder = async ({
   delivery_fee: deliveryFee,
   discount,
   items: cartItems,
-}: Omit<IOrder, "id" | "status" | "created_at" | "updated_at">) => {
+}: CreateOrderInput) => {
   if (!cartItems || cartItems.length === 0) throw new Error("Cart is empty");
 
   const orders = await orderService.create({
