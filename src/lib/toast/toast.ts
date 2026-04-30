@@ -27,16 +27,6 @@ export const notify = {
     return toast.promise(promise, {
       pending: i18n.t(messages.loading, params),
       success: i18n.t(messages.success, params),
-      error: {
-        render({ data }) {
-          if (messages.error) return i18n.t(messages.error, params);
-          if (data && typeof data === "object" && "message" in data) {
-            const msg = (data as { message?: string }).message ?? "";
-            return i18n.t(`errors.supabase.${msg}`, { defaultValue: msg });
-          }
-          return i18n.t("errors.unknown");
-        },
-      },
     });
   },
 };

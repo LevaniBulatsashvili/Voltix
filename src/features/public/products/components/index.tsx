@@ -40,6 +40,7 @@ const Products = () => {
     selectField: PRODUCTSELECTFIELD,
   });
   const brandsQuery = useFetchBrands({
+    limit: 1000,
     selectField: "id, name, logo_url",
   });
 

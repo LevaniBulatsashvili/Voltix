@@ -163,22 +163,23 @@ export const createSupabaseService = <
 
   // --- Delete Many ---
   async function deleteMany(filters: IFilters<T>): Promise<void> {
-    let query = supabase.from(table).delete();
+    let query = supabase.from(table).delete({ count: "exact" });
     query = applyFilters<T>(query, filters);
-    const { error } = await query;
+    const { error, count } = await query;
 
-    if (error) throw new Error(`failed_to_delete_${serviceName}`);
+    if (error || count === 0)
+      throw new Error(`failed_to_delete_${serviceName}`);
   }
 
   // --- Delete ---
   async function deleteItem(id: TKey): Promise<void> {
-    const { error } = await supabase
+    const { error, count } = await supabase
       .from(table)
-      .delete()
+      .delete({ count: "exact" })
       .eq(keyFieldString, id);
 
     const singular = singularName ?? serviceName.replace(/s$/, "");
-    if (error) throw new Error(`failed_to_delete_${singular}`);
+    if (error || count === 0) throw new Error(`failed_to_delete_${singular}`);
   }
 
   return {

@@ -11,7 +11,12 @@ export const client = new QueryClient({
 
   mutationCache: new MutationCache({
     onError: (error, _variables, _context, mutation) => {
-      if (mutation.meta?.hasToast) return;
+      if (
+        mutation.meta?.hasToast &&
+        !error.message.includes("update") &&
+        !error.message.includes("delete")
+      )
+        return;
       handleQueryError(error, undefined, mutation);
     },
   }),
