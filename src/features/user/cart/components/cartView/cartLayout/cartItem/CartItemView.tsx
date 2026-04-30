@@ -25,7 +25,7 @@ const CartItemView = ({
       <div className="flex gap-4">
         <div className="size-24 sm:size-32 shrink-0">
           <img
-            src={"https://placehold.co/100x100?text=Product"}
+            src={product.thumbnail || "/images/placeholders/product.webp"}
             alt={t("cart.product")}
             className="w-full h-full object-cover rounded-lg"
           />
