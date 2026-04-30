@@ -58,5 +58,8 @@
 
   "brands": {
     "brands": "Brands"
-  }
+  },
+
+  "can_create_edit_and_delete_their_own_items": "Can create, edit, and delete their own items.",
+  "can_create_edit_and_delete_all_items": "Can create, edit, and delete all items."
 }

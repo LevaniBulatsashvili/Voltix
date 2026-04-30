@@ -1,6 +1,7 @@
 import PrimaryButton from "@/components/button/PrimaryBtn";
+import AdminRolePermissionsInfo from "./AdminRolePermissionsInfo";
 
-interface AdminHeader {
+interface AdminHeaderProps {
   title: string;
   description?: string;
   actionText?: string;
@@ -12,11 +13,14 @@ const AdminHeader = ({
   description,
   actionText,
   onAction,
-}: AdminHeader) => {
+}: AdminHeaderProps) => {
   return (
     <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-4 mb-6">
       <div>
-        <h1 className="text-2xl font-bold">{title}</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-2xl font-bold">{title}</h1>
+          <AdminRolePermissionsInfo />
+        </div>
         {description && (
           <p className="text-md opacity-80 mt-0.5">{description}</p>
         )}

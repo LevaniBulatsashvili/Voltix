@@ -76,5 +76,10 @@
     "updated": "{{entity}} updated successfully",
     "deleting": "Deleting {{entity}}...",
     "deleted": "{{entity}} deleted successfully"
-  }
+  },
+
+  "user": "User",
+  "admin": "Admin",
+  "courier": "Courier",
+  "developer": "Developer"
 }
