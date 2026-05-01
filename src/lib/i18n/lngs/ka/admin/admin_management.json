@@ -7,7 +7,9 @@
     "main_category": "მთავარი კატეგორია",
     "main_category_genitive": "მთავარი კატეგორიის",
     "brand": "ბრენდი",
-    "brand_genitive": "ბრენდის"
+    "brand_genitive": "ბრენდის",
+    "product_spec": "სპეციფიკაციები",
+    "product_spec_genitive": "სპეციფიკაციის"
   },
 
   "manage_your_catalog": "მართეთ თქვენი {{item}} კატალოგი",
@@ -35,7 +37,10 @@
     "stock": "მარაგი",
     "thumbnail": "მინიატურა",
     "logo": "ლოგო",
-    "website_url": "ვებსაიტი"
+    "website_url": "ვებსაიტი",
+    "product": "პროდუქტი",
+    "product_spec": "პროდუქტის სპეციფიკაცია",
+    "spec_value": "სპეციფიკაციის მნიშვნელობა"
   },
 
   "products": {
@@ -58,6 +63,13 @@
 
   "brands": {
     "brands": "ბრენდები"
+  },
+
+  "product_specs": {
+    "product_specs": "პროდუქტის სპეციფიკაციები",
+    "total_specs": "ყველა სპეციფიკაცია",
+    "unique_spec_types": "უნიკალური სპეციფიკაციების ტიპები",
+    "products_with_specs": "პროდუქტები სპეციფიკაციებით"
   },
 
   "can_create_edit_and_delete_their_own_items": "შეუძლია საკუთარი ნივთების შექმნა, რედაქტირება და წაშლა.",

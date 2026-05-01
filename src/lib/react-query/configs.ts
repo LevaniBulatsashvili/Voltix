@@ -21,6 +21,7 @@ export const Query_Keys = {
   wishlist: "wishlist",
   product_images: "product_images",
   order_items: "order_items",
+  product_specs: "product_specs",
 };
 
 export const Query_Tables = {
@@ -37,6 +38,5 @@ export const Query_Tables = {
   products: "products",
   profiles: "profiles",
   spec_values: "spec_values",
-  specs: "specs",
   wishlists: "wishlists",
 };

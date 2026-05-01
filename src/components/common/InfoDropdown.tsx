@@ -27,7 +27,7 @@ const InfoDropdown = ({
   }, []);
 
   return (
-    <div ref={ref} className={`z-100 ${className}`}>
+    <div ref={ref} className={`z-10 ${className}`}>
       <button
         onClick={() => setOpen((p) => !p)}
         className="size-7 rounded-full border text-sm font-medium flex items-center justify-center hover:bg-gray-100 transition"

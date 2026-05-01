@@ -7,7 +7,9 @@
     "main_category": "Main Category",
     "main_category_genitive": "Main Category",
     "brand": "Brand",
-    "brand_genitive": "Brand"
+    "brand_genitive": "Brand",
+    "product_spec": "Product Specs",
+    "product_spec_genitive": "Product Specs"
   },
 
   "manage_your_catalog": "Manage Your {{item}} Catalog",
@@ -35,7 +37,10 @@
     "stock": "Stock",
     "thumbnail": "Thumbnail",
     "logo": "Logo",
-    "website_url": "Website URL"
+    "website_url": "Website URL",
+    "product": "Product",
+    "product_spec": "Product spec",
+    "spec_value": "Spec value"
   },
 
   "products": {
@@ -58,6 +63,13 @@
 
   "brands": {
     "brands": "Brands"
+  },
+
+  "product_specs": {
+    "product_specs": "Product Specs",
+    "total_specs": "Total specs",
+    "unique_spec_types": "Unique spec types",
+    "products_with_specs": "Products with specs"
   },
 
   "can_create_edit_and_delete_their_own_items": "Can create, edit, and delete their own items.",

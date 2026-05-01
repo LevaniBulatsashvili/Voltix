@@ -55,13 +55,8 @@ export interface IBrand {
 export interface IProductSpec {
   id: number;
   product_id: IProduct["id"];
+  profile_id?: IProfile["id"];
   spec: string;
-  value: string;
-}
-
-export interface ISpecValue {
-  id: number;
-  spec_id: IProductSpec["id"];
   value: string;
 }
 
