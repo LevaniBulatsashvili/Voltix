@@ -1,13 +1,23 @@
 import { useDeleteAccount } from "@/features/auth/hooks/useDeleteAccount";
+import { isAccountProtected } from "@/features/auth/utils/isAccountProtected";
 import { useAppSelector } from "@/hooks/redux";
+import { notify } from "@/lib/toast/toast";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const DeleteAccountSection = () => {
   const { t } = useTranslation();
   const { theme } = useAppSelector((state) => state.theme);
+  const { user } = useAppSelector((state) => state.auth);
   const { mutate: deleteAccount, isPending } = useDeleteAccount();
   const [confirm, setConfirm] = useState(false);
+
+  const onAccountDelete = () => {
+    if (isAccountProtected(user?.email)) {
+      setConfirm(false);
+      notify.info("This account can't be deleted");
+    } else deleteAccount();
+  };
 
   return (
     <div className="border border-red-200 rounded-lg p-4 flex flex-col gap-3 mt-8">
@@ -26,7 +36,7 @@ const DeleteAccountSection = () => {
       ) : (
         <div className="flex gap-2">
           <button
-            onClick={() => deleteAccount()}
+            onClick={onAccountDelete}
             disabled={isPending}
             className="text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition disabled:opacity-50"
           >

@@ -18,13 +18,13 @@ const AdminNavigation = ({ items, className }: IAdminNavigation) => {
   const activePath = location.pathname;
 
   return (
-    <nav className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 ${className}`}>
+    <nav className={`grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6 ${className}`}>
       {items.map((item) => (
         <AppLink
           key={item.value}
           to={item.value}
           className={`
-            bg-primary text-background text-center py-2 font-semibold
+            bg-primary text-background text-center p-2 font-semibold truncate
             ${
               activePath === item.value
                 ? ""
