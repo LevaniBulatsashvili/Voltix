@@ -64,6 +64,9 @@ export const AdminBrandsPage = lazy(
 export const AdminProductSpecsPage = lazy(
   () => import("@/pages/admin/productSpecs/AdminProductSpecsPage"),
 );
+export const AdminProductFAQsPage = lazy(
+  () => import("@/pages/admin/productFAQs/AdminProductFAQsPage"),
+);
 
 // Error
 export const NotFoundPage = lazy(

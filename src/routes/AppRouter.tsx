@@ -95,6 +95,10 @@ const AppRoutes = () => (
               path={PAGE.ADMIN.PRODUCT_SPECS}
               element={<Page.AdminProductSpecsPage />}
             />
+            <Route
+              path={PAGE.ADMIN.PRODUCT_FAQS}
+              element={<Page.AdminProductFAQsPage />}
+            />
           </Route>
         </Route>
 

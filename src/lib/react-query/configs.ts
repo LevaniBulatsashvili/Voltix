@@ -22,6 +22,7 @@ export const Query_Keys = {
   product_images: "product_images",
   order_items: "order_items",
   product_specs: "product_specs",
+  product_faqs: "product_faqs",
 };
 
 export const Query_Tables = {

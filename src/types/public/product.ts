@@ -80,7 +80,7 @@ export interface IProductImage {
 export interface IProductFAQ {
   id: string;
   product_id: IProduct["id"];
-  profile_id: IProfile["id"];
+  profile_id?: IProfile["id"];
   question: string;
   answer?: string;
   answered_by?: IProfile["id"];

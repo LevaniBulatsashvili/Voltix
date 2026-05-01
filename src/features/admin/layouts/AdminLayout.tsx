@@ -18,6 +18,10 @@ const ADMIN_PAGES = [
     label: "admin_management.product_specs.product_specs",
     value: PAGE.ADMIN.PRODUCT_SPECS,
   },
+  {
+    label: "admin_management.product_faqs.product_faqs",
+    value: PAGE.ADMIN.PRODUCT_FAQS,
+  },
 ];
 
 const AdminLayout = () => (

@@ -32,6 +32,7 @@ const PAGE = {
     CATEGORIES: "/admin/categories",
     BRANDS: "/admin/brands",
     PRODUCT_SPECS: "/admin/product-specs",
+    PRODUCT_FAQS: "/admin/product-faqs",
   },
 
   SOCIAL: {
