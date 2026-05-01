@@ -39,9 +39,10 @@ const MobileMenu = ({
             currentLanguage={currentLanguage}
             onLanguageChange={onLanguageChange}
             onToggleTheme={onToggleTheme}
+            onNavigate={handleClose}
           />
 
-          <ProductSearchBar />
+          <ProductSearchBar onNavigate={handleClose} />
 
           <nav className="flex flex-col gap-2 mt-2">
             <NavLinks

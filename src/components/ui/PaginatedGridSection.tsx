@@ -54,7 +54,7 @@ const PaginatedGridSection = <T,>({
         >
           {(products) => (
             <div
-              className={`grid sm:grid-cols-2 lg:grid-cols-${maxCols} gap-4`}
+              className={`grid min-[480px]:grid-cols-2 lg:grid-cols-${maxCols} gap-4`}
             >
               {products.map((item) => renderItem(item))}
             </div>

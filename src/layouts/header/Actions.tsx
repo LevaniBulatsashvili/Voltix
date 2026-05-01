@@ -23,6 +23,7 @@ interface IActions {
   currentLanguage: string;
   onLanguageChange: (lang: string) => void;
   onToggleTheme: () => void;
+  onNavigate?: () => void;
 }
 
 const Actions = ({
@@ -30,6 +31,7 @@ const Actions = ({
   currentLanguage,
   onLanguageChange,
   onToggleTheme,
+  onNavigate,
 }: IActions) => {
   const { t } = useTranslation();
   const { signOut } = useLogout();
@@ -41,6 +43,11 @@ const Actions = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   useClickOutside(dropdownRef, () => setDropdownOpen(false));
   const totalItems = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
+
+  const handleDropdownClick = () => {
+    setDropdownOpen(false);
+    onNavigate?.();
+  };
 
   const handleLogout = () => {
     signOut();
@@ -58,7 +65,11 @@ const Actions = ({
   return (
     <div className="flex items-center gap-4 flex-wrap relative">
       {isVerified && (isUser || isDeveloper) && (
-        <AppLink to={PAGE.USER.CART} className="relative">
+        <AppLink
+          to={PAGE.USER.CART}
+          className="relative"
+          onClick={() => onNavigate?.()}
+        >
           <ShoppingCart className="w-6 h-6" />
           {totalItems > 0 && (
             <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -73,19 +84,19 @@ const Actions = ({
           onClick={() => setDropdownOpen((prev) => !prev)}
           className="size-8 rounded-full flex items-center justify-center"
         >
-          <User className="size-7  object-cover rounded-full border" />
+          <User className="size-7 object-cover rounded-full border" />
         </button>
 
         {dropdownOpen && (
           <div
             ref={dropdownRef}
-            className="absolute -right-19 sm:-right-17 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50"
+            className="absolute left-0 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50"
           >
             {menu.map((item, i) => (
               <ProfileDropdownItem
                 key={i}
                 item={item}
-                onClick={() => setDropdownOpen(false)}
+                onClick={handleDropdownClick}
               />
             ))}
           </div>

@@ -8,9 +8,10 @@ import LikeBtn, { type ILikeBtnOptions } from "@/components/button/LikeBtn";
 export interface IProductCard {
   product: IProduct;
   likeOptions?: ILikeBtnOptions;
+  className?: string;
 }
 
-const ProductCard = ({ product, likeOptions }: IProductCard) => {
+const ProductCard = ({ product, likeOptions, className }: IProductCard) => {
   return (
     <AppLink
       to={buildProductLink(
@@ -18,7 +19,7 @@ const ProductCard = ({ product, likeOptions }: IProductCard) => {
         product.category.name.toLowerCase(),
         product.id,
       )}
-      className="relative bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      className={`relative bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer ${className}`}
     >
       {likeOptions && (
         <LikeBtn isLiked={likeOptions.isLiked} onLike={likeOptions.onLike} />
@@ -36,7 +37,7 @@ const ProductCard = ({ product, likeOptions }: IProductCard) => {
       </div>
 
       <div className="mt-3 space-y-2 text-start">
-        <p className="font-semibold capitalize text-lg text-gray-800">
+        <p className="line-clamp-2 font-semibold capitalize text-lg text-gray-800">
           {product.name}
         </p>
 

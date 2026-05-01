@@ -31,20 +31,25 @@ const AdminToolbar = ({
 }: IAdminToolbar) => {
   return (
     <div className="flex gap-3 mb-4">
-      <SearchBar
-        searchValue={searchValue}
-        onSearchValueChange={setSearchValue}
-        hasData={hasData}
-        isSearchDisabled={isSearchDisabled}
-        searchInputClassName={searchInputClassName}
-      />
-      {selectDropdownOptions && (
-        <Select
-          value={selectDropdownOptions.selectValue}
-          onChange={selectDropdownOptions.onSelect}
-          options={selectDropdownOptions.selectOptions}
-          baseLabel={selectDropdownOptions.selectBaseLabel}
+      <div className="flex-1 min-w-0">
+        <SearchBar
+          searchValue={searchValue}
+          onSearchValueChange={setSearchValue}
+          hasData={hasData}
+          isSearchDisabled={isSearchDisabled}
+          searchInputClassName={searchInputClassName}
         />
+      </div>
+
+      {selectDropdownOptions && (
+        <div className="shrink-0">
+          <Select
+            value={selectDropdownOptions.selectValue}
+            onChange={selectDropdownOptions.onSelect}
+            options={selectDropdownOptions.selectOptions}
+            baseLabel={selectDropdownOptions.selectBaseLabel}
+          />
+        </div>
       )}
     </div>
   );

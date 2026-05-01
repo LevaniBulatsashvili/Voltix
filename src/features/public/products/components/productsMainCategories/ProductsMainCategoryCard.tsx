@@ -16,7 +16,9 @@ const ProductsMainCategoryCard = ({
   return (
     <AppLink to={to}>
       <div className="relative bg-gray-100 p-6 rounded-2xl overflow-hidden h-72.5 hover:shadow-lg transition-shadow duration-300">
-        <h2 className="text-3xl sm:text-4xl font-medium text-black">{title}</h2>
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-black">
+          {title}
+        </h2>
 
         <img
           src={image}

@@ -29,11 +29,11 @@ const Pagination = ({
       )}
 
       <div className="w-full sm:w-auto overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
-        <div className="flex gap-2 items-center min-w-max">
+        <div className="flex gap-1 sm:gap-2 items-center min-w-max">
           <button
             onClick={() => onChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
+            className="size-9 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
           >
             <ChevronLeft size={18} />
           </button>
@@ -47,7 +47,7 @@ const Pagination = ({
               <button
                 key={key}
                 onClick={() => onChange(value)}
-                className={`size-10 border rounded shrink-0 ${
+                className={`size-9 sm:size-10 border rounded shrink-0 ${
                   currentPage === value
                     ? "bg-black text-white"
                     : "hover:bg-gray-100"
@@ -61,7 +61,7 @@ const Pagination = ({
           <button
             onClick={() => onChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
+            className="size-9 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
           >
             <ChevronRight size={18} />
           </button>

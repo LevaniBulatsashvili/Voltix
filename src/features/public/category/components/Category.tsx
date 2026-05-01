@@ -46,7 +46,7 @@ const Category = () => {
 
   return (
     <PageWrapper>
-      <div className="flex justify-between py-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 py-8">
         <h1 className="text-2xl sm:text-4xl font-bold">
           {t(`common.${categoryName}`)}
         </h1>

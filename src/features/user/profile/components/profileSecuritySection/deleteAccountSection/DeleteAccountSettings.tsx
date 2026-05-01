@@ -38,13 +38,13 @@ const DeleteAccountSection = () => {
           <button
             onClick={onAccountDelete}
             disabled={isPending}
-            className="text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition disabled:opacity-50"
+            className="text-xs sm:text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition disabled:opacity-50"
           >
             {t("profile.confirm_delete")}
           </button>
           <button
             onClick={() => setConfirm(false)}
-            className={`text-sm border px-4 py-2 rounded-lg ${theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700"} transition`}
+            className={`text-xs sm:text-sm border px-4 py-2 rounded-lg ${theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700"} transition`}
           >
             {t("common.cancel")}
           </button>

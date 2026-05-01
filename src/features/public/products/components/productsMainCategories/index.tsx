@@ -11,7 +11,7 @@ const ProductsMainCategories = () => {
   });
 
   return (
-    <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-16 bg-white">
+    <div className="mb-14 sm:mb-20 w-[90%] mx-auto rounded-4xl p-6 sm:p-10 md:p-13 lg:p-16 bg-white">
       <h2 className="mb-10 sm:mb-16 text-4xl sm:text-5xl font-extrabold uppercase text-center text-black">
         {t("products.browse_by_category")}
       </h2>

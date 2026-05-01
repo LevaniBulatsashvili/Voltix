@@ -17,7 +17,7 @@ const ProfileHeader = ({
   onAvatarSuccess,
 }: IProfileHeader) => {
   return (
-    <div className="flex self-start md:self-auto items-center gap-4 md:gap-6">
+    <div className="flex self-start md:self-auto items-center gap-1 sm:gap-4 md:gap-6">
       <AvatarUploader
         currentAvatar={avatar}
         profileId={id}

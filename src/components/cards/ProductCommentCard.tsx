@@ -9,7 +9,12 @@ interface IProductCommentCard {
 
 const ProductCommentCard = ({ productComment }: IProductCommentCard) => {
   return (
-    <div className="bg-gray-50 p-7 rounded-2xl border border-gray-300 shadow hover:shadow-lg transition h-60 sm:h-80 overflow-auto">
+    <div
+      className="bg-gray-50 p-7 rounded-2xl border border-gray-300 shadow hover:shadow-lg transition h-63 sm:h-80 overflow-auto
+      scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent
+     hover:scrollbar-thumb-gray-400
+    "
+    >
       {(productComment.rating || productComment.rating === 0) && (
         <div className="text-3xl flex items-center gap-1 mb-4">
           {Array.from({ length: 5 }).map((_, i) => (

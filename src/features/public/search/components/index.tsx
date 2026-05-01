@@ -98,6 +98,7 @@ const Search = () => {
                 isLiked,
                 toggleWishlist,
               })}
+              className="max-w-73 sm:max-w-full"
             />
           )}
         />
