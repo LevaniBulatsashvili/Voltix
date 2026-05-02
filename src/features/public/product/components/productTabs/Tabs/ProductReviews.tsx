@@ -7,7 +7,8 @@ import { InfiniteGrid } from "@/components/ui/InfiniteGrid";
 import { useInfiniteList } from "@/hooks/useInfiniteList";
 import PrimaryButton from "@/components/button/PrimaryBtn";
 import { useRole } from "@/features/user/profile/hooks/useRole";
-import { notify } from "@/lib/toast/toast";
+import ProductReviewsNoData from "./productReview/ProductReviewsNoData";
+import ProductReviewModal from "./productReview/ProductReviewModal";
 
 interface IProductReviews {
   productId: number;
@@ -17,6 +18,7 @@ const ProductReviews = ({ productId }: IProductReviews) => {
   const { t } = useTranslation();
   const { isVerified, isRole } = useRole();
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const {
     items,
@@ -61,9 +63,9 @@ const ProductReviews = ({ productId }: IProductReviews) => {
           {isVerified && (
             <PrimaryButton
               text={t("product.review")}
-              className={`rounded-full! ${isRole(["admin", "developer"]) ? "opacity-70! pointer-events-none" : ""}`}
-              disabled={isRole(["admin", "developer"])}
-              onClick={() => notify.info("coming soon!")}
+              className={`rounded-full! ${isRole(["admin"]) ? "opacity-70! pointer-events-none" : ""}`}
+              disabled={isRole(["admin"])}
+              onClick={() => setShowReviewModal(true)}
             />
           )}
         </div>
@@ -73,6 +75,7 @@ const ProductReviews = ({ productId }: IProductReviews) => {
         items={items}
         error={error}
         isFetching={isFetching}
+        noDataFallback={<ProductReviewsNoData />}
         gridClassName="grid grid-cols-1 sm:grid-cols-2 gap-4"
         renderItem={(comment) => (
           <ProductCommentCard key={comment.id} productComment={comment} />
@@ -89,6 +92,13 @@ const ProductReviews = ({ productId }: IProductReviews) => {
             ? t("product.loading")
             : t("product.load_more_reviews")}
         </button>
+      )}
+
+      {showReviewModal && (
+        <ProductReviewModal
+          productId={productId}
+          onClose={() => setShowReviewModal(false)}
+        />
       )}
     </div>
   );

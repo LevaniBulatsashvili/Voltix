@@ -52,11 +52,11 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
         </div>
       )}
 
-      <div className="order-1 sm:order-2 min-w-0 rounded-xl overflow-hidden bg-gray-50 max-h-125 aspect-square sm:aspect-5/4">
+      <div className="order-1 sm:order-2 min-w-0 rounded-xl overflow-hidden bg-gray-50 max-h-125">
         <img
           src={selectedImage.image_url}
           alt={name}
-          className={`w-full h-full object-contain object-left transition-opacity duration-150 ${
+          className={`w-full h-full object-cover transition-opacity duration-150 ${
             fade ? "opacity-100" : "opacity-0"
           }`}
         />

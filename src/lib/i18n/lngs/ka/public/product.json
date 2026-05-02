@@ -17,5 +17,16 @@
   "price": "ფასი",
   "stock": "მარაგი",
   "rating": "რეიტინგი",
-  "sold": "გაყიდული"
+  "sold": "გაყიდული",
+  "no_reviews_yet": "შეფასებები არ არსებობს",
+  "be_the_first_to_share_your_experience_with_this_product": "იყავით პირველი, ვინც ამ პროდუქტს შეაფასებს",
+  "write_a_review": "დაწერეთ შეფასება",
+  "your_rating": "თქვენი შეფასება",
+  "your_review": "თქვენი მიმოხილვა",
+  "submitting": "იგზავნება...",
+  "submit_review": "შეფასება",
+  "please_select_a_rating": "გთხოვთ, აირჩიოთ შეფასება",
+  "please_write_a_comment": "გთხოვთ, დაწეროთ კომენტარი",
+  "review_must_be_at_least_10_characters": "მიმოხილვა უნდა შედგებოდეს მინიმუმ 10 სიმბოლოსგან",
+  "review_must_be_under_500_characters": "მიმოხილვა არ უნდა აღემატებოდეს 500 სიმბოლოს"
 }

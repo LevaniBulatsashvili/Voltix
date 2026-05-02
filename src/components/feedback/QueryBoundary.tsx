@@ -28,6 +28,7 @@ export const QueryBoundary = <T,>({
       response={query.data}
       isLoading={query.isLoading}
       isRefetching={query.isRefetching}
+      isFetching={query.isFetching}
       error={query.error}
       onRetry={query.refetch}
       noDataFallback={noDataFallback}

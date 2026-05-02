@@ -17,5 +17,16 @@
   "price": "Price",
   "stock": "Stock",
   "rating": "Rating",
-  "sold": "Sold"
+  "sold": "Sold",
+  "no_reviews_yet": "No Reviews Yet",
+  "be_the_first_to_share_your_experience_with_this_product": "Be the first to share your experience with this product",
+  "write_a_review": "Write a review",
+  "your_rating": "Your rating",
+  "your_review": "Your review",
+  "submitting": "Submitting...",
+  "submit_review": "Submit review",
+  "please_select_a_rating": "Please select a rating",
+  "please_write_a_comment": "Please write a comment",
+  "review_must_be_at_least_10_characters": "Review must be at least 10 characters",
+  "review_must_be_under_500_characters": "Review must be under 500 characters"
 }
