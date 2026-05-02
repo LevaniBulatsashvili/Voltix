@@ -61,6 +61,9 @@ The goal of Voltix was to build a production-ready eCommerce frontend that demon
 - 🌐 Full i18n — English and Georgian
 - 🌙 Theme support
 - 🛠️ Admin panel — product CRUD with image upload (WebP optimized)
+- 🏷️ Promo code system with expiry and percentage discounts
+- ⭐ Product reviews with star ratings
+- 📋 Order management with cancellation and real-time updates
 
 ---
 

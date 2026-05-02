@@ -46,6 +46,15 @@ Full-stack eCommerce app for electronics: catalog, cart, orders, wishlist, user 
 
 - Cart, wishlist, auth, theme, settings persisted via custom Redux middleware
 - Notifications dispatched to Redux slice, consumed by `ToastListener`
+- `useCopyToClipboard` at `src/hooks/useCopyToClipboard.ts` — shared clipboard hook used across order IDs and promo codes
+- `usePromoCode` at `src/features/user/cart/hooks/usePromoCode.ts` — validates and applies promo codes against Supabase, computes discounted total
+
+### Modals
+
+- `Modal` at `src/components/ui/modal/Modal.tsx` — base modal with `useEscKey` and `useClickOutside`, `disableClickOutside` prop
+- `ItemModal` — wraps `Modal` for admin CRUD forms (add/edit), i18n title, submit/cancel actions
+- `ConfirmModal` — wraps `Modal` for destructive confirmations, `danger` variant for red confirm button
+- `ProductReviewModal` — uses `Modal` for submitting star rating + comment, resets state on close
 
 ## Engineering principles
 
@@ -74,16 +83,22 @@ npm run preview  # preview production build
 
 ## Supabase tables
 
-| Table             | Key fields                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------ |
-| `products`        | `id`, `name`, `thumbnail`, `brand_id`, `main_category_id`, `category_id`, `price`, `stock` |
-| `product_images`  | `id`, `product_id`, `image_url`                                                            |
-| `brands`          | `id`, `name`                                                                               |
-| `main_categories` | `id`, `name`                                                                               |
-| `categories`      | `id`, `main_category_id`, `name`                                                           |
-| `profiles`        | `id`, `avatar_url`                                                                         |
-| `orders`          | `id`, `user_id`                                                                            |
-| `wishlist`        | `id`, `user_id`, `product_id`                                                              |
+| Table              | Key fields                                                                                                                                            |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `products`         | `id`, `name`, `thumbnail`, `brand_id`, `main_category_id`, `category_id`, `price`, `price_final`, `stock`, `rating_avg`, `rating_count`, `total_sold` |
+| `product_images`   | `id`, `product_id`, `image_url`                                                                                                                       |
+| `product_comments` | `id`, `product_id`, `profile_id`, `rating`, `comment`, `verified`, `created_at`                                                                       |
+| `product_specs`    | `id`, `product_id`, `spec`, `value`                                                                                                                   |
+| `product_faqs`     | `id`, `product_id`, `question`, `answer`, `answered_by`, `answered_at`                                                                                |
+| `brands`           | `id`, `name`, `logo_url`, `website_url`                                                                                                               |
+| `main_categories`  | `id`, `name`, `thumbnail`                                                                                                                             |
+| `categories`       | `id`, `main_category_id`, `name`                                                                                                                      |
+| `profiles`         | `id`, `full_name`, `phone`, `avatar_url`, `role`                                                                                                      |
+| `addresses`        | `id`, `profile_id`, `address_line`, `city`, `postal_code`, `country`, `is_default`                                                                    |
+| `orders`           | `id`, `profile_id`, `currency`, `status`, `total_amount`, `delivery_fee`, `discount`, `promo_code`, `date`                                            |
+| `order_items`      | `id`, `order_id`, `product_id`, `quantity`, `price`, `total`                                                                                          |
+| `promo_codes`      | `id`, `code`, `discount_percentage`, `expires_at`, `is_active`                                                                                        |
+| `wishlist`         | `id`, `profile_id`, `product_id`, `created_at`                                                                                                        |
 
 ## Storage buckets
 
