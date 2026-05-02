@@ -16,6 +16,7 @@ interface IPaginatedGridSection<T> {
   onPageChange: (page: number) => void;
   renderItem: (item: T) => ReactNode;
   className?: string;
+  productGridClassName?: string;
 }
 
 const PaginatedGridSection = <T,>({
@@ -26,7 +27,8 @@ const PaginatedGridSection = <T,>({
   maxCols = 2,
   onPageChange,
   renderItem,
-  className,
+  className = "",
+  productGridClassName,
 }: IPaginatedGridSection<T>) => {
   const { data, currentPage, totalCount, totalPages } =
     useCachedQueryData(query);
@@ -54,7 +56,10 @@ const PaginatedGridSection = <T,>({
         >
           {(products) => (
             <div
-              className={`grid min-[480px]:grid-cols-2 lg:grid-cols-${maxCols} gap-4`}
+              className={
+                productGridClassName ??
+                `grid min-[480px]:grid-cols-2 lg:grid-cols-${maxCols} gap-4`
+              }
             >
               {products.map((item) => renderItem(item))}
             </div>

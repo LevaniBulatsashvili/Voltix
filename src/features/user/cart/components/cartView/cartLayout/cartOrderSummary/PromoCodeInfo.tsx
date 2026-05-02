@@ -1,6 +1,6 @@
-import { useState } from "react";
 import InfoDropdown from "@/components/common/InfoDropdown";
 import { useTranslation } from "react-i18next";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipBoard";
 
 const DEMO_CODES = [
   { code: "WELCOME20", discount: "20%" },
@@ -10,13 +10,7 @@ const DEMO_CODES = [
 
 const PromoCodeInfo = () => {
   const { t } = useTranslation();
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopied(code);
-    setTimeout(() => setCopied(null), 1500);
-  };
+  const { copy, isCopied } = useCopyToClipboard();
 
   return (
     <InfoDropdown
@@ -30,11 +24,11 @@ const PromoCodeInfo = () => {
       {DEMO_CODES.map(({ code, discount }) => (
         <div key={code} className="flex items-center justify-between gap-2">
           <code
-            onClick={() => handleCopy(code)}
+            onClick={() => copy(code)}
             className="text-xs bg-gray-100 px-2 py-1 rounded-md font-mono cursor-pointer hover:bg-gray-200 transition select-all"
             title={t("cart.click_to_copy")}
           >
-            {copied === code ? `✓ ${t("cart.copied")}` : code}
+            {isCopied(code) ? `✓ ${t("cart.copied")}` : code}
           </code>
           <span className="text-xs text-green-600 font-medium whitespace-nowrap">
             {t("cart.discount_percentage", { percentage: discount })}

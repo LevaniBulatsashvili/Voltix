@@ -1,9 +1,11 @@
 import type { IOrder } from "@/types/profile/profile";
-import OrderItem from "./OrdersItem";
-import OrderStatus from "./OrdersStatus";
-import { Truck } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useFormatter } from "@/hooks/useDateFormatter";
+import { useState } from "react";
+import ConfirmModal from "@/components/ui/modal/ConfirmModal";
+import { useUpdateOrder } from "../../hooks/ordersCRUD";
+import { OrderCardHeader } from "./orderCardHeader/OrderCardHeader";
+import OrderCardBody from "./orderCardBody/OrderCardBody";
+import OrderCardFooter from "./OrderCardFooter";
 
 interface OrderCard {
   order: IOrder;
@@ -12,46 +14,55 @@ interface OrderCard {
 
 const OrderCard = ({ order, format }: OrderCard) => {
   const { t } = useTranslation();
-  const { formatDate } = useFormatter();
+
+  const [showCancel, setShowCancel] = useState(false);
+  const { mutate: updateOrder } = useUpdateOrder();
+
+  const handleCancel = () => {
+    updateOrder(
+      { id: order.id, status: "cancelled" },
+      { onSuccess: () => setShowCancel(false) },
+    );
+  };
 
   return (
-    <div className="border border-primary/50 rounded-2xl overflow-hidden shadow-sm">
-      <div className="px-5 pt-5 ">
-        <div className="flex justify-between items-start gap-3">
-          <div>
-            <span className="text-lg uppercase tracking-wide font-semibold">
-              {t("orders.order")}
-            </span>
-            <h2 className="text-sm font-medium mt-0.5 opacity-80">
-              #{order.id.slice(0, 8)}
-            </h2>
-            <p className="text-sm mt-1 opacity-80">{formatDate(order.date!)}</p>
-          </div>
-          <OrderStatus status={order.status} />
-        </div>
+    <>
+      <div
+        className={`border border-primary/50 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-opacity ${order.status === "cancelled" ? "opacity-50" : "opacity-100"}`}
+      >
+        <OrderCardHeader
+          id={order.id}
+          date={order.date!}
+          status={order.status}
+        />
+
+        <OrderCardBody
+          items={order.items}
+          deliveryFee={order.delivery_fee}
+          discount={order.discount}
+          promoCode={order.promo_code}
+          format={format}
+        />
+
+        <OrderCardFooter
+          total={order.total_amount}
+          status={order.status}
+          onCancel={() => setShowCancel(true)}
+          format={format}
+        />
       </div>
 
-      <div className="px-5 py-4">
-        {order.items?.map((item, idx) => (
-          <OrderItem key={item.id ?? idx} item={item} format={format} />
-        ))}
-
-        <div className="flex justify-between items-center py-2 text-md opacity-85">
-          <span className="flex items-center gap-1.5">
-            <Truck />
-            {t("orders.delivery_fee")}
-          </span>
-          <span>{format(order.delivery_fee)}</span>
-        </div>
-      </div>
-
-      <div className="text-lg px-5 py-4 flex justify-between items-center">
-        <span className="font-medium">{t("orders.total")}</span>
-        <span className="font-medium tabular-nums">
-          {format(order.total_amount)}
-        </span>
-      </div>
-    </div>
+      <ConfirmModal
+        open={showCancel}
+        title={t("orders.cancel_order")}
+        description={t("orders.cancel_order_confirm")}
+        confirmText={t("orders.cancel_order")}
+        cancelText={t("common.cancel")}
+        variant="danger"
+        onConfirm={handleCancel}
+        onClose={() => setShowCancel(false)}
+      />
+    </>
   );
 };
 

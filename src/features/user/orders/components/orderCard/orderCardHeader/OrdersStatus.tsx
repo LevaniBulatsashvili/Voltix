@@ -1,5 +1,6 @@
 interface OrderStatus {
   status: string;
+  statusText: string;
 }
 
 const statusStyles: Record<string, string> = {
@@ -9,14 +10,14 @@ const statusStyles: Record<string, string> = {
   default: "bg-blue-50 text-blue-700",
 };
 
-const OrderStatus = ({ status }: OrderStatus) => {
+const OrderStatus = ({ status, statusText }: OrderStatus) => {
   const style = statusStyles[status] ?? statusStyles.default;
 
   return (
     <span
-      className={`text-sm font-semibold px-2.5 py-1 rounded-full capitalize border-2 ${style}`}
+      className={`text-sm font-semibold px-2.5 py-1 rounded-full border-2 ${style}`}
     >
-      {status}
+      {statusText}
     </span>
   );
 };

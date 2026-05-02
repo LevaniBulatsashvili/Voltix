@@ -1,10 +1,12 @@
 import type { ISortBy } from "@/features/public/search/components";
 import SortByBtn from "@/components/button/SortByBtn";
 import { useTranslation } from "react-i18next";
+import type { ReactNode } from "react";
 
 export interface ISortOptions {
   sortBy: ISortBy;
   onChangeSort: (sortBy: ISortBy) => void;
+  renderSort?: ReactNode;
 }
 
 interface IPaginationhHeader {
@@ -43,12 +45,13 @@ const PaginationhHeader = ({
           })}
         </p>
 
-        {sortOptions && (
-          <SortByBtn
-            sortBy={sortOptions.sortBy}
-            onChangeSort={sortOptions.onChangeSort}
-          />
-        )}
+        {sortOptions &&
+          (sortOptions.renderSort ?? (
+            <SortByBtn
+              sortBy={sortOptions.sortBy}
+              onChangeSort={sortOptions.onChangeSort}
+            />
+          ))}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import InfoDropdown from "@/components/common/InfoDropdown";
 import { useAppSelector } from "@/hooks/redux";
-import { useState } from "react";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipBoard";
 import { useTranslation } from "react-i18next";
 
 const credentials = [
@@ -18,13 +18,7 @@ const roleStyles: Record<string, string> = {
 const TestCredentials = () => {
   const { t } = useTranslation();
   const { theme } = useAppSelector((state) => state.theme);
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const copy = (val: string) => {
-    navigator.clipboard.writeText(val);
-    setCopied(val);
-    setTimeout(() => setCopied(null), 1200);
-  };
+  const { copy, isCopied } = useCopyToClipboard(1200);
 
   return (
     <InfoDropdown
@@ -59,7 +53,7 @@ const TestCredentials = () => {
                   theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700"
                 } transition`}
               >
-                {copied === val
+                {isCopied(val)
                   ? t("login.copied")
                   : val.includes("@")
                     ? val
