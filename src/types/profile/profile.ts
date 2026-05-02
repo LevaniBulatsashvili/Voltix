@@ -37,6 +37,7 @@ export interface IOrder {
   date: string;
   created_at: string;
   updated_at?: string;
+  promo_code?: string;
 
   items?: IOrderItem[];
   address?: IAddress;

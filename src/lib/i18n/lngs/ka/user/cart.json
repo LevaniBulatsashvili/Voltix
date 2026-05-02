@@ -12,5 +12,16 @@
   "go_to_checkout": "ყიდვა",
   "your_cart_is_empty": "თქვენი კალათა ცარიელია",
   "looks_like_you_haven't_added_any_products_to_your_cart_yet": "თქვენ კალათაში არ დაგიმატებიათ პროდუქტები.",
-  "purchase": "ყიდვა"
+  "purchase": "ყიდვა",
+  "remove": "წაშლა",
+  "validating": "მოწმდება...",
+  "enter_a_promo_code": "შეიყვანეთ პრომო კოდი",
+  "invalid_promo_code": "პრომო კოდი არასწორია",
+  "promo_code_has_expired": "პრომო კოდს ვადა ამოეწურა",
+  "promo_applied": "{{percentage}}%-იანი ფასდაკლება გამოყენებულია!",
+  "available_promo_codes": "ხელმისაწვდომი პრომო კოდები",
+  "demo_promo_codes": "დემო პრომო კოდები",
+  "discount_percentage": "{{percentage}}%-იანი ფასდაკლება",
+  "click_to_copy": "დააკლიკეთ დასაკოპირებლად",
+  "copied": "დაკოპირდა"
 }

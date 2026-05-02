@@ -10,6 +10,7 @@ export type CreateOrderInput = Omit<
   "id" | "status" | "created_at" | "updated_at" | "items" | "date"
 > & {
   items: ICartItem[];
+  promo_code?: string;
 };
 
 export const createOrder = async ({
@@ -19,6 +20,7 @@ export const createOrder = async ({
   delivery_fee: deliveryFee,
   discount,
   items: cartItems,
+  promo_code: promoCode,
 }: CreateOrderInput) => {
   if (!cartItems || cartItems.length === 0) throw new Error("Cart is empty");
 
@@ -29,6 +31,7 @@ export const createOrder = async ({
     total_amount: totalAmount,
     delivery_fee: deliveryFee,
     discount,
+    promo_code: promoCode,
   });
 
   const orderItems: ICreatePayload<IOrderItem>[] = cartItems.map((item) => ({

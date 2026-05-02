@@ -12,5 +12,16 @@
   "go_to_checkout": "go to checkout",
   "your_cart_is_empty": "your cart is empty",
   "looks_like_you_haven't_added_any_products_to_your_cart_yet": "Looks like you haven't added any products to your cart yet.",
-  "purchase": "purchase"
+  "purchase": "purchase",
+  "remove": "Remove",
+  "validating": "Checking...",
+  "enter_a_promo_code": "Enter a promo code",
+  "invalid_promo_code": "Invalid promo code",
+  "promo_code_has_expired": "Promo code has expired",
+  "promo_applied": "{{percentage}}% discount applied!",
+  "available_promo_codes": "Available promo codes",
+  "demo_promo_codes": "Demo Promo Codes",
+  "discount_percentage": "{{percentage}} off",
+  "click_to_copy": "Click to copy",
+  "copied": "copied"
 }
