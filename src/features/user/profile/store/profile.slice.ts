@@ -11,9 +11,23 @@ export interface ProfileState {
 const persisted = profileStorage.get();
 
 const initialState: ProfileState = {
-  profile: persisted?.profile ?? undefined,
+  profile: persisted?.profile,
   loading: !persisted?.profile,
   error: undefined,
+};
+
+const isProfileEqual = (prev: IProfile, next: IProfile): boolean => {
+  for (const key of Object.keys(next) as (keyof IProfile)[]) {
+    const prevVal = prev[key];
+    const nextVal = next[key];
+
+    const bothArrays = Array.isArray(prevVal) && Array.isArray(nextVal);
+    if (bothArrays && JSON.stringify(prevVal) !== JSON.stringify(nextVal))
+      return false;
+    if (!bothArrays && prevVal !== nextVal) return false;
+  }
+
+  return true;
 };
 
 const profileSlice = createSlice({
@@ -21,6 +35,13 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     setProfile(state, action: PayloadAction<IProfile | undefined>) {
+      if (
+        state.profile &&
+        action.payload &&
+        isProfileEqual(state.profile, action.payload)
+      )
+        return;
+
       state.profile = action.payload;
       state.loading = false;
       state.error = undefined;

@@ -8,6 +8,8 @@ const ProfileDropdownItem = ({
   item: MenuItem;
   onClick: () => void;
 }) => {
+  const Icon = item.icon;
+
   if (item.type === "button") {
     return (
       <button
@@ -16,8 +18,9 @@ const ProfileDropdownItem = ({
           onClick();
         }}
         className="w-full flex items-center gap-2 px-4 py-2 hover:opacity-90"
+        role="menuitem"
       >
-        {item.icon}
+        <Icon className="size-4" />
         {item.label}
       </button>
     );
@@ -28,8 +31,9 @@ const ProfileDropdownItem = ({
       to={item.to!}
       onClick={onClick}
       className="flex items-center gap-2 px-4 py-2 hover:opacity-90"
+      role="menuitem"
     >
-      {item.icon}
+      <Icon className="size-4" />
       {item.label}
     </AppLink>
   );

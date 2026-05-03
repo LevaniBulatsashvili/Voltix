@@ -1,9 +1,4 @@
-import { useRef, useState } from "react";
-import { ShoppingCart, User } from "lucide-react";
-import AppLink from "@/components/button/AppLink";
-import LangSelector from "@/components/inputs/LangSelector";
-import ToggleBtn from "@/components/button/ToggleBtn";
-import { PAGE } from "@/pages/pageConfig";
+import { useRef, useState, useMemo, useCallback, memo } from "react";
 import { useAppSelector } from "@/hooks/redux";
 import type { ILanguage } from "@/types/header";
 import { useLogout } from "@/hooks/useLogout";
@@ -17,6 +12,11 @@ import {
   getUserMenu,
 } from "../utils/menuGenerators";
 import { useRole } from "@/features/user/profile/hooks/useRole";
+import CartButton from "./CartBtn";
+import LangSelector from "@/components/inputs/LangSelector";
+import ToggleBtn from "@/components/button/ToggleBtn";
+import { User } from "lucide-react";
+import { shallowEqual } from "react-redux";
 
 interface IActions {
   languages: ILanguage[];
@@ -26,100 +26,101 @@ interface IActions {
   onNavigate?: () => void;
 }
 
-const Actions = ({
-  languages,
-  currentLanguage,
-  onLanguageChange,
-  onToggleTheme,
-  onNavigate,
-}: IActions) => {
-  const { t } = useTranslation();
-  const { signOut } = useLogout();
-  const { theme } = useAppSelector((state) => state.theme);
-  const { profile } = useAppSelector((state) => state.profile);
-  const { isUser, isCourier, isAdmin, isDeveloper, isVerified } = useRole();
-  const { items: cartItems } = useAppSelector((state) => state.cart);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  useClickOutside(dropdownRef, () => setDropdownOpen(false));
-  const totalItems = cartItems.reduce((acc, { quantity }) => acc + quantity, 0);
+const Actions = memo(
+  ({
+    languages,
+    currentLanguage,
+    onLanguageChange,
+    onToggleTheme,
+    onNavigate,
+  }: IActions) => {
+    const { t } = useTranslation();
+    const { signOut } = useLogout();
+    const theme = useAppSelector((state) => state.theme.theme);
+    const profile = useAppSelector(
+      (state) => state.profile.profile,
+      shallowEqual,
+    );
+    const cartItems = useAppSelector((state) => state.cart.items);
+    const { isUser, isAdmin, isDeveloper, isVerified } = useRole();
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleDropdownClick = () => {
-    setDropdownOpen(false);
-    onNavigate?.();
-  };
+    useClickOutside(dropdownRef, () => setDropdownOpen(false));
 
-  const handleLogout = () => {
-    signOut();
-    setDropdownOpen(false);
-  };
+    const totalItems = useMemo(
+      () => cartItems.reduce((acc, { quantity }) => acc + quantity, 0),
+      [cartItems],
+    );
 
-  let menu;
+    const handleLogout = useCallback(() => {
+      signOut();
+      setDropdownOpen(false);
+    }, [signOut]);
 
-  if (!profile) menu = getGuestMenu(t);
-  else if (isUser) menu = getUserMenu(t, handleLogout);
-  else if (isAdmin) menu = getAdminMenu(t, handleLogout);
-  else if (isCourier) menu = getUserMenu(t, handleLogout);
-  else menu = getDeveloperMenu(t, handleLogout);
+    const handleDropdownClick = useCallback(() => {
+      setDropdownOpen(false);
+      onNavigate?.();
+    }, [onNavigate]);
 
-  return (
-    <div className="flex items-center gap-4 flex-wrap relative">
-      {isVerified && (isUser || isDeveloper) && (
-        <AppLink
-          to={PAGE.USER.CART}
-          className="relative"
-          onClick={() => onNavigate?.()}
-        >
-          <ShoppingCart className="w-6 h-6" />
-          {totalItems > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-              {totalItems}
-            </span>
-          )}
-        </AppLink>
-      )}
+    const menu = useMemo(() => {
+      if (!profile) return getGuestMenu(t);
+      if (isUser) return getUserMenu(t, handleLogout);
+      if (isAdmin) return getAdminMenu(t, handleLogout);
+      return getDeveloperMenu(t, handleLogout);
+    }, [profile, isUser, isAdmin, t, handleLogout]);
 
-      <div className="relative">
-        <button
-          onClick={() => setDropdownOpen((prev) => !prev)}
-          className="size-8 rounded-full flex items-center justify-center"
-        >
-          <User className="size-7 object-cover rounded-full border" />
-        </button>
-
-        {dropdownOpen && (
-          <div
-            ref={dropdownRef}
-            className="absolute left-0 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50"
-          >
-            {menu.map((item, i) => (
-              <ProfileDropdownItem
-                key={i}
-                item={item}
-                onClick={handleDropdownClick}
-              />
-            ))}
-          </div>
+    return (
+      <div className="flex items-center gap-4 flex-wrap relative">
+        {isVerified && (isUser || isDeveloper) && (
+          <CartButton totalItems={totalItems} onNavigate={onNavigate} />
         )}
+
+        <div className="relative">
+          <button
+            onClick={() => setDropdownOpen((prev) => !prev)}
+            className="size-8 rounded-full flex items-center justify-center"
+            aria-expanded={dropdownOpen}
+            aria-haspopup="menu"
+            aria-label="User menu"
+          >
+            <User className="size-7 object-cover rounded-full border" />
+          </button>
+
+          {dropdownOpen && (
+            <div
+              ref={dropdownRef}
+              className="absolute left-0 mt-1 w-42 bg-primary text-background rounded shadow-lg border border-background overflow-hidden z-50"
+            >
+              {menu.map((item) => (
+                <ProfileDropdownItem
+                  key={item.label}
+                  item={item}
+                  onClick={handleDropdownClick}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <LangSelector
+          value={currentLanguage}
+          onChange={(e) => onLanguageChange(e.target.value)}
+          languages={languages}
+        />
+
+        <ToggleBtn
+          isActive={theme === "dark"}
+          onToggle={onToggleTheme}
+          className="border border-indigo-400 shadow-md transition-all duration-300 hover:border-indigo-600 hover:shadow-lg hover:scale-105"
+          inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400 hover:from-pink-300 hover:via-purple-300 hover:to-blue-400"
+          activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700 hover:from-indigo-700 hover:via-blue-800 hover:to-gray-800"
+          inactiveThumbClassName="bg-yellow-400 hover:bg-yellow-300"
+          activeThumbClassName="bg-gray-200 hover:bg-gray-100"
+        />
       </div>
-
-      <LangSelector
-        value={currentLanguage}
-        onChange={(e) => onLanguageChange(e.target.value)}
-        languages={languages}
-      />
-
-      <ToggleBtn
-        isActive={theme === "dark"}
-        onToggle={onToggleTheme}
-        className="border border-indigo-400 shadow-md transition-all duration-300 hover:border-indigo-600 hover:shadow-lg hover:scale-105"
-        inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400 hover:from-pink-300 hover:via-purple-300 hover:to-blue-400"
-        activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700 hover:from-indigo-700 hover:via-blue-800 hover:to-gray-800"
-        inactiveThumbClassName="bg-yellow-400 hover:bg-yellow-300"
-        activeThumbClassName="bg-gray-200 hover:bg-gray-100"
-      />
-    </div>
-  );
-};
+    );
+  },
+);
 
 export default Actions;

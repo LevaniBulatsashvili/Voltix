@@ -8,24 +8,40 @@ import { toggleTheme } from "@/store/theme/theme.slice";
 import NavDropdown from "./NavDropdown";
 import MobileMenu from "./MobileMenu";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
+
+const languages = [
+  { value: "en", language: "Eng", code: "us" },
+  { value: "ka", language: "ქარ", code: "ge" },
+];
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
-  const toggleMode = () => dispatch(toggleTheme());
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(123);
 
-  const navLinks = [
-    { label: t("header.on_sale"), to: buildCategoryLink("on-sale") },
-    { label: t("header.new_arrivals"), to: buildCategoryLink("new-arrivals") },
-    { label: t("products.top_selling"), to: buildCategoryLink("top-selling") },
-  ];
-  const languages = [
-    { value: "en", language: "Eng", code: "us" },
-    { value: "ka", language: "ქარ", code: "ge" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      { label: t("header.on_sale"), to: buildCategoryLink("on-sale") },
+      {
+        label: t("header.new_arrivals"),
+        to: buildCategoryLink("new-arrivals"),
+      },
+      {
+        label: t("products.top_selling"),
+        to: buildCategoryLink("top-selling"),
+      },
+    ],
+    [t],
+  );
+
+  const toggleMode = useCallback(() => dispatch(toggleTheme()), [dispatch]);
+  const handleMenuToggle = useCallback(() => setMenuOpen((prev) => !prev), []);
+  const handleMenuClose = useCallback(() => setMenuOpen(false), []);
+  const handleLanguageChange = useCallback(
+    (lang: string) => i18n.changeLanguage(lang),
+    [i18n],
+  );
 
   return (
     <header className="items-center bg-primary text-background py-4 sm:py-5 md:py-6 px-8 sm:px-10 md:px-16 lg:px-25 flex flex-col gap-10 sm:flex-row sm:items-center sm:gap-6 relative">
@@ -33,7 +49,9 @@ const Header = () => {
         <Logo label="voltix" />
         <button
           className="sm:hidden p-2 rounded hover:bg-primary/70 transition"
-          onClick={() => setMenuOpen((prev) => !prev)}
+          onClick={handleMenuToggle}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -44,9 +62,9 @@ const Header = () => {
           navLinks={navLinks}
           languages={languages}
           currentLanguage={i18n.language}
-          onLanguageChange={(lang) => i18n.changeLanguage(lang)}
+          onLanguageChange={handleLanguageChange}
           onToggleTheme={toggleMode}
-          closeMenu={() => setMenuOpen(false)}
+          closeMenu={handleMenuClose}
         />
       )}
 
@@ -60,7 +78,7 @@ const Header = () => {
           <Actions
             languages={languages}
             currentLanguage={i18n.language}
-            onLanguageChange={(lang) => i18n.changeLanguage(lang)}
+            onLanguageChange={handleLanguageChange}
             onToggleTheme={toggleMode}
           />
         </div>
@@ -69,4 +87,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

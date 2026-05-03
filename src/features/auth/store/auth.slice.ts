@@ -36,6 +36,17 @@ const authSlice = createSlice({
       state.session = null;
       state.isLoading = false;
     },
+    restoreSession(
+      state,
+      action: PayloadAction<{
+        user: IAuthUser | null;
+        session: Session | null;
+      }>,
+    ) {
+      state.user = action.payload.user;
+      state.session = action.payload.session;
+      state.isLoading = false;
+    },
   },
 });
 
