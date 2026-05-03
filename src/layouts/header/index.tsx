@@ -15,6 +15,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const toggleMode = () => dispatch(toggleTheme());
   const [menuOpen, setMenuOpen] = useState(false);
+  console.log(123);
 
   const navLinks = [
     { label: t("header.on_sale"), to: buildCategoryLink("on-sale") },

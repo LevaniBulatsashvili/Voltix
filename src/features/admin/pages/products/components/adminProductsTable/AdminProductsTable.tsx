@@ -43,7 +43,7 @@ const AdminProductsTable = ({
           <TableCell className={product.stock === 0 ? "text-red-500" : ""}>
             {product.stock}
           </TableCell>
-          <TableCell>{product.rating_avg.toFixed(1)}</TableCell>
+          <TableCell>{product.rating_avg?.toFixed(1) ?? "-"}</TableCell>
           <TableCell>{product.total_sold.toLocaleString()}</TableCell>
           <TableCell>
             <div className="flex gap-4">
