@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { ShoppingCart } from "lucide-react";
 import AppLink from "@/components/button/AppLink";
 import { PAGE } from "@/pages/pageConfig";
@@ -8,7 +7,7 @@ interface ICartButton {
   onNavigate?: () => void;
 }
 
-const CartButton = memo(({ totalItems, onNavigate }: ICartButton) => (
+const CartButton = ({ totalItems, onNavigate }: ICartButton) => (
   <AppLink
     to={PAGE.USER.CART}
     className="relative"
@@ -21,7 +20,7 @@ const CartButton = memo(({ totalItems, onNavigate }: ICartButton) => (
       </span>
     )}
   </AppLink>
-));
+);
 
 CartButton.displayName = "CartButton";
 export default CartButton;

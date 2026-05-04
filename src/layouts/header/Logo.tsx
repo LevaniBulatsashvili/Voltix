@@ -1,5 +1,6 @@
 import AppLink from "@/components/button/AppLink";
 import { PAGE } from "@/pages/pageConfig";
+import { memo } from "react";
 
 interface ILogo {
   label: string;
@@ -15,4 +16,4 @@ const Logo = ({ label, className = "" }: ILogo) => (
   </AppLink>
 );
 
-export default Logo;
+export default memo(Logo);

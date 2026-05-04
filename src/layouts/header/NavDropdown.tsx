@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 import { Menu, X } from "lucide-react";
 import NavLinks from "./NavLinks";
 import type { INavLink } from "@/types/header/Nav";
@@ -57,4 +57,4 @@ const NavDropdown = ({
   );
 };
 
-export default NavDropdown;
+export default memo(NavDropdown);
