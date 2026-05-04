@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import type { IProductImage } from "@/types/public/product";
 
 interface ProductGalleryProps {
@@ -65,4 +65,4 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
   );
 };
 
-export default ProductGallery;
+export default memo(ProductGallery);

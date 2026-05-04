@@ -2,6 +2,7 @@ import type { IProduct } from "@/types/public/product";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import ProductBtn from "@/components/button/ProductBtn";
 import { useAppSelector } from "@/hooks/redux";
+import { shallowEqual } from "react-redux";
 
 interface IProductActions {
   product: IProduct;
@@ -20,9 +21,11 @@ const ProductActions = ({
   decrease,
   handleAddToCart,
 }: IProductActions) => {
-  const { profile } = useAppSelector((state) => state.profile);
-  const isDisabled =
-    profile?.role !== "user" ? profile?.role !== "developer" : true;
+  const profile = useAppSelector(
+    (state) => state.profile.profile,
+    shallowEqual,
+  );
+  const isDisabled = profile?.role !== "user" && profile?.role !== "developer";
 
   return (
     <div className="mt-auto pt-4 flex items-center gap-4">

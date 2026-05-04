@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 interface IProductTabHeader {
@@ -32,4 +33,4 @@ const ProductTabHeader = ({
   );
 };
 
-export default ProductTabHeader;
+export default memo(ProductTabHeader);

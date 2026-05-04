@@ -1,5 +1,5 @@
 import type { IProductFAQ } from "@/types/public/product";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 interface IProductFAQs {
   faqs: IProductFAQ[];
@@ -41,4 +41,4 @@ const ProductFAQs = ({ faqs }: IProductFAQs) => {
   );
 };
 
-export default ProductFAQs;
+export default memo(ProductFAQs);

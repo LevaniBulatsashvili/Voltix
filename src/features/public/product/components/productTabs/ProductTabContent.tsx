@@ -5,8 +5,8 @@ interface IProductTabContent {
   children: { [key: string]: ReactNode };
 }
 
-const ProductTabContent = ({ activeTab, children }: IProductTabContent) => {
-  return <div className="mt-8">{children[activeTab]}</div>;
-};
+const ProductTabContent = ({ activeTab, children }: IProductTabContent) => (
+  <div className="mt-8">{children[activeTab]}</div>
+);
 
 export default ProductTabContent;

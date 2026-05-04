@@ -7,6 +7,7 @@ import PrimaryButton from "@/components/button/PrimaryBtn";
 import { X } from "lucide-react";
 import Modal from "@/components/ui/modal/Modal";
 import { useAppSelector } from "@/hooks/redux";
+import { shallowEqual } from "react-redux";
 
 interface IProductReviewModal {
   productId: number;
@@ -15,7 +16,10 @@ interface IProductReviewModal {
 
 const ProductReviewModal = ({ productId, onClose }: IProductReviewModal) => {
   const { t } = useTranslation();
-  const { profile } = useAppSelector((state) => state.profile);
+  const profile = useAppSelector(
+    (state) => state.profile.profile,
+    shallowEqual,
+  );
   const [rating, setRating] = useState(0);
   const [hovered, setHovered] = useState(0);
   const [comment, setComment] = useState("");

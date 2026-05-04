@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { IProductSpec } from "@/types/public/product";
+import { memo } from "react";
 
 interface IProductDetails {
   specs?: IProductSpec[];
@@ -8,6 +9,7 @@ interface IProductDetails {
 const ProductDetails = ({ specs }: IProductDetails) => {
   const { t } = useTranslation();
   const hasSpecs = specs && specs.length > 0;
+
   return (
     <div className="w-full">
       {hasSpecs ? (
@@ -34,4 +36,4 @@ const ProductDetails = ({ specs }: IProductDetails) => {
   );
 };
 
-export default ProductDetails;
+export default memo(ProductDetails);

@@ -5,6 +5,7 @@ import ProductInfo from "./ProductInfo";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { addToCart } from "@/features/user/cart/store/cart.slice";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
+import { shallowEqual } from "react-redux";
 
 interface IProductDisplay {
   product: IProduct;
@@ -12,9 +13,11 @@ interface IProductDisplay {
 
 const ProductDisplay = ({ product }: IProductDisplay) => {
   const dispatch = useAppDispatch();
-  const { profile } = useAppSelector((state) => state.profile);
-  const { items } = useAppSelector((state) => state.cart);
-
+  const profile = useAppSelector(
+    (state) => state.profile.profile,
+    shallowEqual,
+  );
+  const items = useAppSelector((state) => state.cart.items);
   const inCartQuantity =
     items.find((item) => item.product.id === product.id)?.quantity || 0;
   const maxQuantity = product.stock - inCartQuantity;

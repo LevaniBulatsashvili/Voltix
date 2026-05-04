@@ -8,25 +8,19 @@ export const buildProductBreadcrumbs = (
   product: IProduct,
   t: TFunction,
 ): ICrumb[] => {
+  const mainCategory = product.main_category.name.toLowerCase();
+  const category = product.category.name.toLowerCase();
+
   return [
+    { label: t("common.home"), to: PAGE.PUBLIC.BASE },
     {
-      label: t("common.home"),
-      to: PAGE.PUBLIC.BASE,
+      label: t(`common.${mainCategory}`),
+      to: buildCategoryLink(mainCategory.replace(/\s+/g, "-")),
     },
     {
-      label: t(`common.${product.main_category.name.toLowerCase()}`),
-      to: buildCategoryLink(
-        product.main_category.name.toLowerCase().replace(/\s+/g, "-"),
-      ),
+      label: t(`common.${category}`),
+      to: buildCategoryLink(category.replace(/\s+/g, "-")),
     },
-    {
-      label: t(`common.${product.category.name.toLowerCase()}`),
-      to: buildCategoryLink(
-        product.category.name.toLowerCase().replace(/\s+/g, "-"),
-      ),
-    },
-    {
-      label: product.name,
-    },
+    { label: product.name },
   ];
 };

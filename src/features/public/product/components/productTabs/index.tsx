@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import ProductTabHeader from "./ProductTabHeader";
 import ProductTabContent from "./ProductTabContent";
 
@@ -12,21 +12,26 @@ interface IProductTabs {
 
 type TabKeys = keyof IProductTabs["children"];
 
+const TABS = [
+  { key: "details", label: "product.product_details" },
+  { key: "reviews", label: "product.rating_reviews" },
+  { key: "faqs", label: "product.faqs" },
+];
+
 const ProductTabs = ({ children }: IProductTabs) => {
   const [activeTab, setActiveTab] = useState<TabKeys>("details");
 
-  const tabs = [
-    { key: "details", label: "product.product_details" },
-    { key: "reviews", label: "product.rating_reviews" },
-    { key: "faqs", label: "product.faqs" },
-  ];
+  const handleTabChange = useCallback(
+    (key: string) => setActiveTab(key as TabKeys),
+    [],
+  );
 
   return (
     <div className="w-full">
       <ProductTabHeader
-        tabs={tabs}
+        tabs={TABS}
         activeTab={activeTab}
-        onTabChange={(key: string) => setActiveTab(key as TabKeys)}
+        onTabChange={handleTabChange}
       />
       <ProductTabContent activeTab={activeTab} children={children} />
     </div>
