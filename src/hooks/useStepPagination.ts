@@ -23,7 +23,7 @@ export const useStepPagination = ({
   );
 
   const prevDisabled = currentPage === 1;
-  const nextDisabled = currentPage * 3 >= totalItems;
+  const nextDisabled = currentPage * visibleItems >= totalItems;
 
   return { prev, next, prevDisabled, nextDisabled };
 };

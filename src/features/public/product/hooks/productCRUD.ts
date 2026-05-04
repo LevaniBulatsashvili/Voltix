@@ -5,6 +5,7 @@ import { productService } from "../../product/services/productService";
 export const {
   useInfiniteFetchMany: useInfiniteFetchProducts,
   useFetchMany: useFetchProducts,
+  fetchManyOptions: fetchProductsOptions,
   useFetch: useFetchProduct,
   useCreate: useCreateProduct,
   useUpdate: useUpdateProduct,

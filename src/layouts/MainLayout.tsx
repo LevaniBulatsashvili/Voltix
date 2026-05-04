@@ -4,6 +4,7 @@ import Header from "./header/index.tsx";
 import { useAppSelector } from "@/hooks/redux.ts";
 import ErrorBoundary from "@/components/feedback/ErrorBoundary.tsx";
 import OopsPage from "@/pages/error/oops/OopsPage.tsx";
+import WishlistProvider from "@/features/user/wishlist/providers/WishlistProvider.tsx";
 
 const MainLayout = () => {
   const theme = useAppSelector((state) => state.theme.theme);
@@ -13,9 +14,11 @@ const MainLayout = () => {
       className={`${theme} flex flex-col min-h-screen text-primary bg-background`}
     >
       <Header />
-      <ErrorBoundary fallback={<OopsPage />}>
-        <PageContainer />
-      </ErrorBoundary>
+      <WishlistProvider>
+        <ErrorBoundary fallback={<OopsPage />}>
+          <PageContainer />
+        </ErrorBoundary>
+      </WishlistProvider>
       <Footer />
     </div>
   );

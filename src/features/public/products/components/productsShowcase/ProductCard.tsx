@@ -3,15 +3,39 @@ import PriceTag from "@/components/ui/PriceTag";
 import StarRating from "@/components/ui/StarRatings";
 import AppLink from "@/components/button/AppLink";
 import { buildProductLink } from "../../../product/utils/buildProductLink";
-import LikeBtn, { type ILikeBtnOptions } from "@/components/button/LikeBtn";
+import LikeBtn from "@/components/button/LikeBtn";
+import { memo, useMemo, useState } from "react";
+import { useAppSelector } from "@/hooks/redux";
+import { shallowEqual } from "react-redux";
+import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
+import { useWishlistContext } from "@/features/user/wishlist/hooks/useWishlistContext";
 
 export interface IProductCard {
   product: IProduct;
-  likeOptions?: ILikeBtnOptions;
   className?: string;
 }
 
-const ProductCard = ({ product, likeOptions, className }: IProductCard) => {
+const ProductCard = ({ product, className }: IProductCard) => {
+  const [imgSrc, setImgSrc] = useState(
+    product.thumbnail || "/images/placeholders/product.webp",
+  );
+  const profile = useAppSelector(
+    (state) => state.profile.profile,
+    shallowEqual,
+  );
+  const { isLiked, toggleWishlist } = useWishlistContext(); // ✅ shared instance
+
+  const likeOptions = useMemo(
+    () =>
+      getLikeOptions({
+        profileId: profile?.id,
+        productId: product.id,
+        isLiked,
+        toggleWishlist,
+      }),
+    [profile?.id, product.id, isLiked, toggleWishlist],
+  );
+
   return (
     <AppLink
       to={buildProductLink(
@@ -27,11 +51,11 @@ const ProductCard = ({ product, likeOptions, className }: IProductCard) => {
 
       <div className="overflow-hidden rounded-lg">
         <img
-          src={product.thumbnail || "/images/placeholders/product.webp"}
+          src={imgSrc}
           alt={product.name}
-          onError={(e) => {
-            e.currentTarget.src = "/images/placeholders/product.webp";
-          }}
+          loading="lazy"
+          decoding="async"
+          onError={() => setImgSrc("/images/placeholders/product.webp")}
           className="object-contain w-full h-60 transform hover:scale-105 transition-transform duration-300"
         />
       </div>
@@ -53,4 +77,4 @@ const ProductCard = ({ product, likeOptions, className }: IProductCard) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

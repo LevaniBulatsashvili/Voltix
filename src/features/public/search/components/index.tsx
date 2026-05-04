@@ -9,9 +9,6 @@ import PageWrapper from "@/components/ui/PageWrapper";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import { useFetchProducts } from "../../product/hooks/productCRUD";
 import ProductCard from "../../products/components/productsShowcase/ProductCard";
-import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
-import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
-import { useAppSelector } from "@/hooks/redux";
 import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 export type ISortBy = "created_at" | "total_sold";
@@ -19,7 +16,6 @@ const limit = 6;
 
 const Search = () => {
   const { t } = useTranslation();
-  const { profile } = useAppSelector((state) => state.profile);
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(
     null,
   );
@@ -49,8 +45,6 @@ const Search = () => {
     },
     selectField: PRODUCTSELECTFIELD,
   });
-
-  const { isLiked, toggleWishlist } = useWishlist();
 
   const handleCategoryChange = (category: ICategory | null) => {
     setSelectedCategory(category);
@@ -92,12 +86,6 @@ const Search = () => {
             <ProductCard
               key={product.id}
               product={product}
-              likeOptions={getLikeOptions({
-                profileId: profile?.id,
-                productId: product.id,
-                isLiked,
-                toggleWishlist,
-              })}
               className="max-w-73 sm:max-w-full"
             />
           )}

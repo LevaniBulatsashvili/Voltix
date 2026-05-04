@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useWishlistedIds } from "./useFetchWishlistIds";
 import { useToggleWishlist } from "./useToggleWishlist";
 
@@ -5,17 +6,25 @@ export function useWishlist() {
   const { wishlistedIds, wishlistIdByProductId } = useWishlistedIds();
   const toggle = useToggleWishlist();
 
-  const isLiked = (productId: number) => wishlistedIds.has(productId);
+  const isLiked = useCallback(
+    (productId: number) => wishlistedIds.has(productId),
+    [wishlistedIds],
+  );
 
-  const getWishlistId = (productId: number) =>
-    wishlistIdByProductId.get(productId);
+  const getWishlistId = useCallback(
+    (productId: number) => wishlistIdByProductId.get(productId),
+    [wishlistIdByProductId],
+  );
 
-  const toggleWishlist = (productId: number) =>
-    toggle.toggleWishlist({
-      productId,
-      isLiked: wishlistedIds.has(productId),
-      wishlistId: wishlistIdByProductId.get(productId),
-    });
+  const toggleWishlist = useCallback(
+    (productId: number) =>
+      toggle.toggleWishlist({
+        productId,
+        isLiked: wishlistedIds.has(productId),
+        wishlistId: wishlistIdByProductId.get(productId),
+      }),
+    [wishlistedIds, wishlistIdByProductId, toggle],
+  );
 
   return {
     isLiked,

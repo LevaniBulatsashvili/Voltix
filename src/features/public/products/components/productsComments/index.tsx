@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useVisibleCount } from "../../hooks/useVisibleCount";
 import { useFetchProductComments } from "../../../product/hooks/productCommentCRUD";
 import ProductCommentsView from "./ProductsCommentsView";
@@ -24,4 +24,4 @@ const ProductsComments = () => {
   );
 };
 
-export default ProductsComments;
+export default memo(ProductsComments);

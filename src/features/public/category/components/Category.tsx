@@ -9,14 +9,11 @@ import { useInfiniteList } from "@/hooks/useInfiniteList.ts";
 import { InfiniteGrid } from "@/components/ui/InfiniteGrid.tsx";
 import PageWrapper from "@/components/ui/PageWrapper.tsx";
 import CategoryInfiniteGridSkeleton from "./skeleton/CategoryInfiniteGridSkeleton.tsx";
-import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist.ts";
-import { useAppSelector } from "@/hooks/redux.ts";
-import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions.ts";
 import { PRODUCTSELECTFIELD } from "@/utils/consts.ts";
 
 const Category = () => {
   const { t } = useTranslation();
-  const { profile } = useAppSelector((state) => state.profile);
+
   const { categoryName } = useParams<{ categoryName: TCategoryQueries }>();
 
   const options = useCategoryFilterOptions(categoryName!);
@@ -35,8 +32,6 @@ const Category = () => {
       selectField: PRODUCTSELECTFIELD,
     }),
   );
-
-  const { isLiked, toggleWishlist } = useWishlist();
 
   const { observerRef } = useInfiniteAutoFetch({
     fetchNextPage,
@@ -59,16 +54,7 @@ const Category = () => {
         error={error}
         isFetching={isFetching}
         renderItem={(product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            likeOptions={getLikeOptions({
-              profileId: profile?.id,
-              productId: product.id,
-              isLiked,
-              toggleWishlist,
-            })}
-          />
+          <ProductCard key={product.id} product={product} />
         )}
         loadingFallback={<CategoryInfiniteGridSkeleton />}
         defaultFallbackOptions={{ className: "h-[70dvh]" }}

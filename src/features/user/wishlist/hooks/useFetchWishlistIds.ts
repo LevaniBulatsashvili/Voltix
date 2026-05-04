@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/hooks/redux";
 import { useFetchWishlists } from "./wishlistCRUD";
+import { useMemo } from "react";
 
 export function useWishlistedIds() {
   const { profile } = useAppSelector((state) => state.profile);
@@ -13,12 +14,14 @@ export function useWishlistedIds() {
     !!profile,
   );
 
-  const wishlistedIds = new Set(
-    (query.data?.data ?? []).map((w) => w.product_id),
+  const wishlistedIds = useMemo(
+    () => new Set((query.data?.data ?? []).map((w) => w.product_id)),
+    [query.data?.data],
   );
 
-  const wishlistIdByProductId = new Map(
-    (query.data?.data ?? []).map((w) => [w.product_id, w.id]),
+  const wishlistIdByProductId = useMemo(
+    () => new Map((query.data?.data ?? []).map((w) => [w.product_id, w.id])),
+    [query.data?.data],
   );
 
   return { wishlistedIds, wishlistIdByProductId, isLoading: query.isLoading };

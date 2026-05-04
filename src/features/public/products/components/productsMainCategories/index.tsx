@@ -3,6 +3,7 @@ import MainCategoriesGrid from "./ProductsMainCategoriesGrid";
 import ProductsMainCategoriesSkeleton from "../productsSkeleton/ProductsMainCategoriesSkeleton";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import { useFetchMainCategories } from "../../../category/hooks/mainCategoryCRUD";
+import { memo } from "react";
 
 const ProductsMainCategories = () => {
   const { t } = useTranslation();
@@ -22,11 +23,11 @@ const ProductsMainCategories = () => {
         defaultFallbackOptions={{ className: "h-145 w-full" }}
       >
         {(mainCategories) => (
-          <MainCategoriesGrid t={t} mainCategories={mainCategories} />
+          <MainCategoriesGrid mainCategories={mainCategories} />
         )}
       </QueryBoundary>
     </div>
   );
 };
 
-export default ProductsMainCategories;
+export default memo(ProductsMainCategories);

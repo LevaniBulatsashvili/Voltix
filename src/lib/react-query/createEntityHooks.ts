@@ -60,6 +60,15 @@ export const createEntityHooks = <
       service.fetchMany,
     )(options, enabled);
 
+  const fetchManyOptions = (
+    options?: FetchManyOpts,
+    enabled: boolean = true,
+  ) => ({
+    queryKey: [queryKeyPrefix, options] as const,
+    queryFn: () => service.fetchMany(options),
+    enabled,
+  });
+
   const useInfiniteFetchMany = createInfiniteQueryHook<T, FetchManyOpts>(
     (options) => [queryKeyPrefix, options],
     (optionsWithPage) => service.infiniteFetch(optionsWithPage),
@@ -110,6 +119,7 @@ export const createEntityHooks = <
   return {
     useFetch,
     useFetchMany,
+    fetchManyOptions,
     useInfiniteFetchMany,
     useCreateMany,
     useCreate,

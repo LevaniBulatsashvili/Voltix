@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import { useCurrency } from "./useCurrency";
 import useFetchRates from "@/hooks/useFetchRates";
 
@@ -5,43 +6,49 @@ export const usePrice = () => {
   const currency = useCurrency();
   const { data: rates, isLoading } = useFetchRates();
 
-  const convert = (usd: number) => {
-    if (currency === "USD") return usd;
-    const rate = rates?.[currency];
-    return rate ? usd * rate : usd;
-  };
+  const convert = useCallback(
+    (usd: number) => {
+      if (currency === "USD") return usd;
+      const rate = rates?.[currency];
+      return rate ? usd * rate : usd;
+    },
+    [currency, rates],
+  );
 
-  const format = (usd: number, reversed?: boolean, noConversion?: boolean) => {
-    let value = convert(usd);
-    if (noConversion) value = usd;
-
-    const currencySymbols: Record<string, string> = {
-      USD: "$",
-      EUR: "€",
-      GEL: "₾",
-    };
-
-    const formatted = new Intl.NumberFormat("en-US", {
+  const formatter = useMemo(() => {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency,
       currencyDisplay: "symbol",
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(value);
+    });
+  }, [currency]);
 
-    let finalFormatted =
-      currency === "GEL"
-        ? formatted.replace("GEL", currencySymbols[currency])
-        : formatted;
+  const format = useCallback(
+    (usd: number, reversed?: boolean, noConversion?: boolean) => {
+      const value = noConversion ? usd : convert(usd);
 
-    if (reversed) finalFormatted = finalFormatted.slice(1) + finalFormatted[0];
-    return finalFormatted;
-  };
+      const formatted = formatter.format(value);
 
-  return {
-    currency,
-    convert,
-    format,
-    isLoading,
-  };
+      const currencySymbols: Record<string, string> = {
+        USD: "$",
+        EUR: "€",
+        GEL: "₾",
+      };
+
+      let finalFormatted =
+        currency === "GEL"
+          ? formatted.replace("GEL", currencySymbols[currency])
+          : formatted;
+
+      if (reversed)
+        finalFormatted = finalFormatted.slice(1) + finalFormatted[0];
+
+      return finalFormatted;
+    },
+    [currency, convert, formatter],
+  );
+
+  return { currency, convert, format, isLoading };
 };

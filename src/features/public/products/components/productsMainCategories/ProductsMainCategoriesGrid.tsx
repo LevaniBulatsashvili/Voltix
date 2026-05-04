@@ -1,10 +1,9 @@
 import type { IMainCategory } from "@/types/public/product";
 import { buildCategoryLink } from "../../utils/buildCategoryLink";
 import ProductsMainCategoryCard from "./ProductsMainCategoryCard";
-import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface IProductsMainCategoriesGrid {
-  t: TFunction;
   mainCategories: IMainCategory[];
 }
 
@@ -16,9 +15,10 @@ const spanPattern = [
 ];
 
 const ProductsMainCategoriesGrid = ({
-  t,
   mainCategories,
 }: IProductsMainCategoriesGrid) => {
+  const { t } = useTranslation();
+
   return (
     <div className="grid grid-cols-5 gap-5">
       {mainCategories.map(({ id, name, thumbnail }, index) => {

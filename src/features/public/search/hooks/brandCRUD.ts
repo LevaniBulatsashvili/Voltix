@@ -5,6 +5,7 @@ import { brandService } from "../services/brandService";
 export const {
   useInfiniteFetchMany: useInfiniteFetchBrandWithTotal,
   useFetchMany: useFetchBrands,
+  fetchManyOptions: fetchBrandsOptions,
   useFetch: useFetchBrand,
   useCreate: useCreateBrand,
   useUpdate: useUpdateBrand,

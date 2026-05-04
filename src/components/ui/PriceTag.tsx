@@ -1,5 +1,6 @@
 import { usePrice } from "@/features/user/cart/hooks/usePrice";
 import calculateDiscount from "@/utils/calculateDiscount";
+import { memo } from "react";
 
 interface IPriceTag {
   price: number;
@@ -38,4 +39,4 @@ const PriceTag = ({ price, discount, textColor = "primary" }: IPriceTag) => {
   );
 };
 
-export default PriceTag;
+export default memo(PriceTag);

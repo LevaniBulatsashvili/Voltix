@@ -43,7 +43,6 @@ export function useToggleWishlist() {
         { product_id: productId, profile_id: profile!.id },
         {
           onError: () => queryClient.invalidateQueries({ queryKey: idsKey }),
-          onSuccess: () => queryClient.invalidateQueries({ queryKey: idsKey }),
         },
       );
     }

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import AuthRoute from "@/routes/AuthRoute";
 import { PAGE } from "@/pages/pageConfig";
-import MainLayout from "@/layouts/PageLayout";
+import MainLayout from "@/layouts/MainLayout";
 import * as Page from "@/pages/lazyPages";
 import AdminLayout from "@/features/admin/layouts/AdminLayout";
 

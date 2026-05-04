@@ -1,4 +1,5 @@
 import { Star, StarHalf } from "lucide-react";
+import { memo } from "react";
 
 interface IStarRating {
   rating: number;
@@ -32,4 +33,4 @@ const StarRating = ({ rating, textColor = "primary" }: IStarRating) => {
   );
 };
 
-export default StarRating;
+export default memo(StarRating);

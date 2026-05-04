@@ -5,14 +5,10 @@ import ProductCard from "../../products/components/productsShowcase/ProductCard"
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useWishlist } from "@/features/user/wishlist/hooks/useWishlist";
-import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
-import { useAppSelector } from "@/hooks/redux";
 import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 const SearchResults = () => {
   const { t } = useTranslation();
-  const { profile } = useAppSelector((state) => state.profile);
   const { searchVal } = useParams<string>();
   const [page, setPage] = useState(1);
 
@@ -22,7 +18,6 @@ const SearchResults = () => {
     filters: { ilike: { name: `%${searchVal}%` } },
     selectField: PRODUCTSELECTFIELD,
   });
-  const { isLiked, toggleWishlist } = useWishlist();
 
   return (
     <PageWrapper className="xl:px-0">
@@ -34,16 +29,7 @@ const SearchResults = () => {
         description="common.showing_products"
         onPageChange={setPage}
         renderItem={(product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            likeOptions={getLikeOptions({
-              profileId: profile?.id,
-              productId: product.id,
-              isLiked,
-              toggleWishlist,
-            })}
-          />
+          <ProductCard key={product.id} product={product} />
         )}
         maxCols={3}
       />
