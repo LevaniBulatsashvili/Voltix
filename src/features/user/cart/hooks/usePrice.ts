@@ -2,6 +2,12 @@ import { useCallback, useMemo } from "react";
 import { useCurrency } from "./useCurrency";
 import useFetchRates from "@/hooks/useFetchRates";
 
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  USD: "$",
+  EUR: "€",
+  GEL: "₾",
+};
+
 export const usePrice = () => {
   const currency = useCurrency();
   const { data: rates, isLoading } = useFetchRates();
@@ -31,15 +37,9 @@ export const usePrice = () => {
 
       const formatted = formatter.format(value);
 
-      const currencySymbols: Record<string, string> = {
-        USD: "$",
-        EUR: "€",
-        GEL: "₾",
-      };
-
       let finalFormatted =
         currency === "GEL"
-          ? formatted.replace("GEL", currencySymbols[currency])
+          ? formatted.replace("GEL", CURRENCY_SYMBOLS[currency])
           : formatted;
 
       if (reversed)
@@ -50,5 +50,13 @@ export const usePrice = () => {
     [currency, convert, formatter],
   );
 
-  return { currency, convert, format, isLoading };
+  return useMemo(
+    () => ({
+      currency,
+      convert,
+      format,
+      isLoading,
+    }),
+    [currency, convert, format, isLoading],
+  );
 };

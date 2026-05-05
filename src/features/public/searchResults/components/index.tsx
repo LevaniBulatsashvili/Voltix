@@ -3,7 +3,7 @@ import { useFetchProducts } from "../../product/hooks/productCRUD";
 import PageWrapper from "@/components/ui/PageWrapper";
 import ProductCard from "../../products/components/productsShowcase/ProductCard";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
@@ -12,10 +12,15 @@ const SearchResults = () => {
   const { searchVal } = useParams<string>();
   const [page, setPage] = useState(1);
 
+  const filters = useMemo(
+    () => ({ ilike: { name: `%${searchVal}%` } }),
+    [searchVal],
+  );
+
   const productsQuery = useFetchProducts({
     page,
     limit: 9,
-    filters: { ilike: { name: `%${searchVal}%` } },
+    filters,
     selectField: PRODUCTSELECTFIELD,
   });
 

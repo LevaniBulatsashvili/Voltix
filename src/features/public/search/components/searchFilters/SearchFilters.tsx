@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { Sliders, X } from "lucide-react";
 import { SelectDropdown } from "@/components/ui/SelectDropdown";
-import type { IBrand, ICategory } from "@/types/public/product";
-import type { TFunction } from "i18next";
+import type { IBrand, ICategory, IMainCategory } from "@/types/public/product";
 import SearchPriceFilter from "./SearchPriceFilter";
 import SearchRatingFilter from "./SearchRatingFilter";
 import SearchDiscountFilter from "./SearchDiscountFilter";
@@ -12,39 +11,62 @@ import { useFetchBrands } from "../../hooks/brandCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SelectDropdownSkeleton from "@/components/skeleton/SelectDropdownSkeleton";
 import SelectDropdownGridSkeleton from "@/components/skeleton/SelectDropdownGridSkeleton";
+import { useTranslation } from "react-i18next";
+import { useSearchFilters } from "../../hooks/useSearchFilters";
+import type { ISearchFilterState } from "../../utils/mapFiltersToQuery";
 
-interface ISearchFilters {
-  t: TFunction;
-  selectedCategory: ICategory | null;
-  onFilterCategory: (selectedCategory: ICategory | null) => void;
-  selectedBrand: IBrand | null;
-  onSelectedBrandChange: (selectedBrandId: IBrand | null) => void;
-  onPriceFilterChange?: (min: number, max: number) => void;
-  selectedRating?: number;
-  onRatingChange?: (rating?: number) => void;
-  hasDiscount?: boolean;
-  onHasDiscountChange?: (value: boolean) => void;
+interface ISearchFiltersProps {
+  onApply: (filters: ISearchFilterState) => void;
 }
 
-const SearchFilters = ({
-  t,
-  selectedCategory,
-  onFilterCategory,
-  onPriceFilterChange,
-  selectedRating,
-  onRatingChange,
-  hasDiscount,
-  onHasDiscountChange,
-  selectedBrand,
-  onSelectedBrandChange,
-}: ISearchFilters) => {
+const SearchFilters = ({ onApply }: ISearchFiltersProps) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const mainCategoriesQuery = useFetchMainCategories({
-    sort: [{ field: "id", ascending: true }],
-    selectField: "id, name, categories(id,name)",
-  });
-  const brandQuery = useFetchBrands({ selectField: "id, name" });
+  const [tempCategory, setTempCategory] = useState<ICategory | null>(null);
+  const [tempBrand, setTempBrand] = useState<IBrand | null>(null);
+
+  const {
+    minPrice,
+    maxPrice,
+    rating,
+    hasDiscount,
+    handlePriceChange,
+    handleRatingChange,
+    handleHasDiscountChange,
+  } = useSearchFilters();
+
+  const handleLocalApply = () => {
+    onApply({
+      category: tempCategory,
+      brand: tempBrand,
+      minPrice,
+      maxPrice,
+      rating,
+      hasDiscount,
+    });
+    setIsOpen(false);
+  };
+
+  const categoryQueryOptions = useMemo(
+    () => ({
+      limit: 1000,
+      sort: [{ field: "id" as keyof IMainCategory, ascending: true }],
+      selectField: "id, name, categories(id,name)",
+    }),
+    [],
+  );
+
+  const brandQueryOptions = useMemo(
+    () => ({
+      limit: 1000,
+      selectField: "id, name",
+    }),
+    [],
+  );
+
+  const mainCategoriesQuery = useFetchMainCategories(categoryQueryOptions);
+  const brandQuery = useFetchBrands(brandQueryOptions);
 
   return (
     <>
@@ -70,16 +92,7 @@ const SearchFilters = ({
           xl:static xl:translate-x-0 xl:w-82 xl:block
         `}
       >
-        <div className="flex justify-between items-center mb-6 xl:hidden">
-          <h2 className="text-xl font-bold capitalize">
-            {t("search.filters")}
-          </h2>
-          <button onClick={() => setIsOpen(false)}>
-            <X size={24} />
-          </button>
-        </div>
-
-        <div className="hidden xl:flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold capitalize">
             {t("search.filters")}
           </h2>
@@ -91,20 +104,16 @@ const SearchFilters = ({
         <QueryBoundary
           query={mainCategoriesQuery}
           loadingFallback={<SelectDropdownGridSkeleton />}
-          defaultFallbackOptions={{ className: "h-[23dvh]" }}
         >
           {(mainCategoriesData) => (
             <div className="py-3 border-y border-gray-300">
               {mainCategoriesData.map(({ id, name, categories }) => (
                 <SelectDropdown<ICategory>
-                  t={t}
                   key={id}
                   name={`common.${name.toLowerCase()}`}
                   items={categories!}
-                  onSelect={onFilterCategory}
-                  selectedKey={
-                    selectedCategory ? String(selectedCategory.id) : null
-                  }
+                  onSelect={setTempCategory}
+                  selectedKey={tempCategory ? String(tempCategory.id) : null}
                   getKey={(category) => String(category.id)}
                   renderText={(category) =>
                     `common.${category.name.toLowerCase()}`
@@ -115,18 +124,11 @@ const SearchFilters = ({
           )}
         </QueryBoundary>
 
-        <SearchPriceFilter t={t} onPriceFilterChange={onPriceFilterChange} />
-
-        <SearchRatingFilter
-          t={t}
-          value={selectedRating}
-          onChange={onRatingChange}
-        />
-
+        <SearchPriceFilter onPriceFilterChange={handlePriceChange} />
+        <SearchRatingFilter value={rating} onChange={handleRatingChange} />
         <SearchDiscountFilter
-          t={t}
           hasDiscount={hasDiscount}
-          onHasDiscountChange={onHasDiscountChange}
+          onHasDiscountChange={handleHasDiscountChange}
         />
 
         <QueryBoundary
@@ -134,16 +136,14 @@ const SearchFilters = ({
           loadingFallback={
             <SelectDropdownSkeleton className="pb-6 border-b border-gray-400" />
           }
-          defaultFallbackOptions={{ className: "h-[15dvh] p-0!" }}
         >
           {(brandsData) => (
             <div className="py-3 border-y border-gray-300">
               <SelectDropdown<IBrand>
-                t={t}
                 name="search.brands"
                 items={brandsData}
-                onSelect={onSelectedBrandChange}
-                selectedKey={selectedBrand ? String(selectedBrand.id) : null}
+                onSelect={setTempBrand}
+                selectedKey={tempBrand ? String(tempBrand.id) : null}
                 getKey={(brand) => String(brand.id)}
                 renderText={(brand) => `common.${brand.name.toLowerCase()}`}
               />
@@ -154,10 +154,11 @@ const SearchFilters = ({
         <PrimaryButton
           text={t("search.apply_filters")}
           className="mt-6 py-4 w-full! rounded-full!"
+          onClick={handleLocalApply}
         />
       </div>
     </>
   );
 };
 
-export default SearchFilters;
+export default memo(SearchFilters);

@@ -27,7 +27,7 @@ const PaginationhHeader = ({
   sortOptions,
 }: IPaginationhHeader) => {
   const { t } = useTranslation();
-  const start = (currentPage - 1) * pageSize + 1;
+  const start = pageSize ? (currentPage - 1) * pageSize + 1 : pageSize;
   const end = Math.min(currentPage * pageSize, totalCount);
 
   return (

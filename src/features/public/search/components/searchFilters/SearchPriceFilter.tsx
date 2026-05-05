@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import { ChevronDown } from "lucide-react";
 import { usePrice } from "@/features/user/cart/hooks/usePrice";
 import { useDebounce } from "@/hooks/useDebounce";
 import Slider from "@/components/ui/Slider";
+import { useTranslation } from "react-i18next";
 
 interface ISearchPriceFilter {
-  t: (key: string) => string;
   min?: number;
   max?: number;
   onPriceFilterChange?: (min: number, max: number) => void;
 }
 
 const SearchPriceFilter = ({
-  t,
   min = 0,
   max = 5000,
   onPriceFilterChange,
 }: ISearchPriceFilter) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const [minPrice, setMinPrice] = useState(min);
@@ -24,10 +24,15 @@ const SearchPriceFilter = ({
   const debouncedMin = useDebounce(minPrice, 300);
   const debouncedMax = useDebounce(maxPrice, 300);
   const { format } = usePrice();
+  const stableOnChange = useRef(onPriceFilterChange);
 
   useEffect(() => {
-    onPriceFilterChange?.(debouncedMin, debouncedMax);
-  }, [debouncedMin, debouncedMax, onPriceFilterChange]);
+    stableOnChange.current = onPriceFilterChange;
+  });
+
+  useEffect(() => {
+    stableOnChange.current?.(debouncedMin, debouncedMax);
+  }, [debouncedMin, debouncedMax]);
 
   return (
     <div className="w-full">
@@ -67,4 +72,4 @@ const SearchPriceFilter = ({
   );
 };
 
-export default SearchPriceFilter;
+export default memo(SearchPriceFilter);

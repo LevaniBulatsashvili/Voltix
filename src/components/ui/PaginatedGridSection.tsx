@@ -19,6 +19,12 @@ interface IPaginatedGridSection<T> {
   productGridClassName?: string;
 }
 
+const colsMap: Record<number, string> = {
+  2: "lg:grid-cols-2",
+  3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
+};
+
 const PaginatedGridSection = <T,>({
   query,
   title,
@@ -58,7 +64,7 @@ const PaginatedGridSection = <T,>({
             <div
               className={
                 productGridClassName ??
-                `grid min-[480px]:grid-cols-2 lg:grid-cols-${maxCols} gap-4`
+                `grid min-[480px]:grid-cols-2 ${colsMap[maxCols] ?? "lg:grid-cols-3"} gap-4`
               }
             >
               {products.map((item) => renderItem(item))}

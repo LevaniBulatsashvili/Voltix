@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useSearchFilters = (
   initial?: Partial<{
@@ -7,7 +7,6 @@ export const useSearchFilters = (
     rating: number;
     hasDiscount: boolean;
   }>,
-  resetPage?: () => void,
 ) => {
   const [minPrice, setMinPrice] = useState<number | undefined>(
     initial?.minPrice,
@@ -20,28 +19,24 @@ export const useSearchFilters = (
     initial?.hasDiscount,
   );
 
-  const handlePriceChange = (min: number, max: number) => {
+  const handlePriceChange = useCallback((min: number, max: number) => {
     setMinPrice(min);
     setMaxPrice(max === 5000 ? undefined : max);
-    resetPage?.();
-  };
+  }, []);
 
-  const handleRatingChange = (value?: number) => {
+  const handleRatingChange = useCallback((value?: number) => {
     setRating(value);
-    resetPage?.();
-  };
+  }, []);
 
-  const handleHasDiscountChange = (value: boolean) => {
+  const handleHasDiscountChange = useCallback((value: boolean) => {
     setHasDiscount(value);
-    resetPage?.();
-  };
+  }, []);
 
   return {
     minPrice,
     maxPrice,
     rating,
     hasDiscount,
-
     handlePriceChange,
     handleRatingChange,
     handleHasDiscountChange,

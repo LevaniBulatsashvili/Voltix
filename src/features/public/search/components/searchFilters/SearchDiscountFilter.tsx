@@ -1,16 +1,17 @@
-import type { TFunction } from "i18next";
+import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ISearchDiscountFilter {
-  t: TFunction;
   hasDiscount?: boolean;
   onHasDiscountChange?: (value: boolean) => void;
 }
 
 const SearchDiscountFilter = ({
-  t,
   hasDiscount,
   onHasDiscountChange,
 }: ISearchDiscountFilter) => {
+  const { t } = useTranslation();
+
   return (
     <div className="py-4">
       <label className="flex items-center justify-between gap-2 cursor-pointer select-none">
@@ -28,4 +29,4 @@ const SearchDiscountFilter = ({
   );
 };
 
-export default SearchDiscountFilter;
+export default memo(SearchDiscountFilter);

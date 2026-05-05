@@ -25,7 +25,7 @@ const ProductsHeader = ({
   <div className="p-8 sm:p-10 md:p-15 lg:px-24.5 grid grid-cols-1 xl:grid-cols-2 gap-0 xl:gap-16">
     <div className="flex flex-col justify-between h-full">
       <div className="grid gap-8">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center xl:text-start font-extrabold capitalize leading-tight break-words">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center xl:text-start font-extrabold capitalize leading-tight wrap-break-word">
           {title}
         </h1>
         <p className="mt-4 text-sm sm:text-lg lg:text-xl text-center xl:text-start opacity-80 mx-auto sm:w-full sm:mx-0">

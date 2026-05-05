@@ -1,27 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useRef } from "react";
 import { ChevronDown, Star } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import Slider from "@/components/ui/Slider";
+import { useTranslation } from "react-i18next";
 
 interface ISearchRatingFilter {
-  t: (key: string) => string;
   value?: number | null;
   onChange?: (rating?: number) => void;
 }
 
 const SearchRatingFilter = ({
-  t,
   value = null,
   onChange,
 }: ISearchRatingFilter) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(value ?? 0);
-
   const debouncedRating = useDebounce(rating, 300);
 
+  const stableOnChange = useRef(onChange);
   useEffect(() => {
-    onChange?.(debouncedRating === 0 ? undefined : debouncedRating);
-  }, [debouncedRating, onChange]);
+    stableOnChange.current = onChange;
+  });
+
+  useEffect(() => {
+    stableOnChange.current?.(
+      debouncedRating === 0 ? undefined : debouncedRating,
+    );
+  }, [debouncedRating]);
 
   return (
     <div className="w-full border-y border-gray-300">
@@ -71,4 +77,4 @@ const SearchRatingFilter = ({
   );
 };
 
-export default SearchRatingFilter;
+export default memo(SearchRatingFilter);

@@ -1,10 +1,9 @@
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { useAppSelector } from "@/hooks/redux";
-import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface ISelectDropdown<T> {
-  t: TFunction;
   name: string;
   items: T[];
   getKey: (item: T) => string;
@@ -15,7 +14,6 @@ interface ISelectDropdown<T> {
 }
 
 export const SelectDropdown = <T,>({
-  t,
   name,
   items,
   getKey,
@@ -24,6 +22,7 @@ export const SelectDropdown = <T,>({
   selectedKey,
   className = "",
 }: ISelectDropdown<T>) => {
+  const { t } = useTranslation();
   const { theme } = useAppSelector((state) => state.theme);
   const [open, setOpen] = useState(false);
 
