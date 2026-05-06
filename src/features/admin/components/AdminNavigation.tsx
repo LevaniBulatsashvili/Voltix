@@ -1,4 +1,5 @@
 import AppLink from "@/components/button/AppLink";
+import { cn } from "@/utils/cn";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
@@ -18,18 +19,18 @@ const AdminNavigation = ({ items, className }: IAdminNavigation) => {
   const activePath = location.pathname;
 
   return (
-    <nav className={`grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6 ${className}`}>
+    <nav
+      className={cn("grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6", className)}
+    >
       {items.map((item) => (
         <AppLink
           key={item.value}
           to={item.value}
-          className={`
-            bg-primary text-background text-center p-2 font-semibold truncate
-            ${
-              activePath === item.value
-                ? ""
-                : "opacity-75 hover:opacity-100 transition duration-200"
-            }`}
+          className={cn(
+            "bg-primary text-background text-center p-2 font-semibold truncate",
+            activePath !== item.value &&
+              "opacity-75 hover:opacity-100 transition duration-200",
+          )}
         >
           {t(item.label)}
         </AppLink>

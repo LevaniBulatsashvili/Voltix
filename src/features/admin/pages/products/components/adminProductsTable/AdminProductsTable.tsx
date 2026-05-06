@@ -4,6 +4,7 @@ import { usePrice } from "@/features/user/cart/hooks/usePrice";
 import type { IProduct } from "@/types/public/product";
 import { useTranslation } from "react-i18next";
 import AdminTable from "@/features/admin/components/AdminTable";
+import { cn } from "@/utils/cn";
 
 interface IAdminProductsTable {
   products: IProduct[];
@@ -40,7 +41,7 @@ const AdminProductsTable = ({
             <p className="text-xs">{product.brand.name}</p>
           </TableCell>
           <TableCell>{format(product.price)}</TableCell>
-          <TableCell className={product.stock === 0 ? "text-red-500" : ""}>
+          <TableCell className={cn(product.stock === 0 && "text-red-500")}>
             {product.stock}
           </TableCell>
           <TableCell>{product.rating_avg?.toFixed(1) ?? "-"}</TableCell>

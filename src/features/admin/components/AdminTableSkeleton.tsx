@@ -29,9 +29,13 @@ const SkeletonRow = () => (
   </TableRow>
 );
 
-const AdminTableSkeleton = () => (
+interface IAdminTableSkeleton {
+  count?: number;
+}
+
+const AdminTableSkeleton = ({ count = 9 }: IAdminTableSkeleton) => (
   <>
-    {Array.from({ length: 9 }).map((_, i) => (
+    {Array.from({ length: count }).map((_, i) => (
       <SkeletonRow key={i} />
     ))}
   </>
