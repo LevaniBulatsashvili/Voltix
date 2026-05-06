@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import type { UseQueryResult } from "@tanstack/react-query";
 import SearchInput from "./SearchInput";
 import { SearchResults } from "./SearchResults";
@@ -11,14 +12,12 @@ interface ISearchBar<T> {
   hasData?: boolean;
   placeholder?: string;
   searchInputClassName?: string;
-
   searchResultOptions?: {
     query?: UseQueryResult<IDataResponse<T>>;
     limit: number;
     onViewAll: () => void;
     renderItem: (item: T) => React.ReactNode;
   };
-
   className?: string;
 }
 
@@ -30,13 +29,11 @@ export function SearchBar<T>({
   hasData,
   placeholder,
   searchInputClassName,
-
   searchResultOptions,
-
-  className = "",
+  className,
 }: ISearchBar<T>) {
   return (
-    <div className={`relative w-full ${className ?? "max-w-100 ml-auto"}`}>
+    <div className={cn("relative w-full max-w-100 ml-auto", className)}>
       <SearchInput
         searchVal={searchValue}
         onSearchValueChange={onSearchValueChange}
@@ -46,7 +43,6 @@ export function SearchBar<T>({
         placeholder={placeholder}
         searchInputClassName={searchInputClassName}
       />
-
       {searchResultOptions && (
         <SearchResults
           query={searchResultOptions.query}

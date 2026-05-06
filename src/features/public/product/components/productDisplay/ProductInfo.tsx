@@ -27,7 +27,7 @@ const ProductInfo = ({
     <div className="flex flex-col grow gap-4">
       <ProductHeader
         name={name}
-        rating={rating_avg}
+        rating={rating_avg ?? 0}
         price={price}
         discount={discount_percentage}
       />

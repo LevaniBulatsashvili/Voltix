@@ -105,7 +105,7 @@ const Actions = memo(
 
         <LangSelector
           value={currentLanguage}
-          onChange={(e) => onLanguageChange(e.target.value)}
+          onChange={(value) => onLanguageChange(value)}
           languages={languages}
         />
 

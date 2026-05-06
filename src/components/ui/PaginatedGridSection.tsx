@@ -1,11 +1,12 @@
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import SearchProductCardGridSkeleton from "@/features/public/search/components/searchSkeleton/SearchProductCardSkeleton";
 import Pagination from "@/components/ui/Pagination";
-import { type ReactNode } from "react";
+import { useCallback, type ReactNode } from "react";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { IDataResponse } from "@/types/common/api";
 import PaginationhHeader, { type ISortOptions } from "./PaginationHeader";
 import { useCachedQueryData } from "@/hooks/useCachedQueryData";
+import { cn } from "@/utils/cn";
 
 interface IPaginatedGridSection<T> {
   query: UseQueryResult<IDataResponse<T>, Error>;
@@ -33,11 +34,27 @@ const PaginatedGridSection = <T,>({
   maxCols = 2,
   onPageChange,
   renderItem,
-  className = "",
+  className,
   productGridClassName,
 }: IPaginatedGridSection<T>) => {
   const { data, currentPage, totalCount, totalPages } =
     useCachedQueryData(query);
+
+  const gridClass =
+    productGridClassName ??
+    cn(
+      "grid min-[480px]:grid-cols-2 gap-4",
+      colsMap[maxCols] ?? "lg:grid-cols-3",
+    );
+
+  const renderProducts = useCallback(
+    (products: T[]) => (
+      <div className={gridClass}>
+        {products.map((item) => renderItem(item))}
+      </div>
+    ),
+    [gridClass, renderItem],
+  );
 
   return (
     <div>
@@ -60,16 +77,7 @@ const PaginatedGridSection = <T,>({
             <SearchProductCardGridSkeleton count={maxCols * 2} cols={maxCols} />
           }
         >
-          {(products) => (
-            <div
-              className={
-                productGridClassName ??
-                `grid min-[480px]:grid-cols-2 ${colsMap[maxCols] ?? "lg:grid-cols-3"} gap-4`
-              }
-            >
-              {products.map((item) => renderItem(item))}
-            </div>
-          )}
+          {renderProducts}
         </QueryBoundary>
       </div>
 

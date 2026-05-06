@@ -89,5 +89,6 @@
   "user": "User",
   "admin": "Admin",
   "courier": "Courier",
-  "developer": "Developer"
+  "developer": "Developer",
+  "new": "new"
 }

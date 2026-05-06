@@ -14,7 +14,7 @@ export interface IProduct {
   price: number;
   price_final: number;
   discount_percentage?: number;
-  rating_avg: number;
+  rating_avg: number | null;
   rating_count: number;
   stock: number;
   thumbnail: string;

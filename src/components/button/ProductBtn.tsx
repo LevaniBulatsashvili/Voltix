@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { useTranslation } from "react-i18next";
 
 interface IProductBtn {
@@ -11,15 +12,14 @@ const ProductBtn = ({
   text,
   onClick,
   disabled = false,
-  className = "",
+  className,
 }: IProductBtn) => {
   const { t } = useTranslation();
-
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`rounded-full px-6 py-2 capitalize ${className}`}
+      className={cn("rounded-full px-6 py-2 capitalize", className)}
     >
       {t(text)}
     </button>

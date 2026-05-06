@@ -1,34 +1,71 @@
+import { cn } from "@/utils/cn";
 import { Star, StarHalf } from "lucide-react";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 interface IStarRating {
-  rating: number;
-  textColor?: string;
+  rating?: number;
+  totalReviews?: number;
+  className?: string;
 }
 
-const StarRating = ({ rating, textColor = "primary" }: IStarRating) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
-  const emptyStars = 5 - fullStars - halfStar;
+const StarRating = ({
+  rating = 0,
+  totalReviews = 0,
+  className,
+}: IStarRating) => {
+  const { t } = useTranslation();
+  const isUnrated = rating === 0;
 
   return (
-    <div className="flex items-center gap-1">
-      {Array.from({ length: fullStars }).map((_, i) => (
-        <Star key={`full-${i}`} className="w-5 h-5 text-yellow-500" />
-      ))}
+    <div className={cn("flex items-center gap-1.5", className)}>
+      <div className="flex items-center">
+        {[...Array(5)].map((_, i) => {
+          const step = i + 1;
+          const isFull = rating >= step;
+          const isHalf = rating > i && rating < step;
 
-      {halfStar === 1 && (
-        <StarHalf key="half" className="w-5 h-5 text-yellow-500" />
+          if (isHalf) {
+            return (
+              <div key={i} className="relative">
+                <Star size={20} className="text-slate-200 fill-slate-100" />
+                <StarHalf
+                  size={20}
+                  className="absolute top-0 left-0 fill-yellow-400 text-yellow-400"
+                />
+              </div>
+            );
+          }
+
+          return (
+            <Star
+              key={i}
+              size={20}
+              className={cn(
+                "transition-colors",
+                isFull
+                  ? "fill-yellow-400 text-yellow-400"
+                  : "text-slate-200 fill-slate-100",
+              )}
+            />
+          );
+        })}
+      </div>
+
+      {isUnrated ? (
+        <span className="text-md font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded tracking-widest uppercase ml-1">
+          {t("common.new")}
+        </span>
+      ) : (
+        <div className="flex items-center gap-1">
+          <span className="text-md font-bold text-slate-900">
+            {rating.toFixed(1)}
+          </span>
+          <span className="text-md text-slate-400 font-bold">
+            ({totalReviews})
+          </span>
+        </div>
       )}
-
-      {Array.from({ length: emptyStars }).map((_, i) => (
-        <Star key={`empty-${i}`} className="w-5 h-5 text-gray-300" />
-      ))}
-
-      <span className={`ml-2 text-${textColor}`}>
-        {rating}
-        <span className="opacity-60">/5</span>
-      </span>
     </div>
   );
 };

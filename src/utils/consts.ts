@@ -46,6 +46,6 @@ export const createCategoryQuery = (slug: string): string =>
     .map((w) => w.charAt(0).toLowerCase() + w.slice(1))
     .join("-");
 
-export const PRODUCTSELECTFIELD = `id, name, price, rating_avg, discount_percentage, thumbnail,
+export const PRODUCTSELECTFIELD = `id, name, price, rating_avg, rating_count, discount_percentage, thumbnail,
                                 main_category: main_categories(name),
                                 category: categories(name)`;

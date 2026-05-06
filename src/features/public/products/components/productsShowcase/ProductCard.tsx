@@ -65,12 +65,14 @@ const ProductCard = ({ product, className }: IProductCard) => {
           {product.name}
         </p>
 
-        <StarRating rating={product.rating_avg} textColor="black" />
+        <StarRating
+          rating={product.rating_avg ?? 0}
+          totalReviews={product.rating_count}
+        />
 
         <PriceTag
           price={product.price}
           discount={product.discount_percentage}
-          textColor="black"
         />
       </div>
     </AppLink>

@@ -12,9 +12,10 @@ import ProductReviewModal from "./productReview/ProductReviewModal";
 
 interface IProductReviews {
   productId: number;
+  productRating?: number;
 }
 
-const ProductReviews = ({ productId }: IProductReviews) => {
+const ProductReviews = ({ productId, productRating }: IProductReviews) => {
   const { t } = useTranslation();
   const { isVerified, isRole } = useRole();
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
@@ -97,6 +98,7 @@ const ProductReviews = ({ productId }: IProductReviews) => {
       {showReviewModal && (
         <ProductReviewModal
           productId={productId}
+          currentRatingCount={productRating}
           onClose={() => setShowReviewModal(false)}
         />
       )}

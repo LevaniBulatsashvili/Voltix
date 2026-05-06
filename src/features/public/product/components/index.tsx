@@ -36,7 +36,12 @@ const Product = () => {
                   details: (
                     <ProductDetails specs={product.product_specs || []} />
                   ),
-                  reviews: <ProductReviews productId={product.id} />,
+                  reviews: (
+                    <ProductReviews
+                      productId={product.id}
+                      productRating={product.rating_count}
+                    />
+                  ),
                   faqs: <ProductFAQs faqs={product.product_faqs || []} />,
                 }}
               />

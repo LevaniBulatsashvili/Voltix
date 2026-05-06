@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ChevronDown } from "lucide-react";
 import { type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,7 +26,6 @@ export const FormDropdown = ({
         <p className="mb-3 text-lg text-black opacity-90 capitalize">
           {t(text)}
         </p>
-
         <button
           type="button"
           className="flex justify-between items-center h-14 w-full p-5 text-black text-lg rounded-lg bg-gray-200"
@@ -33,9 +33,10 @@ export const FormDropdown = ({
         >
           <span className="capitalize">{t(placeholder)}</span>
           <ChevronDown
-            className={`w-5 h-5 transition-transform duration-150 ${
-              open ? "rotate-180" : "rotate-0"
-            }`}
+            className={cn(
+              "w-5 h-5 transition-transform duration-150",
+              open ? "rotate-180" : "rotate-0",
+            )}
           />
         </button>
       </div>

@@ -1,5 +1,6 @@
 import type { ICrumb } from "@/types/common/crumbs";
 import AppLink from "../button/AppLink";
+import { cn } from "@/utils/cn";
 
 interface IBreadcrumbs {
   items: ICrumb[];
@@ -7,13 +8,9 @@ interface IBreadcrumbs {
   className?: string;
 }
 
-const Breadcrumbs = ({
-  items,
-  separator = "/",
-  className = "",
-}: IBreadcrumbs) => {
+const Breadcrumbs = ({ items, separator = "/", className }: IBreadcrumbs) => {
   return (
-    <nav className={`mb-6 ${className}`} aria-label="breadcrumb">
+    <nav className={cn("mb-6", className)} aria-label="breadcrumb">
       <ol className="flex flex-wrap items-center gap-1">
         {items.map((crumb, idx) => (
           <li

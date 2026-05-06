@@ -28,9 +28,10 @@ const ErrorState = ({ title, className, isRetrying, onRetry }: IErrorState) => {
           <RefreshCcw
             size={30}
             strokeWidth={2.8}
-            className={`transition-transform ${
-              isRetrying ? "animate-spin-reverse" : ""
-            }`}
+            className={cn(
+              "transition-transform",
+              isRetrying && "animate-spin-reverse",
+            )}
           />
         </button>
       )}

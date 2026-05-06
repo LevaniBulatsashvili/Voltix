@@ -1,13 +1,15 @@
+import { shallowEqual } from "react-redux";
 import {
   useController,
   type Control,
   type FieldValues,
   type Path,
 } from "react-hook-form";
-import { Label } from "./Label";
-import { Select } from "@/components/ui/Select";
 import { useAppSelector } from "@/hooks/redux";
 import { useFlicker } from "@/hooks/useFlicker";
+import { Label } from "./Label";
+import { Select } from "@/components/ui/Select";
+import type { RootState } from "@/store";
 
 interface IFormSelect<T extends FieldValues> {
   name: Path<T>;
@@ -19,6 +21,11 @@ interface IFormSelect<T extends FieldValues> {
   isLoading?: boolean;
 }
 
+const selectLoadingSettings = (state: RootState) => ({
+  permaLoadingState: state.settings.permaLoadingState,
+  flickerLoadingState: state.settings.flickerLoadingState,
+});
+
 const FormSelect = <T extends FieldValues>({
   name,
   label,
@@ -29,15 +36,19 @@ const FormSelect = <T extends FieldValues>({
   isLoading,
 }: IFormSelect<T>) => {
   const { permaLoadingState, flickerLoadingState } = useAppSelector(
-    (state) => state.settings,
+    selectLoadingSettings,
+    shallowEqual,
   );
   const flicker = useFlicker({ flickerLoading: flickerLoadingState });
   const { field } = useController({ name, control });
 
+  const showLoading = isLoading || permaLoadingState || flicker === "loading";
+  const showError = error && !error.includes("errors.");
+
   return (
     <div>
       <Label htmlFor={name} text={label} />
-      {isLoading || permaLoadingState || flicker === "loading" ? (
+      {showLoading ? (
         <div className="h-14 w-full bg-gray-200 rounded-lg animate-pulse" />
       ) : (
         <Select
@@ -48,9 +59,7 @@ const FormSelect = <T extends FieldValues>({
           selectBtnClassName="py-4"
         />
       )}
-      {!error?.includes("errors.") && (
-        <p className="mt-1 text-sm text-red-500">{error}</p>
-      )}
+      {showError && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };

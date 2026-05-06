@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePagination } from "@/hooks/usePagination";
 
@@ -14,13 +15,22 @@ const Pagination = ({
   totalPages,
   onChange,
   showInfo,
-  className = "",
+  className,
 }: IPagination) => {
   const { pages } = usePagination(currentPage, totalPages);
 
+  const pageButtonClass = (isActive: boolean) =>
+    cn(
+      "size-9 sm:size-10 border rounded shrink-0",
+      isActive ? "bg-black text-white" : "hover:bg-gray-100",
+    );
+
   return (
     <div
-      className={`flex justify-between flex-col-reverse sm:flex-row sm:items-center gap-4 mt-6 ${className}`}
+      className={cn(
+        "flex justify-between flex-col-reverse sm:flex-row sm:items-center gap-4 mt-6",
+        className,
+      )}
     >
       {showInfo ? (
         <div className="text-md opacity-80">{showInfo}</div>
@@ -47,11 +57,7 @@ const Pagination = ({
               <button
                 key={key}
                 onClick={() => onChange(value)}
-                className={`size-9 sm:size-10 border rounded shrink-0 ${
-                  currentPage === value
-                    ? "bg-black text-white"
-                    : "hover:bg-gray-100"
-                }`}
+                className={pageButtonClass(currentPage === value)}
               >
                 {value}
               </button>

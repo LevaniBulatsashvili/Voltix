@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { forwardRef, type InputHTMLAttributes } from "react";
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,25 +9,20 @@ interface IInput extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, IInput>(
-  (
-    { name, type = "text", placeholder = "", className = "", ...props },
-    ref,
-  ) => {
-    return (
-      <input
-        ref={ref}
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className={`
-          h-14 w-full p-5 text-black text-lg rounded-lg focus:outline-gray-400 bg-gray-200 disabled:opacity-90 disabled:cursor-not-allowed placeholder:capitalize
-          ${className}
-        `}
-        {...props}
-      />
-    );
-  },
+  ({ name, type = "text", placeholder = "", className, ...props }, ref) => (
+    <input
+      ref={ref}
+      id={name}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      className={cn(
+        "h-14 w-full p-5 text-black text-lg rounded-lg focus:outline-gray-400 bg-gray-200 disabled:opacity-90 disabled:cursor-not-allowed placeholder:capitalize",
+        className,
+      )}
+      {...props}
+    />
+  ),
 );
 
 Input.displayName = "Input";

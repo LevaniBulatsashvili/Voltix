@@ -8,13 +8,19 @@ import { X } from "lucide-react";
 import Modal from "@/components/ui/modal/Modal";
 import { useAppSelector } from "@/hooks/redux";
 import { shallowEqual } from "react-redux";
+import { useUpdateProduct } from "@/features/public/product/hooks/productCRUD";
 
 interface IProductReviewModal {
   productId: number;
+  currentRatingCount?: number;
   onClose: () => void;
 }
 
-const ProductReviewModal = ({ productId, onClose }: IProductReviewModal) => {
+const ProductReviewModal = ({
+  productId,
+  currentRatingCount,
+  onClose,
+}: IProductReviewModal) => {
   const { t } = useTranslation();
   const profile = useAppSelector(
     (state) => state.profile.profile,
@@ -24,7 +30,11 @@ const ProductReviewModal = ({ productId, onClose }: IProductReviewModal) => {
   const [hovered, setHovered] = useState(0);
   const [comment, setComment] = useState("");
 
-  const { mutate: createComment, isPending } = useCreateProductComment();
+  const { mutate: createComment, isPending: commentCreatePending } =
+    useCreateProductComment();
+  const { mutate: updateProduct, isPending: productUpdatePending } =
+    useUpdateProduct();
+  const isPending = commentCreatePending || productUpdatePending;
 
   const handleClose = () => {
     setRating(0);
@@ -49,7 +59,10 @@ const ProductReviewModal = ({ productId, onClose }: IProductReviewModal) => {
       },
       {
         onSuccess: () => {
-          handleClose();
+          updateProduct(
+            { id: productId, rating_count: (currentRatingCount ?? 0) + 1 },
+            { onSuccess: handleClose },
+          );
         },
       },
     );

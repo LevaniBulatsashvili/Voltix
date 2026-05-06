@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import type { ReactNode } from "react";
 
 interface ICarousel {
@@ -6,27 +7,27 @@ interface ICarousel {
   itemClassName?: string;
 }
 
+const TRACK_CLASS =
+  "flex items-center justify-center gap-4 pr-4 animate-scroll-left";
+
 const Carousel = ({ items, carouselClassName, itemClassName }: ICarousel) => {
-  const trackClasses =
-    "flex items-center justify-center gap-4 pr-4 animate-scroll-left";
-  const itemClasses = `flex-none text-center content-center p-[1em] ${itemClassName}!`;
+  const itemClass = cn(
+    "flex-none text-center content-center p-[1em]",
+    itemClassName,
+  );
+
+  const renderItems = (keyPrefix: string) =>
+    items.map((item, index) => (
+      <div key={`${keyPrefix}-${index}`} className={itemClass}>
+        {item}
+      </div>
+    ));
 
   return (
-    <div className={`flex overflow-hidden w-full ${carouselClassName}`}>
-      <div className={trackClasses}>
-        {items.map((item, index) => (
-          <div key={index} className={itemClasses}>
-            {item}
-          </div>
-        ))}
-      </div>
-
-      <div aria-hidden className={trackClasses}>
-        {items.map((item, index) => (
-          <div key={`dup-${index}`} className={itemClasses}>
-            {item}
-          </div>
-        ))}
+    <div className={cn("flex overflow-hidden w-full", carouselClassName)}>
+      <div className={TRACK_CLASS}>{renderItems("a")}</div>
+      <div aria-hidden className={TRACK_CLASS}>
+        {renderItems("dup")}
       </div>
     </div>
   );

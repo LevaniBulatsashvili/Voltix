@@ -19,7 +19,7 @@ export function SearchResults<T>({
 }: ISearchResults<T>) {
   const { t } = useTranslation();
 
-  if (query === undefined || query.data === undefined) return null;
+  if (!query || query.data === undefined) return null;
 
   return (
     <QueryBoundary
@@ -41,14 +41,15 @@ export function SearchResults<T>({
       {(items) => (
         <ul className="absolute w-full border text-black bg-white rounded-md shadow-lg z-50 max-h-65">
           {items.map((item) => renderItem(item))}
-
-          {items.length > limit - 1 && (
-            <div
-              onClick={onViewAll}
-              className="pl-4 py-1 text-lg font-medium hover:bg-gray-100 cursor-pointer"
-            >
-              {t("header.all_results")}
-            </div>
+          {items.length >= limit && (
+            <li>
+              <button
+                onClick={onViewAll}
+                className="w-full text-left pl-4 py-1 text-lg font-medium hover:bg-gray-100"
+              >
+                {t("header.all_results")}
+              </button>
+            </li>
           )}
         </ul>
       )}

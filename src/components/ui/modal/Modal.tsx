@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { useEscKey } from "@/hooks/useEscKey";
 import { useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
@@ -15,7 +16,7 @@ const Modal = ({
   isOpen,
   children,
   onClose,
-  className = "",
+  className,
   disableClickOutside = false,
 }: IModal) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,15 +28,16 @@ const Modal = ({
 
   return (
     <div
-      onClick={() => !disableClickOutside && onClose()}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
       role="dialog"
       aria-modal="true"
     >
       <div
         ref={ref}
-        onClick={(e) => e.stopPropagation()}
-        className={`bg-background text-primary border border-primary/30 rounded-xl py-8 px-3 sm:px-6 lg:px-8 w-full max-w-xl shadow-lg mx-4 ${className}`}
+        className={cn(
+          "bg-background text-primary border border-primary/30 rounded-xl py-8 px-3 sm:px-6 lg:px-8 w-full max-w-xl shadow-lg mx-4",
+          className,
+        )}
       >
         {children}
       </div>
