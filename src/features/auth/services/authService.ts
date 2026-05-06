@@ -9,9 +9,6 @@ import { getCurrentAuthUser, reauthenticate } from "./auth.helpers";
 import { mapUser } from "../utils/mapUser";
 
 export const authService: IAuthService = {
-  // =========================
-  // 🔐 LOGIN
-  // =========================
   async loginWithEmail(email, password): Promise<IAuthResponse> {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -27,9 +24,6 @@ export const authService: IAuthService = {
     };
   },
 
-  // =========================
-  // 📝 REGISTER
-  // =========================
   async registerWithEmail(email, password): Promise<IAuthResponse> {
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -52,9 +46,6 @@ export const authService: IAuthService = {
     };
   },
 
-  // =========================
-  // 🌐 OAUTH
-  // =========================
   async loginWithGoogle(): Promise<IOAuthResponse> {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -66,17 +57,11 @@ export const authService: IAuthService = {
     return data as IOAuthResponse;
   },
 
-  // =========================
-  // 🚪 LOGOUT
-  // =========================
   async logout(): Promise<void> {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   },
 
-  // =========================
-  // 📧 UPDATE EMAIL
-  // =========================
   async updateEmail(newEmail, currentPassword) {
     const authUser = await getCurrentAuthUser();
     if (!authUser?.email) throw new Error("No authenticated user found.");
@@ -91,9 +76,6 @@ export const authService: IAuthService = {
     return mapUser(data.user);
   },
 
-  // =========================
-  // 🔒 UPDATE PASSWORD
-  // =========================
   async updatePassword(currentPassword, newPassword): Promise<void> {
     const authUser = await getCurrentAuthUser();
     if (!authUser?.email) throw new Error("No authenticated user found.");
@@ -106,9 +88,6 @@ export const authService: IAuthService = {
     if (error) throw error;
   },
 
-  // =========================
-  // 📩 RESET PASSWORD
-  // =========================
   async sendPasswordResetEmail(email): Promise<void> {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,

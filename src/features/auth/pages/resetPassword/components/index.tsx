@@ -14,6 +14,7 @@ import ErrorMessage from "@/features/auth/components/ErrorMessage";
 import { FormInput } from "@/components/form/Input/FormInput";
 import Spinner from "@/components/feedback/Spinner";
 import { useEffect } from "react";
+import Form from "@/components/form/Form";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const ResetPassword = () => {
   return (
     <FormContainer>
       <FormHeader text="reset_password.reset_password" />
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           name="password"
           label="reset_password.new_password"
@@ -64,7 +65,7 @@ const ResetPassword = () => {
 
         <PrimaryButton text="reset_password.submit" disabled={isPending} />
         {error && <ErrorMessage message={error.message} />}
-      </form>
+      </Form>
     </FormContainer>
   );
 };

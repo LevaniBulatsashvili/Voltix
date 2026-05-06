@@ -11,6 +11,8 @@
   "main_categories_could_not_be_fetched": "მთავარი კატეგორიების მიღება ვერ მოხერხდა",
   "brands_could_not_be_fetched": "ბრენდების მიღება ვერ მოხერხდა",
   "upload_failed": "ატვირთვა ვერ მოხერხდა",
+  "Email not confirmed": "იმეილი არ არის დადასტურებული",
+  "email rate limit exceeded": "იმეილის გაგზავნის ლიმიტი ამოიწურა",
 
   "entities": {
     "data": "მონაცემები",

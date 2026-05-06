@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import type { ReactNode } from "react";
 
 interface IHeading {
@@ -5,10 +6,13 @@ interface IHeading {
   className?: string;
 }
 
-const Heading = ({ children, className = "" }: IHeading) => {
+const Heading = ({ children, className }: IHeading) => {
   return (
     <h1
-      className={`text-3xl font-bold mb-6 text-center capitalize ${className}`}
+      className={cn(
+        "text-3xl font-bold mb-6 text-center capitalize",
+        className,
+      )}
     >
       {children}
     </h1>

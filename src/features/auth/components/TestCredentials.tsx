@@ -1,6 +1,7 @@
 import InfoDropdown from "@/components/common/InfoDropdown";
 import { useAppSelector } from "@/hooks/redux";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipBoard";
+import { cn } from "@/utils/cn";
 import { useTranslation } from "react-i18next";
 
 const credentials = [
@@ -35,7 +36,10 @@ const TestCredentials = () => {
           className="border rounded-lg p-2.5 flex flex-col gap-1.5"
         >
           <span
-            className={`text-sm font-semibold px-2 py-0.5 rounded-full w-fit ${roleStyles[cred.role]}`}
+            className={cn(
+              "text-sm font-semibold px-2 py-0.5 rounded-full w-fit",
+              roleStyles[cred.role],
+            )}
           >
             {t(`common.${cred.role}`)}
           </span>
@@ -49,9 +53,10 @@ const TestCredentials = () => {
               </span>
               <button
                 onClick={() => copy(val)}
-                className={`text-xs font-mono border px-1.5 py-0.5 rounded ${
-                  theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700"
-                } transition`}
+                className={cn(
+                  "text-xs font-mono border px-1.5 py-0.5 rounded transition",
+                  theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700",
+                )}
               >
                 {isCopied(val)
                   ? t("login.copied")

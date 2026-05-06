@@ -11,6 +11,8 @@
   "main_categories_could_not_be_fetched": "Main categories could not be fetched",
   "brands_could_not_be_fetched": "Brands could not be fetched",
   "upload_failed": "Upload failed",
+  "Email not confirmed": "Email Not Confirmed",
+  "email rate limit exceeded": "Email sending limit exhausted",
 
   "entities": {
     "data": "Data",

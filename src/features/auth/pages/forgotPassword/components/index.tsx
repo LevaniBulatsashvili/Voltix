@@ -14,6 +14,7 @@ import { FormInput } from "@/components/form/Input/FormInput";
 import ErrorMessage from "@/features/auth/components/ErrorMessage";
 import AuthSwitchLink from "@/features/auth/components/AuthSwitchLink";
 import { CheckCircle } from "lucide-react";
+import Form from "@/components/form/Form";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -42,7 +43,7 @@ const ForgotPassword = () => {
           <CheckCircle size={26} strokeWidth={2} />
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             name="email"
             label="forgot_password.email"
@@ -55,7 +56,7 @@ const ForgotPassword = () => {
             disabled={isPending}
           />
           {error && <ErrorMessage message={error.message} />}
-        </form>
+        </Form>
       )}
 
       <AuthSwitchLink

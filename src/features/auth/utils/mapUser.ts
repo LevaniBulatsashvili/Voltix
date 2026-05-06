@@ -7,7 +7,7 @@ export const mapUser = (user: User | null): IAuthUser | null => {
   return {
     id: user.id,
     email: user.email ?? null,
-    email_verified: user.email_confirmed_at ? true : false,
+    email_verified: !!user.email_confirmed_at,
     created_at: user.created_at ?? "",
     app_metadata: user.app_metadata ?? {},
   };
