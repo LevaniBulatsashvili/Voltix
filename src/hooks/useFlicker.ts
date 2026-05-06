@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type TFlickerType = "loading" | "error" | "empty" | null;
 
@@ -10,6 +10,17 @@ interface IUseFlickerOptions {
   interval?: number;
 }
 
+function getActiveFlickerType(
+  loading?: boolean,
+  error?: boolean,
+  empty?: boolean,
+): TFlickerType {
+  if (loading) return "loading";
+  if (error) return "error";
+  if (empty) return "empty";
+  return null;
+}
+
 export const useFlicker = ({
   flickerLoading,
   flickerError,
@@ -18,45 +29,51 @@ export const useFlicker = ({
   interval = 2000,
 }: IUseFlickerOptions) => {
   const [flicker, setFlicker] = useState<TFlickerType>(null);
+  const mountedRef = useRef(true);
 
   useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const activeType = getActiveFlickerType(
+      flickerLoading,
+      flickerError,
+      flickerEmpty,
+    );
+
+    if (!activeType) {
+      const t = window.setTimeout(() => setFlicker(null), 0);
+      return () => clearTimeout(t);
+    }
+
     let onTimeout: number | undefined;
     let offTimeout: number | undefined;
 
-    const startFlicker = (type: TFlickerType) => {
-      const flickerCycle = () => {
-        queueMicrotask(() => setFlicker(type));
+    const flickerCycle = () => {
+      if (!mountedRef.current) return;
+      setFlicker(activeType);
 
-        offTimeout = window.setTimeout(() => {
-          setFlicker(null);
-          if (type && isFlickerActive(type))
-            onTimeout = window.setTimeout(flickerCycle, interval);
-        }, duration);
-      };
-      flickerCycle();
+      offTimeout = window.setTimeout(() => {
+        if (!mountedRef.current) return;
+        setFlicker(null);
+
+        if (
+          getActiveFlickerType(flickerLoading, flickerError, flickerEmpty) ===
+          activeType
+        )
+          onTimeout = window.setTimeout(flickerCycle, interval);
+      }, duration);
     };
 
-    const isFlickerActive = (type: TFlickerType) => {
-      switch (type) {
-        case "loading":
-          return !!flickerLoading;
-        case "error":
-          return !!flickerError;
-        case "empty":
-          return !!flickerEmpty;
-        default:
-          return false;
-      }
-    };
-
-    if (flickerLoading) startFlicker("loading");
-    else if (flickerError) startFlicker("error");
-    else if (flickerEmpty) startFlicker("empty");
+    flickerCycle();
 
     return () => {
-      if (onTimeout) clearTimeout(onTimeout);
-      if (offTimeout) clearTimeout(offTimeout);
-      setFlicker(null);
+      clearTimeout(onTimeout);
+      clearTimeout(offTimeout);
     };
   }, [flickerLoading, flickerError, flickerEmpty, duration, interval]);
 

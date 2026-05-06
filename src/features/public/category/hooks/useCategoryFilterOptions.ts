@@ -12,18 +12,15 @@ export const useCategoryFilterOptions = (
 ) => {
   const navigate = useNavigate();
 
-  const options = useMemo(() => {
-    return getCategoryQueryOptions(categoryName) ?? {};
-  }, [categoryName]);
+  const options = useMemo(
+    () => getCategoryQueryOptions(categoryName),
+    [categoryName],
+  );
 
   useEffect(() => {
-    if (
-      shouldNavigate &&
-      categoryName &&
-      !getCategoryQueryOptions(categoryName)
-    )
+    if (shouldNavigate && categoryName && options === null)
       navigate(PAGE.NOT_FOUND);
-  }, [categoryName, navigate, shouldNavigate]);
+  }, [categoryName, options, navigate, shouldNavigate]);
 
-  return options;
+  return options ?? {};
 };

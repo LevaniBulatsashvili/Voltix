@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { Box } from "lucide-react";
 
 interface IEmptyState {
@@ -9,7 +10,10 @@ interface IEmptyState {
 const EmptyState = ({ title, description, className }: IEmptyState) => {
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl ${className}`}
+      className={cn(
+        "w-full flex flex-col items-center justify-center px-8 py-12 text-center mx-auto border rounded-2xl",
+        className,
+      )}
     >
       <Box className="size-16 opacity-85 mb-6" />
       <h3 className="text-xl font-semibold mb-2 capitalize">{title}</h3>

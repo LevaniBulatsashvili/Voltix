@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import EmptyState from "./EmptyState";
 import Spinner from "./Spinner";
 import ErrorState from "./ErrorState";
@@ -11,6 +11,8 @@ import {
 } from "@/components/feedback/utils/asyncBoundaryUtils";
 import { useTranslation } from "react-i18next";
 import { parseServiceError } from "@/lib/supabase/parseServiceError";
+import type { RootState } from "@/store";
+import { shallowEqual } from "react-redux";
 
 export interface IFallbackOptions {
   noDataOpt?: { title?: string; description?: string; classname?: string };
@@ -41,6 +43,15 @@ type IAsyncBoundaryProps<T> = {
   children: (items: T[], meta: IAsyncBoundaryMeta) => ReactNode;
 };
 
+const selectAsyncBoundarySettings = (state: RootState) => ({
+  permaLoadingState: state.settings.permaLoadingState,
+  permaErrorState: state.settings.permaErrorState,
+  permaNoDataState: state.settings.permaNoDataState,
+  flickerLoadingState: state.settings.flickerLoadingState,
+  flickerErrorState: state.settings.flickerErrorState,
+  flickerNoDataState: state.settings.flickerNoDataState,
+});
+
 function AsyncBoundary<T>({
   response,
   isLoading,
@@ -56,7 +67,7 @@ function AsyncBoundary<T>({
   children,
 }: IAsyncBoundaryProps<T>) {
   const { t } = useTranslation();
-  const settings = useAppSelector((state) => state.settings);
+  const settings = useAppSelector(selectAsyncBoundarySettings, shallowEqual);
 
   const flicker = useFlicker({
     flickerLoading: settings.flickerLoadingState,
@@ -64,66 +75,66 @@ function AsyncBoundary<T>({
     flickerEmpty: settings.flickerNoDataState,
   });
 
-  const { items, meta } = normalizeResponse(response);
-  const isEmpty = items.length === 0;
+  const { items, meta } = useMemo(
+    () => normalizeResponse(response),
+    [response],
+  );
 
   const state = resolveAsyncState({
     isLoading,
     error,
-    isEmpty: isEmpty && !isFetching,
+    isEmpty: items.length === 0 && !isFetching,
     flicker,
     settings,
   });
 
-  if (state === "loading")
+  const {
+    loadingOpt,
+    errorOpt,
+    noDataOpt,
+    className: fallbackClassName,
+  } = defaultFallbackOptions ?? {};
+
+  if (state === "loading") {
     return (
       loadingFallback ?? (
         <Spinner
-          containerClass={
-            defaultFallbackOptions?.loadingOpt?.containerClassName
-          }
-          spinnerclass={defaultFallbackOptions?.loadingOpt?.spinnerClassName}
+          containerClass={loadingOpt?.containerClassName}
+          spinnerclass={loadingOpt?.spinnerClassName}
         />
       )
     );
+  }
 
-  if (state === "error")
+  if (state === "error") {
     return (
       errorFallback ?? (
         <ErrorState
           title={parseServiceError(
-            error?.message || "an_error_has_occurred",
+            error?.message ?? "an_error_has_occurred",
             t,
           )}
-          className={
-            defaultFallbackOptions?.errorOpt?.className ??
-            defaultFallbackOptions?.className
-          }
+          className={errorOpt?.className ?? fallbackClassName}
           isRetrying={isRefetching ?? false}
           onRetry={onRetry}
         />
       )
     );
+  }
 
-  if (state === "empty")
+  if (state === "empty") {
     return (
       noDataFallback ?? (
         <EmptyState
-          title={t(
-            defaultFallbackOptions?.noDataOpt?.title ??
-              "common.no_data_available",
-          )}
+          title={t(noDataOpt?.title ?? "common.no_data_available")}
           description={
-            defaultFallbackOptions?.noDataOpt?.description &&
-            t(defaultFallbackOptions?.noDataOpt?.description)
+            noDataOpt?.description ? t(noDataOpt.description) : undefined
           }
-          className={
-            defaultFallbackOptions?.noDataOpt?.classname ??
-            defaultFallbackOptions?.className
-          }
+          className={noDataOpt?.classname ?? fallbackClassName}
         />
       )
     );
+  }
 
   return (
     <>

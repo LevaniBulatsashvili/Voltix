@@ -4,7 +4,7 @@ import type { IFallbackOptions } from "../feedback/AsyncBoundary";
 import type { IDataResponse } from "@/types/common/api";
 import { useFlicker } from "@/hooks/useFlicker";
 import Spinner from "../feedback/Spinner";
-import type { ReactNode } from "react";
+import { useCallback, useMemo, type ReactNode } from "react";
 
 interface IInfiniteGrid<T> {
   items: T[];
@@ -20,13 +20,16 @@ interface IInfiniteGrid<T> {
   paginationFallback?: ReactNode;
 }
 
+const DEFAULT_GRID_CLASS =
+  "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4";
+
 export function InfiniteGrid<T>({
   items,
   total,
   error,
   isFetching,
   renderItem,
-  gridClassName = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4",
+  gridClassName,
   defaultFallbackOptions,
   loadingFallback,
   errorFallback,
@@ -36,19 +39,52 @@ export function InfiniteGrid<T>({
   const { permaLoadingState, flickerLoadingState } = useAppSelector(
     (state) => state.settings,
   );
-
   const flicker = useFlicker({ flickerLoading: flickerLoadingState });
 
-  const response: IDataResponse<T> = {
-    data: items,
-    total: total ?? items.length,
-    page: 1,
-    limit: items.length,
-    hasMore: false,
-  };
+  const response = useMemo<IDataResponse<T>>(
+    () => ({
+      data: items,
+      total: total ?? items.length,
+      page: 1,
+      limit: items.length,
+      hasMore: false,
+    }),
+    [items, total],
+  );
 
   const showPaginationSpinner =
     isFetching || permaLoadingState || flicker === "loading";
+
+  const spinnerContainerClass =
+    defaultFallbackOptions?.loadingOpt?.containerClassName ?? "mt-4";
+  const spinnerClass = defaultFallbackOptions?.loadingOpt?.spinnerClassName;
+
+  const renderFooter = useCallback(
+    () =>
+      showPaginationSpinner
+        ? (paginationFallback ?? (
+            <Spinner
+              containerClass={spinnerContainerClass}
+              spinnerclass={spinnerClass}
+            />
+          ))
+        : null,
+    [
+      showPaginationSpinner,
+      paginationFallback,
+      spinnerContainerClass,
+      spinnerClass,
+    ],
+  );
+
+  const renderChildren = useCallback(
+    (normalizedItems: T[]) => (
+      <div className={gridClassName ?? DEFAULT_GRID_CLASS}>
+        {normalizedItems.map(renderItem)}
+      </div>
+    ),
+    [renderItem, gridClassName],
+  );
 
   return (
     <AsyncBoundary
@@ -60,25 +96,9 @@ export function InfiniteGrid<T>({
       loadingFallback={loadingFallback}
       errorFallback={errorFallback}
       noDataFallback={noDataFallback}
-      renderFooter={() =>
-        showPaginationSpinner
-          ? (paginationFallback ?? (
-              <Spinner
-                containerClass={
-                  defaultFallbackOptions?.loadingOpt?.containerClassName ??
-                  "mt-4"
-                }
-                spinnerclass={
-                  defaultFallbackOptions?.loadingOpt?.spinnerClassName
-                }
-              />
-            ))
-          : null
-      }
+      renderFooter={renderFooter}
     >
-      {(normalizedItems) => (
-        <div className={gridClassName}>{normalizedItems.map(renderItem)}</div>
-      )}
+      {renderChildren}
     </AsyncBoundary>
   );
 }

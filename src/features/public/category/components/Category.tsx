@@ -3,17 +3,18 @@ import { useCategoryFilterOptions } from "../hooks/useCategoryFilterOptions.ts";
 import type { TCategoryQueries } from "../utils/categoryQueryMap";
 import { useInfiniteFetchProducts } from "../../product/hooks/productCRUD.ts";
 import ProductCard from "../../products/components/productsShowcase/ProductCard.tsx";
-import { useTranslation } from "react-i18next";
 import { useInfiniteAutoFetch } from "@/hooks/useInfiniteAutoFetch.ts";
 import { useInfiniteList } from "@/hooks/useInfiniteList.ts";
 import { InfiniteGrid } from "@/components/ui/InfiniteGrid.tsx";
 import PageWrapper from "@/components/ui/PageWrapper.tsx";
 import CategoryInfiniteGridSkeleton from "./skeleton/CategoryInfiniteGridSkeleton.tsx";
 import { PRODUCTSELECTFIELD } from "@/utils/consts.ts";
+import { useCallback } from "react";
+import CategoryHeader from "./CategoryHeader.tsx";
+
+const PRODUCT_LIMIT = 9;
 
 const Category = () => {
-  const { t } = useTranslation();
-
   const { categoryName } = useParams<{ categoryName: TCategoryQueries }>();
 
   const options = useCategoryFilterOptions(categoryName!);
@@ -27,7 +28,7 @@ const Category = () => {
     isFetchingNextPage,
   } = useInfiniteList(
     useInfiniteFetchProducts({
-      limit: 9,
+      limit: PRODUCT_LIMIT,
       ...options,
       selectField: PRODUCTSELECTFIELD,
     }),
@@ -39,23 +40,22 @@ const Category = () => {
     isFetchingNextPage,
   });
 
+  const renderProduct = useCallback(
+    (product: (typeof items)[number]) => (
+      <ProductCard key={product.id} product={product} />
+    ),
+    [],
+  );
+
+  console.log("category");
   return (
     <PageWrapper>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 py-8">
-        <h1 className="text-2xl sm:text-4xl font-bold">
-          {t(`common.${categoryName}`)}
-        </h1>
-        <p className="flex gap-2 text-2xl sm:text-4xl font-semibold">
-          {t("category.total")} <span>{total}</span>
-        </p>
-      </div>
+      <CategoryHeader categoryName={categoryName!} total={total} />
       <InfiniteGrid
         items={items}
         error={error}
         isFetching={isFetching}
-        renderItem={(product) => (
-          <ProductCard key={product.id} product={product} />
-        )}
+        renderItem={renderProduct}
         loadingFallback={<CategoryInfiniteGridSkeleton />}
         defaultFallbackOptions={{ className: "h-[70dvh]" }}
       />

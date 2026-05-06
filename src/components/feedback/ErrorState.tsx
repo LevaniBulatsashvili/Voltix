@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { AlertTriangle, RefreshCcw } from "lucide-react";
 
 interface IErrorState {
@@ -10,7 +11,10 @@ interface IErrorState {
 const ErrorState = ({ title, className, isRetrying, onRetry }: IErrorState) => {
   return (
     <div
-      className={`w-full relative px-8 py-12 text-center border rounded-2xl bg-red-50 mx-auto flex flex-col items-center justify-center ${className}`}
+      className={cn(
+        "w-full relative px-8 py-12 text-center border rounded-2xl bg-red-50 mx-auto flex flex-col items-center justify-center",
+        className,
+      )}
     >
       <AlertTriangle className="size-16 text-red-500 mb-6" />
       <h3 className="text-xl font-semibold mb-2 text-red-700">{title}</h3>
