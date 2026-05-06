@@ -3,20 +3,42 @@ import ToggleBtn from "@/components/button/ToggleBtn";
 
 import { type ISettings, toggleSetting } from "../store/settings.slice";
 import { useTranslation } from "react-i18next";
+import { useCallback, useMemo } from "react";
 
 const Settings = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const settings = useAppSelector((state) => state.settings);
 
-  const settingsItems: { label: string; key: keyof ISettings }[] = [
-    { label: t("settings.permanent_no_data_state"), key: "permaNoDataState" },
-    { label: t("settings.flicker_no_data_state"), key: "flickerNoDataState" },
-    { label: t("settings.permanent_loading_state"), key: "permaLoadingState" },
-    { label: t("settings.flicker_loading_state"), key: "flickerLoadingState" },
-    { label: t("settings.permanent_srror_state"), key: "permaErrorState" },
-    { label: t("settings.flicker_error_state"), key: "flickerErrorState" },
-  ];
+  const settingsItems = useMemo(
+    () =>
+      [
+        {
+          label: t("settings.permanent_no_data_state"),
+          key: "permaNoDataState",
+        },
+        {
+          label: t("settings.flicker_no_data_state"),
+          key: "flickerNoDataState",
+        },
+        {
+          label: t("settings.permanent_loading_state"),
+          key: "permaLoadingState",
+        },
+        {
+          label: t("settings.flicker_loading_state"),
+          key: "flickerLoadingState",
+        },
+        { label: t("settings.permanent_srror_state"), key: "permaErrorState" },
+        { label: t("settings.flicker_error_state"), key: "flickerErrorState" },
+      ] as { label: string; key: keyof ISettings }[],
+    [t],
+  );
+
+  const handleToggle = useCallback(
+    (key: keyof ISettings) => dispatch(toggleSetting(key)),
+    [dispatch],
+  );
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-8">
@@ -39,7 +61,7 @@ const Settings = () => {
 
             <ToggleBtn
               isActive={settings[key]}
-              onToggle={() => dispatch(toggleSetting(key))}
+              onToggle={() => handleToggle(key)}
               className="min-w-12.5 border border-primary"
               activeToggleClassName="bg-background"
               inactiveToggleClassName="bg-primary"

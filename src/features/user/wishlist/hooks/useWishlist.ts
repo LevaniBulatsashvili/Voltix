@@ -4,7 +4,7 @@ import { useToggleWishlist } from "./useToggleWishlist";
 
 export function useWishlist() {
   const { wishlistedIds, wishlistIdByProductId } = useWishlistedIds();
-  const toggle = useToggleWishlist();
+  const { toggleWishlist: toggle } = useToggleWishlist();
 
   const isLiked = useCallback(
     (productId: number) => wishlistedIds.has(productId),
@@ -18,7 +18,7 @@ export function useWishlist() {
 
   const toggleWishlist = useCallback(
     (productId: number) =>
-      toggle.toggleWishlist({
+      toggle({
         productId,
         isLiked: wishlistedIds.has(productId),
         wishlistId: wishlistIdByProductId.get(productId),

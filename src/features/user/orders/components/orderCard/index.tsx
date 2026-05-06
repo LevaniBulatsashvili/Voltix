@@ -6,6 +6,7 @@ import { useUpdateOrder } from "../../hooks/ordersCRUD";
 import { OrderCardHeader } from "./orderCardHeader/OrderCardHeader";
 import OrderCardBody from "./orderCardBody/OrderCardBody";
 import OrderCardFooter from "./OrderCardFooter";
+import { cn } from "@/utils/cn";
 
 interface OrderCard {
   order: IOrder;
@@ -28,7 +29,10 @@ const OrderCard = ({ order, format }: OrderCard) => {
   return (
     <>
       <div
-        className={`border border-primary/50 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-opacity ${order.status === "cancelled" ? "opacity-50" : "opacity-100"}`}
+        className={cn(
+          "border border-primary/50 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-opacity",
+          order.status === "cancelled" ? "opacity-50" : "opacity-100",
+        )}
       >
         <OrderCardHeader
           id={order.id}

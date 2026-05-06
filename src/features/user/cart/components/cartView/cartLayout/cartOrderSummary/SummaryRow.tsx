@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { useTranslation } from "react-i18next";
 
 interface ISummaryRow {
@@ -17,10 +18,10 @@ const SummaryRow = ({
   const { t } = useTranslation();
 
   return (
-    <p className={`flex justify-between text-xl opacity-80 ${summaryClass}`}>
+    <p className={cn("flex justify-between text-xl opacity-80", summaryClass)}>
       {t(label)}
 
-      <span className={`font-bold opacity-100 ${valueClass}`}>{value}</span>
+      <span className={cn("font-bold opacity-100", valueClass)}>{value}</span>
     </p>
   );
 };

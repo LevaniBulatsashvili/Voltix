@@ -4,10 +4,11 @@ import { useFetchOrders } from "../hooks/ordersCRUD";
 import OrderCard from "./orderCard";
 import PageWrapper from "@/components/ui/PageWrapper";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { IOrderSortBy } from "./orderCard/OrderSortBtn";
 import OrderSortBtn from "./orderCard/OrderSortBtn";
+import type { IOrder } from "@/types/profile/profile";
 
 const Orders = () => {
   const { t } = useTranslation();
@@ -26,6 +27,13 @@ const Orders = () => {
 
   const { format } = usePrice();
 
+  const renderOrder = useCallback(
+    (order: IOrder) => (
+      <OrderCard key={order.id} order={order} format={format} />
+    ),
+    [format],
+  );
+
   return (
     <PageWrapper className="xl:px-0">
       <PaginatedGridSection
@@ -33,9 +41,7 @@ const Orders = () => {
         title={t("orders.orders")}
         description="common.showing_products"
         onPageChange={setPage}
-        renderItem={(order) => (
-          <OrderCard key={order.id} order={order} format={format} />
-        )}
+        renderItem={renderOrder}
         maxCols={3}
         className="min-h-[90dvh]"
         productGridClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"

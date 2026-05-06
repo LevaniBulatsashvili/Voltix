@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -21,9 +22,10 @@ const OrderSortBtn = ({ sortBy, onChangeSort }: IOrderSortBtn) => {
         : t("orders.sort_by_status")}
       <ChevronDown
         size={18}
-        className={`transition-transform duration-300 ${
-          sortBy === "date" ? "rotate-0" : "rotate-180"
-        }`}
+        className={cn(
+          "transition-transform duration-300",
+          sortBy !== "date" && "rotate-180",
+        )}
       />
     </button>
   );

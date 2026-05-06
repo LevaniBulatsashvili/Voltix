@@ -23,13 +23,13 @@ const PromoCodeInfo = () => {
       </p>
       {DEMO_CODES.map(({ code, discount }) => (
         <div key={code} className="flex items-center justify-between gap-2">
-          <code
+          <button
             onClick={() => copy(code)}
-            className="text-xs bg-gray-100 px-2 py-1 rounded-md font-mono cursor-pointer hover:bg-gray-200 transition select-all"
+            className="text-xs bg-gray-100 px-2 py-1 rounded-md font-mono cursor-pointer hover:bg-gray-200 transition select-all text-left"
             title={t("cart.click_to_copy")}
           >
             {isCopied(code) ? `✓ ${t("cart.copied")}` : code}
-          </code>
+          </button>
           <span className="text-xs text-green-600 font-medium whitespace-nowrap">
             {t("cart.discount_percentage", { percentage: discount })}
           </span>

@@ -1,11 +1,13 @@
 import PageWrapper from "@/components/ui/PageWrapper";
 import PaginatedGridSection from "@/components/ui/PaginatedGridSection";
 import ProductCard from "@/features/public/products/components/productsShowcase/ProductCard";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetchWishlists } from "../hooks/wishlistCRUD";
 import { useAppSelector } from "@/hooks/redux";
 import { PRODUCTSELECTFIELD } from "@/utils/consts";
+import type { IWishlist } from "@/types/profile/wishlist";
+
 
 const Wishlist = () => {
   const { t } = useTranslation();
@@ -19,6 +21,13 @@ const Wishlist = () => {
     selectField: `product: products(${PRODUCTSELECTFIELD})`,
   });
 
+  const renderWishlistItem = useCallback(
+    ({ product }: IWishlist) => (
+      <ProductCard key={product!.id} product={product!} />
+    ),
+    [],
+  );
+
   return (
     <PageWrapper className="xl:px-0">
       <PaginatedGridSection
@@ -26,9 +35,7 @@ const Wishlist = () => {
         title={t("wishlist.wishlist")}
         description="common.showing_products"
         onPageChange={setPage}
-        renderItem={({ product }) => (
-          <ProductCard key={product!.id} product={product!} />
-        )}
+        renderItem={renderWishlistItem}
         maxCols={3}
       />
     </PageWrapper>

@@ -2,6 +2,7 @@ import { useDeleteAccount } from "@/features/auth/hooks/useDeleteAccount";
 import { isAccountProtected } from "@/features/auth/utils/isAccountProtected";
 import { useAppSelector } from "@/hooks/redux";
 import { notify } from "@/lib/toast/toast";
+import { cn } from "@/utils/cn";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -44,7 +45,10 @@ const DeleteAccountSection = () => {
           </button>
           <button
             onClick={() => setConfirm(false)}
-            className={`text-xs sm:text-sm border px-4 py-2 rounded-lg ${theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700"} transition`}
+            className={cn(
+              "text-xs sm:text-sm border px-4 py-2 rounded-lg transition",
+              theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-700",
+            )}
           >
             {t("common.cancel")}
           </button>

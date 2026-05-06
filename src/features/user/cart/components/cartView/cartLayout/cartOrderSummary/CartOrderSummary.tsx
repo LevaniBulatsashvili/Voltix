@@ -8,6 +8,7 @@ import { usePrice } from "../../../../hooks/usePrice";
 import { useCreateOrder } from "../../../../hooks/useCreateOrder";
 import { usePromoCode } from "@/features/user/cart/hooks/usePromoCode";
 import PromoCodeInfo from "./PromoCodeInfo";
+import { cn } from "@/utils/cn";
 
 interface ICartOrderSummary {
   subtotal: number;
@@ -114,7 +115,10 @@ const CartOrderSummary = ({
                 ? "cart.validating"
                 : "cart.apply"
           }
-          className={`rounded-full! w-full sm:w-auto ${promoCode ? "bg-red-500! hover:bg-red-600!" : ""}`}
+          className={cn(
+            "rounded-full! w-full sm:w-auto",
+            promoCode && "bg-red-500! hover:bg-red-600!",
+          )}
           disabled={isValidating}
         />
       </div>
@@ -129,7 +133,10 @@ const CartOrderSummary = ({
       <PrimaryButton
         onClick={handlePurchase}
         text="cart.purchase"
-        className={`rounded-full! justify-self-center ${isPending ? "opacity-60" : ""}`}
+        className={cn(
+          "rounded-full! justify-self-center",
+          isPending && "opacity-60",
+        )}
         disabled={isPending}
       />
     </div>

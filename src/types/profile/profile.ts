@@ -1,5 +1,6 @@
 import type { IProduct } from "../public/product";
 import type { ICurrency } from "@/types/common/currency";
+import type { IWishlist } from "./wishlist";
 
 export type IProfileRole = "user" | "courier" | "admin" | "developer";
 
@@ -58,13 +59,4 @@ export interface IOrderItem {
   quantity: number;
   price: number;
   total: number;
-}
-
-export interface IWishlist {
-  id: string;
-  profile_id: IProfile["id"];
-  product_id: IProduct["id"];
-  created_at: string;
-
-  product?: IProduct;
 }

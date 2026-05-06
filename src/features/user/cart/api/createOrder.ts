@@ -44,11 +44,13 @@ export const createOrder = async ({
 
   await orderItemService.createMany(orderItems);
 
-  cartItems.map(async ({ product, quantity }) => {
-    await productService.update({
-      id: product!.id,
-      stock: product!.stock - quantity,
-      total_sold: product!.total_sold + quantity,
-    });
-  });
+  await Promise.all(
+    cartItems.map(({ product, quantity }) =>
+      productService.update({
+        id: product!.id,
+        stock: product!.stock - quantity,
+        total_sold: product!.total_sold + quantity,
+      }),
+    ),
+  );
 };
