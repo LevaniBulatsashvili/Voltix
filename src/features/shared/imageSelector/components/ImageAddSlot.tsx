@@ -1,3 +1,5 @@
+import { cn } from "@/utils/cn";
+
 interface IImageAddSlot {
   current: number;
   max: number;
@@ -23,12 +25,12 @@ export const ImageAddSlot = ({
     onDrop={onDrop}
     onDragOver={onDragOver}
     onDragLeave={onDragLeave}
-    className={`w-28 h-28 rounded-lg border-2 border-dashed flex flex-col items-center justify-center gap-1 transition-colors shrink-0
-      ${
-        isDragging
-          ? "border-blue-400 bg-blue-50 text-blue-400"
-          : "border-gray-300 hover:border-gray-400 text-gray-400 hover:text-gray-500"
-      }`}
+    className={cn(
+      "w-28 h-28 rounded-lg border-2 border-dashed flex flex-col items-center justify-center gap-1 transition-colors shrink-0",
+      isDragging
+        ? "border-blue-400 bg-blue-50 text-blue-400"
+        : "border-gray-300 hover:border-gray-400 text-gray-400 hover:text-gray-500",
+    )}
   >
     <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
       <path

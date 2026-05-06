@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 
 export const uploadImage = async (file: File, bucket: string) => {
-  const fileName = `${Date.now()}-${file.name}`;
+  const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`;
   const isSvg = file.type === "image/svg+xml";
 
   const { data, error } = await supabase.storage
