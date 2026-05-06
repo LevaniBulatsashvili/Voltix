@@ -1,4 +1,5 @@
 import AppLink from "@/components/button/AppLink";
+import { cn } from "@/utils/cn";
 import { memo } from "react";
 
 interface IProductsMainCategoryCard {
@@ -25,7 +26,7 @@ const ProductsMainCategoryCard = ({
         alt={title}
         loading="lazy"
         decoding="async"
-        className={`absolute bottom-2.5 right-2.5 w-3/4 h-4/5 object-contain ${imgClassName}`}
+        className={cn("absolute bottom-2.5 right-2.5 w-3/4 h-4/5 object-contain", imgClassName)}
       />
     </div>
   </AppLink>

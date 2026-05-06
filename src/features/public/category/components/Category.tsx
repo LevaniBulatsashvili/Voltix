@@ -47,7 +47,6 @@ const Category = () => {
     [],
   );
 
-  console.log("category");
   return (
     <PageWrapper>
       <CategoryHeader categoryName={categoryName!} total={total} />

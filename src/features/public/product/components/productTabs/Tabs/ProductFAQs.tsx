@@ -1,4 +1,5 @@
 import type { IProductFAQ } from "@/types/public/product";
+import { cn } from "@/utils/cn";
 import { memo, useState } from "react";
 
 interface IProductFAQs {
@@ -25,9 +26,10 @@ const ProductFAQs = ({ faqs }: IProductFAQs) => {
           >
             {faq.question}
             <span
-              className={`transform transition-transform ${
-                openIndex === index ? "rotate-180" : "rotate-0"
-              }`}
+              className={cn(
+                "transform transition-transform",
+                openIndex === index ? "rotate-180" : "rotate-0",
+              )}
             >
               ▼
             </span>

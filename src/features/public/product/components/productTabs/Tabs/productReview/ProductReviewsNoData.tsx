@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { MessageSquare, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -14,7 +15,7 @@ const ProductReviewsNoData = () => {
           "bottom-4 right-8 opacity-[0.04] text-8xl",
           "top-1/2 left-4 opacity-[0.05] text-4xl",
         ].map((cls, i) => (
-          <span key={i} className={`absolute ${cls}`}>
+          <span key={i} className={cn("absolute", cls)}>
             ★
           </span>
         ))}

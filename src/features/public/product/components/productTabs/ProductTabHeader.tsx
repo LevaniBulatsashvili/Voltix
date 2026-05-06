@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,11 +21,12 @@ const ProductTabHeader = ({
         <button
           key={tab.key}
           onClick={() => onTabChange(tab.key)}
-          className={`px-2 sm:px-4 py-2 font-medium transition capitalize ${
+          className={cn(
+            "px-2 sm:px-4 py-2 font-medium transition capitalize",
             activeTab === tab.key
               ? "border-b-2 border-primary text-primary"
-              : "text-gray-600 hover:text-primary"
-          }`}
+              : "text-gray-600 hover:text-primary",
+          )}
         >
           {t(tab.label)}
         </button>

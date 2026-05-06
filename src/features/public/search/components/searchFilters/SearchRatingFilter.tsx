@@ -3,6 +3,7 @@ import { ChevronDown, Star } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import Slider from "@/components/ui/Slider";
 import { useTranslation } from "react-i18next";
+import { cn } from "@/utils/cn";
 
 interface ISearchRatingFilter {
   value?: number | null;
@@ -41,16 +42,18 @@ const SearchRatingFilter = ({
 
         <ChevronDown
           size={16}
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={cn(
+            "transition-transform duration-300",
+            isOpen && "rotate-180",
+          )}
         />
       </button>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-40 mt-2 pb-3" : "max-h-0"
-        }`}
+        className={cn(
+          "overflow-hidden transition-all duration-300",
+          isOpen ? "max-h-40 mt-2 pb-3" : "max-h-0",
+        )}
       >
         <Slider
           min={0}

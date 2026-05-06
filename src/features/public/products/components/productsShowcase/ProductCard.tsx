@@ -9,6 +9,7 @@ import { useAppSelector } from "@/hooks/redux";
 import { shallowEqual } from "react-redux";
 import { getLikeOptions } from "@/features/user/wishlist/utils/getLikeOptions";
 import { useWishlistContext } from "@/features/user/wishlist/hooks/useWishlistContext";
+import { cn } from "@/utils/cn";
 
 export interface IProductCard {
   product: IProduct;
@@ -43,7 +44,10 @@ const ProductCard = ({ product, className }: IProductCard) => {
         product.category.name.toLowerCase(),
         product.id,
       )}
-      className={`relative bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer ${className}`}
+      className={cn(
+        "relative bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition-shadow duration-300 cursor-pointer",
+        className,
+      )}
     >
       {likeOptions && (
         <LikeBtn isLiked={likeOptions.isLiked} onLike={likeOptions.onLike} />

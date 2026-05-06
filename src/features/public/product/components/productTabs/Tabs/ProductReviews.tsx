@@ -9,6 +9,7 @@ import PrimaryButton from "@/components/button/PrimaryBtn";
 import { useRole } from "@/features/user/profile/hooks/useRole";
 import ProductReviewsNoData from "./productReview/ProductReviewsNoData";
 import ProductReviewModal from "./productReview/ProductReviewModal";
+import { cn } from "@/utils/cn";
 
 interface IProductReviews {
   productId: number;
@@ -57,14 +58,20 @@ const ProductReviews = ({ productId, productRating }: IProductReviews) => {
                 : t("product.oldest")}
             </span>
             <ChevronDown
-              className={`ml-1 size-4 ${sortOrder === "newest" ? "rotate-0" : "rotate-180"}`}
+              className={cn(
+                "ml-1 size-4",
+                sortOrder !== "newest" && "rotate-180",
+              )}
             />
           </button>
 
           {isVerified && (
             <PrimaryButton
               text={t("product.review")}
-              className={`rounded-full! ${isRole(["admin"]) ? "opacity-70! pointer-events-none" : ""}`}
+              className={cn(
+                "rounded-full!",
+                isRole(["admin"]) && "opacity-70! pointer-events-none",
+              )}
               disabled={isRole(["admin"])}
               onClick={() => setShowReviewModal(true)}
             />

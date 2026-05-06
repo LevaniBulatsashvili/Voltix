@@ -11,12 +11,7 @@ const ProductsCarouselSkeleton = ({
   const items = Array.from({ length: count }).map((_, index) => (
     <Skeleton
       key={index}
-      className="
-        size-16
-        sm:w-20 sm:h-20
-        lg:w-24 lg:h-24
-        rounded-lg
-      "
+      className="size-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-lg"
     />
   ));
 

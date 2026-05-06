@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface IProductsCommentsNavigation {
@@ -13,9 +14,9 @@ const ProductsCommentsNavigation = ({
   onNext,
   prevDisabled,
   nextDisabled,
-  className = "flex gap-4",
+  className,
 }: IProductsCommentsNavigation) => (
-  <div className={className}>
+  <div className={cn("flex gap-4", className)}>
     <button
       onClick={onPrev}
       className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition disabled:opacity-40"

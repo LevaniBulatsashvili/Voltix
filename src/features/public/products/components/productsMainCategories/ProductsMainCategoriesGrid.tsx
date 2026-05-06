@@ -2,6 +2,7 @@ import type { IMainCategory } from "@/types/public/product";
 import { buildCategoryLink } from "../../utils/buildCategoryLink";
 import ProductsMainCategoryCard from "./ProductsMainCategoryCard";
 import { useTranslation } from "react-i18next";
+import { cn } from "@/utils/cn";
 
 interface IProductsMainCategoriesGrid {
   mainCategories: IMainCategory[];
@@ -31,7 +32,7 @@ const ProductsMainCategoriesGrid = ({
             : spanPattern[index % spanPattern.length];
 
         return (
-          <div key={id} className={`col-span-5 ${colSpan}`}>
+          <div key={id} className={cn("col-span-5", colSpan)}>
             <ProductsMainCategoryCard
               to={buildCategoryLink(name.toLowerCase())}
               title={t(`common.${name.toLowerCase()}`)}

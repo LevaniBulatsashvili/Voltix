@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
 import type { IProductImage } from "@/types/public/product";
+import { cn } from "@/utils/cn";
 
 interface ProductGalleryProps {
   galleryImages?: Omit<IProductImage, "product_id">[];
@@ -32,15 +33,12 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
             <button
               key={image.id}
               onClick={() => handleSelect(image)}
-              className={`
-                  relative flex-1 sm:flex-none aspect-square sm:size-32 shrink-0 rounded-lg overflow-hidden
-                  ring-offset-1 transition-all duration-200
-                  ${
-                    selectedImage.id === image.id
-                      ? "ring-2 ring-gray-800 opacity-100"
-                      : "ring-1 ring-gray-200 opacity-60 hover:opacity-100 hover:ring-gray-400"
-                  }
-              `}
+              className={cn(
+                "relative flex-1 sm:flex-none aspect-square sm:size-32 shrink-0 rounded-lg overflow-hidden ring-offset-1 transition-all duration-200",
+                selectedImage.id === image.id
+                  ? "ring-2 ring-gray-800 opacity-100"
+                  : "ring-1 ring-gray-200 opacity-60 hover:opacity-100 hover:ring-gray-400",
+              )}
             >
               <img
                 src={image.image_url}
@@ -56,9 +54,10 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
         <img
           src={selectedImage.image_url}
           alt={name}
-          className={`w-full h-full object-cover transition-opacity duration-150 ${
-            fade ? "opacity-100" : "opacity-0"
-          }`}
+          className={cn(
+            "w-full h-full object-cover transition-opacity duration-150",
+            fade ? "opacity-100" : "opacity-0",
+          )}
         />
       </div>
     </div>

@@ -3,6 +3,7 @@ import QuantitySelector from "@/components/ui/QuantitySelector";
 import ProductBtn from "@/components/button/ProductBtn";
 import { useAppSelector } from "@/hooks/redux";
 import { shallowEqual } from "react-redux";
+import { cn } from "@/utils/cn";
 
 interface IProductActions {
   product: IProduct;
@@ -42,7 +43,10 @@ const ProductActions = ({
           <ProductBtn
             text="product.add_to_cart"
             onClick={handleAddToCart}
-            className={`bg-primary max-w-60 text-background flex-1 hover:opacity-80 ${isDisabled ? "opacity-70 pointer-events-none" : ""}`}
+            className={cn(
+              "bg-primary max-w-60 text-background flex-1 hover:opacity-80",
+              isDisabled && "opacity-70 pointer-events-none",
+            )}
             disabled={isDisabled}
           />
         </>

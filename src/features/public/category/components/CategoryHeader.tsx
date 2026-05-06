@@ -9,7 +9,6 @@ interface ICategoryHeader {
 const CategoryHeader = ({ categoryName, total }: ICategoryHeader) => {
   const { t } = useTranslation();
 
-  console.log("category header");
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 py-8">
       <h1 className="text-2xl sm:text-4xl font-bold">

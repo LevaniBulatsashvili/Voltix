@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/skeleton/Skeleton";
+import { cn } from "@/utils/cn";
 
 interface IProductCommentsListSkeleton {
   className?: string;
@@ -6,12 +7,15 @@ interface IProductCommentsListSkeleton {
 }
 
 const ProductsCommentsListSkeleton = ({
-  className = "",
+  className,
   count = 3,
 }: IProductCommentsListSkeleton) => {
   return (
     <div
-      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}
+      className={cn(
+        "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
+        className,
+      )}
     >
       {Array.from({ length: count }).map((_, index) => (
         <div

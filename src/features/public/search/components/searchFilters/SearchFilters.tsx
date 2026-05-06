@@ -14,6 +14,7 @@ import SelectDropdownGridSkeleton from "@/components/skeleton/SelectDropdownGrid
 import { useTranslation } from "react-i18next";
 import { useSearchFilters } from "../../hooks/useSearchFilters";
 import type { ISearchFilterState } from "../../utils/mapFiltersToQuery";
+import { cn } from "@/utils/cn";
 
 interface ISearchFiltersProps {
   onApply: (filters: ISearchFilterState) => void;
@@ -85,12 +86,12 @@ const SearchFilters = ({ onApply }: ISearchFiltersProps) => {
       )}
 
       <div
-        className={`
-          fixed top-23.5 right-0 h-full w-82 p-6 rounded-l-xl bg-background z-50 xl:max-h-fit xl:border xl:border-gray-400 xl:rounded-2xl
-          transform transition-transform duration-300
-          ${isOpen ? "translate-x-0" : "translate-x-full"}
-          xl:static xl:translate-x-0 xl:w-82 xl:block
-        `}
+        className={cn(
+          "fixed top-23.5 right-0 h-full w-82 p-6 rounded-l-xl bg-background z-50",
+          "xl:max-h-fit xl:border xl:border-gray-400 xl:rounded-2xl xl:static xl:translate-x-0 xl:w-82 xl:block",
+          "transform transition-transform duration-300",
+          isOpen ? "translate-x-0" : "translate-x-full",
+        )}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold capitalize">
