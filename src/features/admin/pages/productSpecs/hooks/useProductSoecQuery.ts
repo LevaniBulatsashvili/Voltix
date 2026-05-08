@@ -6,6 +6,7 @@ export const useProductSpecQuery = () => {
   const result = useAdminQuery<IProductSpec>({
     useQuery: useFetchProductSpecs,
     selectField: `id, product_id, spec, value, product:product_id(name)`,
+    searchKey: "admin-product-specs-search",
   });
 
   return {

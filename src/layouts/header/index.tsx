@@ -73,7 +73,7 @@ const Header = () => {
 
         <div className="flex items-center gap-4 flex-1 min-w-0 justify-end">
           <div className="flex-1 min-w-21.5 max-w-lg">
-            <ProductSearchBar />
+            <ProductSearchBar searchClassName="max-w-100 ml-auto" />
           </div>
           <Actions
             languages={languages}

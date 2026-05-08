@@ -12,7 +12,8 @@
   "brands_could_not_be_fetched": "ბრენდების მიღება ვერ მოხერხდა",
   "upload_failed": "ატვირთვა ვერ მოხერხდა",
   "Email not confirmed": "იმეილი არ არის დადასტურებული",
-  "email rate limit exceeded": "იმეილის გაგზავნის ლიმიტი ამოიწურა",
+  "email rate limit exceeded": "ლიმიტი ამოიწურა, გთხოვთ მოგვიანებით სცადოთ",
+  "failed_to_copy": "დაკოპირება ვერ მოხერხდა",
 
   "entities": {
     "data": "მონაცემები",

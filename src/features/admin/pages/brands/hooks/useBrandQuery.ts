@@ -6,6 +6,7 @@ export const useBrandQuery = () => {
   const result = useAdminQuery<IBrand>({
     useQuery: useFetchBrands,
     selectField: "id, name, logo_url, website_url",
+    searchKey: "admin-brands-search",
   });
 
   return {

@@ -6,6 +6,7 @@ export const useMainCategoryQuery = () => {
   const result = useAdminQuery<IMainCategory>({
     useQuery: useFetchMainCategories,
     selectField: "id, name, thumbnail",
+    searchKey: "admin-main-categories-search",
   });
 
   return {

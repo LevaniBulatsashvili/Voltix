@@ -5,11 +5,15 @@ import { useCallback } from "react";
 
 interface IProductSearchBar {
   onNavigate?: () => void;
+  searchClassName?: string;
 }
 
 const limit = 4;
 
-const ProductSearchBar = ({ onNavigate }: IProductSearchBar) => {
+const ProductSearchBar = ({
+  onNavigate,
+  searchClassName,
+}: IProductSearchBar) => {
   const { searchValue, query, onSelect, onViewAll, setSearchValue } =
     useProductSearch(limit);
 
@@ -60,6 +64,7 @@ const ProductSearchBar = ({ onNavigate }: IProductSearchBar) => {
         onViewAll: onEnter,
         renderItem: renderProduct,
       }}
+      className={searchClassName}
     />
   );
 };

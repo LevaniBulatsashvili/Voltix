@@ -6,6 +6,7 @@ export const useCategoryQuery = () => {
   const result = useAdminQuery<ICategory>({
     useQuery: useFetchCategories,
     selectField: "*, main_category:main_category_id(name)",
+    searchKey: "admin-categories-search",
   });
 
   return {

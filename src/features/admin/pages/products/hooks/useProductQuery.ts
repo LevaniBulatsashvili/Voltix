@@ -12,6 +12,7 @@ export const useProductQuery = () => {
       brand:brand_id(name), main_category:main_category_id(name),
       category:category_id(name), product_images(image_url)
     `,
+    searchKey: "admin-products-search",
   });
 
   return {

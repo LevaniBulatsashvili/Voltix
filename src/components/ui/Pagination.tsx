@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
+import { getPaginationPages } from "@/utils/getPaginationPages";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { usePagination } from "@/hooks/usePagination";
 
 interface IPagination {
   currentPage: number;
@@ -17,12 +17,12 @@ const Pagination = ({
   showInfo,
   className,
 }: IPagination) => {
-  const { pages } = usePagination(currentPage, totalPages);
+  const { pages } = getPaginationPages(currentPage, totalPages);
 
   const pageButtonClass = (isActive: boolean) =>
     cn(
-      "size-9 sm:size-10 border rounded shrink-0",
-      isActive ? "bg-black text-white" : "hover:bg-gray-100",
+      "size-8 sm:size-10 border rounded shrink-0",
+      isActive ? "bg-primary text-background" : "hover:opacity-70",
     );
 
   return (
@@ -43,7 +43,7 @@ const Pagination = ({
           <button
             onClick={() => onChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="size-9 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
+            className="size-8 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
           >
             <ChevronLeft size={18} />
           </button>
@@ -67,7 +67,7 @@ const Pagination = ({
           <button
             onClick={() => onChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="size-9 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
+            className="size-8 sm:size-10 border rounded flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 shrink-0"
           >
             <ChevronRight size={18} />
           </button>

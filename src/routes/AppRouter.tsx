@@ -32,11 +32,11 @@ const AppRoutes = () => (
             path={PAGE.AUTH.VERIFY_EMAIL}
             element={<Page.VerifyEmailPage />}
           />
-          <Route
-            path={PAGE.AUTH.VERIFY_SUCCESS}
-            element={<Page.VerificationSuccessPage />}
-          />
         </Route>
+        <Route
+          path={PAGE.AUTH.VERIFY_SUCCESS}
+          element={<Page.VerificationSuccessPage />}
+        />
 
         {/* Public */}
         <Route path={PAGE.PUBLIC.SHOP} element={<Page.ProductsPage />} />

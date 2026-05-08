@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "./useDebounce";
 
-export function useSearchDebounce(initialValue: string, delay: number = 700) {
+export function useSearchDebounce(storageKey: string, delay = 700) {
   const [value, setValue] = useState(
-    () => localStorage.getItem(initialValue) ?? "",
+    () => localStorage.getItem(storageKey) ?? "",
   );
   const debouncedValue = useDebounce(value, delay);
 
@@ -14,8 +14,8 @@ export function useSearchDebounce(initialValue: string, delay: number = 700) {
   }, [debouncedValue]);
 
   useEffect(() => {
-    localStorage.setItem(initialValue, debouncedValue.trim());
-  }, [debouncedValue, initialValue]);
+    localStorage.setItem(storageKey, debouncedValue.trim());
+  }, [debouncedValue, storageKey]);
 
   return { value, setValue, searchFilters, debouncedValue };
 }

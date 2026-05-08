@@ -13,6 +13,7 @@
   "upload_failed": "Upload failed",
   "Email not confirmed": "Email Not Confirmed",
   "email rate limit exceeded": "Email sending limit exhausted",
+  "failed_to_copy": "Failed to copy",
 
   "entities": {
     "data": "Data",

@@ -10,18 +10,25 @@ import { mapUser } from "@/features/auth/utils/mapUser";
 import {
   clearProfile,
   setProfile,
+  setProfileLoading,
 } from "@/features/user/profile/store/profile.slice";
 import { profileService } from "@/features/user/profile/service/profileService";
 import type { Session } from "@supabase/supabase-js";
+import { notifyError } from "@/lib/toast/notifyError";
+import { store } from "@/store";
 
-const REFETCH_EVENTS = new Set(["TOKEN_REFRESHED", "USER_UPDATED"]);
+const REFETCH_EVENTS = new Set([
+  "TOKEN_REFRESHED",
+  "USER_UPDATED",
+  "SIGNED_IN",
+]);
 const SIGNOUT_EVENTS = new Set(["SIGNED_OUT"]);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
 
   const applySession = useCallback(
-    async (session: Session | null) => {
+    async (session: Session | null, currentUserId?: string) => {
       if (!session?.user) {
         dispatch(setUser(null));
         dispatch(setSession(null));
@@ -29,11 +36,20 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return;
       }
 
-      const profile = await profileService.fetch(session.user.id);
-      dispatch(setUser(mapUser(session.user)));
-      dispatch(setSession(session));
-      if (profile) dispatch(setProfile(profile));
-      else dispatch(clearProfile());
+      if (session.user.id === currentUserId) return;
+
+      dispatch(setProfileLoading(true));
+      try {
+        const fetchedProfile = await profileService.fetch(session.user.id);
+        dispatch(setUser(mapUser(session.user)));
+        dispatch(setSession(session));
+        if (fetchedProfile) dispatch(setProfile(fetchedProfile));
+        else dispatch(clearProfile());
+      } catch (error) {
+        notifyError(error);
+      } finally {
+        dispatch(setProfileLoading(false));
+      }
     },
     [dispatch],
   );
@@ -43,11 +59,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const init = async () => {
       dispatch(setLoading(true));
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      await applySession(session);
-      dispatch(setLoading(false));
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        await applySession(session);
+      } finally {
+        dispatch(setLoading(false));
+      }
 
       const { data } = supabase.auth.onAuthStateChange(
         async (event, session) => {
@@ -55,8 +74,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             await applySession(null);
             return;
           }
-          if (!REFETCH_EVENTS.has(event)) return;
-          await applySession(session);
+          if (REFETCH_EVENTS.has(event)) {
+            const currentUserId = store.getState().auth.user?.id;
+            await applySession(session, currentUserId);
+          }
         },
       );
 
@@ -64,7 +85,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     init();
-
     return () => listener?.subscription.unsubscribe();
   }, [dispatch, applySession]);
 

@@ -13,7 +13,7 @@ export function useProductSearch(limit: number, delay = 700) {
     value: searchValue,
     setValue: setSearchValue,
     searchFilters,
-  } = useSearchDebounce("", delay);
+  } = useSearchDebounce("products-search", delay);
 
   const query = useFetchProducts(
     { limit, filters: searchFilters },

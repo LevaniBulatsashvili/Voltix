@@ -10,9 +10,10 @@ import ProductsComments from "./productsComments";
 import { fetchProductsOptions } from "../../product/hooks/productCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import { buildCategoryLink } from "../utils/buildCategoryLink";
-import { PRODUCTSELECTFIELD } from "@/utils/consts";
+
 import { useMemo } from "react";
 import { useQueries } from "@tanstack/react-query";
+import { PRODUCTSELECTFIELD } from "@/utils/consts";
 
 const Products = () => {
   const { t } = useTranslation();

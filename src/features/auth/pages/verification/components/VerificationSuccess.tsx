@@ -1,14 +1,19 @@
+import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import { PAGE } from "@/pages/pageConfig";
 import Container from "./ui/Container";
 import Heading from "./ui/Heading";
 import Text from "./ui/Text";
 import LinkBtn from "./ui/LinkBtn";
 import { useTranslation } from "react-i18next";
-import { useSyncSession } from "../hooks/useSyncVerifiedUser";
 
 const VerificationSuccess = () => {
   const { t } = useTranslation();
-  useSyncSession();
+
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get("code");
+    if (code) supabase.auth.exchangeCodeForSession(code);
+  }, []);
 
   return (
     <Container>

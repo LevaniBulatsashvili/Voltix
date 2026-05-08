@@ -12,7 +12,7 @@ const persisted = profileStorage.get();
 
 const initialState: ProfileState = {
   profile: persisted?.profile,
-  loading: !persisted?.profile,
+  loading: false,
   error: undefined,
 };
 
@@ -39,8 +39,10 @@ const profileSlice = createSlice({
         state.profile &&
         action.payload &&
         isProfileEqual(state.profile, action.payload)
-      )
+      ) {
+        state.loading = false;
         return;
+      }
 
       state.profile = action.payload;
       state.loading = false;
@@ -48,6 +50,7 @@ const profileSlice = createSlice({
     },
     clearProfile(state) {
       state.profile = undefined;
+      state.loading = false;
       state.error = undefined;
     },
     setProfileLoading(state, action: PayloadAction<boolean>) {

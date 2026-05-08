@@ -18,6 +18,7 @@ interface IUseAdminQuery<T> {
   selectField: string;
   sort?: { field: keyof T; ascending: boolean }[];
   limit?: number;
+  searchKey: string;
 }
 
 export const useAdminQuery = <T>({
@@ -25,6 +26,7 @@ export const useAdminQuery = <T>({
   selectField,
   sort = [{ field: "id" as keyof T, ascending: false }],
   limit = 9,
+  searchKey,
 }: IUseAdminQuery<T>) => {
   const [page, setPage] = useState(1);
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -33,7 +35,7 @@ export const useAdminQuery = <T>({
     value: searchValue,
     setValue: setSearchValue,
     searchFilters,
-  } = useSearchDebounce("");
+  } = useSearchDebounce(searchKey);
 
   const categoryFilterOptions = useCategoryFilterOptions(
     createCategoryQuery(categoryFilter) as TCategoryQueries,

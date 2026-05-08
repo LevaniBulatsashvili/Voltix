@@ -7,6 +7,7 @@ export const useProductFAQQuery = () => {
     useQuery: useFetchProductsFAQs,
     selectField: `id, product_id, question, answer, answered_at, profile_id, answered_by, product:product_id(name)`,
     sort: [{ field: "answered_at", ascending: false }],
+    searchKey: "admin-product-faqs-search",
   });
 
   return {

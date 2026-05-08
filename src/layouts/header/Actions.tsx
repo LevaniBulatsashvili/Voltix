@@ -17,6 +17,7 @@ import LangSelector from "@/components/inputs/LangSelector";
 import ToggleBtn from "@/components/button/ToggleBtn";
 import { User } from "lucide-react";
 import { shallowEqual } from "react-redux";
+import Spinner from "@/components/feedback/Spinner";
 
 interface IActions {
   languages: ILanguage[];
@@ -37,16 +38,17 @@ const Actions = memo(
     const { t } = useTranslation();
     const { signOut } = useLogout();
     const theme = useAppSelector((state) => state.theme.theme);
-    const profile = useAppSelector(
-      (state) => state.profile.profile,
+    const { profile, loading } = useAppSelector(
+      (state) => state.profile,
       shallowEqual,
     );
     const cartItems = useAppSelector((state) => state.cart.items);
     const { isUser, isAdmin, isDeveloper, isVerified } = useRole();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    useClickOutside(dropdownRef, () => setDropdownOpen(false));
+    useClickOutside([dropdownRef, buttonRef], () => setDropdownOpen(false));
 
     const totalItems = useMemo(
       () => cartItems.reduce((acc, { quantity }) => acc + quantity, 0),
@@ -72,20 +74,25 @@ const Actions = memo(
 
     return (
       <div className="flex items-center gap-4 flex-wrap relative">
-        {isVerified && (isUser || isDeveloper) && (
+        {isVerified && (isUser || isDeveloper) && !loading && (
           <CartButton totalItems={totalItems} onNavigate={onNavigate} />
         )}
 
         <div className="relative">
-          <button
-            onClick={() => setDropdownOpen((prev) => !prev)}
-            className="size-8 rounded-full flex items-center justify-center"
-            aria-expanded={dropdownOpen}
-            aria-haspopup="menu"
-            aria-label="User menu"
-          >
-            <User className="size-7 object-cover rounded-full border" />
-          </button>
+          {loading ? (
+            <Spinner containerClass="w-8" spinnerclass="size-6 border-4" />
+          ) : (
+            <button
+              ref={buttonRef}
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="size-8 rounded-full flex items-center justify-center"
+              aria-expanded={dropdownOpen}
+              aria-haspopup="menu"
+              aria-label="User menu"
+            >
+              <User className="size-7 object-cover rounded-full border" />
+            </button>
+          )}
 
           {dropdownOpen && (
             <div

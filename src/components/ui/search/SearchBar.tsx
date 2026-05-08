@@ -33,7 +33,7 @@ export function SearchBar<T>({
   className,
 }: ISearchBar<T>) {
   return (
-    <div className={cn("relative w-full max-w-100 ml-auto", className)}>
+    <div className={cn("relative w-full", className)}>
       <SearchInput
         searchVal={searchValue}
         onSearchValueChange={onSearchValueChange}

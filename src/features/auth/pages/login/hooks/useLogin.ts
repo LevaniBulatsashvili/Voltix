@@ -15,7 +15,6 @@ export const useLogin = () => {
       authService.loginWithEmail(email, password),
     onSuccess: (data) => {
       if (data.authUser) dispatch(setUser(data.authUser));
-
       if (data.session) dispatch(setSession(data.session));
 
       notifySuccess("login.welcome_back");
