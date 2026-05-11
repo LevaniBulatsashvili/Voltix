@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react";
 
 const CONTAINER_HEIGHT = 531;
-const SEGMENT_HEIGHT = 120;
-const SEGMENT_GAP = 2;
-const STEP = SEGMENT_HEIGHT + SEGMENT_GAP;
-const SEGMENTS = Math.ceil((CONTAINER_HEIGHT * 2) / STEP);
+const SEGMENT_HEIGHT = 40;
 const GAP_CHANCE = 0.1;
+const NUM_STREAMS = 20;
+
+interface Stream {
+  x: number;
+  y: number;
+  speed: number;
+  opacity: number;
+}
 
 export function useBinaryChains() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -13,95 +18,55 @@ export function useBinaryChains() {
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    let timeoutId: ReturnType<typeof setTimeout>;
 
-    const rafId = requestAnimationFrame(() => {
-      timeoutId = setTimeout(() => {
-        import("gsap").then(({ gsap }) => {
-          const containerWidth = container.offsetWidth;
+    const canvas = document.createElement("canvas");
+    canvas.className = "absolute inset-0 w-full h-full pointer-events-none";
+    canvas.width = container.offsetWidth;
+    canvas.height = CONTAINER_HEIGHT;
+    container.appendChild(canvas);
 
-          const createStream = (x: number) => {
-            const segments: HTMLDivElement[] = [];
-            for (let i = 0; i < SEGMENTS; i++) {
-              const el = document.createElement("div");
-              el.className = [
-                "absolute",
-                "w-1",
-                "h-20",
-                "bg-green-400",
-                "rounded-sm",
-                "will-change-transform",
-                "pointer-events-none",
-              ].join(" ");
-              const phase = Math.random() * CONTAINER_HEIGHT * 2;
-              gsap.set(el, {
-                x,
-                y: i * STEP - phase,
-                opacity: Math.random() > GAP_CHANCE ? 0.05 : 0,
-              });
-              container.appendChild(el);
-              segments.push(el);
-            }
-            return segments;
-          };
+    const ctx = canvas.getContext("2d")!;
+    let animFrameId: number;
 
-          const animateStream = (
-            segments: HTMLDivElement[],
-            speed: number,
-            streamDelay: number,
-          ) => {
-            const ribbonHeight = SEGMENTS * STEP;
-            segments.forEach((el) => {
-              const startY = Number(gsap.getProperty(el, "y"));
-              const distanceLeft = CONTAINER_HEIGHT + STEP - startY;
-              const initialDuration =
-                (distanceLeft / (CONTAINER_HEIGHT + STEP)) * speed;
-              const segmentDelay = streamDelay + Math.random() * 0.4;
-              const loop = () => {
-                const visible = Math.random() > GAP_CHANCE;
-                gsap.set(el, {
-                  y: -(ribbonHeight - CONTAINER_HEIGHT),
-                  opacity: visible ? 0.05 : 0,
-                });
-                gsap.to(el, {
-                  y: CONTAINER_HEIGHT + STEP,
-                  duration: speed,
-                  ease: "none",
-                  onComplete: loop,
-                });
-              };
-              gsap.to(el, {
-                y: CONTAINER_HEIGHT + STEP,
-                duration: Math.max(initialDuration, 0.1),
-                ease: "none",
-                delay: segmentDelay,
-                onComplete: loop,
-              });
-            });
-          };
+    const streams: Stream[] = Array.from({ length: NUM_STREAMS }, (_, i) => ({
+      x: (canvas.width / (NUM_STREAMS - 1)) * i,
+      y: Math.random() * CONTAINER_HEIGHT,
+      speed: 1.2 + Math.random() * 0.8,
+      opacity: Math.random() > GAP_CHANCE ? 0.07 : 0,
+    }));
 
-          const spacingArr = [
-            containerWidth / 40,
-            containerWidth / 6,
-            containerWidth / 3.3,
-            containerWidth / 2.1,
-            containerWidth / 1.7,
-            containerWidth / 1.4,
-            containerWidth / 1.17,
-            containerWidth / 1.02,
-          ];
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          spacingArr.forEach((spacing) => {
-            animateStream(createStream(spacing), 11, Math.random() * 2);
-          });
-        });
-      }, 500);
-    });
+      streams.forEach((stream) => {
+        if (stream.opacity === 0) {
+          stream.y += stream.speed;
+          if (stream.y > CONTAINER_HEIGHT) {
+            stream.y = -SEGMENT_HEIGHT;
+            stream.opacity = Math.random() > GAP_CHANCE ? 0.07 : 0;
+          }
+          return;
+        }
+
+        ctx.fillStyle = `rgba(74, 222, 128, ${stream.opacity})`;
+        ctx.fillRect(stream.x - 2, stream.y, 4, SEGMENT_HEIGHT);
+
+        stream.y += stream.speed;
+        if (stream.y > CONTAINER_HEIGHT) {
+          stream.y = -SEGMENT_HEIGHT;
+          stream.opacity = Math.random() > GAP_CHANCE ? 0.07 : 0;
+        }
+      });
+
+      animFrameId = requestAnimationFrame(draw);
+    };
+
+    const rafId = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(rafId);
-      clearTimeout(timeoutId);
-      container.innerHTML = "";
+      cancelAnimationFrame(animFrameId);
+      canvas.remove();
     };
   }, []);
 
