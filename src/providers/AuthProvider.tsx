@@ -1,6 +1,6 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/lib/supabase";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   setUser,
   setLoading,
@@ -15,7 +15,6 @@ import {
 import { profileService } from "@/features/user/profile/service/profileService";
 import type { Session } from "@supabase/supabase-js";
 import { notifyError } from "@/lib/toast/notifyError";
-import { store } from "@/store";
 
 const REFETCH_EVENTS = new Set([
   "TOKEN_REFRESHED",
@@ -26,6 +25,12 @@ const SIGNOUT_EVENTS = new Set(["SIGNED_OUT"]);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector((state) => state.auth.user?.id);
+
+  const currentUserIdRef = useRef(currentUserId);
+  useEffect(() => {
+    currentUserIdRef.current = currentUserId;
+  }, [currentUserId]);
 
   const applySession = useCallback(
     async (session: Session | null, currentUserId?: string) => {
@@ -74,10 +79,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             await applySession(null);
             return;
           }
-          if (REFETCH_EVENTS.has(event)) {
-            const currentUserId = store.getState().auth.user?.id;
-            await applySession(session, currentUserId);
-          }
+          if (REFETCH_EVENTS.has(event))
+            await applySession(session, currentUserIdRef.current);
         },
       );
 

@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import type { gsap as GsapType } from "gsap";
 import { animateSlider, cutElectronic } from "./slider";
 
 const CLIP_ENTER = [
@@ -9,6 +9,7 @@ const CLIP_ENTER = [
 ];
 
 function animateElectronic(
+  gsap: typeof GsapType,
   wrapper: HTMLElement,
   duration: number,
   layerIndex: number,
@@ -17,9 +18,7 @@ function animateElectronic(
   if (!electronic) return gsap.timeline();
 
   const isFirst = layerIndex === 7;
-
   gsap.set(electronic, { zIndex: layerIndex });
-
   const tl = gsap.timeline();
 
   if (isFirst) {
@@ -33,25 +32,27 @@ function animateElectronic(
   }
 
   tl.set({}, { duration: duration - 1 });
-
   return tl;
 }
 
 export function electronicsScene(
+  gsap: typeof GsapType,
   wrapper: HTMLElement,
   slider: HTMLElement,
   duration: number,
   layerIndex: number,
 ): gsap.core.Timeline {
   const containerWidth = wrapper.offsetWidth;
-
   const tl = gsap.timeline();
 
-  tl.add(animateElectronic(wrapper, duration, layerIndex));
+  tl.add(animateElectronic(gsap, wrapper, duration, layerIndex));
 
   if (layerIndex !== 0)
     tl.add(
-      [animateSlider(slider, containerWidth), cutElectronic(wrapper)],
+      [
+        animateSlider(gsap, slider, containerWidth),
+        cutElectronic(gsap, wrapper),
+      ],
       duration,
     );
   else tl.to({}, { duration: duration - 1 });

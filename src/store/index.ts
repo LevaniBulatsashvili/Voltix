@@ -9,6 +9,7 @@ import settingsReducer from "@/features/user/settings/store/settings.slice";
 import { settingsMiddleware } from "@/features/user/settings/store/settings.middleware";
 import { authMiddleware } from "@/features/auth/store/auth.middleware";
 import { profileMiddleware } from "@/features/user/profile/store/profileMiddleware";
+import { themeMiddleware } from "./theme/theme.middleware";
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -27,8 +28,9 @@ export const store = configureStore({
       settingsMiddleware,
       authMiddleware,
       profileMiddleware,
+      themeMiddleware,
     ),
-  devTools: true,
+  devTools: import.meta.env.DEV,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

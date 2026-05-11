@@ -9,7 +9,7 @@ import {
 import { authService } from "../../../../../auth/services/authService";
 import PasswordInput from "@/components/form/Input/PasswordInput";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
-import { notifySupabaseError } from "@/lib/toast/notifySupabaseError";
+import { notifyError } from "@/lib/toast/notifyError";
 
 interface IChangePasswordModal {
   isOpen: boolean;
@@ -36,7 +36,7 @@ const ChangePasswordModal = ({ isOpen, onClose }: IChangePasswordModal) => {
       onClose();
       notifySuccess("profile.password_update_successful");
     } catch (error: unknown) {
-      notifySupabaseError(error);
+      notifyError(error);
     }
   };
 

@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import gsap from "gsap";
 import { electronicsScene } from "../utils/electronicsScene";
 import { type IElectronicItem } from "../utils/electronicsConfig";
 
@@ -22,23 +21,24 @@ export function useProductsAnimation({
 
     if (!slider || wrappers.some((w) => !w)) return;
 
-    const tl = gsap.timeline({ repeat: -1 });
+    import("gsap").then(({ gsap }) => {
+      const tl = gsap.timeline({ repeat: -1 });
 
-    wrappers.forEach((wrapper, i) => {
-      const layerIndex = wrappers.length - 1 - i;
-
-      const scene = electronicsScene(
-        wrapper!,
-        slider,
-        sceneDuration,
-        layerIndex,
-      );
-
-      tl.add(scene, i === 0 ? 0 : "-=1.5");
+      wrappers.forEach((wrapper, i) => {
+        const layerIndex = wrappers.length - 1 - i;
+        const scene = electronicsScene(
+          gsap,
+          wrapper!,
+          slider,
+          sceneDuration,
+          layerIndex,
+        );
+        tl.add(scene, i === 0 ? 0 : "-=1.5");
+      });
     });
 
     return () => {
-      tl.kill();
+      import("gsap").then(({ gsap }) => gsap.killTweensOf("*"));
     };
   }, [sliderRef, itemRefs, items, sceneDuration]);
 }

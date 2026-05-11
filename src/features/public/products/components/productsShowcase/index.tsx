@@ -8,12 +8,14 @@ interface IProductShowcase {
   title: string;
   products: IProduct[];
   viewAllLink: string;
+  "aria-label"?: string;
 }
 
 const ProductShowcase = ({
   title,
   products,
   viewAllLink,
+  "aria-label": ariaLabel,
 }: IProductShowcase) => {
   const { t } = useTranslation();
 
@@ -26,7 +28,11 @@ const ProductShowcase = ({
         ))}
       </div>
       <div className="mt-16">
-        <ViewProducts to={viewAllLink} text={"products.view_all"} />
+        <ViewProducts
+          to={viewAllLink}
+          aria-label={ariaLabel}
+          text={"products.view_all"}
+        />
       </div>
     </div>
   );

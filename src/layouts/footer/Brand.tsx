@@ -6,12 +6,12 @@ import { PAGE } from "@/pages/pageConfig";
 const SocialLinks = () => (
   <ul className="flex gap-4 mt-4">
     <li>
-      <AppLink to={PAGE.SOCIAL.LINKDIN}>
+      <AppLink to={PAGE.SOCIAL.LINKDIN} aria-label="LinkedIn">
         <Linkedin className="size-5 hover:scale-110 transition-transform" />
       </AppLink>
     </li>
     <li>
-      <AppLink to={PAGE.SOCIAL.GITHUB}>
+      <AppLink to={PAGE.SOCIAL.GITHUB} aria-label="GitHub">
         <Github className="size-5 hover:scale-110 transition-transform" />
       </AppLink>
     </li>

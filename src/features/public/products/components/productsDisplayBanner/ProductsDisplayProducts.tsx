@@ -1,6 +1,6 @@
 interface IProductsDisplayProducts {
   items: { src: string; alt: string }[];
-  setRef: (el: HTMLDivElement | null, i: number) => void; // ✅ callback instead of ref
+  setRef: (el: HTMLDivElement | null, i: number) => void;
 }
 
 const ProductsDisplayProducts = ({
@@ -17,6 +17,7 @@ const ProductsDisplayProducts = ({
         <img
           src={src}
           alt={alt}
+          loading={i === 0 ? "eager" : "lazy"}
           className="electronic absolute inset-0 size-full object-contain opacity-0 will-change-[clip-path,opacity]"
         />
       </div>

@@ -8,7 +8,7 @@ import {
   type TChangeEmail,
 } from "../../../schemas/changeEmailSchema";
 import { authService } from "../../../../../auth/services/authService";
-import { notifySupabaseError } from "@/lib/toast/notifySupabaseError";
+import { notifyError } from "@/lib/toast/notifyError";
 import { notifySuccess } from "@/lib/toast/notifySuccess";
 
 interface IChangeEmailModal {
@@ -32,7 +32,7 @@ const ChangeEmailModal = ({ isOpen, onClose }: IChangeEmailModal) => {
       onClose();
       notifySuccess("profile.please_check_both_emails_to_verify");
     } catch (error) {
-      notifySupabaseError(error);
+      notifyError(error);
     }
   };
 

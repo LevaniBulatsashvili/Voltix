@@ -77,6 +77,8 @@ const Products = () => {
                 alt={name}
                 loading="lazy"
                 decoding="async"
+                width={144}
+                height={144}
               />
             ))}
             carouselClassName="my-4 xl:my-10 border-y-4 border-primary bg-white"
@@ -97,6 +99,7 @@ const Products = () => {
             title="products.new_arrivals"
             products={newestProducts}
             viewAllLink={buildCategoryLink("new-arrivals")}
+            aria-label={t("products.view_all_new_arrivals")}
           />
         )}
       </QueryBoundary>
@@ -115,6 +118,7 @@ const Products = () => {
             title="products.top_selling"
             products={topSellingProducts}
             viewAllLink={buildCategoryLink("top-selling")}
+            aria-label={t("products.view_all_top_selling")}
           />
         )}
       </QueryBoundary>

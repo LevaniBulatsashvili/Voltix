@@ -1,6 +1,7 @@
-import gsap from "gsap";
+import type { gsap as GsapType } from "gsap";
 
 export function animateSlider(
+  gsap: typeof GsapType,
   sliderEl: HTMLElement,
   containerWidth: number,
 ): gsap.core.Timeline {
@@ -10,18 +11,17 @@ export function animateSlider(
 
   return gsap
     .timeline()
-    .to(sliderEl, {
-      x: withWithoutSlider * 0.4,
-      duration: 0.4,
-      opacity: 1,
-    })
+    .to(sliderEl, { x: withWithoutSlider * 0.4, duration: 0.4, opacity: 1 })
     .to(sliderEl, { x: withWithoutSlider * 0.45, duration: 0.2 })
     .to(sliderEl, { x: -40, duration: 0.4 })
     .to(sliderEl, { opacity: 0 })
     .set(sliderEl, { x: withWithoutSlider });
 }
 
-export function cutElectronic(wrapper: HTMLElement): gsap.core.Timeline {
+export function cutElectronic(
+  gsap: typeof GsapType,
+  wrapper: HTMLElement,
+): gsap.core.Timeline {
   const electronic = wrapper.querySelector<HTMLElement>(".electronic");
 
   return gsap

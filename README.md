@@ -67,6 +67,18 @@ The goal of Voltix was to build a production-ready eCommerce frontend that demon
 
 ---
 
+---
+
+## ⚡ Performance & Technical Excellence
+
+- **Advanced Rendering Patterns** – Leverages React 19’s latest APIs and strategic memoization (`useMemo`, `memo`) to ensure 60fps performance even during complex UI transitions in the product catalog.
+- **Client-Side Asset Pipeline** – Integrated `browser-image-compression` to transform all uploads into **WebP** format before they reach Supabase, drastically reducing LCP (Largest Contentful Paint) and storage overhead.
+- **Hybrid State Architecture** – Orchestrated a dual-state strategy: **TanStack Query** for server-state synchronization (caching/optimistic updates) and **Redux Toolkit** for complex client-side persistence (auth, cart, i18n).
+- **Enterprise-Grade Security** – Implemented **PKCE (Proof Key for Code Exchange)** authentication flows and custom Higher-Order Components (HOCs) for Role-Based Access Control (RBAC).
+- **Scalable Architecture** – Followed a strict feature-based folder structure and SOLID principles, ensuring the codebase remains maintainable as the domain complexity grows.
+
+---
+
 ## 🧱 Project Architecture
 
 Feature-based folder structure:

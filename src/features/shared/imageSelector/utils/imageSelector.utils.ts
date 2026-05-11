@@ -9,12 +9,16 @@ export const toSelectedImage = (url: string): ISelectedImage => ({
   uploadedUrl: url,
 });
 
-export const convertToWebP = async (file: File): Promise<File> => {
+export const convertToWebP = async (
+  file: File,
+  options?: Parameters<typeof imageCompression>[1],
+): Promise<File> => {
   return imageCompression(file, {
     maxSizeMB: 1,
     maxWidthOrHeight: 1200,
     useWebWorker: true,
     fileType: "image/webp",
     initialQuality: 0.82,
+    ...options,
   });
 };

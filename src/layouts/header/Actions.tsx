@@ -119,6 +119,11 @@ const Actions = memo(
         <ToggleBtn
           isActive={theme === "dark"}
           onToggle={onToggleTheme}
+          aria-label={
+            theme === "dark"
+              ? t("common.switch_to_light")
+              : t("common.switch_to_dark")
+          }
           className="border border-indigo-400 shadow-md transition-all duration-300 hover:border-indigo-600 hover:shadow-lg hover:scale-105"
           inactiveToggleClassName="bg-gradient-to-r from-pink-200 via-purple-200 to-blue-300 border-gray-400 hover:from-pink-300 hover:via-purple-300 hover:to-blue-400"
           activeToggleClassName="bg-gradient-to-r from-indigo-800 via-blue-900 to-gray-900 border-gray-700 hover:from-indigo-700 hover:via-blue-800 hover:to-gray-800"

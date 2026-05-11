@@ -9,6 +9,7 @@ interface IToggleBtn {
   inactiveToggleClassName?: string;
   activeThumbClassName?: string;
   inactiveThumbClassName?: string;
+  "aria-label"?: string;
 }
 
 const ToggleBtn = ({
@@ -19,6 +20,7 @@ const ToggleBtn = ({
   inactiveToggleClassName,
   activeThumbClassName,
   inactiveThumbClassName,
+  "aria-label": ariaLabel,
 }: IToggleBtn) => {
   const [internalState, setInternalState] = useState(false);
   const toggled = isActive ?? internalState;
@@ -32,6 +34,8 @@ const ToggleBtn = ({
     <button
       type="button"
       onClick={handleClick}
+      aria-label={ariaLabel}
+      aria-pressed={toggled}
       className={cn(
         "relative w-12.5 h-7 rounded-full cursor-pointer transition-all duration-400",
         toggled ? activeToggleClassName : inactiveToggleClassName,

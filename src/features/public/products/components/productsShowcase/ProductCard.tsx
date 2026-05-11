@@ -24,7 +24,7 @@ const ProductCard = ({ product, className }: IProductCard) => {
     (state) => state.profile.profile,
     shallowEqual,
   );
-  const { isLiked, toggleWishlist } = useWishlistContext(); // ✅ shared instance
+  const { isLiked, toggleWishlist } = useWishlistContext();
 
   const likeOptions = useMemo(
     () =>
@@ -61,6 +61,8 @@ const ProductCard = ({ product, className }: IProductCard) => {
           decoding="async"
           onError={() => setImgSrc("/images/placeholders/product.webp")}
           className="object-contain w-full h-60 transform hover:scale-105 transition-transform duration-300"
+          width={300}
+          height={240}
         />
       </div>
 

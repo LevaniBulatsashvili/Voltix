@@ -1,9 +1,9 @@
 const ProductsDisplayBackground = () => (
-  <div
-    className="absolute inset-0 z-0
-               bg-[url('/images/electronics/bg.webp')]
-               bg-cover bg-center bg-no-repeat"
+  <img
+    src="/images/electronics/bg.webp"
+    alt=""
+    fetchPriority="high"
+    className="absolute inset-0 z-0 w-full h-full object-cover"
   />
 );
-
 export default ProductsDisplayBackground;

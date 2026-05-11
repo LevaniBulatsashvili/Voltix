@@ -90,5 +90,9 @@
   "admin": "Admin",
   "courier": "Courier",
   "developer": "Developer",
-  "new": "new"
+  "new": "new",
+  "previous": "Previous",
+  "next": "Next",
+  "switch_to_light": "Switch to Light",
+  "switch_to_dark": "Switch to Dark"
 }

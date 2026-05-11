@@ -1,37 +1,24 @@
-import { memo, useCallback, useRef } from "react";
-import { useBinaryChains } from "../../hooks/useBinaryChains";
-import { useProductsAnimation } from "../../hooks/useProductsAnimation";
-import { ELECTRONICS, SCENE_DURATION } from "../../utils/electronicsConfig";
+import { memo } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import ProductsDisplayBackground from "./ProductsDisplayBackground";
-import ProductsDisplaySlider from "./ProductsDisplaySlider";
-import ProductsDisplayBinaryChains from "./ProductsDisplayBinaryChains";
-import ProductsDisplayProducts from "./ProductsDisplayProducts";
+import ProductsDisplayAnimatedBanner from "./ProductsDisplayAnimatedBanner";
+import { ELECTRONICS } from "../../utils/electronicsConfig";
 
 const ProductsDisplayBanner = () => {
-  const { containerRef } = useBinaryChains();
-  const sliderRef = useRef<HTMLImageElement>(null);
-  const electronicsRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const setElectronicRef = useCallback(
-    (el: HTMLDivElement | null, i: number) => {
-      electronicsRefs.current[i] = el;
-    },
-    [],
-  );
-
-  useProductsAnimation({
-    sliderRef,
-    itemRefs: electronicsRefs,
-    items: ELECTRONICS,
-    sceneDuration: SCENE_DURATION,
-  });
+  const isMobile = useIsMobile();
 
   return (
     <div className="mt-10 xl:mt-0 min-h-109 relative overflow-hidden contain-[layout_style] rounded-4xl">
       <ProductsDisplayBackground />
-      <ProductsDisplayBinaryChains containerRef={containerRef} />
-      <ProductsDisplaySlider sliderRef={sliderRef} />
-      <ProductsDisplayProducts items={ELECTRONICS} setRef={setElectronicRef} />
+      {isMobile ? (
+        <img
+          src={ELECTRONICS[0].src}
+          alt={ELECTRONICS[0].alt}
+          className="absolute inset-0 w-full h-full object-contain"
+        />
+      ) : (
+        <ProductsDisplayAnimatedBanner />
+      )}
     </div>
   );
 };

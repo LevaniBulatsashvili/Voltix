@@ -23,10 +23,15 @@ const ProductsMainCategoryCard = ({
 
       <img
         src={image}
-        alt={title}
+        alt=""
         loading="lazy"
         decoding="async"
-        className={cn("absolute bottom-2.5 right-2.5 w-3/4 h-4/5 object-contain", imgClassName)}
+        className={cn(
+          "absolute bottom-2.5 right-2.5 w-3/4 h-4/5 object-contain",
+          imgClassName,
+        )}
+        width={514}
+        height={232}
       />
     </div>
   </AppLink>

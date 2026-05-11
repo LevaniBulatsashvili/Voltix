@@ -4,7 +4,7 @@
 @theme {
   --color-primary: #020202;
   --color-secondary: #ef4444;
-  --color-accent: #f59e0b;
+  --color-accent: #1d4ed8;
   --color-background: #f9fafb;
   --color-text: #1f2937;
   --color-hover: #93c5fd;
@@ -43,7 +43,7 @@
 .light {
   --color-primary: #020202;
   --color-secondary: #ef4444;
-  --color-accent: #f59e0b;
+  --color-accent: #1d4ed8;
   --color-background: #f9fafb;
   --color-text: #1f2937;
   --color-hover: #93c5fd;
@@ -52,7 +52,7 @@
 .dark {
   --color-primary: #e5e7eb;
   --color-secondary: #ef4444;
-  --color-accent: #f59e0b;
+  --color-accent: #1d4ed8;
   --color-background: #0f172a;
   --color-text: #1f2937;
   --color-hover: #3730a3;

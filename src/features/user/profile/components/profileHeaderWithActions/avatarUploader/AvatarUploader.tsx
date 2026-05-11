@@ -6,6 +6,7 @@ import { deleteAvatar } from "../../../api/deleteAvatar";
 import Avatar from "@/components/ui/Avatar";
 import AvatarOverlay from "./AvatarOverlay";
 import Spinner from "@/components/feedback/Spinner";
+import { convertToWebP } from "@/features/shared/imageSelector/utils/imageSelector.utils";
 
 interface IAvatarUploader {
   currentAvatar: string;
@@ -35,7 +36,17 @@ const AvatarUploader = ({
     setPreview(URL.createObjectURL(file));
 
     try {
-      const url = await uploadAvatar(file, profileId);
+      const compressed = await convertToWebP(file, {
+        maxWidthOrHeight: 200,
+        maxSizeMB: 0.1,
+        initialQuality: 0.8,
+      });
+
+      const compressedFile = new File([compressed], `${profileId}.webp`, {
+        type: "image/webp",
+      });
+
+      const url = await uploadAvatar(compressedFile, profileId);
       await updateProfile({ id: profileId, avatar_url: url });
 
       if (previousAvatar?.includes("/avatars/")) {
@@ -56,7 +67,7 @@ const AvatarUploader = ({
         htmlFor={inputId}
         className="group block size-full rounded-full overflow-hidden border-2 border-gray-300 cursor-pointer relative"
       >
-        <Avatar src={preview} />
+        <Avatar src={preview} width={93} height={93} />
         <AvatarOverlay />
       </label>
 

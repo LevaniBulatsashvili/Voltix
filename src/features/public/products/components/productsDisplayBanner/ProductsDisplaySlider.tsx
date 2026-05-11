@@ -8,6 +8,7 @@ const ProductsDisplaySlider = ({ sliderRef }: IProductsDisplaySlider) => (
     <img
       ref={sliderRef}
       src="/images/electronics/slider.webp"
+      fetchPriority="high"
       className="absolute left-0 opacity-0 will-change-transform"
       alt="slider"
     />

@@ -61,7 +61,7 @@ const StarRating = ({
           <span className="text-md font-bold text-slate-900">
             {rating.toFixed(1)}
           </span>
-          <span className="text-md text-slate-400 font-bold">
+          <span className="text-md text-slate-500 font-bold">
             ({totalReviews})
           </span>
         </div>
