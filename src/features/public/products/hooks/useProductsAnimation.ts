@@ -21,26 +21,31 @@ export function useProductsAnimation({
 
     if (!slider || wrappers.some((w) => !w)) return;
 
-    const rafId = requestAnimationFrame(() => {
-      import("gsap").then(({ gsap }) => {
-        const tl = gsap.timeline({ repeat: -1 });
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-        wrappers.forEach((wrapper, i) => {
-          const layerIndex = wrappers.length - 1 - i;
-          const scene = electronicsScene(
-            gsap,
-            wrapper!,
-            slider,
-            sceneDuration,
-            layerIndex,
-          );
-          tl.add(scene, i === 0 ? 0 : "-=1.5");
+    const rafId = requestAnimationFrame(() => {
+      timeoutId = setTimeout(() => {
+        import("gsap").then(({ gsap }) => {
+          const tl = gsap.timeline({ repeat: -1 });
+
+          wrappers.forEach((wrapper, i) => {
+            const layerIndex = wrappers.length - 1 - i;
+            const scene = electronicsScene(
+              gsap,
+              wrapper!,
+              slider,
+              sceneDuration,
+              layerIndex,
+            );
+            tl.add(scene, i === 0 ? 0 : "-=1.5");
+          });
         });
-      });
+      }, 500);
     });
 
     return () => {
       cancelAnimationFrame(rafId);
+      clearTimeout(timeoutId);
       import("gsap").then(({ gsap }) => gsap.killTweensOf("*"));
     };
   }, [sliderRef, itemRefs, items, sceneDuration]);
