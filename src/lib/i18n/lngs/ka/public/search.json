@@ -6,5 +6,7 @@
   "rating": "რეიტინგი",
   "discounted": "ფასდაკლება",
   "brands": "ბრენდები",
-  "apply_filters": "გაფილტვრა"
+  "apply_filters": "გაფილტვრა",
+  "open_filters": "ფილტრების გახსნა",
+  "close_filters": "ფილტრების დახურვა"
 }

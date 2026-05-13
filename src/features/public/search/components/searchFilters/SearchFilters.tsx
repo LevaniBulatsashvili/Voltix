@@ -74,8 +74,9 @@ const SearchFilters = ({ onApply }: ISearchFiltersProps) => {
       <button
         className="absolute right-6 md:right-11 lg:right-20 xl:hidden p-2 border rounded-md"
         onClick={() => setIsOpen(true)}
+        aria-label={t("search.open_filters")}
       >
-        <Sliders size={24} />
+        <Sliders size={24} aria-hidden="true" />
       </button>
 
       {isOpen && (
@@ -97,8 +98,12 @@ const SearchFilters = ({ onApply }: ISearchFiltersProps) => {
           <h2 className="text-xl font-bold capitalize">
             {t("search.filters")}
           </h2>
-          <button className="xl:hidden" onClick={() => setIsOpen(false)}>
-            <X size={24} />
+          <button
+            className="xl:hidden"
+            onClick={() => setIsOpen(false)}
+            aria-label={t("search.close_filters")}
+          >
+            <X size={24} aria-hidden="true" />
           </button>
         </div>
 

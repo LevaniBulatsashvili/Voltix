@@ -17,3 +17,9 @@ export const ELECTRONICS: IElectronicItem[] = [
 ];
 
 export const SCENE_DURATION = 4.5;
+
+export const BANNER_PRELOADS = [
+  "/images/electronics/bg.webp",
+  "/images/electronics/slider.webp",
+  ELECTRONICS[0].src,
+];

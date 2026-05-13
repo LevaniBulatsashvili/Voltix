@@ -1,12 +1,18 @@
 import { memo, useCallback, useRef } from "react";
 import { useBinaryChains } from "../../hooks/useBinaryChains";
 import { useProductsAnimation } from "../../hooks/useProductsAnimation";
-import { ELECTRONICS, SCENE_DURATION } from "../../utils/electronicsConfig";
+import {
+  BANNER_PRELOADS,
+  ELECTRONICS,
+  SCENE_DURATION,
+} from "../../utils/electronicsConfig";
 import ProductsDisplaySlider from "./ProductsDisplaySlider";
 import ProductsDisplayBinaryChains from "./ProductsDisplayBinaryChains";
 import ProductsDisplayProducts from "./ProductsDisplayProducts";
+import useBannerPreloads from "../../hooks/useBannerPreloads";
 
 const ProductsDisplayAnimatedBanner = () => {
+  useBannerPreloads(BANNER_PRELOADS);
   const { containerRef } = useBinaryChains();
   const sliderRef = useRef<HTMLImageElement>(null);
   const electronicsRefs = useRef<(HTMLDivElement | null)[]>([]);

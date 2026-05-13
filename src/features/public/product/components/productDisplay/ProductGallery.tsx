@@ -43,6 +43,9 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
               <img
                 src={image.image_url}
                 alt={`${name} ${idx + 1}`}
+                loading="lazy"
+                width={128}
+                height={128}
                 className="w-full h-full object-cover"
               />
             </button>
@@ -50,10 +53,12 @@ const ProductGallery = ({ galleryImages = [], name }: ProductGalleryProps) => {
         </div>
       )}
 
-      <div className="order-1 sm:order-2 min-w-0 rounded-xl overflow-hidden bg-gray-50 max-h-125">
+      <div className="order-1 sm:order-2 min-w-0 rounded-xl overflow-hidden bg-gray-50 aspect-4/3 max-h-125">
         <img
           src={selectedImage.image_url}
           alt={name}
+          fetchPriority="high"
+          decoding="async"
           className={cn(
             "w-full h-full object-cover transition-opacity duration-150",
             fade ? "opacity-100" : "opacity-0",

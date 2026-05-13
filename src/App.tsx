@@ -4,8 +4,10 @@ import { client } from "./lib/react-query/client";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import AuthProvider from "./providers/AuthProvider";
-import ToastProvider from "./providers/toast/ToastProvider";
-import ToastListener from "./providers/toast/ToastListener";
+import { lazy } from "react";
+
+const ToastProvider = lazy(() => import("./providers/toast/ToastProvider"));
+const ToastListener = lazy(() => import("./providers/toast/ToastListener"));
 
 function App() {
   return (

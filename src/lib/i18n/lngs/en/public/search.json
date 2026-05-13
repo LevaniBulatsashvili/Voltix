@@ -6,5 +6,7 @@
   "rating": "rating",
   "discounted": "discounted",
   "brands": "brands",
-  "apply_filters": "apply filters"
+  "apply_filters": "apply filters",
+  "open_filters": "Open filters",
+  "close_filters": "Close filters"
 }

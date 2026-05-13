@@ -1,8 +1,5 @@
 import { useParams } from "react-router-dom";
-import ProductDetails from "./productTabs/Tabs/ProductDetails";
 import ProductDisplay from "./productDisplay/ProductDisplay";
-import ProductFAQs from "./productTabs/Tabs/ProductFAQs";
-import ProductReviews from "./productTabs/Tabs/ProductReviews";
 import ProductTabs from "./productTabs";
 import Breadcrumbs from "@/components/ui/BreadCrumbs";
 import { buildProductBreadcrumbs } from "../utils/buildProductBreadcrumbs";
@@ -11,11 +8,20 @@ import ProductSkeleton from "./productSkeleton/ProductSkeleton";
 import { useFetchProduct } from "../hooks/productCRUD";
 import { QueryBoundary } from "@/components/feedback/QueryBoundary";
 import PageWrapper from "@/components/ui/PageWrapper";
+import { lazy, Suspense } from "react";
 
 const Product = () => {
   const { t } = useTranslation();
   const { productId } = useParams<{ productId: string }>();
   const productQuery = useFetchProduct(Number(productId));
+
+  const ProductReviews = lazy(
+    () => import("./productTabs/Tabs/ProductReviews"),
+  );
+  const ProductDetails = lazy(
+    () => import("./productTabs/Tabs/ProductDetails"),
+  );
+  const ProductFAQs = lazy(() => import("./productTabs/Tabs/ProductFAQs"));
 
   return (
     <PageWrapper>
@@ -34,15 +40,23 @@ const Product = () => {
               <ProductTabs
                 children={{
                   details: (
-                    <ProductDetails specs={product.product_specs || []} />
+                    <Suspense fallback={<div className="h-40" />}>
+                      <ProductDetails specs={product.product_specs || []} />
+                    </Suspense>
                   ),
                   reviews: (
-                    <ProductReviews
-                      productId={product.id}
-                      productRating={product.rating_count}
-                    />
+                    <Suspense fallback={<div className="h-40" />}>
+                      <ProductReviews
+                        productId={product.id}
+                        productRating={product.rating_count}
+                      />
+                    </Suspense>
                   ),
-                  faqs: <ProductFAQs faqs={product.product_faqs || []} />,
+                  faqs: (
+                    <Suspense fallback={<div className="h-40" />}>
+                      <ProductFAQs faqs={product.product_faqs || []} />
+                    </Suspense>
+                  ),
                 }}
               />
             </>

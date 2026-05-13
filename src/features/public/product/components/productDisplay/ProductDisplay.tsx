@@ -40,7 +40,7 @@ const ProductDisplay = ({ product }: IProductDisplay) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 xl:gap-14 mb-14 sm:mb-20 w-full">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 xl:gap-14 mb-14 sm:mb-20 w-full">
       <ProductGallery
         galleryImages={product.product_images}
         name={product.name}

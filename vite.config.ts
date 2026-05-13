@@ -17,12 +17,18 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom", "react-router-dom"],
-          "vendor-redux": ["@reduxjs/toolkit", "react-redux"],
-          "vendor-query": ["@tanstack/react-query"],
-          "vendor-supabase": ["@supabase/supabase-js"],
-          "vendor-ui": ["react-toastify", "lucide-react"],
+        manualChunks(id) {
+          if (id.includes("@supabase/")) return "vendor-supabase";
+          if (id.includes("@reduxjs/toolkit") || id.includes("react-redux"))
+            return "vendor-redux";
+          if (id.includes("@tanstack/react-query")) return "vendor-query";
+          if (id.includes("lucide-react")) return "vendor-ui";
+          if (
+            id.includes("react-dom") ||
+            id.includes("react-router-dom") ||
+            id.includes("/react/")
+          )
+            return "vendor-react";
         },
       },
     },
