@@ -19,6 +19,7 @@ const PasswordSection = () => {
           type="password"
           value="dummyPassword"
           disabled
+          aria-label={t("profile.current_password")}
           className="h-14 p-5 text-black text-lg rounded-lg focus:outline-gray-400 bg-gray-200 disabled:opacity-90 disabled:cursor-not-allowed"
         />
       </ProfileFormSection>

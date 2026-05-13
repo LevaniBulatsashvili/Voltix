@@ -22,7 +22,7 @@ const DeleteAccountSection = () => {
 
   return (
     <div className="border border-red-200 rounded-lg p-4 flex flex-col gap-3 mt-8">
-      <h3 className="text-red-600 font-medium">{t("profile.danger_zone")}</h3>
+      <h2 className="text-red-600 font-medium">{t("profile.danger_zone")}</h2>
       <p className="text-sm text-gray-500">
         {t("profile.delete_account_warning")}
       </p>
@@ -30,7 +30,7 @@ const DeleteAccountSection = () => {
       {!confirm ? (
         <button
           onClick={() => setConfirm(true)}
-          className="self-start text-sm text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition"
+          className="self-start text-sm text-red-700 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-50 transition"
         >
           {t("profile.delete_account")}
         </button>
@@ -39,7 +39,7 @@ const DeleteAccountSection = () => {
           <button
             onClick={onAccountDelete}
             disabled={isPending}
-            className="text-xs sm:text-sm bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition disabled:opacity-50"
+            className="text-xs sm:text-sm bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition disabled:opacity-50"
           >
             {t("profile.confirm_delete")}
           </button>

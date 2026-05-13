@@ -11,7 +11,7 @@ const ProfileInfo = ({ name, email }: IProfileInfo) => {
       </div>
 
       <div className="mt-1 whitespace-nowrap scrollbar-none">
-        <p className="opacity-70 truncate">{email}</p>
+        <p className="opacity-85 truncate">{email}</p>
       </div>
     </div>
   );

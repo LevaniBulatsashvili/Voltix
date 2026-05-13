@@ -1,4 +1,4 @@
-import DeleteAccountSection from "./deleteAccountSection/DeleteAccountSettings";
+import DeleteAccountSection from "./deleteAccountSection/DeleteAccountSection";
 import EmailSection from "./emailSection/EmailSection";
 import PasswordSection from "./passwordSection/PasswordSection";
 
