@@ -16,7 +16,7 @@ const OAuthButton = ({ labelKey, icon, onClick, disabled }: IOAuthButton) => {
       disabled={disabled}
       className="w-full border rounded-lg py-3 flex items-center justify-center gap-2 hover:opacity-80 transition disabled:opacity-50"
     >
-      <img src={icon} className="size-5" />
+      <img src={icon} alt="" aria-hidden="true" className="size-5" />
       {t(labelKey)}
     </button>
   );

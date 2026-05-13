@@ -9,7 +9,7 @@ const OAuthProviders = () => {
     <div className="flex flex-col gap-3 mt-3">
       <div className="flex items-center gap-2">
         <hr className="flex-1" />
-        <span className="text-sm opacity-50">{t("common.or")}</span>
+        <span className="text-sm opacity-80">{t("common.or")}</span>
         <hr className="flex-1" />
       </div>
 
