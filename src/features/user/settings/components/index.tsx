@@ -62,6 +62,7 @@ const Settings = () => {
             <ToggleBtn
               isActive={settings[key]}
               onToggle={() => handleToggle(key)}
+              aria-label={label}
               className="min-w-12.5 border border-primary"
               activeToggleClassName="bg-background"
               inactiveToggleClassName="bg-primary"

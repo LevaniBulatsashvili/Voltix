@@ -1,5 +1,6 @@
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import { Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ICartItemActions {
   onRemove: () => void;
@@ -16,11 +17,14 @@ const CartItemActions = ({
   quantity,
   maxQuantity,
 }: ICartItemActions) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-row-reverse sm:flex-col justify-between items-end h-full">
       <button
         onClick={onRemove}
         className="flex text-primary hover:text-gray-400 transition"
+        aria-label={t("cart.remove_item")}
       >
         <Trash2 size={24} />
       </button>

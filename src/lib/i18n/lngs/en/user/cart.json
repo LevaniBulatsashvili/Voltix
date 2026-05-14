@@ -23,5 +23,8 @@
   "demo_promo_codes": "Demo Promo Codes",
   "discount_percentage": "{{percentage}} off",
   "click_to_copy": "Click to copy",
-  "copied": "copied"
+  "copied": "copied",
+  "remove_item": "Remove item from cart",
+  "decrease_quantity": "Decrease quantity",
+  "increase_quantity": "Increase quantity"
 }

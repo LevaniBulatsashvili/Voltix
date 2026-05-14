@@ -1,6 +1,7 @@
 import { cn } from "@/utils/cn";
 import { useCooldown } from "@/hooks/useCooldown";
 import { Heart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export interface ILikeBtnOptions {
   isLiked: boolean;
@@ -9,6 +10,7 @@ export interface ILikeBtnOptions {
   heartSize?: number;
   className?: string;
   cooldownMs?: number;
+  "aria-label"?: string;
 }
 
 const LikeBtn = ({
@@ -17,7 +19,9 @@ const LikeBtn = ({
   heartSize = 30,
   cooldownMs = 1000,
   className,
+  "aria-label": ariaLabel,
 }: ILikeBtnOptions) => {
+  const { t } = useTranslation();
   const { isCoolingDown, run } = useCooldown(cooldownMs);
 
   return (
@@ -28,6 +32,15 @@ const LikeBtn = ({
         run(onLike);
       }}
       disabled={isCoolingDown}
+      aria-label={
+        ariaLabel ??
+        t(
+          isLiked
+            ? "wishlist.remove_from_wishlist"
+            : "wishlist.add_to_wishlist",
+        )
+      }
+      aria-pressed={isLiked}
       className={cn(
         "absolute top-3 right-3 z-10 bg-white/80 backdrop-blur p-2 rounded-full transition",
         isCoolingDown ? "opacity-50 cursor-not-allowed" : "hover:scale-110",

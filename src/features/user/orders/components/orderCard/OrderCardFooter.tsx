@@ -28,7 +28,7 @@ const OrderCardFooter = ({
       {status === "pending" && (
         <button
           onClick={onCancel}
-          className="mt-3 w-full py-2 rounded-xl border border-red-300 text-red-500 text-sm font-medium hover:bg-red-50 transition"
+          className="mt-3 w-full py-2 rounded-xl border border-red-300 text-red-700 text-sm font-medium hover:bg-red-50 transition"
         >
           {t("orders.cancel_order")}
         </button>

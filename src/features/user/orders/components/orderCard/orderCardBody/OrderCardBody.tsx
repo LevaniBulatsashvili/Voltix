@@ -2,6 +2,7 @@ import { Tag, Truck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import OrderItem from "./OrdersItem";
 import type { IOrderItem } from "@/types/profile/profile";
+import { cn } from "@/utils/cn";
 
 interface IOrderCardBody {
   items?: IOrderItem[];
@@ -9,6 +10,7 @@ interface IOrderCardBody {
   discount: number;
   promoCode?: string;
   format: (value: number) => string;
+  isCancelled?: boolean;
 }
 
 const OrderCardBody = ({
@@ -17,6 +19,7 @@ const OrderCardBody = ({
   discount,
   promoCode,
   format,
+  isCancelled,
 }: IOrderCardBody) => {
   const { t } = useTranslation();
 
@@ -26,7 +29,7 @@ const OrderCardBody = ({
         <OrderItem key={item.id ?? idx} item={item} format={format} />
       ))}
 
-      <div className="flex justify-between items-center py-2 text-md opacity-85">
+      <div className="flex justify-between items-center py-2 text-base text-primary/80">
         <span className="flex items-center gap-1.5">
           <Truck size={16} />
           {t("orders.delivery_fee")}
@@ -35,12 +38,17 @@ const OrderCardBody = ({
       </div>
 
       {discount > 0 && (
-        <div className="flex justify-between items-center py-2 text-md gap-2">
-          <span className="flex items-center gap-1.5 text-green-500 min-w-0 flex-wrap">
+        <div className="flex justify-between items-center py-2 text-base gap-2">
+          <span
+            className={cn(
+              "flex items-center gap-1.5 min-w-0 flex-wrap",
+              isCancelled ? "text-primary/70" : "text-green-700",
+            )}
+          >
             <Tag size={16} className="shrink-0" />
             {t("orders.discount")}
             {promoCode && (
-              <span className="text-xs bg-red-50 border border-red-200 text-green-500 px-2 py-0.5 rounded-full font-mono shrink-0">
+              <span className="text-xs bg-green-50 border border-green-200 text-green-800 px-2 py-0.5 rounded-full font-mono shrink-0">
                 {promoCode}
               </span>
             )}

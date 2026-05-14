@@ -10,13 +10,13 @@ const OrderItem = ({ item, format }: OrderItem) => {
 
   return (
     <div className="flex justify-between items-center py-2 border-b last:border-0">
-      <span className="text-md">
+      <span className="text-base">
         {item.product?.name ?? "Product"}
-        <span className="inline-block  text-[11px] rounded px-1 py-0.5 ml-1.5">
+        <span className="inline-block bg-primary/10 text-primary text-[11px] rounded px-1 py-0.5 ml-1.5">
           x{item.quantity}
         </span>
       </span>
-      <span className="text-md  tabular-nums">{format(total)}</span>
+      <span className="text-base tabular-nums">{format(total)}</span>
     </div>
   );
 };

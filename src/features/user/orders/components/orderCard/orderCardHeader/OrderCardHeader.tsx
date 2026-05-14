@@ -20,13 +20,12 @@ export const OrderCardHeader = (order: IOrderCardHeader) => {
     <div className="px-5 pt-5">
       <div className="flex justify-between items-start gap-2">
         <div className="min-w-0">
-          <span className="text-base sm:text-lg uppercase tracking-wide font-semibold">
+          <span className="text-base sm:text-lg uppercase tracking-wide font-bold text-primary">
             {t("orders.order")}
           </span>
           <button
             onClick={() => copy(order.id)}
-            className="flex items-center gap-1 mt-0.5 opacity-80 hover:opacity-100 transition group"
-            title={t("orders.copy_id")}
+            className="flex items-center gap-1 mt-0.5 text-primary hover:text-primary transition group"
           >
             <h2 className="text-sm font-medium truncate">
               #{order.id.slice(0, 8)}
@@ -40,7 +39,7 @@ export const OrderCardHeader = (order: IOrderCardHeader) => {
               />
             )}
           </button>
-          <p className="text-sm mt-1 opacity-80">{formatDate(order.date!)}</p>
+          <p className="text-sm mt-1 text-primary">{formatDate(order.date!)}</p>
         </div>
         <div className="shrink-0">
           <OrderStatus

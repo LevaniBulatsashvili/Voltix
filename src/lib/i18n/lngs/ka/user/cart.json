@@ -23,5 +23,8 @@
   "demo_promo_codes": "დემო პრომო კოდები",
   "discount_percentage": "{{percentage}}%-იანი ფასდაკლება",
   "click_to_copy": "დააკლიკეთ დასაკოპირებლად",
-  "copied": "დაკოპირდა"
+  "copied": "დაკოპირდა",
+  "remove_item": "ნივთის კალათიდან ამოშლა",
+  "decrease_quantity": "რაოდენობის შემცირება",
+  "increase_quantity": "რაოდენობის გაზრდა"
 }

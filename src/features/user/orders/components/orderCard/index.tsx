@@ -30,8 +30,10 @@ const OrderCard = ({ order, format }: OrderCard) => {
     <>
       <div
         className={cn(
-          "border border-primary/50 rounded-2xl overflow-hidden shadow-sm flex flex-col transition-opacity",
-          order.status === "cancelled" ? "opacity-50" : "opacity-100",
+          "border rounded-2xl overflow-hidden shadow-sm flex flex-col",
+          order.status === "cancelled"
+            ? "border-primary/30 bg-primary/5"
+            : "border-primary/50",
         )}
       >
         <OrderCardHeader
@@ -46,6 +48,7 @@ const OrderCard = ({ order, format }: OrderCard) => {
           discount={order.discount}
           promoCode={order.promo_code}
           format={format}
+          isCancelled={order.status === "cancelled"}
         />
 
         <OrderCardFooter
